@@ -1,0 +1,23 @@
+.lead-table .table tbody tr td:nth-child(2) {
+    white-space: nowrap;
+}
+
+.error-message {
+    color: red;
+}
+// sorting icon
+.downward-img {
+    transform: rotate(-90deg);
+    margin-left: 10px;
+    width: 100%;
+    max-width: 10px;
+  }
+  .upward-img {
+    transform: rotate(90deg);
+    margin-left: 10px;
+    width: 100%;
+    max-width: 10px;
+  }
+  .active-tab{
+    color: #0089ff;
+  }

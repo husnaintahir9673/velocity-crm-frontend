@@ -1,0 +1,621 @@
+<main class="dashboard-wrapper">
+    <div class="overlay" *ngIf="predictiveSearchResults.length" (click)="predictiveSearchResults = []"></div>
+    <div class="container">
+        <div class="searchbar-box-container" *ngIf="canListLead">
+            <div class="searchbar-box">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-5">
+                            <div class="form-group">
+                                <label class="big-label">What you are looking for?</label>
+                                <div class="top-header-search">
+                                    <input autocomplete="off" (keyup.enter)="onSearch()" #predictiveSearch
+                                        [(ngModel)]="tempFilter['Search'].value" class="form-control search-input"
+                                        type="text" placeholder="Search for name, company name etc">
+                                    <button (click)="onSearch()" type="submit">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.41668 12.8334C2.87876 12.8334 0 9.9546 0 6.41668C0 2.87876 2.87876 0 6.41668 0C9.9546 0 12.8334 2.87876 12.8334 6.41668C12.8334 9.9546 9.9546 12.8334 6.41668 12.8334ZM6.41668 1.16667C3.52217 1.16667 1.16667 3.52159 1.16667 6.41668C1.16667 9.31177 3.52217 11.6667 6.41668 11.6667C9.31119 11.6667 11.6667 9.31177 11.6667 6.41668C11.6667 3.52159 9.31119 1.16667 6.41668 1.16667Z"
+                                                fill="white" />
+                                            <path
+                                                d="M13.4163 14C13.2669 14 13.1176 13.9429 13.0038 13.8291L10.2068 11.032C9.97926 10.8039 9.97926 10.4347 10.2068 10.2072C10.4348 9.97911 10.8041 9.97911 11.0322 10.2072L13.8287 13.0043C14.0568 13.2324 14.0568 13.601 13.8287 13.8291C13.7149 13.9429 13.5656 14 13.4163 14Z"
+                                                fill="white" />
+                                        </svg>
+                                    </button>
+                                    <div class="result-lisitng" *ngIf="predictiveSearchResults.length">
+                                        <table class="table">
+                                            <thead>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Company</th>
+                                                <th>
+                                                    Phone
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="cursor-pointer" *ngFor="let res of predictiveSearchResults"
+                                                    (click)="tempFilter['Search'].value = res.search; predictiveSearchResults = []; onSearch(); ">
+                                                    <td>
+                                                        {{ res.name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ res.email }}
+                                                    </td>
+                                                    <td>
+                                                        {{ res.company_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ res.phone_number }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- <ul class="inner-result-list">
+                                            <li *ngFor="let res of predictiveSearchResults">
+                                                <a class="cursor-pointer" (click)="tempFilter['Search'].value = res; predictiveSearchResults = []; onSearch(); ">{{res}}</a>
+                                            </li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-8 col-lg-7">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group hidden">
+                                        <div class="input-group">
+                                            <!-- [(ngModel)]="searchByDateRange" -->
+                                            <input name="datepicker" class="form-control" ngbDatepicker
+                                                #datepicker="ngbDatepicker" [minDate]="{year: 1900, month: 1, day: 1}"
+                                                [autoClose]="'outside'" (dateSelect)="onDateSelection($event)"
+                                                [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden"
+                                                [startDate]="fromDate!" [maxDate]="maxDate" tabindex="-1">
+                                            <ng-template #t let-date let-focused="focused">
+                                                <span class="custom-day" [class.focused]="focused"
+                                                    [class.range]="isRange(date)"
+                                                    [class.faded]="isHovered(date) || isInside(date)"
+                                                    (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                                    {{ date.day }}
+                                                </span>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <div class="input-group">
+                                            <input readonly #dpFromDate name="dpFromDate" [value]="selectedDate"
+                                                (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                                                (click)="datepicker.toggle()" type="text"
+                                                class="form-control cursor-pointer" placeholder="Select Date"
+                                                name="date">
+                                            <span class="input-group-text cursor-pointer" (click)="datepicker.toggle()">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M7.5 9C7.64834 9 7.79334 8.95601 7.91668 8.8736C8.04002 8.79119 8.13614 8.67406 8.19291 8.53701C8.24968 8.39997 8.26453 8.24917 8.23559 8.10368C8.20665 7.9582 8.13522 7.82456 8.03033 7.71967C7.92544 7.61478 7.7918 7.54335 7.64632 7.51441C7.50083 7.48547 7.35003 7.50032 7.21299 7.55709C7.07594 7.61386 6.95881 7.70999 6.8764 7.83332C6.79399 7.95666 6.75 8.10166 6.75 8.25C6.75 8.44891 6.82902 8.63968 6.96967 8.78033C7.11032 8.92098 7.30109 9 7.5 9ZM11.25 9C11.3983 9 11.5433 8.95601 11.6667 8.8736C11.79 8.79119 11.8861 8.67406 11.9429 8.53701C11.9997 8.39997 12.0145 8.24917 11.9856 8.10368C11.9566 7.9582 11.8852 7.82456 11.7803 7.71967C11.6754 7.61478 11.5418 7.54335 11.3963 7.51441C11.2508 7.48547 11.1 7.50032 10.963 7.55709C10.8259 7.61386 10.7088 7.70999 10.6264 7.83332C10.544 7.95666 10.5 8.10166 10.5 8.25C10.5 8.44891 10.579 8.63968 10.7197 8.78033C10.8603 8.92098 11.0511 9 11.25 9ZM7.5 12C7.64834 12 7.79334 11.956 7.91668 11.8736C8.04002 11.7912 8.13614 11.6741 8.19291 11.537C8.24968 11.4 8.26453 11.2492 8.23559 11.1037C8.20665 10.9582 8.13522 10.8246 8.03033 10.7197C7.92544 10.6148 7.7918 10.5434 7.64632 10.5144C7.50083 10.4855 7.35003 10.5003 7.21299 10.5571C7.07594 10.6139 6.95881 10.71 6.8764 10.8333C6.79399 10.9567 6.75 11.1017 6.75 11.25C6.75 11.4489 6.82902 11.6397 6.96967 11.7803C7.11032 11.921 7.30109 12 7.5 12ZM11.25 12C11.3983 12 11.5433 11.956 11.6667 11.8736C11.79 11.7912 11.8861 11.6741 11.9429 11.537C11.9997 11.4 12.0145 11.2492 11.9856 11.1037C11.9566 10.9582 11.8852 10.8246 11.7803 10.7197C11.6754 10.6148 11.5418 10.5434 11.3963 10.5144C11.2508 10.4855 11.1 10.5003 10.963 10.5571C10.8259 10.6139 10.7088 10.71 10.6264 10.8333C10.544 10.9567 10.5 11.1017 10.5 11.25C10.5 11.4489 10.579 11.6397 10.7197 11.7803C10.8603 11.921 11.0511 12 11.25 12ZM3.75 9C3.89834 9 4.04334 8.95601 4.16668 8.8736C4.29001 8.79119 4.38614 8.67406 4.44291 8.53701C4.49968 8.39997 4.51453 8.24917 4.48559 8.10368C4.45665 7.9582 4.38522 7.82456 4.28033 7.71967C4.17544 7.61478 4.0418 7.54335 3.89632 7.51441C3.75083 7.48547 3.60003 7.50032 3.46299 7.55709C3.32594 7.61386 3.20881 7.70999 3.1264 7.83332C3.04399 7.95666 3 8.10166 3 8.25C3 8.44891 3.07902 8.63968 3.21967 8.78033C3.36032 8.92098 3.55109 9 3.75 9ZM12.75 1.5H12V0.75C12 0.551088 11.921 0.360322 11.7803 0.21967C11.6397 0.0790176 11.4489 0 11.25 0C11.0511 0 10.8603 0.0790176 10.7197 0.21967C10.579 0.360322 10.5 0.551088 10.5 0.75V1.5H4.5V0.75C4.5 0.551088 4.42098 0.360322 4.28033 0.21967C4.13968 0.0790176 3.94891 0 3.75 0C3.55109 0 3.36032 0.0790176 3.21967 0.21967C3.07902 0.360322 3 0.551088 3 0.75V1.5H2.25C1.65326 1.5 1.08097 1.73705 0.65901 2.15901C0.237053 2.58097 0 3.15326 0 3.75V12.75C0 13.3467 0.237053 13.919 0.65901 14.341C1.08097 14.7629 1.65326 15 2.25 15H12.75C13.3467 15 13.919 14.7629 14.341 14.341C14.7629 13.919 15 13.3467 15 12.75V3.75C15 3.15326 14.7629 2.58097 14.341 2.15901C13.919 1.73705 13.3467 1.5 12.75 1.5ZM13.5 12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5H2.25C2.05109 13.5 1.86032 13.421 1.71967 13.2803C1.57902 13.1397 1.5 12.9489 1.5 12.75V6H13.5V12.75ZM13.5 4.5H1.5V3.75C1.5 3.55109 1.57902 3.36032 1.71967 3.21967C1.86032 3.07902 2.05109 3 2.25 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V4.5ZM3.75 12C3.89834 12 4.04334 11.956 4.16668 11.8736C4.29001 11.7912 4.38614 11.6741 4.44291 11.537C4.49968 11.4 4.51453 11.2492 4.48559 11.1037C4.45665 10.9582 4.38522 10.8246 4.28033 10.7197C4.17544 10.6148 4.0418 10.5434 3.89632 10.5144C3.75083 10.4855 3.60003 10.5003 3.46299 10.5571C3.32594 10.6139 3.20881 10.71 3.1264 10.8333C3.04399 10.9567 3 11.1017 3 11.25C3 11.4489 3.07902 11.6397 3.21967 11.7803C3.36032 11.921 3.55109 12 3.75 12Z"
+                                                        fill="#8989B2" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <ng-select (change)="onStatusChange()" [(ngModel)]="tempFilter['Status'].value"
+                                            name="status" placeholder="Select Status" appearance="outline"
+                                            [searchable]="false" [clearable]="false" labelForId="elead">
+                                            <ng-option [value]="status" *ngFor="let status of leadStatusList">
+                                                {{ status.name }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="opacity-0">fgf</label>
+                                        <a (click)="advanceSearchToggle = !advanceSearchToggle"
+                                            class="theme-btn light-btn in-blc cursor-pointer">
+                                            <span class="btn-icon">
+                                                <svg width="11" height="16" viewBox="0 0 11 16" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0_110_1548)">
+                                                        <path
+                                                            d="M5.37497 15.9999C5.17532 15.9999 4.98336 15.9249 4.82979 15.7824L0.222645 11.2824C-0.0768192 10.9899 -0.0768192 10.5099 0.222645 10.2174C0.522109 9.92492 1.01354 9.92492 1.313 10.2174L5.37497 14.1924L9.43693 10.2174C9.73639 9.92492 10.2201 9.92492 10.5196 10.2174C10.8191 10.5099 10.8191 10.9824 10.5196 11.2749L5.92014 15.7824C5.76657 15.9324 5.57461 15.9999 5.37497 15.9999Z"
+                                                            fill="#FA5440" />
+                                                    </g>
+                                                    <g clip-path="url(#clip1_110_1548)">
+                                                        <path
+                                                            d="M5.37497 5.99992C5.17532 5.99992 4.98336 5.92492 4.82979 5.78242L0.222645 1.28242C-0.0768192 0.989922 -0.0768192 0.509922 0.222645 0.217422C0.522109 -0.0750781 1.01354 -0.0750781 1.313 0.217422L5.37497 4.19242L9.43693 0.217422C9.73639 -0.0750781 10.2201 -0.0750781 10.5196 0.217422C10.8191 0.509922 10.8191 0.982422 10.5196 1.27492L5.92014 5.78242C5.76657 5.93242 5.57461 5.99992 5.37497 5.99992Z"
+                                                            fill="#FA5440" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_110_1548">
+                                                            <rect width="10.75" height="6" fill="white"
+                                                                transform="translate(0 10)" />
+                                                        </clipPath>
+                                                        <clipPath id="clip1_110_1548">
+                                                            <rect width="10.75" height="6" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg></span>
+                                            <span>Advanced search</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- by adding "show" class to "advance-search" advance search box will open  -->
+                    <div class="advance-search" [ngClass]="{ 'show': advanceSearchToggle }">
+                        <div class="row">
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Full name</label>
+                                    <input [(ngModel)]="tempFilter['Full name'].value" name="name" type="text"
+                                        placeholder="Full name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input [(ngModel)]="tempFilter['Phone'].value" name="phone" type="text"
+                                        placeholder="Enter Phone" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input [(ngModel)]="tempFilter['Email'].value" name="email" type="text"
+                                        placeholder="Enter email id" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label for="elead">Exclusive lead</label>
+                                    <ng-select [(ngModel)]="tempFilter['Exclusive lead'].value"
+                                        placeholder="Select Exclusive Lead" name="exclusivelead" appearance="outline"
+                                        [searchable]="false" [clearable]="false" labelForId="elead">
+                                        <ng-option value="Yes">
+                                            Yes
+                                        </ng-option>
+                                        <ng-option value="No">
+                                            No
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <input [(ngModel)]="tempFilter['ID'].value" name="id" type="text"
+                                        placeholder="Enter ID" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Company name</label>
+                                    <input [(ngModel)]="tempFilter['Company name'].value" name="companyname" type="text"
+                                        placeholder="Enter company name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Disposition</label>
+                                    <ng-select [(ngModel)]="tempFilter['Disposition'].value" name="disposition"
+                                        placeholder="Select Disposition" appearance="outline" [searchable]="false"
+                                        [clearable]="false" labelForId="elead">
+                                        <ng-option [value]="{ id: 1, name: 'Sale' }">
+                                            Sale
+                                        </ng-option>
+                                        <ng-option [value]="{ id: 0, name: 'No Sale' }">
+                                            No Sale
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Manager</label>
+                                    <ng-select [(ngModel)]="tempFilter['Manager'].value" name="manager"
+                                        placeholder="Select Manager" appearance="outline" [searchable]="false"
+                                        [clearable]="false" labelForId="elead">
+                                        <ng-option [value]="manager" *ngFor="let manager of managersList">
+                                            {{ manager.name }}
+                                        </ng-option>
+
+                                    </ng-select>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>User</label>
+                                    <ng-select [(ngModel)]="tempFilter['User'].value" name="user"
+                                        placeholder="Select User" appearance="outline" [searchable]="false"
+                                        [clearable]="false" labelForId="elead">
+                                        <ng-option [value]="user" *ngFor="let user of usersList">
+                                            {{ user.name }}
+                                        </ng-option>
+
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Lead source</label>
+                                    <ng-select [(ngModel)]="tempFilter['Lead source'].value" name="leadsource"
+                                        placeholder="Select Lead Source" appearance="outline" [searchable]="false"
+                                        [clearable]="false" labelForId="elead">
+                                        <ng-option [value]="source" *ngFor="let source of leadSourceList">{{ source.name
+                                            }}
+                                        </ng-option>
+
+                                    </ng-select>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                                <div class="form-group">
+                                    <label>Campaign</label>
+                                    <ng-select [(ngModel)]="tempFilter['Compaign'].value" placeholder="Select Campaign"
+                                        appearance="outline" [searchable]="false" [clearable]="false"
+                                        labelForId="elead">
+                                        <ng-option [value]="campaign" *ngFor="let campaign of campaignList">{{
+                                            campaign.name }}
+                                        </ng-option>
+
+                                    </ng-select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- <div class="col-12 col-sm-4 col-md-2 col-lg-2 col-xs-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input cursor-pointer" id="check1"
+                                        name="lead_markering_notification" value="text">
+                                    <label class="form-check-label cursor-pointer" for="check1">Apply Global
+                                        Search</label>
+                                </div>
+                            </div> -->
+                            <div class="col-12 col-sm-4 col-md-12 col-lg-12 col-xs-2">
+                                <div class="form-group">
+                                    <button (click)="onSearch()" class="theme-btn btn-sm">Search</button>
+                                    <button (click)="resetFilter()"
+                                        class="theme-btn light-btn reset-btn btn-sm">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <ul class="applied-search-list">
+                <ng-container *ngFor="let fil of appliedFilter | keyvalue">
+                    <li (click)="removeFilter(fil.key)" class="applied-search-item cursor-pointer"
+                        *ngIf="fil.value['value']">
+                        <span>{{ fil.key }}:</span> {{ fil.value['value'].name ? fil.value['value'].name :
+                        fil.value['value'] }}
+                        <span class="filter-cross"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4.70508 4.50109L7.84749 1.35856C7.89518 1.31249 7.93322 1.25739 7.95939 1.19647C7.98557 1.13554 7.99934 1.07001 7.99992 1.00371C8.00049 0.937403 7.98786 0.871646 7.96275 0.810275C7.93764 0.748905 7.90056 0.693149 7.85367 0.646262C7.80679 0.599375 7.75103 0.562295 7.68966 0.537186C7.62829 0.512077 7.56253 0.499443 7.49623 0.500019C7.42992 0.500595 7.36439 0.514371 7.30347 0.540542C7.24254 0.566714 7.18744 0.604757 7.14138 0.652452L3.99884 3.79486L0.856437 0.652452C0.762445 0.560524 0.635993 0.509372 0.504522 0.510096C0.373051 0.51082 0.247169 0.563362 0.154195 0.656319C0.0612218 0.749276 0.00865787 0.875148 0.00791059 1.00662C0.00716331 1.13809 0.0582932 1.26455 0.150204 1.35856L3.29274 4.50109L0.150204 7.64362C0.102985 7.68981 0.0653968 7.7449 0.0396153 7.80571C0.0138338 7.86651 0.000371308 7.93183 7.57315e-06 7.99788C-0.000356162 8.06393 0.0123861 8.12939 0.0374963 8.19048C0.0626065 8.25157 0.0995857 8.30707 0.146293 8.35377C0.193 8.40047 0.248508 8.43744 0.309601 8.46254C0.370695 8.48764 0.436161 8.50037 0.502208 8.49999C0.568255 8.49962 0.633572 8.48614 0.694376 8.46035C0.75518 8.43456 0.810264 8.39696 0.856437 8.34973L3.99884 5.20733L7.14138 8.34973C7.23888 8.44723 7.36672 8.49605 7.49443 8.49605C7.62214 8.49605 7.75011 8.44723 7.84749 8.34973C7.9411 8.25609 7.99369 8.12909 7.99369 7.99668C7.99369 7.86426 7.9411 7.73727 7.84749 7.64362L4.70508 4.50109Z"
+                                    fill="#383D56" />
+                            </svg>
+                        </span>
+                    </li>
+                </ng-container>
+
+
+            </ul>
+        </div>
+        <div class="statics-list">
+            <div class="statics-item">
+                <span class="statics-icon mustard">
+                    <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1145_2183)">
+                            <path
+                                d="M14.999 3.375V16.875C14.999 17.1734 14.8861 17.4595 14.6852 17.6705C14.4843 17.8815 14.2118 18 13.9276 18H1.07045C0.786291 18 0.513769 17.8815 0.312838 17.6705C0.111906 17.4595 -0.000976562 17.1734 -0.000976562 16.875V3.375C-0.000976562 3.07663 0.111906 2.79048 0.312838 2.5795C0.513769 2.36853 0.786291 2.25 1.07045 2.25H2.14188V1.125C2.14188 0.826631 2.25476 0.540483 2.45569 0.329505C2.65663 0.118526 2.92915 0 3.21331 0C3.49747 0 3.76999 0.118526 3.97092 0.329505C4.17186 0.540483 4.28474 0.826631 4.28474 1.125V2.25H6.42759V1.125C6.42759 0.826631 6.54048 0.540483 6.74141 0.329505C6.94234 0.118526 7.21486 0 7.49902 0C7.78318 0 8.05571 0.118526 8.25664 0.329505C8.45757 0.540483 8.57045 0.826631 8.57045 1.125V2.25H10.7133V1.125C10.7133 0.826631 10.8262 0.540483 11.0271 0.329505C11.2281 0.118526 11.5006 0 11.7847 0C12.0689 0 12.3414 0.118526 12.5424 0.329505C12.7433 0.540483 12.8562 0.826631 12.8562 1.125V2.25H13.9276C14.2118 2.25 14.4843 2.36853 14.6852 2.5795C14.8861 2.79048 14.999 3.07663 14.999 3.375ZM12.8562 6.75H2.14188V7.875H12.8562V6.75ZM12.8562 10.125H2.14188V11.25H12.8562V10.125ZM12.8562 13.5H2.14188V14.625H12.8562V13.5Z"
+                                fill="#DA7625" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1145_2183">
+                                <rect width="15" height="18" fill="white" transform="translate(-0.000976562)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score mustard">{{ dashboardData.total_leads_count ?? 0 }}</h4>
+                    <p class="statics-title">Created</p>
+                </div>
+            </div>
+            <div class="statics-item cursor-pointer">
+                <span class="statics-icon green">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.125 0C1.82663 0 1.54048 0.118526 1.3295 0.329505C1.11853 0.540483 1 0.826631 1 1.125V16.875C1 17.1734 1.11853 17.4595 1.3295 17.6705C1.54048 17.8815 1.82663 18 2.125 18H16.75C17.0484 18 17.3345 17.8815 17.5455 17.6705C17.7565 17.4595 17.875 17.1734 17.875 16.875V1.125C17.875 0.826631 17.7565 0.540483 17.5455 0.329505C17.3345 0.118526 17.0484 0 16.75 0L2.125 0ZM15.625 6.1245V15.75H12.25V6.1245H15.625ZM11.125 3.375V15.75H7.75V3.375H11.125ZM6.625 10.2499V15.75H3.25V10.2499H6.625Z"
+                            fill="#638D2F" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score green">{{ dashboardData.active_lead ?? 0 }}</h4>
+                    <p class="statics-title"> Active </p>
+                </div>
+            </div>
+            <div class="statics-item">
+                <span class="statics-icon blue">
+                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.4508 8.72552V1.14516C11.4508 0.516165 10.9346 0 10.3056 0H1.14467C0.515676 0 -0.000488281 0.516165 -0.000488281 1.14516V12.4513C-0.000488281 13.0803 0.515676 13.5965 1.14467 13.5965H7.90256C7.90256 13.532 7.90256 13.4674 7.91866 13.4029L8.01537 12.9836C8.17661 12.3062 8.49922 11.6772 8.99917 11.1934L11.4508 8.72552ZM7.03156 5.4514L7.33794 5.08049C7.37013 5.0483 7.41856 5.0483 7.45088 5.08049C7.56383 5.1772 7.69287 5.25796 7.82179 5.30625C7.98303 5.37077 8.12817 5.40296 8.27346 5.40296C8.4025 5.40296 8.49922 5.37077 8.57983 5.32234C8.66045 5.25782 8.69278 5.1933 8.69278 5.09658C8.69278 5.06439 8.69278 5.03206 8.67668 4.99987C8.67668 4.96768 8.66059 4.93535 8.62826 4.91925C8.61216 4.88706 8.57983 4.87083 8.54764 4.85473C8.51544 4.83863 8.48312 4.8063 8.43469 4.79021C8.38627 4.77411 8.35407 4.74179 8.28955 4.72569C8.24113 4.70959 8.17661 4.67726 8.11209 4.66117C8.04756 4.64507 7.99914 4.62897 7.95085 4.61274C7.90242 4.59665 7.85413 4.58055 7.78961 4.56432C7.74118 4.54822 7.67666 4.51589 7.64447 4.4998C7.59604 4.4837 7.56385 4.45137 7.51542 4.43528C7.467 4.40308 7.41871 4.38685 7.38638 4.35466C7.35419 4.32246 7.32186 4.29014 7.27343 4.25794C7.24124 4.22575 7.20891 4.19342 7.19281 4.145C7.16062 4.09657 7.14439 4.06438 7.12829 4.01595C7.1122 3.96753 7.0961 3.91924 7.07987 3.87081C7.07987 3.82239 7.06377 3.75787 7.06377 3.69335C7.06377 3.43526 7.14439 3.22561 7.30576 3.04828C7.467 2.87081 7.69289 2.77409 7.98319 2.7419V2.33867C7.98319 2.29024 8.01538 2.25805 8.0638 2.25805H8.43472C8.48314 2.25805 8.51534 2.29024 8.51534 2.33867L8.51547 2.74176C8.67671 2.77396 8.82185 2.82238 8.96713 2.8869C9.09617 2.95142 9.19289 3.01595 9.28974 3.08047C9.32193 3.11266 9.32193 3.16109 9.30584 3.19341L9.01556 3.56433C8.98336 3.59652 8.95104 3.59652 8.91884 3.58042C8.67685 3.41918 8.435 3.33843 8.20924 3.33843C8.08019 3.33843 7.98348 3.37063 7.91896 3.41905C7.85444 3.46748 7.82224 3.532 7.82224 3.62871C7.82224 3.70933 7.87067 3.78995 7.93519 3.83837C8.01581 3.8868 8.14485 3.95132 8.33842 4.01584C8.41904 4.04803 8.49966 4.06426 8.54808 4.08036C8.59651 4.09646 8.67713 4.12878 8.74165 4.14488C8.80617 4.17707 8.87069 4.19331 8.91911 4.2255C8.96754 4.25769 9.01583 4.27392 9.06425 4.30612C9.11268 4.33831 9.16097 4.37064 9.1933 4.40283C9.22549 4.43503 9.25782 4.48345 9.29001 4.51578C9.32221 4.5642 9.35453 4.61249 9.37063 4.66092C9.38673 4.70934 9.40282 4.75763 9.41906 4.82216C9.43515 4.88668 9.43515 4.9512 9.43515 5.03182C9.43515 5.2899 9.35454 5.51566 9.19316 5.67689C9.03193 5.85435 8.80604 5.95107 8.51574 5.9995V6.3543C8.51574 6.40273 8.48354 6.43492 8.43512 6.43492H8.06421C8.01578 6.43492 7.98359 6.40273 7.98359 6.3543V5.98339C7.62878 5.93496 7.30616 5.77373 7.04808 5.53173C6.99939 5.5159 6.99939 5.46747 7.03159 5.45137L7.03156 5.4514ZM2.38655 2.66113H5.5477C5.77346 2.66113 5.95094 2.8386 5.95094 3.06436C5.95094 3.29013 5.77347 3.46759 5.5477 3.46759L2.38655 3.46746C2.16079 3.46746 1.98332 3.28999 1.98332 3.06423C1.98332 2.85457 2.16079 2.66113 2.38655 2.66113V2.66113ZM2.38655 5.16097H5.5477C5.77346 5.16097 5.95094 5.33843 5.95094 5.5642C5.95094 5.78996 5.77347 5.96743 5.5477 5.96743H2.38655C2.16079 5.96743 1.98332 5.78996 1.98332 5.5642C1.98332 5.33843 2.16079 5.16097 2.38655 5.16097ZM6.7574 10.9673H2.38655C2.16079 10.9673 1.98332 10.7898 1.98332 10.5641C1.98332 10.3383 2.16079 10.1608 2.38655 10.1608H6.7574C6.98316 10.1608 7.16063 10.3383 7.16063 10.5641C7.16063 10.7737 6.98317 10.9673 6.7574 10.9673ZM2.38655 8.46734C2.16079 8.46734 1.98332 8.28987 1.98332 8.0641C1.98332 7.83834 2.16079 7.66087 2.38655 7.66087H9.06373C9.28949 7.66087 9.46696 7.83834 9.46696 8.0641C9.46696 8.28987 9.28949 8.46734 9.06373 8.46734H2.38655Z"
+                            fill="#5254A6" />
+                        <path d="M9.55273 11.4094L12.7347 8.22705L14.0578 9.54995L10.8759 12.7323L9.55273 11.4094Z"
+                            fill="#5254A6" />
+                        <path
+                            d="M15.209 7.90312L14.3864 7.09666C14.2413 6.95152 14.0316 6.95152 13.9026 7.06446L13.1445 7.82236L14.467 9.14485L15.2413 8.38695C15.3541 8.25791 15.3541 8.04825 15.2089 7.90311L15.209 7.90312Z"
+                            fill="#5254A6" />
+                        <path
+                            d="M8.54762 13.1126L8.4509 13.5319C8.41871 13.7094 8.57995 13.8867 8.75728 13.8383L9.17659 13.7416C9.64433 13.6286 10.0798 13.4352 10.4346 13.1287L9.14427 11.8384C8.85412 12.2255 8.64445 12.6448 8.54759 13.1126L8.54762 13.1126Z"
+                            fill="#5254A6" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score blue">{{ dashboardData.closed_leads ?? 0 }}</h4>
+                    <p class="statics-title">Closed</p>
+                </div>
+            </div>
+            <div class="statics-item cursor-pointer" (click)="selectedStatus('Docs In')">
+                <span class="statics-icon user">
+                    <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M9.75649 4.29119H9.62251C9.30978 4.29119 8.99706 4.17943 8.75132 3.95607C8.48336 3.71033 8.327 3.353 8.327 2.99566V0.538574H1.26855C0.866446 0.538574 0.553711 0.851305 0.553711 1.25342V13.8069C0.553711 14.209 0.866442 14.5217 1.26855 14.5217H11.1639C11.566 14.5217 11.8787 14.209 11.8787 13.8069V4.0678L9.75649 4.29119Z"
+                            fill="#547BDB" />
+                        <path
+                            d="M9.68954 3.68875L11.4988 3.51L8.90771 0.918945V2.97391C8.90771 3.17488 8.99709 3.37602 9.13107 3.51C9.28743 3.64398 9.48841 3.71097 9.68953 3.68875H9.68954Z"
+                            fill="#547BDB" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score user">{{ dashboardData.docs_in_leads_count ?? 0 }}</h4>
+                    <p class="statics-title">DOCS-IN</p>
+                </div>
+            </div>
+
+            <div class="statics-item cursor-pointer" (click)="selectedStatus('Declined')">
+                <span class="statics-icon declined">
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                            fill="#C9624C" />
+                        <path
+                            d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                            fill="#C9624C" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score declined">{{ dashboardData.declined_leads_count ?? 0 }}</h4>
+                    <p class="statics-title">Declined</p>
+                </div>
+            </div>
+            <!-- <div class="statics-item">
+                <span class="statics-icon mustard">
+                    <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1145_2183)">
+                            <path
+                                d="M14.999 3.375V16.875C14.999 17.1734 14.8861 17.4595 14.6852 17.6705C14.4843 17.8815 14.2118 18 13.9276 18H1.07045C0.786291 18 0.513769 17.8815 0.312838 17.6705C0.111906 17.4595 -0.000976562 17.1734 -0.000976562 16.875V3.375C-0.000976562 3.07663 0.111906 2.79048 0.312838 2.5795C0.513769 2.36853 0.786291 2.25 1.07045 2.25H2.14188V1.125C2.14188 0.826631 2.25476 0.540483 2.45569 0.329505C2.65663 0.118526 2.92915 0 3.21331 0C3.49747 0 3.76999 0.118526 3.97092 0.329505C4.17186 0.540483 4.28474 0.826631 4.28474 1.125V2.25H6.42759V1.125C6.42759 0.826631 6.54048 0.540483 6.74141 0.329505C6.94234 0.118526 7.21486 0 7.49902 0C7.78318 0 8.05571 0.118526 8.25664 0.329505C8.45757 0.540483 8.57045 0.826631 8.57045 1.125V2.25H10.7133V1.125C10.7133 0.826631 10.8262 0.540483 11.0271 0.329505C11.2281 0.118526 11.5006 0 11.7847 0C12.0689 0 12.3414 0.118526 12.5424 0.329505C12.7433 0.540483 12.8562 0.826631 12.8562 1.125V2.25H13.9276C14.2118 2.25 14.4843 2.36853 14.6852 2.5795C14.8861 2.79048 14.999 3.07663 14.999 3.375ZM12.8562 6.75H2.14188V7.875H12.8562V6.75ZM12.8562 10.125H2.14188V11.25H12.8562V10.125ZM12.8562 13.5H2.14188V14.625H12.8562V13.5Z"
+                                fill="#DA7625" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1145_2183">
+                                <rect width="15" height="18" fill="white" transform="translate(-0.000976562)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+                <div class="statics-content ">
+                    <h4 class="statics-score mustard">{{ dashboardData.total_leads_count ?? 0 }}</h4>
+                    <p class="statics-title">SUBMITTED LEADS</p>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="order-list-inner" *ngIf="canListLead">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">All Leads</h6>
+                    <div class="dropdown" ngbDropdown>
+                        <!-- <li class="nav-item cursor-pointer" ngbDropdown> -->
+                        <a class="custom-dropdowm dropdown-toggle" data-bs-toggle="dropdown" ngbDropdownToggle>
+                            Actions
+                        </a>
+                        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                            <!-- (click)="openModal(editprofile, 'edit-profile')" -->
+
+                            <!-- (click)="openModal(changePassword, 'change-password')" -->
+                            <button *ngIf="canDeleteLead" (click)="deleteMultipleLeads()" class="dropdown-item"
+                                ngbDropdownItem>
+                                Delete Lead</button>
+
+                        </div>
+                        <!-- </li> -->
+                    </div>
+                </div>
+                <div class="create-new-lead" *ngIf="canAddLead">
+                    <a routerLink="/submitter/createlead" class="theme-btn in-blc"><span>+</span> Create New Lead</a>
+                </div>
+            </div>
+            <div class="leading-table-outer">
+                <div class="table-responsive lead-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input #selectAll (change)="onCheckingAll($event.target)" type="checkbox"
+                                            class="form-check-input cursor-pointer" id="check1" name="option1"
+                                            value="something">
+                                    </div>
+                                </th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col" class="min-width">Primary phone</th>
+                                <th scope="col" class="min-width">Date</th>
+                                <th scope="col">Company name</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer"
+                                [routerLink]="canViewLead ? '/submitter/lead-detail/' + lead.id: '.'"
+                                *ngFor="let lead of leadsList | paginate: { itemsPerPage: recordsPerPage, currentPage: page, totalItems: totalRecords }">
+                                <td>
+                                    <div class="form-check">
+                                        <input #inputBox (click)="$event.stopPropagation()"
+                                            (change)="onChange(lead.id, $event.target); " type="checkbox"
+                                            class="form-check-input cursor-pointer" [(checked)]="lead.selected">
+                                    </div>
+                                </td>
+                                <td>{{ lead.lead_id }}</td>
+                                <td>{{ lead.full_name | titlecase }}</td>
+
+                                <td>
+                                    <img src="assets/images/message.svg" alt="/icon">
+                                    <span>
+                                        {{ lead.email }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <img src="assets/images/phone.svg" alt="/icon">
+                                    <span>
+                                        {{ lead.phone_number }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <img src="assets/images/calendar.svg" alt="/icon">
+                                    <span>
+                                        {{getDate(lead.created_at)}}
+                                    </span>
+                                    <!-- {{ lead.created_at | date:dateFormat }} -->
+                                </td>
+                                <td>
+                                    {{ lead.company_name }}
+                                </td>
+                                <td [ngSwitch]="lead.status">
+                                    <span *ngSwitchCase="'Withdrawn'" class="status-text primary">
+                                        Withdrawn
+                                    </span>
+                                    <span *ngSwitchCase="'Final Underwriting'" class="status-text mustard">
+                                        Final Underwriting
+                                    </span>
+                                    <span *ngSwitchCase="'Contract Requested'" class="status-text faded-blue">
+                                        Contract Requested
+                                    </span>
+                                    <span *ngSwitchCase="'Default'" class="status-text declined">
+                                        Default
+                                    </span>
+                                    <span *ngSwitchCase="'Funded'" class="status-text black">
+                                        Funded
+                                    </span>
+                                    <span *ngSwitchCase="'Contract In'" class="status-text blue">
+                                        Contract In
+                                    </span>
+                                    <span *ngSwitchCase="'Contract Out'" class="status-text faded-blue">
+                                        Contract Out
+                                    </span>
+                                    <span *ngSwitchCase="'Approved'" class="status-text green">
+                                        Approved
+                                    </span>
+                                    <span *ngSwitchCase="'Submitted'" class="status-text mustard">
+                                        Submitted
+                                    </span>
+                                    <span *ngSwitchCase="'Docs In'" class="status-text blue">
+                                        Docs In
+                                    </span>
+                                    <span *ngSwitchCase="'APP OUT'" class="status-text declined">
+                                        APP OUT
+                                    </span>
+                                    <span *ngSwitchCase="'New Lead'" class="status-text mustard">
+                                        New Lead
+                                    </span>
+                                    <span *ngSwitchCase="'Declined'" class="status-text declined">
+                                        Declined
+                                    </span>
+                                </td>
+                                <td>
+                                    {{ lead.source }}
+                                </td>
+                                <td>
+                                    <div class="dropdown" ngbDropdown>
+                                        <a (click)="$event.stopPropagation();" class="custom-dropdowm dropdown-toggle"
+                                            data-bs-toggle="dropdown" ngbDropdownToggle>
+                                            <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                    fill="#FA5440"></path>
+                                                <path
+                                                    d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                    fill="#FA5440"></path>
+                                                <path
+                                                    d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                    fill="#FA5440"></path>
+                                            </svg>
+                                        </a>
+                                        <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                            <!-- <li >
+                                                <a ngbDropdownItem class="dropdown-item table-dropdown-item phone" href="#"><img
+                                                        src="assets/images/phone.svg" alt="/icon">Phone</a>
+                                            </li> -->
+                                            <li *ngIf="canViewLead">
+                                                <a ngbDropdownItem class="dropdown-item table-dropdown-item view"
+                                                    routerLink="/submitter/lead-detail/{{ lead.id }}"><img
+                                                        src="assets/images/view.svg" alt="/icon">View detail</a>
+                                            </li>
+                                            <li *ngIf="canEditLead">
+                                                <a ngbDropdownItem class="dropdown-item table-dropdown-item edit"
+                                                    routerLink="/submitter/edit-lead/{{ lead.id }}"><img
+                                                        src="assets/images/edit.svg" alt="/icon">Edit</a>
+                                            </li>
+                                            <li *ngIf="canDeleteLead">
+                                                <a (confirm)="deleteSingleLead(lead.id)"
+                                                    [swal]="{ title: 'Are you sure to delete?',text: 'You will not be able to revert this!',icon: 'warning',confirmButtonColor: '#f0412e', showCancelButton: true,confirmButtonText: 'Yes, delete it!' }"
+                                                    ngbDropdownItem class="dropdown-item table-dropdown-item delete"
+                                                    href="#"><img src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="!leadsList.length">
+                                <td colspan="14" class="text-center">No Records Found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table-sort-items">
+                        <div class="table-select-row">
+                            <span>Show </span>
+                            <select [(ngModel)]="recordsPerPage" (change)="onLimitChange($any($event.target).value)"
+                                class="select table-select-count">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span> entries</span>
+                        </div>
+                        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

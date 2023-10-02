@@ -1,0 +1,333 @@
+.radio-btns-inner[_ngcontent-jnf-c172] {
+    background: #FFEEEC;
+    border: 1px solid #FFC8C1;
+    border-radius: 5px;
+    padding: 14px;
+    width: 100%;
+    max-width: 390px;
+}
+.d-flex {
+    display: flex !important;
+}
+.radio-btns-inner li:not(:last-child) {
+    margin-right: 30px;
+}
+li {
+    list-style-type: none;
+}
+.create-lead-content .radio-btn-section input {
+    border-radius: 100% !important;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+}
+.radio-btns-inner input:checked, .radio-btns-inner input:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.radio-btns-inner input:checked + label, .radio-btns-inner input:not(:checked) + label {
+    position: relative !important;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.radio-btns-inner label {
+    margin-bottom: 0px;
+}
+.radio-btns-inner label {
+    font-family: "IBM-semi";
+    font-size: 15px;
+    color: #383D56 !important;
+}
+label {
+    font-family: "IBM-medium";
+    font-size: 15px;
+    line-height: 20px;
+    color: #565D80;
+    margin-bottom: 7px;
+    display: block;
+}
+label {
+    font-family: "IBM-medium";
+    font-size: 15px;
+    line-height: 20px;
+    color: #565d80;
+    margin-bottom: 7px;
+    display: block;
+}
+.radio-btns-inner input:checked + label:before, .radio-btns-inner input:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #fa5440;
+    border-radius: 100%;
+    background: #fff;
+}
+.radio-btns-inner input:checked + label:after, .radio-btns-inner input:not(:checked) + label:after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: #fa5440;
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    border-radius: 100%;
+    transition: all 0.2s ease;
+}
+.radio-btns-inner {
+    background: #FFEEEC;
+    border: 1px solid #FFC8C1;
+    border-radius: 5px;
+    padding: 8px 14px;
+    width: 100%;
+    max-width: 390px;
+}
+.radio-btns-inner li:not(:last-child) {
+    margin-right: 30px;
+}
+.radio-btns-inner input:checked, .radio-btns-inner input:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.radio-btns-inner input:checked + label, .radio-btns-inner input:not(:checked) + label {
+    position: relative !important;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.radio-btns-inner label {
+    font-family: 'IBM-semi';
+    font-size: 15px;
+    color: #383D56 !important;
+}
+.radio-btns-inner label {
+    margin-bottom: 0px;
+}
+.radio-btns-inner input:checked + label:before, .radio-btns-inner input:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #fa5440;
+    border-radius: 100%;
+    background: #fff;
+}
+.radio-btns-inner input:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.radio-btns-inner input:checked + label:before {
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 15%);
+}
+.radio-btns-inner input:checked + label:after, .radio-btns-inner input:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #fa5440;
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+label {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    line-height: 20px;
+    color: #565D80;
+    margin-bottom: 7px;
+    display: block;
+}
+.form-activity {
+    padding-bottom: 15px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.radio-btn-section{
+    padding-bottom: 15px;
+}
+.text-area {
+    resize: none;
+}
+
+
+// 30-may-CSS
+
+.list-search-content .col-md-4 .btn-group {
+    display: flex;
+    justify-content: flex-start;
+    background: #FFEEEC;
+    border-radius: 5px;
+}
+.btn-group .btn {
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-family: 'IBM-semi';
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #FA5440;
+}
+.list-search-content .btn-group .btn.active{
+    background: #FA5440;
+    border-radius: 5px;
+    border-color: #FA5440;
+    color: #FFFFFF;
+}
+.btn-outline-secondary:hover {
+    opacity: 0.6;
+    background-color: transparent;
+}
+.list-search-content .col-md-4 .btn-group {
+    min-height: 45px;
+    width: 100%;
+    max-width: 207px;
+    padding: 5px;
+}
+.date-arrow h3 {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    line-height: 23px;
+    color: #565D80;
+    margin-bottom: 0px;
+}
+.btn-group-top .btn-group {
+    display: flex;
+}
+.btn-group.left-content {
+    width: 100%;
+    max-width: 207px;
+    min-height: 45px;
+    background: #FFEEEC;
+    border-radius: 5px;
+    padding: 5px;
+}
+.btn-group.left-content {
+justify-content: flex-start;
+}
+.left-content .btn {
+    margin: 0px;
+}
+.btn-group.right-content {
+    justify-content: flex-end;
+}
+.btn-group.left-content .btn-primary {
+    background-color: transparent;
+}
+.right-content .theme-btn {
+    min-height: 33px;
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+.right-content .light-btn {
+    margin-right: 10px;
+}.btn-group-top {
+    border-bottom: 1px solid #DEDEF3;
+    padding-bottom: 10px;
+}
+.calender-data .container {
+    padding: 0px;
+}
+.btn-group-top {
+    padding: 10px 20px;
+}
+.btn-group-top .row.text-center {
+    align-items: center;
+}
+.right-content .theme-btn {
+    width: 100%;
+    min-width: 66px;
+    max-width: 125px;
+}
+.right-arrows {
+    display: flex;
+    justify-content: flex-end;
+}
+.date-arrow {
+    padding: 15px 20px;
+}
+.right-arrows .arw-icon {
+    padding: 0px 10px;
+}
+.cal-header .cal-cell {
+    background: #FFEEEC;
+    border-radius: 0px;
+}
+
+@media screen and (max-width:991px) {
+    .top-header-navigation .nav-link {
+        font-size: 10px;
+    }
+    .top-header-search .search-input {
+        min-width: 395px;
+    }
+    .step-listing li {
+        max-width: 105px;
+        flex: 0 0 105px;
+    }
+    .update-table .table thead tr th {
+    font-size: 16px;
+    }
+    .top-header-search .search-input {
+        min-width: 100%;
+    }
+    .calender-data .container {
+        max-width: 100% !important;
+    }
+    }
+        
+        @media screen and (max-width:767px) {
+        .inner-page-search .col-6 {
+        width: 100%;
+        margin-bottom: 20px;
+        }
+        .seach-right .form-group {
+        justify-content: flex-start;
+        }
+        .top-header-search .search-input {
+        min-width: 100%;
+        }
+        .top-header-search {
+        width: 100%;
+        }
+        .update-table .table thead tr th {
+        font-size: 15px;
+        padding: 13px 12px;
+        white-space: pre;
+        }
+       
+        }
+        @media screen and (max-width:575px) {
+        .update-table .table thead tr th {
+        font-size: 13px;
+        padding: 13px 12px;
+        line-height: 30px;
+        }
+        .seach-right .form-group {
+        flex-wrap: wrap;
+        }
+        .seach-right label {
+        font-size: 18px;
+        margin-bottom: 10px !important;
+        }
+        .calender-data .list-search-content .col-sm-6.col-md-6 {
+            margin-bottom: 20px;
+        }
+        }

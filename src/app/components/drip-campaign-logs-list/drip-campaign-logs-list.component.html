@@ -1,0 +1,65 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-header">
+            <ul class="breadcrumb">
+                <li class="left-icon">
+                    <span>
+                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                fill="#565D80"></path>
+                        </svg>
+                    </span>
+                </li>
+                <li>
+                    <span class="cursor-pointer"  routerLink="/{{userBaseRoute}}/drip-campaign-list">Drip Campaign List</span>/
+                </li>
+                <li>
+                    <span class="active-page">Drip Campaign Logs List</span>
+                </li>
+            </ul>
+        </div>
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><span class="serial-border">S.No.</span></th>
+                            <th scope="col">Updates</th>
+                            <th scope="col">Updated By</th>
+                            <th scope="col">Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="
+                  let user of dripCampaignList
+                    | paginate
+                      : {
+                          itemsPerPage: usersListLimit,
+                          currentPage: userListPage,
+                          totalItems: totalUsersCount
+                        };
+                  let i = index
+                "  
+               >
+               <td><span class="serial-border">{{ usersListLimit * (userListPage - 1) + i + 1 }}</span></td>
+                            <td>{{ user.note }}</td>
+                            <td>
+                                {{ user.name }}
+                            </td>
+                            <td> <img src="assets/images/calendar.svg" alt="/icon" />
+                                <span>{{ getDate(user.created_at) }}</span>
+                            </td>
+                          
+                        </tr>
+                        <tr *ngIf="!dripCampaignList.length">
+                            <td colspan="4" class="text-center">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

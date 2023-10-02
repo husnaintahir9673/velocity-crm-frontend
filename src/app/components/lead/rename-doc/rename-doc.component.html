@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">File Rename</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal.emit()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="renameForm">
+        <div class="form-group">
+            <label for="old">File Name</label>
+            <input formControlName="name" type="text" class="form-control" id="old"
+                placeholder="Enter filename" />
+            <div class="invalid-input" *ngIf="f.name.errors && f.name.touched">
+                <div *ngIf="f.name.errors.required">
+                    Name is required
+                </div>
+                <div *ngIf="f.name.errors.pattern">
+                    Invalid name
+                </div>
+                <div *ngIf="f.name.errors.minlength">
+                    File name must be minimum 3 characters long
+                </div>
+                <div *ngIf="f.name.errors.maxlength">
+                    Maximum 100 characters allowed
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="theme-btn" (click)="renameSubmit()">Update</button>
+</div>

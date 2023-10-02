@@ -1,0 +1,381 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span routerLink="/{{userBaseRoute}}/email-template-list">
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/email-template-list">Email Templates</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Update Email Template</span>
+                    </li>
+                </ul>
+                <!-- <ul class="breadcrumb">
+                    
+
+                    <li>
+                        <span class="active-page">Update Email Template</span>
+                    </li>
+
+                </ul> -->
+            </div>
+            <div class="create-lead-content">
+                <form [formGroup]="emailTemplateForm">
+                    <div class="updated-role-feilds">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cstm-btn-updated">
+                                    <div class="right-content">
+                                        <div class="btn-group right-content text-end">    
+                                            <button [ngStyle]="background" class="theme-btn cursor-pointer" (click)="sendTestEmail()">Send Test Email</button>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group right-content">
+                                        <!-- <button *ngIf="showDeleteButton && canDeleteTemplate" class="theme-btn white-btn cursor-pointer"
+                                            (click)="opensendEmailRemovepopup()">Delete Email Template</button> -->
+                                        <button *ngIf="canAddTemplate && !duplicateMode" [ngStyle]="background" class="theme-btn cursor-pointer"
+                                            routerLink="/{{userBaseRoute}}/add-email-templates"><span
+                                                class="add-icon">+</span>Add Email Template</button>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <!-- <div class="col-md-6">
+                                        <div class="btn-group right-content">
+                                            <button class="theme-btn white-btn" (click)="deleteEmailTemplate(7)" >Delete Email Template</button>
+                                        </div>
+                                    </div> -->
+                                   
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label>Template Name*</label>
+                                                <!-- [readonly]="!showDeleteButton && !duplicateMode" -->
+                                                <input  type="text" placeholder="Enter email template"  formControlName="template_name"
+                                                class="form-control" />
+                                                <!-- <ng-select formControlName="template_name" placeholder="Select email template"
+                                                    appearance="outline" [searchable]="false" [clearable]="false" labelForId="elead"
+                                                    [ngModel]="firstTemplateKey" (ngModelChange)="getEmailTemplateData($event)">
+                                                    <ng-option [value]="emailTemplate.key"
+                                                        *ngFor="let emailTemplate of emailTemplatesList">{{ emailTemplate.name
+                                                        }}
+                                                    </ng-option>
+                                                </ng-select> -->
+                                                <div class="invalid-input"
+                                                    *ngIf="f.template_name.errors && f.template_name.touched">
+                                                    <div *ngIf="f.template_name.errors.required">
+                                                        Template name is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label>Template Subject*</label>
+                                                <input  type="text" placeholder="Enter subject" formControlName="subject"
+                                                    class="form-control" />
+                                                <div class="invalid-input" *ngIf="f.subject.errors && f.subject.touched">
+                                                    <div *ngIf="f.subject.errors.required">
+                                                        Template subject is required
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.pattern">
+                                                        Invalid template subject
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.minlength">
+                                                        Template subject must be minimum 3 characters long
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                           <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                        <label>Template Type*</label>
+                                        <select
+                                            formControlName="template_type"
+                                            class="form-control"
+                                            name=""
+                                            id=""
+                                        >
+                                            <option value="">--Select Template Type--</option>
+                                            <option
+                                            [value]="tempalte.id"
+                                            *ngFor="let tempalte of templateType"
+                                            >
+                                            {{ tempalte.name }}
+                                            </option>
+                                        </select>
+                                        <div
+                                            class="invalid-input"
+                                            *ngIf="
+                                            f.template_type.errors && f.template_type.touched
+                                            "
+                                        >
+                                            <div *ngIf="f.template_type.errors.required">
+                                                Template type is required
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>Send Application Attachment</label>
+                                            <select formControlName="send_application_attachment" class="form-control" name="" id="country">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   <!-- <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>Is Default*</label>
+                                            <select formControlName="is_default" class="form-control" name="" id="country">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                            <div
+                                            class="invalid-input"
+                                            *ngIf="
+                                            f.is_default.errors && f.is_default.touched
+                                            "
+                                        >
+                                        <div *ngIf="f.is_default.errors.required">
+                                            Is Default is required
+                                        </div>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                        <label>Lead Status</label>
+                                        <select
+                                            formControlName="lead_status"
+                                            class="form-control"
+                                            name=""
+                                            id=""
+                                        >
+                                            <option value="">--Select Lead Status--</option>
+                                            <option
+                                            [value]="status.id"
+                                            *ngFor="let status of leadStatusList"
+                                            >
+                                            {{ status.name }}
+                                            </option>
+                                        </select>
+                                        </div>
+                                    </div> -->
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select formControlName="status" class="form-control" name="" id="country">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>Send Bcc</label>
+                                            <select formControlName="send_bcc" class="form-control" name="" id="country">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                        <label>From Option</label>
+                                        <select
+                                            formControlName="from_option"
+                                            class="form-control"
+                                            name=""
+                                            id=""
+                                        >
+                                            <option value="">--Select From--</option>
+                                            <option
+                                            [value]="from.id"
+                                            *ngFor="let from of fromOptions"
+                                            >
+                                            {{ from.name }}
+                                            </option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>To Option</label>
+                                        <ng-select
+                                            [items]="rolesList"
+                                            [multiple]="true"
+                                            bindLabel="name"
+                                            [closeOnSelect]="false"
+                                            [virtualScroll]="true"
+                                            bindValue="id"
+                                            formControlName="to_option"
+                                            placeholder="Select"
+                                            [loading]="loading"
+                                        >
+                                            <ng-template
+                                            ng-option-tmp
+                                            let-item="item"
+                                            let-item$="item$"
+                                            let-index="index"
+                                            >
+                                            <input
+                                                id="item-{{ index }}"
+                                                type="checkbox"
+                                                [checked]="item$.selected"
+                                            />
+                                            {{ item.name }}
+                                            </ng-template>
+                                        </ng-select>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                        <label>Bcc Option</label>
+                                        <ng-select
+                                        [items]="rolesList"
+                                        [multiple]="true"
+                                        bindLabel="name"
+                                        [closeOnSelect]="false"
+                                        [virtualScroll]="true"
+                                        bindValue="id"
+                                        formControlName="bcc_option"
+                                        placeholder="Select"
+                                        [loading]="loading"
+                                        >
+                                        <ng-template
+                                            ng-option-tmp
+                                            let-item="item"
+                                            let-item$="item$"
+                                            let-index="index"
+                                        >
+                                            <input
+                                            id="item-{{ index }}"
+                                            type="checkbox"
+                                            [checked]="item$.selected"
+                                            />
+                                            {{ item.name }}
+                                        </ng-template>
+                                        </ng-select>
+                                        </div>
+                                    </div>
+                                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="form-group">
+                                            <label>Keep Renewal User CC In Second Fund</label>
+                                            <select formControlName="keep_renewal_user" class="form-control" name="" id="country">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form-group cstm-placeholder-box">
+                                            <h4>Placeholders</h4>
+                                          <p *ngFor="let token of personilizedVariables | keyvalue">{{ token.key }}: <b>{{getCapitalizeName(token.key)}}</b></p>
+                                        </div>
+                                    </div>
+                                    </div>
+                            
+                                
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="module-area">
+                                            <!-- <ckeditor formControlName="template" #myckeditor name="myckeditor" required
+                                                [config]="ckeConfig" debounce="500"
+                                                >
+                                                <ckbutton [name]="'personlized'"
+                                                [command]="'insert_name'"
+                                                (click)="openPeronisedForm($event)"
+                                                [label]="'Personalized'"
+                                                [toolbar]="'custom,1'"
+                                                >
+                                            </ckbutton>
+                                            </ckeditor> -->
+                                            <angular-editor formControlName="template" #myckeditor  [config]="editorConfig">
+                                                <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+                                                    <ae-toolbar-set>
+                                                    <ae-button iconClass="fa fa-user" title="Personalized"
+                                                                (buttonClick)="openPeronisedForm(myckeditor)">
+                                                    </ae-button>
+                                                    </ae-toolbar-set>
+                                                </ng-template>
+                                            </angular-editor>
+                                            <!-- <textarea formControlName="template"></textarea> -->
+                                            <!-- <div class="module-icons-box">
+                                                <div class="module-icons-inner"></div>
+                                            </div> -->
+                                            <div class="invalid-input" *ngIf="f.template.errors && f.template.touched">
+                                                <div *ngIf="f.template.errors.required">
+                                                    Template is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="lead-submit-btn" *ngIf="canUpdateTemplate">
+                <button class="theme-btn submit-btn" [ngStyle]="background" (click)="emailTemplateFormSubmit()">
+                    <span class="">{{ duplicateMode ? 'Continue': 'Update' }}</span>
+                    <span class="btn-icon btn-right-icon">
+                        <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                fill="white"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<ng-template #personizedVars>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Insert Personalization Token</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Select Personalization Token* </label>
+                    <ng-select  (change)="onTokenSelect($event)"
+                    name="status" placeholder="Select Token" appearance="outline"
+                 labelForId="elead">
+                    <ng-option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">
+                      {{ token.key }}
+                    </ng-option>
+                    </ng-select>
+                    <!-- <select (change)="onTokenSelect($event)" class="form-control" name="" id="">
+                        <option value="">--Select token--</option>
+                        <option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">{{ token.key }}</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

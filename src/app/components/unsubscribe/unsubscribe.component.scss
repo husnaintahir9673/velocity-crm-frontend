@@ -1,0 +1,127 @@
+.card{
+    background-color: rgb(243, 224, 224);
+    text-decoration: center;
+    width: 100% !important;
+}
+.inner-card{
+    background-color: rgb(201, 215, 228);
+}
+.inner2-card{
+    background-color: rgb(233, 177, 236);
+}
+.p{
+    color: black;
+}
+.login-page-inner {
+    background-color: #E8E8F1;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.login-page {
+    overflow: hidden;
+}
+
+.login-card {
+    background-color: #fff;
+    padding: 40px 50px;
+}
+
+.form-head {
+    margin: 0 0 30px;
+}
+
+.form-heading {
+    font-family: 'IBM-semi';
+    font-size: 23px;
+    color: #383D56;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+.bi-eye-slash {
+    position: absolute;
+    right: 24px !important;
+    top: 33px !important;
+    z-index: 5;
+}
+.cstm-unsubscribe {
+    background: #ffff;
+    width: 40%;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0px 0px 11px #a7a7a7;
+    border-radius: 10px;
+    text-align: center;
+}
+.cstm-unsubscribe button {
+    margin-top: 25px;
+    width: 100%;
+    max-width: 130px;
+    text-align: center;
+    margin-left: 10px;
+}
+.cstm-unsubscribe .inner-card, .cstm-unsubscribe .inner2-card {
+    background-color: #ffeeec;
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+}
+.login-page-inner {
+    padding: 40px 0;
+    background-color: #ffeff0ad;
+}
+.cstm-unsubscribe span.unsubscribe-icon svg, .cstm-unsubscribe span.unsubscribe-icon-next svg {
+    width: 200px;
+}
+.cstm-unsubscribe span.unsubscribe-icon, .cstm-unsubscribe span.unsubscribe-icon-next {
+    display: block;
+    margin-bottom: 20px;
+}
+.cstm-unsubscribe .inner-card h4 {
+    font-weight: 600;
+}
+.cstm-unsubscribe .inner-card.active {
+    box-shadow: 0px 0px 5px #f32505;
+}
+.unsubscribe-icon-next .cls-1, .unsubscribe-icon-next .cls-5 {
+    fill: #f8999c;
+}
+.unsubscribe-icon-next .cls-2 {
+    fill: #ff9a9d;
+}
+.unsubscribe-icon-next .cls-4 {
+    fill: #f1989b;
+}
+.cstm-unsubscribe-success {
+    background-color: #f0412e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+.cstm-unsubscribe-success h3 {
+    font-weight: 600;
+    color: #fff !important;
+}
+.cstm-unsubscribe-success p {
+    font-weight: 600;
+    color: #fff !important;
+}
+.cstm-unsubscribe h4 {
+    font-weight: 600;
+}
+
+.subscribe-theme-btn {
+    text-align: center;
+}
+.subscribe-theme-btn button.subscribe-btn {
+    background: #fff;
+    color: #f0523a;
+    border: 1px solid #f0523a;
+}

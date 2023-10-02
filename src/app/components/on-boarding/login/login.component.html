@@ -1,0 +1,76 @@
+<main class="">
+    <div class="login-page-inner">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="login-card shadow">
+                        <div class="text-center ">
+                            <a>
+                                <img src="assets/images/logo.png" alt="logo" />
+                            </a>
+                        </div>
+                        <div class="login-card-body">
+                            <div class="form-head">
+                                <h3 class="form-heading">Login</h3>
+
+                            </div>
+
+                            <form [formGroup]="loginForm">
+                                <div class="form-group">
+                                    <label for="username">Email*</label>
+                                    <input formControlName="username" type="text" class="form-control" id="username"
+                                        placeholder="Enter Email" />
+                                    <div class="invalid-input" *ngIf="f.username.errors && f.username.touched">
+                                        <div *ngIf="f.username.errors.required">
+                                            Email is required
+                                        </div>
+                                        <div *ngIf="f.username.errors.usernameEmail && !f.username.errors.required">
+                                            Invalid email
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password*</label>
+                                    <input formControlName="password" type="password" class="form-control" id="password"
+                                        [type]="passwordType ? 'password': 'text'" placeholder="Enter Password" />
+                                    <span (click)="passwordType = !passwordType" *ngIf="!passwordType"
+                                        class="bi bi-eye-slash cursor-pointer" id="togglePassword">
+                                        <img src="assets/images/eye-visible.svg" alt="Eye Off Icon">
+                                    </span>
+                                    <span (click)="passwordType = !passwordType" *ngIf="passwordType"
+                                        class="bi bi-eye-slash eye-visible cursor-pointer" id="togglePassword">
+                                        <img src="assets/images/eye-off.svg" alt="Eye On Icon">
+                                    </span>
+                                    <div class="invalid-input" *ngIf="f.password.errors && f.password.touched">
+                                        <div *ngIf="f.password.errors.required">
+                                            Password is required
+                                        </div>
+                                        <div *ngIf="f.password.errors.pattern">
+                                            Please enter a password without spaces
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <div class="form-check">
+                                        <input formControlName="rememberMe" type="checkbox"
+                                            class="form-check-input cursor-pointer" id="check1" name="option1"
+                                            value="something">
+                                        <label class="form-check-label cursor-pointer" for="check1">Remember Me</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button (click)="submitLogin()" type="submit"
+                                        class="theme-btn btn-block">Login</button>
+                                </div>
+                                <div class="form-group text-center">
+                                    <a class="links" routerLink="/forgot-password">Forgot Password</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

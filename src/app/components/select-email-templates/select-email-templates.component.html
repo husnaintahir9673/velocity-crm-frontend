@@ -1,0 +1,142 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-header" *ngIf="show == 'showtrue'">
+            <h3 class="page-title cursor-pointer" routerLink="/admin/company">
+                <span>
+                    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                            fill="#565D80" />
+                    </svg>
+
+                </span> Select Email Templates
+            </h3>
+        </div>
+        <div class="craete-lead-wrapper">
+            <div class="create-laed-content">
+                <div class="full-view manage-cstm-file">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Select Email Templates</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <ng-container [formGroup]="lenderFormGroup">
+                                <div class="row">
+                                    <div class="notification-checkbox pull-right">
+                                        <span>Type*</span>
+                                        <div class="cstm-check-box">
+                                            <div class="form-check">
+                                            <input
+                                                formControlName="type"
+                                                type="radio"
+                                                class="form-check-input cursor-pointer"
+                                                id="all"
+                                                name="type"
+                                                value="all"
+                                                
+                                            />
+                                            <!-- (change)="checkBoxColor($any($event.target).value)" -->
+                                            <!-- [ngStyle]="{'background-color':colorCheckbox?color:'','border-color':colorCheckbox?color:''}" -->
+                                            <label
+                                                class="form-check-label cursor-pointer"
+                                                for="all"
+                                                >All Email Templates</label
+                                            >
+                                            </div>
+                                            <div class="form-check">
+                                            <input
+                                                formControlName="type"
+                                                type="radio"
+                                                class="form-check-input cursor-pointer"
+                                                id="custom"
+                                                name="type"
+                                                value="custom"
+                                                
+                                            />
+                                            <!-- (change)="checkBoxColor($any($event.target).value)"  -->
+                                            <!-- [ngStyle]="{'background-color':colorCheckbox2?color:'','border-color':colorCheckbox2?color:''}" -->
+                                            <label
+                                                class="form-check-label cursor-pointer"
+                                                for="custom"
+                                                >Custom Email Templates</label
+                                            >
+                                            </div>
+                                        </div>
+                                        <div
+                                        class="invalid-input"
+                                        *ngIf="
+                                          f.type.errors &&
+                                          f.type.touched
+                                        "
+                                      >
+                                        <div
+                                          *ngIf="f.type.errors.required"
+                                        >
+                                          Type is required
+                                        </div>
+                                      </div>
+                                      </div>
+                                      <div *ngIf="lenderFormGroup.value.type == 'custom'">
+                                    <div class="row cstm-overflow">
+                                        <div   class="col-12 col-sm-6 col-md-6 col-lg-4 " formArrayName="lenderFormArray"
+                                        *ngFor="let agn of lenderFormArray.controls; let i = index"> 
+                                        <ng-container formGroupName="{{i}}">
+                                         <div class="form-group">
+                                             <label class="label-toggle">{{getPermissionName(lenderFormArray.controls[i].get('template_name')?.value)}} <span class="toggleSwitch nolabel"><input type="checkbox"  formControlName="is_checked" id="0"><span><span></span><span></span></span><a [ngStyle]="lenderFormArray.controls[i].get('is_checked')?.value ? {'background-color': color} : {'background-color': '#ffff'}"></a></span></label>
+                                             <!-- <input readonly formControlName="template_name" type="text"
+                                                 placeholder="Enter field name" class="form-control" /> -->
+                                         </div>
+                                         <div class="invalid-input"
+                                             *ngIf="lenderFormArray.controls[i].get('template_name')?.errors && lenderFormArray.controls[i].get('template_name')?.touched">
+                                             <div
+                                                 *ngIf="lenderFormArray.controls[i].get('template_name')?.errors?.pattern">
+                                                 Invalid Field name
+                                             </div>
+                                             <div *ngIf="lenderFormArray.controls[i].get('template_name')?.errors?.minlength">
+                                                 Field name must be minimum 3 characters long
+                                             </div>
+                                             <div *ngIf="lenderFormArray.controls[i].get('template_name')?.errors?.maxlength">
+                                                 Maximum 100 characters allowed
+                                             </div>
+                                         </div>
+                                        <!-- <div class="col-3 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                         <div class="form-group">
+                                             <label>Is Required</label>
+                                             <input formControlName="is_required" type="checkbox" />
+                                         </div>
+                                     </div> -->
+
+                               
+                             </ng-container>
+                                       </div>
+                                       </div>
+                                      </div>
+                                  
+                                    <div class="d-flex justify-content-end">
+                                        <!-- (click)="submit()" -->
+                                        <a (click)="submit()" class="theme-btn cursor-pointer " [ngStyle]="background">
+                                            <span class="">Submit</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+        
+                                            </span>
+                                        </a>
+                                    </div> 
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

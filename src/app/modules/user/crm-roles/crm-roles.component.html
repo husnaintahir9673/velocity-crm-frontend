@@ -1,0 +1,134 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="searchbar-box-container">
+            <div class="order-list-inner">
+                <div class="table-list-buttons">
+                    <div class="lead-dropdown">
+                        <h6 class="all-leads-text">Roles</h6>
+
+                    </div>
+
+                </div>
+                <div class="table-responsive lead-table">
+                    <div class="btn-group right-content">
+                        <!-- <button class="theme-btn text-right" (click)="openModal(addRole)"><span
+                                class="add-icon">+</span> Add Role</button> -->
+                        <button routerLink="admin/admin-update-permission-details" class="theme-btn mx-2">Permissions
+                            Group Description</button>
+                    </div>
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Role
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let role of rolesList; let i = index">
+                                <td>
+                                    {{ i+1 }}
+                                </td>
+                                <td>
+                                    {{ role.name }}
+                                </td>
+                                <td>
+                                    <div class="dropdown" ngbDropdown>
+                                        <a (click)="$event.stopPropagation();" class="custom-dropdowm dropdown-toggle"
+                                            data-bs-toggle="dropdown" ngbDropdownToggle>
+                                            <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                    fill="#FA5440" />
+                                                <path
+                                                    d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                    fill="#FA5440" />
+                                                <path
+                                                    d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                    fill="#FA5440" />
+                                            </svg>
+                                        </a>
+                                        <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                            <li>
+                                                <!--[queryParams]="{mode: 'edit'}"-->
+                                                <a routerLink="../admin-role/{{ role.id }}" ngbDropdownItem
+                                                    class="dropdown-item table-dropdown-item edit"> <svg width="12"
+                                                        height="15" viewBox="0 0 12 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                                            fill="#FA5440" />
+                                                    </svg> Edit</a>
+                                            </li>
+                                            <!-- <li>
+                                                <a class="cursor-pointer" routerLink="../role/{{ role.id }}">
+                                                    <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                                            fill="#FA5440" />
+                                                    </svg>
+                                                </a>   
+                                            </li> -->
+                                            <li *ngIf="role.can_deleted">
+                                                <a (confirm)="deleteRole(role)"
+                                                    [swal]="{ title: 'Are you sure to delete this role?',text: 'All users of this role will also get deleted!',icon: 'warning', confirmButtonColor: '#f0412e', showCancelButton: true,confirmButtonText: 'Yes, delete it!' }"
+                                                    ngbDropdownItem
+                                                    class="dropdown-item table-dropdown-item delete cursor-pointer"><img
+                                                        src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<ng-template #addRole>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Role</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addRoleForm">
+            <div class="form-group">
+                <label for="new">Role name*</label>
+                <input formControlName="name" type="text" class="form-control" id="new" placeholder="Enter role name" />
+                <div class="invalid-input" *ngIf="f.name.errors && f.name.touched">
+                    <div *ngIf="f.name.errors.required">
+                        Role name is required
+                    </div>
+                    <div *ngIf="f.name.errors.pattern">
+                        Invalid role name
+                    </div>
+                    <div *ngIf="f.name.errors.minlength">
+                        Role name must be minimum 3 characters long
+                    </div>
+                    <div *ngIf="f.name.errors.maxlength">
+                        Role name must be maximum 20 characters long
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="theme-btn" (click)="addRoleSubmit()">Add Role</button>
+    </div>
+</ng-template>

@@ -1,0 +1,53 @@
+.login-page-inner {
+    background-color: #e8e8f1;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.login-page {
+    overflow: hidden;
+}
+
+.login-card {
+    background-color: #fff;
+    padding: 40px 50px;
+}
+
+.form-head {
+    margin: 0 0 30px;
+}
+
+.form-heading {
+    font-family: "IBM-semi";
+    font-size: 23px;
+    color: #383d56;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+.links {
+    color: #383d56;
+    font-family: 'IBM-medium';
+}
+.bi-eye-slash {
+    position: absolute;
+    right: 24px !important;
+    top: 33px !important;
+    z-index: 5;
+}
+::-ms-reveal {
+    display: none !important;
+}
+
+//
+.form-check-input:checked,
+.form-check-input:checked:focus {
+    background-color: #fa5440 !important;
+    border-color: #fa5440;
+    border-radius: 2px;
+}

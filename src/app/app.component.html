@@ -1,0 +1,6 @@
+<router-outlet> 
+</router-outlet>
+<!-- <ngx-spinner type="ball-spin-clockwise"  size="medium"></ngx-spinner> -->
+<ngx-ui-loader *ngIf="getValue" [pbColor]="color" [fgsColor]="color"></ngx-ui-loader>
+<ngx-ui-loader *ngIf="removeSpinner"></ngx-ui-loader>
+<!-- ball-clip-rotate -->

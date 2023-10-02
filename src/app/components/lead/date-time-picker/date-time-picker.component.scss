@@ -1,0 +1,25 @@
+.toggle-btn {
+    border: 1px solid #8989b2;
+    margin-top: 10px;
+}
+.togller {
+    border: 1px solid #8989b2 !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-left: 0 !important;
+}
+.togller:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #8989b2 !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-left: 0 !important;
+}
+.custom-datepicker:focus {
+    border: 1px solid #8989b2 !important;
+    border-right: 0 !important;
+}
+.form-group {
+    margin-bottom: 15px;
+}

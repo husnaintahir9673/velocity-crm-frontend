@@ -1,0 +1,180 @@
+<main class="dashboard-wrapper">
+    <div *ngIf="twilioConfigurationMessage" class="alert alert-danger" role="alert">
+        <p  class="text-center email"><b>Please update your twilio
+                configuration</b><a routerLink="/{{userBaseRoute}}/email-configurations" class="click cursor-pointer"> click
+                here to update</a></p>
+    </div>
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../leads">
+                        <span>All Leads</span>/
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span class="active-page"> Lead Details <span class="active-page" *ngIf="lead.lead_id">( {{
+                                lead.lead_id }}, {{lead?.company_name}}, DBA - {{lead?.lead_doing_business_as}}
+                                )</span></span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Send Sms</span>
+                    </li>
+                </ul>
+            </div>
+            <app-all-detail-lead [leadId]="leadID" (leadDetails)="getLeadBasicDetails($event)"></app-all-detail-lead>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Send Sms Details</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="sendSmsForm">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Phone Number* </label>
+                                                <input [mask]="mask.phone" prefix="+1" formControlName="phone_number" type="tel"
+                                                    placeholder="Enter phone number" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="s.phone_number.errors && s.phone_number.touched">
+                                                    <div *ngIf="s.phone_number.errors.required">
+                                                        Phone number is required
+                                                    </div>
+                                                    <div *ngIf="s.phone_number.errors.mask">
+                                                        Invalid phone number
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Sms Template* </label>
+                                                <ng-select formControlName="sms_template"
+                                                    placeholder="Select sms template" appearance="outline"
+                                                    [searchable]="false" [clearable]="false" labelForId="elead"
+                                                    [ngModel]="firstTemplateKey">
+                                                    <ng-option [value]="emailTemplate.name"
+                                                        *ngFor="let emailTemplate of emailTemplatesList">{{
+                                                        emailTemplate.name
+                                                        }}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="invalid-input"
+                                                    *ngIf="s.sms_template.errors && s.sms_template.touched">
+                                                    <div *ngIf="s.sms_template.errors.required">
+                                                        Sms template is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Sms Content* </label>
+                                                <textarea formControlName="message" placeholder="Enter sms content"
+                                                    [maxlength]="1000" class="form-control"></textarea>
+                                                <div class="invalid-input"
+                                                    *ngIf="s.message.errors && s.message.touched">
+                                                    <div *ngIf="s.message.errors.required">
+                                                        Sms content is required
+                                                    </div>
+                                                    <div *ngIf="s.message.errors.pattern">
+                                                        Invalid sms content
+                                                    </div>
+                                                    <div *ngIf="s.message.errors.maxlength">
+                                                        Maximum 1000 characters allowed
+                                                    </div>
+                                                    <div *ngIf="s.message.errors.minlength">
+                                                        Sms must be minimum 3 characters long
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="lead-submit-btn">
+                                            <a (click)="openModal(preview)" class="theme-btn cursor-pointer">
+                                                <span class="">Preview</span>
+                                                <span class="btn-icon btn-right-icon">
+                                                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.79166 0C4.25 0 1.22542 2.20292 0 5.3125C1.22542 8.42208 4.25 10.625 7.79166 10.625C11.3369 10.625 14.3579 8.42208 15.5833 5.3125C14.3579 2.20292 11.3369 0 7.79166 0ZM7.79166 8.85417C5.83666 8.85417 4.25 7.2675 4.25 5.3125C4.25 3.3575 5.83666 1.77083 7.79166 1.77083C9.74666 1.77083 11.3333 3.3575 11.3333 5.3125C11.3333 7.2675 9.74666 8.85417 7.79166 8.85417ZM7.79166 3.1875C6.61937 3.1875 5.66666 4.14021 5.66666 5.3125C5.66666 6.48479 6.61937 7.4375 7.79166 7.4375C8.96395 7.4375 9.91666 6.48479 9.91666 5.3125C9.91666 4.14021 8.96395 3.1875 7.79166 3.1875Z"
+                                                            fill="white" />
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            <button class="theme-btn submit-btn" (click)="sendSms()">
+                                                <span class="">Submit</span>
+                                                <span class="btn-icon btn-right-icon">
+                                                    <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                            fill="white"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="lead-submit-btn text-end">
+                    <a (click)="openModal(preview)" class="theme-btn cursor-pointer" [ngStyle]="background">
+                        <span class="">Preview</span>
+                        <span class="btn-icon btn-right-icon">
+                            <svg width="16" height="11" viewBox="0 0 16 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.79166 0C4.25 0 1.22542 2.20292 0 5.3125C1.22542 8.42208 4.25 10.625 7.79166 10.625C11.3369 10.625 14.3579 8.42208 15.5833 5.3125C14.3579 2.20292 11.3369 0 7.79166 0ZM7.79166 8.85417C5.83666 8.85417 4.25 7.2675 4.25 5.3125C4.25 3.3575 5.83666 1.77083 7.79166 1.77083C9.74666 1.77083 11.3333 3.3575 11.3333 5.3125C11.3333 7.2675 9.74666 8.85417 7.79166 8.85417ZM7.79166 3.1875C6.61937 3.1875 5.66666 4.14021 5.66666 5.3125C5.66666 6.48479 6.61937 7.4375 7.79166 7.4375C8.96395 7.4375 9.91666 6.48479 9.91666 5.3125C9.91666 4.14021 8.96395 3.1875 7.79166 3.1875Z"
+                                    fill="white" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a class="theme-btn submit-btn cursor-pointer" (click)="sendSms()" [ngStyle]="background">
+                        <span class="">Submit</span>
+                        <span class="btn-icon btn-right-icon">
+                            <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                    fill="white"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<ng-template #preview>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Preview Sms Content</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePreviewModal()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row" [formGroup]="previewForm">
+            <div class="row">
+                <div class="col-12">
+                    <textarea readonly formControlName="message" [maxlength]="1000" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

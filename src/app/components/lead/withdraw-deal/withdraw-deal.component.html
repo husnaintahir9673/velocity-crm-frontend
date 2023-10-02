@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 class="modal-title">Withdraw Deal</h4>
+    <button type="button" class="btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+    <div class="row" [formGroup]="withDrawForm">
+        <div class="col-12">
+            <div class="form-group">
+                <label>Select Withdraw Reason*</label>
+                <select formControlName="reason" name="" id="" class="form-control multiselect-reason">
+                    <option value="">Select withdraw reason</option>
+                    <option [value]="reason.id" *ngFor="let reason of withDrawReasons">
+                        {{ reason.name }}
+                    </option>
+                </select>
+                <div class="invalid-input" *ngIf="f.reason?.errors && f.reason?.touched">
+                    <div *ngIf="f.reason?.errors?.required">
+                        Withdraw reason is required
+                    </div>
+                    <!-- <div *ngIf="f.reason?.errors?.pattern">
+                        Invalid Withdraw reason
+                    </div> -->
+                    <!-- <div *ngIf="f.reason?.errors?.maxlength">
+                        Maximum 200 characters allowed
+                    </div>
+                    <div *ngIf="f.reason?.errors?.minlength">
+                        Withdraw reason must be minimum 3 characters long
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label>Note*</label>
+                <textarea formControlName="note" class="form-control" name="" id="" cols="30" rows="5"></textarea>
+            </div>
+            <div class="invalid-input" *ngIf="f.note?.errors && f.note?.touched">
+                <div *ngIf="f.note?.errors?.required">
+                    Note is required
+                </div>
+                <div *ngIf="f.note?.errors?.pattern">
+                    Invalid note
+                </div>
+                <div *ngIf="f.note?.errors?.maxlength">
+                    Max characters allowed are 1000
+                </div>
+                <div *ngIf="f.note?.errors?.minlength">
+                    Note must be minimum 3 characters long
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="theme-btn btn-sm" data-bs-dismiss="modal" (click)="withdrawLead()" [ngStyle]="background">Withdraw</button>
+</div>

@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Signature</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal(true)"></button>
+</div>
+<div class="modal-body">
+    <div class="signature">
+        <signature-pad #pad2 [options]="signaturePadOptions" (drawEnd)="drawComplete()"></signature-pad>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" [ngStyle]="{'background-color':color}" class="theme-btn" (click)="closeModal(false)" >Submit</button>
+    <button type="button" [ngStyle]="{'background-color':color}" class="theme-btn" (click)="resetSignPad()">Reset</button>
+</div>

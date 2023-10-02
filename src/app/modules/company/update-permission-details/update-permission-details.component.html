@@ -1,0 +1,87 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="../roles">Roles</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Permissions Group Description</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-lead-content">
+                <div class="updated-role-feilds">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="updated-title">
+                                <span class="accordion-head-title">Permissions Group Description</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="full-view" [formGroup]="form">
+                    <div class="accordion" id="accordion">
+                        <div class="row">
+                            <div class="col-6" *ngFor="let permission of f | keyvalue">
+                                <div class="accordion-item" >
+                                    <a class="accordion-head" data-bs-toggle="collapse">
+                                        <span class="accordion-head-title">{{ permission.key }}</span>
+        
+                                    </a>
+                                    <div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="form-group">
+                                                        <!-- <textarea class="form-control" rows="2"
+                                                            [formControlName]="permission.key"></textarea> -->
+                                                        <input [formControlName]="permission.key" type="text" placeholder=""
+                                                        class="form-control" />
+                                                        <div class="invalid-input"
+                                                            *ngIf="form.get(permission.key)?.errors && form.get(permission.key)?.touched">
+                                                            <div *ngIf="form.get(permission.key)?.errors?.required">
+                                                                Description is required
+                                                            </div>
+                                                            <div *ngIf="form.get(permission.key)?.errors?.pattern">
+                                                                Invalid description
+                                                            </div>
+                                                            <div *ngIf="form.get(permission.key)?.errors?.maxlength">
+                                                                Maximum 500 characters allowed
+                                                            </div>
+                                                            <div *ngIf="form.get(permission.key)?.errors?.minlength">
+                                                                Description must be minimum 3 characters long
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button routerLink="../roles" class="theme-btn white-btn">Cancel</button>
+                                <button (click)="updatePermissions()" class="theme-btn" [ngStyle]="background">Update</button>
+                            </div>
+                        </div>
+                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

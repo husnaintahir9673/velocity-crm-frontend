@@ -1,0 +1,211 @@
+/* Add Listing Form CSS */
+.form-activity {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+}
+.create-lead-content .radio-btn-section input {
+    border-radius: 100% !important;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+}
+.radio-btn-section {
+   padding-bottom: 5px;
+}
+.updated-title {
+    margin-bottom: 30px;
+}
+.radio-btn-section .form-check:not(:last-child) {
+    margin-right: 40px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+/* 
+radio-btn-css */
+.radio-btns-inner {
+    background: #FFEEEC;
+    border: 1px solid #FFC8C1;
+    border-radius: 5px;
+    padding: 14px;
+    width: 100%;
+    max-width: 390px;
+}
+.radio-btns-inner li:not(:last-child) {
+    margin-right: 30px;
+}
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.craete-lead-wrapper {
+    padding-bottom: 100px;
+}
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.page-header .breadcrumb {
+    padding-top: 4px;
+}
+.page-header .breadcrumb .left-icon {
+    margin-right: 10px;
+    display: inline-block;
+}
+.breadcrumb li span {
+    margin-right: 0px;
+}
+li {
+    list-style-type: none;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.radio-btns-inner input:checked, .radio-btns-inner input:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.radio-btns-inner input:checked + label, .radio-btns-inner input:not(:checked) + label {
+    position: relative !important;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.radio-btns-inner label {
+    font-family: 'IBM-semi';
+    font-size: 15px;
+    color: #383D56 !important;
+}
+.radio-btns-inner label {
+    margin-bottom: 0px;
+}
+// .radio-btns-inner input:checked + label:before, .radio-btns-inner input:not(:checked) + label:before {
+//     content: '';
+//     position: absolute;
+//     left: 0;
+//     top: 2px;
+//     width: 18px;
+//     height: 18px;
+//     border: 1px solid #fa5440;
+//     border-radius: 100%;
+//     background: #fff;
+// }
+.radio-btns-inner input:checked + label .radio-before, .radio-btns-inner input:not(:checked) + label .radio-before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #fa5440;
+    border-radius: 100%;
+    background: #fff;
+}
+// .radio-btns-inner input:not(:checked) + label:after {
+//     opacity: 0;
+//     -webkit-transform: scale(0);
+//     transform: scale(0);
+// }
+.radio-btns-inner input:not(:checked) + label .radio-after{
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.radio-btns-inner input:checked + label:before {
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 15%);
+}
+// .radio-btns-inner input:checked + label:after, .radio-btns-inner input:not(:checked) + label:after {
+//     content: '';
+//     width: 12px;
+//     height: 12px;
+//     background: #fa5440;
+//     position: absolute;
+//     top: 5px;
+//     left: 3px;
+//     border-radius: 100%;
+//     -webkit-transition: all 0.2s ease;
+//     transition: all 0.2s ease;
+// }
+.radio-btns-inner input:checked + label .radio-after, .radio-btns-inner input:not(:checked) + label .radio-after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #fa5440;
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+label {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    line-height: 20px;
+    color: #565D80;
+    margin-bottom: 7px;
+    display: block;
+}
+app-date-time-picker {
+    width: 100%;
+}
+.popover-body {
+    max-width: 235px;
+}
+
+
+
+/* container Queries */
+
+@media screen and (min-width:200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        max-width: 880px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .container {
+        max-width: 1120px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .container {
+        max-width: 1250px;
+        padding: 0 25px;
+    }
+}
+
+@media screen and (min-width:1441px) {
+    .container {
+        max-width: 1675px;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width:991px) {
+.top-header-navigation .nav-link {
+    font-size: 10px;
+}
+.top-header-search .search-input {
+    min-width: 395px;
+}
+.step-listing li {
+    max-width: 105px;
+    flex: 0 0 105px;
+}
+}

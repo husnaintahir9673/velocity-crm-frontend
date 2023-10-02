@@ -1,0 +1,173 @@
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.create-lead-content {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+.updated-title {
+    padding-bottom: 30px;
+}
+.full-view {
+    margin-top: 24px;
+}
+.accordion-item {
+    border-radius: 10px!important;
+    border: 0;
+    margin-bottom: 0px;
+}
+.accordion-item {
+    background-color: #fff;
+    overflow: inherit;
+}
+.accordion-head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 18px 45px;
+    background-color: #F6F6F9;
+    border-radius: 10px;
+}
+
+.accordion-head-title {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: #383D56;
+    margin: 0;
+}
+.accordion-body {
+    background-color: #fff;
+    padding: 30px 45px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.page-header .breadcrumb {
+    padding-top: 4px;
+}
+.page-header .breadcrumb .left-icon {
+    margin-right: 10px;
+    display: inline-block;
+}
+.breadcrumb li span {
+    margin-right: 0px;
+}
+.breadcrumb span {
+    font-family: 'IBM-medium';
+    font-size: 16px;
+    line-height: 16px;
+    color: #777C96;
+}
+.breadcrumb .active-page {
+    color: #383D56;
+}
+.permission-outer {
+    padding-bottom: 15px;
+}
+.mt-checkbox{
+    margin-top: 5px;
+}
+.white-btn {
+    background: #f1eaea !important;
+    color: #565D80 !important;
+    margin-right: 10px !important;
+}
+
+
+.tooltip-title {
+    font-family: "IBM";
+    font-size: 14px;
+    line-height: 22px;
+    color: #344054;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #E8E8E8;
+    display: block;
+    padding: 5px 10px;
+}
+.tooltip-para {
+    font-family: "IBM";
+    line-height: 18px;
+    color: #475467;
+    font-size: 12px;
+    text-align: left;
+    display: inline-block;
+    padding: 5px 10px;
+    word-break: break-all;
+}
+.tooltip-context {
+    background: #FFFFFF;
+    border-radius: 4px;
+    position: absolute;
+    width: 100%;
+    max-width: 287px;
+    min-width: 287px;
+    min-height: 100px;
+    transition: opacity 0.3s;
+    opacity: 0;
+    margin: 0px auto;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+    bottom: 140%;
+    padding: 0px;
+    z-index: -1;
+}
+.tooltip-icon img:hover ~ .tooltip-context {
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    max-width: 287px;
+    z-index: 99;
+}
+.tooltip-icon {
+    position: relative;
+    img {
+        width: 15px;
+        cursor: pointer;
+    }
+}
+.tooltip-context::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: -1;
+    bottom: -4px;
+}
+.totltip-custom {
+    min-width: 10px;
+    margin-right: 10px;
+}
+@media screen and (max-width: 767px) {
+    .accordion-head{
+        padding: 18px 25px;
+    }
+    .accordion-body {
+        padding: 25px;
+    }
+}
+@media screen and (max-width: 575px) {
+.create-lead-content {
+    padding: 20px;
+}
+.accordion-body {
+    padding: 18px;
+}
+.accordion-head {
+    padding: 18px;
+}
+}

@@ -1,0 +1,218 @@
+<main class="">
+    <div class="calender-data">
+        <div class="container">
+            <div class="craete-lead-wrapper">
+                <div class="list-search-content">
+                    <div class="btn-group-top">
+                        <div class="row text-center">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="btn-group left-content">
+                                    <div [ngStyle]="{'background':view === CalendarView.Month?color:'','color':view != CalendarView.Month?color:''}" class="btn btn-primary" (click)="setView(CalendarView.Month)"
+                                        [class.active]="view === CalendarView.Month">
+                                        Month
+                                    </div>
+                                    <div [ngStyle]="{'background':view ===CalendarView.Week?color:'','color':view != CalendarView.Week?color:''}" class="btn btn-primary" (click)="setView(CalendarView.Week)"
+                                        [class.active]="view === CalendarView.Week">
+                                        Week
+                                    </div>
+                                    <div [ngStyle]="{'background':view ===CalendarView.Day?color:'','color':view != CalendarView.Day?color:''}" class="btn btn-primary" (click)="setView(CalendarView.Day)"
+                                        [class.active]="view === CalendarView.Day">
+                                        Day
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="btn-group right-content">
+                                    <button mwlCalendarToday [(viewDate)]="viewDate" class="theme-btn light-btn"[ngStyle]="{'color':color}">Today</button>
+                                    <button *ngIf="canAddActivity &&  leadDetails.is_freeze == 0" routerLink="/{{userBaseRoute}}/add-activity/{{leadID}}" class="theme-btn cursor-pointer" [ngStyle]="background"><span class="add-icon">+</span>Add activity</button>
+                                    <button *ngIf="canAddActivity &&  leadDetails.is_freeze != 0" class="theme-btn cursor-not-allowed" [ngStyle]="background"><span class="add-icon">+</span>Add activity</button>
+                                    <!-- <div class="theme-btn light-btn cursor-pointer" mwlCalendarToday
+                                        [(viewDate)]="viewDate">
+                                        Today
+                                    </div>
+                                    <div  *ngIf="roles.SUBMITTER === userRole" routerLink="/submitter/add-activity/{{leadID}}"
+                                        class="theme-btn cursor-pointer" mwlCalendarToday [(viewDate)]="viewDate">
+                                        <span class="add-icon">+</span>
+                                        Add activity
+                                    </div> -->
+                                   
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="date-arrow">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- {{ viewDate | date: {{dateFormat}} 'MMMM d, yyyy' }} -->
+                                <h3>{{getDate(viewDate)}}</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right-arrows">
+                                    <a mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                                        class="arw-icon cursor-pointer">
+                                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0.000390725 4.52119C0.000390718 4.68756 0.0628902 4.84753 0.18164 4.9755L3.93164 8.81479C4.17539 9.06434 4.57539 9.06434 4.81914 8.81479C5.06289 8.56523 5.06289 8.15571 4.81914 7.90616L1.50664 4.52119L4.81914 1.13622C5.06289 0.886665 5.06289 0.483541 4.81914 0.233987C4.57539 -0.0155659 4.18164 -0.0155659 3.93789 0.233987L0.18164 4.06687C0.0566404 4.19485 0.000390733 4.35482 0.000390725 4.52119Z"
+                                                fill="#565D80" />
+                                        </svg>
+                                    </a>
+                                    <a mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                                        class="arw-icon cursor-pointer">
+                                        <svg width="6" height="9" viewBox="0 0 6 9" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M5.97812 4.52119C5.97812 4.68756 5.91563 4.84753 5.79688 4.9755L2.04688 8.81479C1.80313 9.06434 1.40313 9.06434 1.15938 8.81479C0.915625 8.56523 0.915625 8.15571 1.15937 7.90616L4.47188 4.52119L1.15937 1.13622C0.915625 0.886665 0.915625 0.483541 1.15937 0.233987C1.40312 -0.0155659 1.79687 -0.0155659 2.04062 0.233987L5.79688 4.06687C5.92188 4.19485 5.97812 4.35482 5.97812 4.52119Z"
+                                                fill="#565D80" />
+                                        </svg>
+                                    </a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <ng-template #customCellTemplate let-day="day" let-locale="locale">
+                        <div class="cal-cell-top">
+
+                            <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale
+                                }}</span>
+                        </div>
+
+                        <div class="date-data">
+                            <div class="date-menu" (click)="openModal(eventDetail, day.events[0])"
+                                *ngIf="day.events.length">
+                                <div class="inner-text">
+                                    <p [ngClass]="{ 'line-through': pastEvents(day.events[0].start) }">{{ day.events[0].title }}</p>
+                                    <span>{{ day.events[0].start | date: 'hh:mm a' }}</span>
+                                </div>
+                            </div>
+                            <div class="row-dropdown" *ngIf="day.events.length > 1">
+                                <div class="dropdown" ngbDropdown>
+                                    <a ngbDropdownToggle class="btn light-btn custom-dropdown dropdown-toggle"
+                                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        {{ day.events.length - 1 }} more
+                                        <span>{{ day.events.length - 1 > 1 ? 'Events': 'Event' }} </span>
+                                    </a>
+                                    <ul ngbDropdownMenu class="dropdown-menu custom-dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let event of day.events; let i = index">
+                                            <ng-container *ngIf="i>0">
+                                                <a ngbDropdownItem class="dropdown-item" [ngClass]="i % 3 == 0 ? 'bg-color-1' : i % 2 == 0 ? 'bg-color-2' : 'bg-color-3'" (click)="openModal(eventDetail, event)">
+                                                    <div class="date-menu">
+                                                        <div class="inner-text">
+                                                            <p [ngClass]="{ 'line-through': pastEvents(event.start) }">{{ event.title }} </p>
+                                                            <span>{{event.start | date: 'hh:mm a'}}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </ng-container>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div [ngSwitch]="view">
+                        <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"
+                            [events]="events" [refresh]="refresh" [cellTemplate]="customCellTemplate">
+                        </mwl-calendar-month-view>
+                        <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
+                            [events]="events" [refresh]="refresh">
+                        </mwl-calendar-week-view>
+                        <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                            [refresh]="refresh">
+                        </mwl-calendar-day-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<ng-template #eventDetail let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Event Details</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-activity">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="left-input-feild">
+                            <div class="radio-btn-section">
+                                <label for="">Action Type</label>
+                                <div class="radio-btns-inner">
+
+                                    <ul class="d-flex">
+                                        <li>
+                                            <input [ngModel]="eventData?.activity_type" [attr.disabled]="true"
+                                                type="radio" id="test1" name="activity_type" value="TODO">
+                                            <label for="test1">Todo</label>
+                                        </li>
+                                        <li>
+                                            <input [ngModel]="eventData?.activity_type" [attr.disabled]="true"
+                                                type="radio" id="test2" name="activity_type" value="EVENT">
+                                            <label for="test2">Event</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="date-format">
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <div class="input-">
+                                        <input [value]="eventData?.start | date: 'MMM dd, y hh:mm a'" type="text"
+                                            class="form-control" placeholder="Enter advance ($)" name="date" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="assigned-selector">
+                                <div class="form-group">
+                                    <label>Assigned To</label>
+                                    <input [value]="eventData?.assigned_to" type="text" class="form-control"
+                                        placeholder="Select Assigned to" name="date" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="right-input-feilds">
+                            <div class="subject-section">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <input [value]="eventData?.subject" type="text" placeholder="Enter subject"
+                                        class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="assigned-selector">
+                                <div class="form-group">
+                                    <label>Event Type</label>
+                                    <input [value]="eventData?.event_type" type="text" class="form-control"
+                                        placeholder="Select Event Type" name="date" readonly>
+
+                                </div>
+                            </div>
+                            <div class="notes-text">
+                                <div class="form-group">
+                                    <label for=""> Note</label>
+                                    <textarea [value]="eventData?.comment" name="" class="form-control text-area"
+                                        readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</ng-template>

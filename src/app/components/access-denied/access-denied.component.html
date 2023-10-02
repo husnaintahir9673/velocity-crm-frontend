@@ -1,0 +1,39 @@
+<main class="">
+    <div class="login-page-inner">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="login-card shadow">
+                        <div class="text-center ">
+                            <a>
+                                <!-- <img src="assets/images/logo.png" alt="logo" /> -->
+                        <img #img (error)="onimgerror(img)" [src]="userDetails?.logoImage" alt="logo" />
+
+                            </a>
+                        </div>
+                        <div class="access-denied-page">
+                            <div class="header-content">
+                                <h1>403</h1>
+                            </div>
+                            <div class="denied-text">
+                                <p class="common-text">Access Denied/Forbidden</p>
+                                <span class="normal-text">The page or resource you were trying to reach is absolutely
+                                    forbidden for some reasons. </span>
+                                <div class="back-btn">
+                                    <a (click)="onBack()" class="theme-btn cursor-pointer">
+                                        <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M5 5.26282C5 5.42914 4.93752 5.58906 4.81881 5.717L1.06998 9.55508C0.826304 9.80456 0.426429 9.80456 0.182755 9.55508C-0.0609185 9.30561 -0.0609185 8.89621 0.182755 8.64673L3.49422 5.26282L0.182755 1.87891C-0.0609188 1.62944 -0.0609188 1.22644 0.182755 0.976961C0.426429 0.727486 0.820056 0.727486 1.06373 0.976961L4.81881 4.80865C4.94377 4.93658 5 5.0965 5 5.26282Z"
+                                                fill="white" />
+                                        </svg>
+                                        Back To Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

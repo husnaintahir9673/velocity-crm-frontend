@@ -1,0 +1,143 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Commission</h4>
+    <button type="button" class="btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+    <div calss="row" [formGroup]="addCommissionForm">
+        <div class="commision">
+            <label class="cstm-approved">Approved Amount:</label>
+            <span class="approved-amount">{{leadDetails?.lead_commissioned_amount | currency}}</span>
+        </div>
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                <label>Users associated with this lead</label>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                <label>Commission(%)</label>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2">
+                <label>Calculated Amount</label>
+            </div>
+
+        </div>
+        <div class="row align-items-center" formArrayName="users"
+            *ngFor="let agn of addCommissionFArray.controls; let i = index">
+            <ng-container formGroupName="{{i}}">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                    <div class="form-group ">
+                        <label class="agent-name">{{ agn.get('name')?.value }} ({{ agn.get('role')?.value }})</label>
+
+                        <!-- <input formControlName="name" type="text" class="form-control"
+                        placeholder="Enter user" readonly>
+                        <div class="invalid-input" *ngIf="agn.get('user')?.errors && agn.get('user')?.touched">
+                            <div *ngIf="agn.get('user')?.errors?.required">
+                                User is required
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 amount-group">
+                    <div class="form-group">
+                        <!-- <label>Commission(%)*</label> -->
+                        <input (change)="onCommissionPercentage($any($event.target).value, i)"
+                            formControlName="commission_percentage" type="text" class="form-control"
+                            placeholder="Enter commission">
+                        <div class="invalid-input"
+                            *ngIf="agn.get('commission_percentage')?.errors && agn.get('commission_percentage')?.touched">
+                            <div *ngIf="agn.get('commission_percentage')?.errors?.pattern">
+                                Invalid commission(%)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2 amount-group">
+                    <div class="form-group">
+                        <p>${{ agn.get('amount')?.value }}</p>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-2 amount-group"
+                    *ngIf="addCommissionFArray.controls.length > 1 && agn.get('userType')?.value">
+                    <div class="form-group">
+                        <h5 class="sub-heading"> <span (click)="removeCommissionForm(i,agn.value, true)"
+                                class="form-array remove cursor-pointer">Remove(-)</span></h5>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+
+    <hr>
+    
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <b>Automatic Commission Users</b>
+            <ng-select dropdownPosition="top" [items]="automaticUserList" 
+            [closeOnSelect]="false" [multiple]="true" bindLabel="name"
+            [virtualScroll]="true" bindValue="id" 
+            placeholder="Select Automatic Commission Users"
+            [(ngModel)]="automaticUsers"
+            (change)="automaticCommission($event)"
+            (remove)="automaticCommissionRemove($event)"
+            [clearable]="false">
+            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                let-index="index">
+                    <input  #input  id="item-{{ index }}" type="checkbox"
+                    [checked]="item$.selected" [value]="item.id"/>
+
+                    {{ item.name }} ({{item.role}})
+               
+            </ng-template>
+
+
+        </ng-select>
+            <!-- <div class="form-check" *ngFor="let commission of automaticUserList; let i = index">
+                <input #input (change)="automaticCommission(commission, input)" id="auto_commission{{i}}"
+                    name="auto_commission" class="form-check-input" type="checkbox" value="1">
+                <label class="form-check-label cursor-pointer" for="auto_commission{{i}}">{{commission.name}} ({{commission.role}})
+                </label>
+            </div> -->
+
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <b>Company Users</b>
+            <ng-select dropdownPosition="top" [items]="allUserList" 
+            [closeOnSelect]="false" 
+            [clearable]="false" [multiple]="true" bindLabel="name"
+            [virtualScroll]="true" bindValue="id"
+            placeholder="Select Company Users" 
+            (remove)="allCommissionRemove($event)"
+            (change)="userCommission($event)"
+            [(ngModel)]="allselectedUsers"
+            >
+            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                let-index="index">
+              
+                    <input   #otherinput id="item-{{ index }}" type="checkbox"
+                        [checked]="item$.selected" [value]="item.id" />
+
+                    {{ item.name }} ({{item.role}})
+               
+            </ng-template>
+
+
+        </ng-select>
+            <!-- <div class="form-check" *ngFor="let user of allUserList; let i = index">
+                <input #otherinput (change)="userCommission(user, otherinput)" id="user{{i}}" name="user"
+                    class="form-check-input" type="checkbox" value="1">
+                <label class="form-check-label cursor-pointer" for="user{{i}}">{{user.name}} ({{user.role}})
+                </label>
+            </div> -->
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" [ngStyle]="background" class="theme-btn btn-sm" data-bs-dismiss="modal" (click)="addCommssionSubmit()">Add
+        Commission</button>
+</div>

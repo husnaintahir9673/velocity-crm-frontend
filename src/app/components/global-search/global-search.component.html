@@ -1,0 +1,104 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <p>Search results for search <b>'{{searchedValue}}'</b></p>
+        <div class="statics-list">
+            <div class="statics-item cursor-pointer" (click)="openLeads()">
+                <span class="statics-icon mustard">
+                    <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1145_2183)">
+                            <path
+                                d="M14.999 3.375V16.875C14.999 17.1734 14.8861 17.4595 14.6852 17.6705C14.4843 17.8815 14.2118 18 13.9276 18H1.07045C0.786291 18 0.513769 17.8815 0.312838 17.6705C0.111906 17.4595 -0.000976562 17.1734 -0.000976562 16.875V3.375C-0.000976562 3.07663 0.111906 2.79048 0.312838 2.5795C0.513769 2.36853 0.786291 2.25 1.07045 2.25H2.14188V1.125C2.14188 0.826631 2.25476 0.540483 2.45569 0.329505C2.65663 0.118526 2.92915 0 3.21331 0C3.49747 0 3.76999 0.118526 3.97092 0.329505C4.17186 0.540483 4.28474 0.826631 4.28474 1.125V2.25H6.42759V1.125C6.42759 0.826631 6.54048 0.540483 6.74141 0.329505C6.94234 0.118526 7.21486 0 7.49902 0C7.78318 0 8.05571 0.118526 8.25664 0.329505C8.45757 0.540483 8.57045 0.826631 8.57045 1.125V2.25H10.7133V1.125C10.7133 0.826631 10.8262 0.540483 11.0271 0.329505C11.2281 0.118526 11.5006 0 11.7847 0C12.0689 0 12.3414 0.118526 12.5424 0.329505C12.7433 0.540483 12.8562 0.826631 12.8562 1.125V2.25H13.9276C14.2118 2.25 14.4843 2.36853 14.6852 2.5795C14.8861 2.79048 14.999 3.07663 14.999 3.375ZM12.8562 6.75H2.14188V7.875H12.8562V6.75ZM12.8562 10.125H2.14188V11.25H12.8562V10.125ZM12.8562 13.5H2.14188V14.625H12.8562V13.5Z"
+                                fill="#DA7625" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1145_2183">
+                                <rect width="15" height="18" fill="white" transform="translate(-0.000976562)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score mustard">{{ leads?.total}}</h4>
+                    <p class="statics-title">LEADS</p>
+                </div>
+            </div>
+            <div *ngIf="roles.COMPANY == userRole || roles.ADMINISTRATOR == userRole" class="statics-item cursor-pointer" (click)="openUserList()" >
+             
+                <span class="statics-icon user">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.99951 7.29004C10.8635 7.29004 12.3745 5.779 12.3745 3.91504C12.3745 2.05108 10.8635 0.540039 8.99951 0.540039C7.13555 0.540039 5.62451 2.05108 5.62451 3.91504C5.62451 5.779 7.13555 7.29004 8.99951 7.29004Z"
+                            fill="#547BDB" />
+                        <path
+                            d="M17.3582 15.0978C17.0082 13.5038 16.2054 12.0448 15.0464 10.8959C14.7651 10.6136 14.4602 10.3558 14.1351 10.1253C12.6546 9.01481 10.8501 8.42187 8.9995 8.43781C6.73664 8.42623 4.56098 9.30984 2.947 10.8959C1.78797 12.0448 0.985211 13.5038 0.635122 15.0978C0.574271 15.3797 0.577558 15.6716 0.64474 15.952C0.711922 16.2324 0.84128 16.4941 1.02325 16.7178C1.2117 16.9463 1.44901 17.1296 1.71769 17.2542C1.98638 17.3788 2.2796 17.4416 2.57575 17.4378H15.4232C15.7203 17.438 16.0135 17.3714 16.2813 17.2428C16.5491 17.1143 16.7845 16.9272 16.9701 16.6953C17.1488 16.4742 17.2763 16.2163 17.3434 15.9401C17.4105 15.6639 17.4156 15.3762 17.3582 15.0978Z"
+                            fill="#547BDB" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score user">{{ users?.total }}</h4>
+                    <p class="statics-title">USERS</p>
+                </div>
+            </div>
+            <div *ngIf="roles.ADMINISTRATOR == userRole" class="statics-item cursor-pointer" (click)="openCompanyList()">
+                <span class="statics-icon green">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.125 0C1.82663 0 1.54048 0.118526 1.3295 0.329505C1.11853 0.540483 1 0.826631 1 1.125V16.875C1 17.1734 1.11853 17.4595 1.3295 17.6705C1.54048 17.8815 1.82663 18 2.125 18H16.75C17.0484 18 17.3345 17.8815 17.5455 17.6705C17.7565 17.4595 17.875 17.1734 17.875 16.875V1.125C17.875 0.826631 17.7565 0.540483 17.5455 0.329505C17.3345 0.118526 17.0484 0 16.75 0L2.125 0ZM15.625 6.1245V15.75H12.25V6.1245H15.625ZM11.125 3.375V15.75H7.75V3.375H11.125ZM6.625 10.2499V15.75H3.25V10.2499H6.625Z"
+                            fill="#638D2F" />
+                    </svg>
+                </span>
+                <div class="statics-content">
+                    <h4 class="statics-score green">{{ companies?.total}}</h4>
+                    <p class="statics-title">COMPANIES</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<!-- <main class="dashboard-wrapper">
+    <div class="tab-section">
+        <div class="row">
+            <div class="col-12">
+                <div class="tab-inner-box">
+                    <div class="tab-wrapper">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav nav-tabs" role="tablist">
+                            <li class="nav-item cursor-pointer" [ngbNavItem]="'Leads'">
+                              
+                                <a ngbNavLink class="nav-link"  [ngClass]="{ 'active': activeTab == 'Leads' }" > <h4 class="statics-score" >{{ leads?.total}}</h4>Leads</a>
+                                <ng-template ngbNavContent>
+                                    <div class="detail_tab-inner">
+                                        <app-leads-list [searcheditem]="searchedValue" ></app-leads-list>
+                                    </div>
+                                </ng-template>
+                            </li>
+                            <li  *ngIf="roles.COMPANY == userRole || roles.ADMINISTRATOR == userRole" class="nav-item cursor-pointer" [ngbNavItem]="'Users'">
+                            
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab"   [ngClass]="{ 'active': activeTab == 'Users' }"><h4 class="statics-score" >{{ users?.total }}</h4>Users</a>
+                                <ng-template ngbNavContent>
+                                    <div class="detail_tab-inner">
+                                        <app-users [searcheditem]="searchedValue" ></app-users>
+                                    </div>
+                                    
+                                </ng-template>
+                            </li>
+                            <li *ngIf="roles.ADMINISTRATOR == userRole"  class="nav-item cursor-pointer" [ngbNavItem]="'Companies'">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" [ngClass]="{ 'active': activeTab == 'Companies' }" > <h4  class="statics-score" >{{ companies?.total}}</h4>Companies</a>
+                                <ng-template ngbNavContent>
+                                    <div class="detail_tab-inner">
+                                        <app-lead-documents></app-lead-documents>
+                                    </div>
+                                </ng-template>
+                            </li>
+                       
+                        </ul>
+                        <div [ngbNavOutlet]="nav" class="tab-content"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main> -->

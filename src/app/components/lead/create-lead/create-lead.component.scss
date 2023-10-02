@@ -1,0 +1,365 @@
+.dashboard-wrapper {
+    background-color: #e8e8f1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.create-laed-content .nav-tabs {
+    background: #ffffff;
+    border-radius: 15px 15px 0 0;
+    // display: inline-flex;
+    border: 0;
+    overflow: hidden;
+    li {
+        width: 33.3%;
+        text-align: center;
+    }
+    li:last-child {
+        .nav-link {
+            border-right: none;
+        }
+    }
+}
+
+.create-laed-content .nav-tabs .nav-link {
+    font-family: "IBM-medium";
+    font-size: 15px;
+    color: #565d80;
+    padding: 17px 25px 27px;
+    border: 0;
+    box-shadow: 0px -1px 2px rgb(0 0 0 / 9%);
+}
+
+.create-laed-content .nav-tabs .nav-link:hover {
+    border: 0;
+}
+
+.create-laed-content .nav-tabs .nav-link.active {
+    border: 0;
+    background-color: #fa5440;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.create-laed-content .tab-pane {
+    position: relative;
+    margin-bottom: 10px;
+}
+.tab-inner {
+    background-color: #fff;
+    padding: 35px 50px;
+    box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    margin-top: -10px;
+}
+.lead-submit-btn {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.lead-view-btn {
+    display: flex;
+}
+
+.lead-view-btn li a {
+    display: flex;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    // background-color: #FA5440;
+    font-family: "IBM-medium";
+    font-size: 13px;
+    color: #565d80;
+    margin-left: 10px;
+}
+// .lead-view-btn li a  img {
+//     display: flex;
+//     background: #f7f3f3 ;
+
+// }
+
+.lead-view-btn li a.active {
+    background-color: #fa5440;
+    color: #fff;
+}
+
+.lead-view-btn li a span {
+    margin-right: 10px;
+}
+
+/*=============== craete lead css start ===============*/
+
+.page-title {
+    font-family: "IBM-semi";
+    font-size: 20px;
+    color: #383d56;
+    margin: 0;
+}
+
+.page-title span {
+    margin-right: 10px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+// .step-listing {
+//     display: flex;
+//     margin-bottom: 15px;
+// }
+.step-listing {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+// .step-listing li {
+//     position: relative;
+//     max-width: 155px;
+//     flex: 0 0 155px;
+// }
+.step-listing li {
+    position: relative;
+    max-width: 33.3%;
+    flex: 0 0 33.3%;
+}
+.step-listing li a {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 2px solid #fa5440;
+    color: #fa5440;
+    border-radius: 100%;
+    font-family: "IBM-medium";
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+}
+
+// .step-listing li:not(:last-child)::after {
+//     position: absolute;
+//     width: 100%;
+//     content: "";
+//     background: #fff;
+//     top: 50%;
+//     height: 5px;
+//     transform: translateY(-50%);
+//     z-index: 0;
+// }
+// .step-listing li:not(:last-child)::after { //
+//     position: absolute;
+//     width: 100%;
+//     content: "";
+//     background: #fff;
+//     top: 50%;
+//     height: 5px;
+//     transform: translateY(-50%);
+//     z-index: 0;
+//     left: 52%;
+// }
+.step-listing li.active a {
+    background-color: #fa5440;
+    font-size: 0;
+}
+
+// .step-listing li:not(:last-child).active::after {
+//     background-color: #fa5440;
+// }
+
+.step-listing li.active a::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: transparent url("../../../../assets/images/white-check.png") no-repeat center center;
+}
+
+.notification-checkbox {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.full-view .notification-checkbox {
+    background-color: #e8e8f1;
+}
+
+.notification-checkbox span {
+    font-family: "IBM-medium";
+    font-size: 15px;
+    color: #565d80;
+}
+
+.notification-checkbox span,
+.notification-checkbox .form-check {
+    margin: 0 9px;
+}
+
+.notification-checkbox .form-check input {
+    background-color: #fff;
+}
+
+.lead-submit-btn .btn {
+    font-size: 14px;
+}
+.accordion-item {
+    border-radius: 10px !important;
+    overflow: hidden;
+    border: 0;
+    margin-bottom: 18px;
+}
+.accordion-head-title {
+    font-family: "IBM-medium";
+    font-size: 18px;
+    color: #383d56;
+    margin: 0;
+}
+.accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px 45px;
+    background-color: #f6f6f9;
+    position: relative;
+}
+.input-group-text {
+    background-color: #FFF;
+    border-color: #8989B2;
+    border-radius: 0 10px 10px 0;
+    padding-right: 17px;
+}
+.selectBtn {
+    display: flex;
+    align-items: center;
+    cursor: normal;
+}
+.form-control,
+.form-control:focus {
+    background-color: #fff;
+    border: 1px solid #8989b2;
+    border-radius: 10px;
+    min-height: 40px;
+    padding: 7px 20px;
+    font-family: "IBM-medium";
+    font-size: 14px;
+    color: #383D56;
+}
+.custom-select .selectDropdown.toggle {
+    visibility: visible;
+    transform: scale(1, 1);
+}
+.custom-select .selectDropdown {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+    background: var(--bg1);
+    border-top: 1px solid #eee;
+    z-index: 1;
+    background: #fff;
+    transform: scale(1, 0);
+    transform-origin: top center;
+    visibility: hidden;
+    transition: 0.2s ease;
+    max-height: 450px;
+    overflow-y: auto;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 20%);
+}
+.selectBtn:after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    right: 15px;
+    width: 6px;
+    height: 6px;
+    transform: translateY(-50%) rotate(45deg);
+    border-right: 2px solid #8989b2;
+    border-bottom: 2px solid #8989b2;
+    transition: 0.2s ease;
+}
+.custom-select {
+    position: relative;
+}
+.custom-select .selectDropdown .option {
+    font-family: "IBM-medium";
+    font-size: 15px;
+    padding: 10px 18px;
+    color: #565d80;
+}
+
+.toggler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.form-control:focus, .form-control:focus ~ .input-group-text {
+    border-color: #f0523a;
+}
+.step-listing  li  a {
+    // color: #000!important;
+    // border-color: #D3D3D3!important;
+    background: #D3D3D3;
+}
+.step-listing li.active a {
+    border-color: #f0523a ;
+}
+a.navbar-brand.logo img {
+    border-radius: 50%;
+    height: 80px !important;
+    width: 80px !important;
+}
+.step-listing li:first-child a {
+    // background: #f0523a !important;
+    color: #fff !important;
+    // border-color: #FA5440 !important;
+}
+
+/* responsive */
+/* responsive */
+@media screen and (max-width: 1440px) {
+    .create-laed-content .nav-tabs .nav-link {
+        padding: 16px 20px 27px;
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .create-laed-content .nav-tabs .nav-link {
+        padding: 17px 12px 20px;
+    }
+}
+
+.list-after {
+    position: absolute;
+    width: 100%;
+    content: "";
+    background: #fff;
+    top: 50%;
+    height: 5px;
+    transform: translateY(-50%);
+    z-index: 0;
+    left: 52%;
+}
+.step-listing li:not(:last-child).active .list-after{
+    background-color: #fa5440;
+}

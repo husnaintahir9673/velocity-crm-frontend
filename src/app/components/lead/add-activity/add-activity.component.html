@@ -1,0 +1,209 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="../../">All Leads</span>/
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">Lead Details</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Add Activity</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-lead-content">
+                <div class="updated-role-feilds">
+
+                    <form [formGroup]="addActivityForm">
+                        <div class="form-activity">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="left-input-feild">
+                                        <div class="radio-btn-section">
+                                            <label for="">Action Type*</label>
+                                            <div class="radio-btns-inner">
+
+                                                <ul class="d-flex">
+                                                    <li>
+                                                        <input type="radio" id="test1" formControlName="activity_type"
+                                                            name="activity_type" value="TODO" (change)="checkBoxColor($any($event.target).value)">
+                                                        <label for="test1"><div class="radio-before"></div>Todo<div class="radio-after" [ngStyle]="{'background':checkBox?color:'','border-color':checkBox?color:''}"></div></label>
+                                                    </li>
+                                                    <li>
+                                                        <input formControlName="activity_type" type="radio" id="test2"
+                                                            name="activity_type" value="EVENT" (change)="checkBoxColor($any($event.target).value)">
+                                                        <label for="test2"><div class="radio-before"></div>Event<div class="radio-after" [ngStyle]="{'background':checkBox2?color:'','border-color':checkBox2?color:''}"></div></label>
+                                                    </li>
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.activity_type.errors && f.activity_type.touched">
+                                                        <div *ngIf="f.activity_type.errors.required">
+                                                            Activity type is required
+                                                        </div>
+                                                    </div>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="date-format">
+                                            <div class="-group">
+                                                <label>Start Date*</label>
+                                                <div class="input-">
+                                                    <app-date-time-picker formControlName="start_date"
+                                                        name="start_date"></app-date-time-picker>
+
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.start_date.errors && f.start_date.touched">
+                                                        <div *ngIf="f.start_date.errors.required">
+                                                            Start date is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="assigned-selector">
+                                            <div class="form-group">
+                                                <label>Assigned To*</label>
+                                                <select formControlName="assigned_to" class="form-control" name=""
+                                                    id="">
+                                                    <option value="">--Select--</option>
+                                                    <option [value]="assinee.id" *ngFor="let assinee of assineesList">
+                                                        {{assinee.name}}</option>
+                                                </select>
+                                                <!-- <ng-select formControlName="assigned_to"
+                                                    (scrollToEnd)="getMoreCompanies()" [clearable]="false"
+                                                    [virtualScroll]="true" name="status"
+                                                    placeholder="Select Assigned To" appearance="outline"
+                                                    labelForId="elead">
+                                                    <ng-option [value]="assinee.id"
+                                                        *ngFor="let assinee of assineesList">
+                                                        {{assinee.name}}
+                                                    </ng-option>
+                                                </ng-select> -->
+                                                <div class="invalid-input"
+                                                    *ngIf="f.assigned_to.errors && f.assigned_to.touched">
+                                                    <div *ngIf="f.assigned_to.errors.required">
+                                                        Assigned to is required
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-input-feilds">
+                                        <div class="subject-section">
+                                            <div class="form-group">
+                                                <label>Subject*</label>
+                                                <input formControlName="subject" type="text" placeholder="Enter subject"
+                                                    class="form-control">
+                                                <div class="invalid-input"
+                                                    *ngIf="f.subject.errors && f.subject.touched">
+                                                    <div *ngIf="f.subject.errors.required">
+                                                        Subject is required
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.pattern">
+                                                        Invalid subject
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.minlength">
+                                                        Subject must be 3 characters long 
+                                                    </div>
+                                                    <div *ngIf="f.subject.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="assigned-selector">
+                                            <div class="form-group">
+                                                <label>Event Type*</label>
+
+                                                <ng-select formControlName="event_type" name="event"
+                                                    placeholder="Select Event Type" appearance="outline"
+                                                    [searchable]="false" [clearable]="false" labelForId="elead">
+                                                    <ng-option value="">
+
+                                                        Select Event Type
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 1, name: 'Call' }">
+                                                        Call
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 2, name: 'Meeting' }">
+                                                        Meeting
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 3, name: 'Mobile Call' }">
+                                                        Mobile Call
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 4, name: ' Merchant Interview' }">
+                                                        Merchant Interview
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 5, name: 'Funding Eligibilty' }">
+                                                        Funding Eligibilty
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 6, name: 'Renewal' }">
+                                                        Renewal
+                                                    </ng-option>
+                                                    <ng-option [value]="{ id: 7, name: 'Follow Up' }">
+                                                        Follow Up
+                                                    </ng-option>
+
+                                                </ng-select>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.event_type.errors && f.event_type.touched">
+                                                    <div *ngIf="f.event_type.errors.required">
+                                                        Event type is required
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="notes-text">
+                                            <div class="form-group">
+                                                <label for=""> Note</label>
+                                                <textarea formControlName="comment" name=""
+                                                    class="form-control"></textarea>
+                                                <div class="invalid-input" *ngIf="f.comment.errors && f.comment.touched">
+                                                    <div *ngIf="f.comment.errors.minlength">
+                                                        Note must be 3 characters long 
+                                                    </div>
+                                                    <div *ngIf="f.comment.errors.maxlength">
+                                                        Maximum 1000 characters allowed
+                                                    </div>
+                                                    <div *ngIf="f.comment.errors.pattern">
+                                                        Invalid note
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="seach-right text-end mt-2">
+                                <div class="updated-title">
+                                    <button class="btn theme-btn" (click)="addActivitySubmit()" [ngStyle]="background">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>

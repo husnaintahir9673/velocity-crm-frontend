@@ -1,0 +1,113 @@
+<main class="dashboard-wrapper email-template-builder">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../leads">
+                        <span>All Leads</span>/
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                       <span class="active-page"> Lead Details <span class="active-page" *ngIf="lead.lead_id">( {{
+                            lead.lead_id }}, {{lead?.company_name}}, DBA - {{lead?.lead_doing_business_as}}
+                            )</span></span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Final Underwriting</span>
+                    </li>
+                </ul>
+            </div>
+            <app-all-detail-lead  [leadId]="leadID" (leadDetails)="getLeadBasicDetails($event)"></app-all-detail-lead>
+            <div class="create-lead-content">
+                <div class="full-view">
+                    <!-- send-submission -->
+
+                    <div class="send-submission-data">
+                        <div class="inner-submission-data">
+                            <div class="submit-title">
+                                <span class="accordion-head-title">Underwriting Status Checklist</span>
+                            </div>
+                            <div class="lender-type-data">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="status-list-inner">
+                                            <div class="d-flex status-item-headin">
+                                                <span class="accordion-head-title">Status</span>
+                                                <span class="accordion-head-title">Item</span>
+                                            </div>
+                                            <ul class="status-item">
+                                                <li *ngFor="let doc of allDocsList; let i = index">
+                                                    <div class="form-check">
+                                                        <input (change)="onCheckBoxChange($event, i)" class="form-check-input" [disabled]="doc.submitted" [checked]="doc.submitted" type="checkbox" value=""
+                                                        [ngStyle]="{'background-color':doc.uploaded || doc.submitted?color:'','border-color':doc.uploaded || doc.submitted?color:''}"
+                                                            [id]="doc.text">
+                                                        <label class="form-check-label" [for]="doc.text">{{ doc.text }}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                               
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="notes-text">
+                                            <div class="form-group">
+                                                <span class="accordion-head-title">Note</span>
+                                                <textarea [(ngModel)]="note" name="" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="right-checkboxes">
+                                            <ul class="d-flex">
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="check1">
+                                                        <label class="form-check-label" for="check1">24 Capitals
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="check2">
+                                                        <label class="form-check-label" for="check2">6th Ave capitals
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lead-submit-btn">
+                        <a  class="theme-btn cursor-pointer" (click)="reqPendingDocs()" [ngStyle]="background">
+                            <span class="">Submit</span>
+                            <span class="btn-icon btn-right-icon">
+                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                        fill="white"></path>
+                                </svg>
+                            </span>
+                        </a>
+                        <a routerLink="../../lead-detail/{{ leadID }}" class="theme-btn white-btn">
+                            <span class="">Close</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

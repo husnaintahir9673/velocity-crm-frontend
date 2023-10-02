@@ -1,0 +1,785 @@
+.dashboard-wrapper {
+    min-height: unset;
+    padding: 20px 0px 0px;
+}
+.statics-list {
+    margin-bottom: 0px;
+}
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+
+.reset-btn {
+    border: 1px solid #fa5440;
+    margin-left: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 17px !important;
+}
+
+
+
+/*=================== applied filter list css start ===========*/
+
+.applied-search-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.applied-search-item {
+    background-color: #FFEEEC;
+    border: 1px solid #FFC1BA;
+    border-radius: 7px;
+    margin-left: 10px;
+    padding: 4px 20px;
+    font-family: 'IBM-medium';
+    font-size: 12px;
+    color: #383D56;
+}
+
+.filter-cross {
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/*================ applied filter list css end ===========*/
+
+
+/*================ statics data css start ================*/
+
+.statics-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.statics-item {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 14px 15px 0;
+    min-width: 193px;
+}
+
+.statics-item:last-child {
+    margin-right: 0;
+}
+
+.statics-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    background: #FFE9EA;
+    border: 1px solid #FFE1E4;
+    border-radius: 100px;
+    color: #B1525A;
+}
+.statics-icon.user {
+    background: #EBF1FF;
+    border-color: #DEE8FF;
+}
+.statics-icon.green {
+    background: #EDFFD6;
+    border-color: #DDFFB2;
+}
+.statics-icon.mustard {
+    background: #FFEEE1;
+    border-color: #FFE5CF;
+}
+.statics-icon.faded-blue {
+    background: #DDFBFF;
+    border-color: #CCF5FF;
+}
+.statics-icon.blue {
+    background: #F0F1FF;
+    border-color: #F0F1FF;
+}
+.statics-icon.black {
+    background: #ECEEF5;
+    border-color: #E3E4EB;
+}
+.statics-icon.declined {
+    background: #FFEDE9;
+    border-color: #FFE4DE;
+}
+
+.statics-icon svg {
+    fill: currentColor;
+}
+
+.statics-score {
+    font-family: 'IBM-bold';
+    font-size: 22px;
+    color: #B1525A;
+    margin: 0;
+}
+.statics-score.user {
+    color: #547BDB;
+}
+.statics-score.green {
+    color: #638D2F;
+}
+.statics-score.mustard {
+    color: #DA7625;
+}
+.statics-score.faded-blue {
+    color: #63A0AE;
+}
+.statics-score.blue {
+    color: #5254A6;
+}
+.statics-score.black {
+    color: #272A37;
+}
+.statics-score.declined {
+    color: #C9624C;
+}
+
+.statics-title {
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    color: #030229;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+
+/*================ statics data css end ================*/
+
+.table-list-buttons {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.all-leads-text {
+    margin-bottom: 0px;
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: rgba(56, 61, 86, 0.9);
+    margin-right: 20px;
+}
+
+.lead-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.custom-dropdowm {
+    display: inline-block;
+    border-radius: 7px;
+    font-family: 'IBM';
+    font-size: 14px;
+    color: #383D56;
+    padding: 11px 25px;
+    padding-right: 40px;
+    min-width: 110px;
+    cursor: pointer;
+    background: #fff url("/assets/images/drop-arrow.png") no-repeat 85% center;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+.searchbar-box-container {
+    margin-bottom: 20px;
+}
+
+.searchbar-box {
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 30px 50px 15px;
+}
+
+.advance-search {
+    display: none;
+}
+
+.advance-search.show {
+    display: block;
+}
+
+.custom-dropdown-menu {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 0;
+    padding: 0;
+    min-width: 170px;
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.custom-dropdown-menu .dropdown-item:hover {
+    background-color: #fa5440;
+}
+.in-blc {
+    display: inline-block;
+}
+.dropdown-item {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    padding: 10px 18px;
+    color: #565D80;
+}
+
+.table-sort-items {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-select-row {
+    max-width: 50%;
+    flex: 0 0 50%;
+    margin-bottom: 10px;
+}
+
+.table-select-count {
+    appearance: none;
+    -moz-appearance: none;
+    background: #F6F7FC url("/assets/images/drop-arrow.png") no-repeat 85% center;
+    border: 1px solid #D5D8E8;
+    border-radius: 5px;
+    padding: 5px 15px 5px 10px;
+    min-height: 30px;
+    min-width: 60px;
+    color: #878D9B;
+    line-height: 1;
+}
+
+.table-select-row span {
+    font-size: 15px;
+    color: #878D9B;
+}
+
+
+/*============= table css start ==================*/
+
+.table-responsive {
+    margin-bottom: 20px;
+    background: #F8F8FA;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 10px 30px 20px;
+}
+
+.lead-table .table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+td img {
+    margin-right: 5px;
+}
+
+.table tbody tr {
+    background: #FFFFFF;
+    border-radius: 10px;
+    transition: .5s ease;
+}
+
+.table tr:hover {
+    box-shadow: 1px 17px 44px rgba(3, 2, 41, 0.07);
+}
+
+.table th {
+    padding: 18px 25px 8px;
+    vertical-align: middle;
+    border: 0;
+    font-family: 'IBM-medium';
+    font-size: 12px;
+    color: rgba(56, 61, 86, 0.7);
+}
+
+.table th:last-child {
+    text-align: right;
+}
+
+.table td {
+    padding: 15px 25px;
+    vertical-align: middle;
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    color: #383D56;
+    border: 0;
+}
+
+.table td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.table td:last-child {
+    border-radius: 0 10px 10px 0;
+    text-align: right;
+}
+
+.table-responsive .table {
+    margin-bottom: 0;
+}
+
+.table .custom-dropdowm {
+    background: transparent;
+    min-width: auto;
+    padding: 0;
+}
+
+.table .custom-dropdown-menu {
+    padding: 10px;
+}
+
+.table .dropdown-item {
+    margin-bottom: 5px;
+    background: #EBF5ED;
+    border-radius: 5px;
+}
+
+.table .dropdown-item.edit {
+    background: rgba(250, 84, 64, 0.05);
+}
+
+.table .dropdown-item.view {
+    background: #F0F1FF;
+}
+
+.table .dropdown-item.delete {
+    background: rgba(231, 29, 54, 0.05);
+}
+
+.table .dropdown-item img {
+    width: 13px;
+}
+
+.form-check-input,
+.form-check-input:focus {
+    border: 1px solid #B3B3BF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 20px;
+    background-color: transparent;
+    height: 20px;
+    margin-top: 0;
+}
+
+.form-check-input:checked,
+.form-check-input:checked:focus {
+    background-color: #fa5440;
+    border-color: #fa5440;
+    border-radius: 2px;
+}
+
+.form-check-input:focus {
+    box-shadow: none;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 1L4.125 8L1 4.81818' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    background-size: 12px;
+}
+
+.form-check-label {
+    margin: 0;
+    padding-left: 5px;
+}
+
+.status-text {
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    text-align: center;
+    text-transform: capitalize;
+    display: inline-block;
+    padding: 11px 15px;
+    border-radius: 30px;
+    min-width: 140px;
+}
+
+.status-text.red {
+    color: #D11A2A;
+    background-color: rgba(209, 26, 42, .1);
+}
+
+.status-text.yellow {
+    color: #F29339;
+    background-color: rgba(242, 147, 57, .1);
+}
+
+.status-text.green {
+    color: #3A974C;
+    background-color: rgba(58, 151, 76, .1);
+}
+
+
+/*============= table css end ==================*/
+
+
+/*=============== craete lead css start ===============*/
+
+.create-laed-content .nav-tabs {
+    background: #FFFFFF;
+    border-radius: 15px 15px 0 0;
+    display: inline-flex;
+    border: 0;
+    overflow: hidden;
+}
+
+.create-laed-content .nav-tabs .nav-link {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    color: #565D80;
+    padding: 17px 25px 27px;
+    border: 0;
+}
+
+.create-laed-content .nav-tabs .nav-link:hover {
+    border: 0;
+}
+
+.create-laed-content .nav-tabs .nav-link.active {
+    border: 0;
+    background-color: #FA5440;
+    color: #fff;
+}
+
+.tab-content {
+    background-color: #fff;
+    box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    margin-top: -10px;
+    position: relative;
+}
+
+.create-laed-content .tab-pane {
+    padding: 35px 50px;
+}
+
+.lead-submit-btn {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.lead-view-btn {
+    display: flex;
+}
+
+.lead-view-btn li a {
+    display: flex;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'IBM-medium';
+    font-size: 13px;
+    color: #565D80;
+    margin-left: 10px;
+}
+
+.lead-view-btn li a.active {
+    background-color: #FA5440;
+    color: #fff;
+}
+
+.lead-view-btn li a span {
+    margin-right: 10px;
+}
+
+
+/*=============== craete lead css start ===============*/
+
+.page-title {
+    font-family: 'IBM-semi';
+    font-size: 20px;
+    color: #383D56;
+    margin: 0;
+}
+
+.page-title span {
+    margin-right: 10px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.step-listing {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.step-listing li {
+    position: relative;
+    max-width: 155px;
+    flex: 0 0 155px;
+}
+
+.step-listing li a {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 2px solid #FA5440;
+    color: #FA5440;
+    border-radius: 100%;
+    font-family: 'IBM-medium';
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-listing li:not(:last-child)::after {
+    position: absolute;
+    width: 100%;
+    content: "";
+    background: #fff;
+    top: 50%;
+    height: 5px;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.step-listing li.active a {
+    background-color: #FA5440;
+    font-size: 0;
+}
+
+.step-listing li:not(:last-child).active::after {
+    background-color: #fa5440;
+}
+
+.step-listing li.active a::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: transparent url("/assets/images/white-check.png") no-repeat center center;
+}
+
+.notification-checkbox {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.full-view .notification-checkbox {
+    background-color: #E8E8F1;
+}
+
+.notification-checkbox span {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    color: #565D80;
+}
+
+.notification-checkbox span,
+.notification-checkbox .form-check {
+    margin: 0 9px;
+}
+
+.notification-checkbox .form-check input {
+    background-color: #fff;
+}
+
+.input-group-text {
+    background-color: #FFF;
+    border-color: #8989B2;
+    border-radius: 0 10px 10px 0;
+    padding-right: 17px;
+}
+
+
+.custom-select {
+    position: relative;
+}
+
+.selectBtn {
+    display: flex;
+    align-items: center;
+    cursor: normal;
+}
+
+.selectBtn:after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    right: 15px;
+    width: 6px;
+    height: 6px;
+    transform: translateY(-50%) rotate(45deg);
+    border-right: 2px solid #8989B2;
+    border-bottom: 2px solid #8989B2;
+    transition: 0.2s ease;
+}
+
+.custom-select .selectDropdown {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+    background: var(--bg1);
+    border-top: 1px solid #eee;
+    // z-index: 1;
+    background: #fff;
+    transform: scale(1, 0);
+    transform-origin: top center;
+    // visibility: hidden;
+    transition: 0.2s ease;
+    max-height: 450px;
+    overflow-y: auto;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.custom-select .selectDropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.custom-select .selectDropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.custom-select .selectDropdown::-webkit-scrollbar-thumb {
+    background: #fa5440;
+}
+
+.custom-select .selectDropdown.toggle {
+    visibility: visible;
+    transform: scale(1, 1);
+}
+
+.custom-select .selectDropdown .option {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    padding: 10px 18px;
+    color: #565D80;
+}
+
+.custom-select .selectDropdown .option:hover {
+    background-color: #fa5440;
+    color: #fff;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.top-header-search {
+    position: relative;
+}
+
+.top-header-search .search-input {
+    background: #F5F5FD;
+    border-radius: 10px;
+    border-color: transparent;
+    width: 100%;
+    min-width: 450px;
+    font-size: 14px;
+    font-family: 'IBM';
+    color: #8989B2;
+    padding-right: 60px;
+}
+
+.top-header-search button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    padding: 5px 13px;
+    border: 0;
+    background-color: #FA5440;
+    border-radius: 6px;
+    height: 80%;
+    transform: translateY(-50%);
+}
+
+.top-header-search button svg {
+    margin-bottom: 6px;
+}
+
+
+.pagination {
+    background: #FFFFFF;
+    border: 1px solid #E9EDF4;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.page-link {
+    font-size: 14px;
+    line-height: 11px;
+    color: #7B8191;
+    padding: 12px 15px;
+    display: inline-block;
+    border: 0;
+    border-radius: 5px;
+}
+
+.page-link:hover {
+    color: #FA5440;
+    background-color: #eee;
+    border-color: transparent;
+}
+
+.page-item.active .page-link {
+    background-color: #FA5440;
+    border-color: transparent;
+}
+
+.form-group.hidden {
+    width: 0;
+    margin: 0;
+    border: none;
+    padding: 0;
+    height: 0;
+    // overflow: hidden;
+    input {
+        width: 0;
+        height: 0;
+        padding: 0;
+        border: none;
+    }
+}
+.table-responsive {
+    overflow-x: inherit;
+}
+
+
+
+
+/////leads css
+
+
+
+
+

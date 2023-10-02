@@ -1,0 +1,716 @@
+<main class="dashboard-wrapper">
+  <div class="container">
+    <div class="craete-lead-wrapper">
+      <div class="page-header">
+        <ul class="breadcrumb">
+          <li class="left-icon">
+              <span>
+                  <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                          fill="#565D80"></path>
+                  </svg>
+              </span>
+          </li>
+          <li>
+              <!-- <h3 class="page-title cursor-pointer" routerLink="/company/agent"> -->
+              <!-- </h3> -->
+              <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/lenders-list">All Lenders</span>/
+          </li>
+          <li>
+              <span class="active-page"> Add Lender <span class="active-page">
+                  <!-- ( {{
+                  userDetails?.id }}, {{userDetails?.first_name}}
+                      ) -->
+                  </span></span>
+          </li>
+      </ul>
+
+        <!-- <h3
+          class="page-title cursor-pointer"
+          routerLink="/company/lenders-list"
+        >
+          <span>
+            <svg
+              width="5"
+              height="9"
+              viewBox="0 0 5 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                fill="#565D80"
+              />
+            </svg>
+          </span>
+          Add Lender
+        </h3> -->
+      </div>
+      <div class="create-laed-content">
+        <div class="full-view">
+          <div class="accordion-item">
+            <a class="accordion-head" data-bs-toggle="collapse">
+              <span class="accordion-head-title">Lender Details</span>
+              <!-- <span class="accordion-head-icon">
+                                <img src="assets/images/drop-down.svg" alt="" />
+                            </span> -->
+            </a>
+            <div
+              id="collapseOne"
+              class="collapse show"
+              data-bs-parent="#accordion"
+            >
+              <div class="accordion-body">
+                <div class="row" [formGroup]="addLenderForm">
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Lender Name*</label>
+                      <input
+                        formControlName="name"
+                        type="text"
+                        placeholder="Enter lender name"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.name.errors && f.name.touched"
+                      >
+                        <div *ngIf="f.name.errors.required">
+                          Lender name is required
+                        </div>
+                        <div *ngIf="f.name.errors.pattern">
+                          Invalid lender name
+                        </div>
+                        <div *ngIf="f.name.errors.maxlength">
+                          Maximum 100 characters allowed
+                        </div>
+                        <div *ngIf="f.name.errors.minlength">
+                          Name must be minimum 3 characters long
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Lender Type</label>
+                      <select class="form-control" formControlName="type">
+                        <option value="">-Select-</option>
+                        <option value="0">Email</option>
+                        <option value="1">Velocity</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Lender Email*</label>
+                      <input
+                        formControlName="email"
+                        type="email"
+                        placeholder="Enter lender email"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.email.errors && f.email.touched"
+                      >
+                        <div *ngIf="f.email.errors.required">
+                          Lender email is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                        <label>Optional Email</label>
+                        <input formControlName="optional_email" type="text"
+                            placeholder="Enter optional email" class="form-control" />
+                        <div class="invalid-input" *ngIf="f.optional_email.errors && f.optional_email.touched">
+                            <div *ngIf="f.optional_email.errors.pattern">
+                                Invalid optional email
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input
+                        [mask]="mask.phone"
+                        formControlName="phone"
+                        type="text"
+                        placeholder="(xxx) xxx-xxxx"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.phone.errors && f.phone.touched"
+                      >
+                        <div *ngIf="f.phone.errors.pattern">Invalid phone</div>
+                        <div *ngIf="f.phone.errors.mask">Invalid phone</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Contact Person*</label>
+                      <input
+                        formControlName="contact_person"
+                        type="text"
+                        placeholder="Enter contact person"
+                        class="form-control"
+                        />
+                        <!-- maxlength="3" -->
+                      <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.contact_person.errors && f.contact_person.touched
+                        "
+                      >
+                        <div *ngIf="f.contact_person.errors.required">
+                          Contact person is required
+                        </div>
+                        <div *ngIf="f.contact_person.errors.pattern">
+                          Invalid contact person
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Min Credit Score</label>
+                      <input
+                        formControlName="min_credit_score"
+                        type="text"
+                        placeholder="Enter min credit score"
+                        class="form-control"
+                        maxlength="3"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.min_credit_score.errors &&
+                          f.min_credit_score.touched
+                        "
+                      >
+                        <div *ngIf="f.min_credit_score.errors.pattern">
+                          Invalid min credit score
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Max Negative Days</label>
+                      <input
+                        formControlName="max_negative_days"
+                        type="text"
+                        placeholder="Enter max negative days"
+                        class="form-control"
+                        maxlength="5"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.max_negative_days.errors &&
+                          f.max_negative_days.touched
+                        "
+                      >
+                        <div *ngIf="f.max_negative_days.errors.pattern">
+                          Invalid max negative days
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Max Advance($)</label>
+                      <input
+                        formControlName="max_advance"
+                        type="text"
+                        placeholder="Enter max advance"
+                        class="form-control"
+                        maxlength="15"
+                        mask="separator.2"
+                        thousandSeparator=","
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.max_advance.errors && f.max_advance.touched"
+                      >
+                        <div *ngIf="f.max_advance.errors.pattern">
+                          Invalid max advance
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>NSFs</label>
+                      <input
+                        formControlName="nsfs"
+                        type="text"
+                        placeholder="Enter nsfs"
+                        class="form-control"
+                        maxlength="15"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.nsfs.errors && f.nsfs.touched"
+                      >
+                        <div *ngIf="f.nsfs.errors.pattern">Invalid nsfs</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Min Time In Business (Months)</label>
+                      <input
+                        formControlName="min_business_time"
+                        type="text"
+                        placeholder="Enter min business time"
+                        class="form-control"
+                        maxlength="5"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.min_business_time.errors &&
+                          f.min_business_time.touched
+                        "
+                      >
+                        <div *ngIf="f.min_business_time.errors.pattern">
+                          Invalid min business time
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Min Amount($)</label>
+                      <input
+                        formControlName="min_amount"
+                        type="text"
+                        placeholder="Enter min amount"
+                        class="form-control"
+                        maxlength="15"
+                        mask="separator.2"
+                        thousandSeparator=","
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.min_amount.errors && f.min_amount.touched"
+                      >
+                        <div *ngIf="f.min_amount.errors.pattern">
+                          Invalid min amount
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Min Deposits($)</label>
+                      <input
+                        formControlName="min_deposites"
+                        type="text"
+                        placeholder="Enter min deposits"
+                        class="form-control"
+                        maxlength="15"
+                        mask="separator.2"
+                        thousandSeparator=","
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.min_deposites.errors && f.min_deposites.touched
+                        "
+                      >
+                        <div *ngIf="f.min_deposites.errors.pattern">
+                          Invalid min deposits
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Max Position</label>
+                      <input
+                        formControlName="max_position"
+                        type="text"
+                        placeholder="Enter max position"
+                        class="form-control"
+                        maxlength="15"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.max_position.errors && f.max_position.touched"
+                      >
+                        <div *ngIf="f.max_position.errors.pattern">
+                          Invalid max position
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Max Term (Months)</label>
+                      <input
+                        formControlName="max_term"
+                        type="text"
+                        placeholder="Enter max term(months)"
+                        class="form-control"
+                        maxlength="5"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.max_term.errors && f.max_term.touched"
+                      >
+                        <div *ngIf="f.max_term.errors.pattern">
+                          Invalid max term(months)
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>White Label</label>
+                      <select
+                        class="form-control"
+                        formControlName="white_label"
+                      >
+                        <option value="">-Select White Label-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Consolidation</label>
+                      <select
+                        class="form-control"
+                        formControlName="consolidation"
+                      >
+                        <option value="">-Select Consolidation-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Sole Prop</label>
+                      <select class="form-control" formControlName="sole_prop">
+                        <option value="">-Select Sole Prop-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Home Based Business</label>
+                      <select
+                        class="form-control"
+                        formControlName="home_business"
+                      >
+                        <option value="">-Select Home Based Business-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Non Profit</label>
+                      <select class="form-control" formControlName="non_profit">
+                        <option value="">-Select Non Profit-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Daily/Weekly</label>
+                      <select
+                        class="form-control"
+                        formControlName="daily_weekly"
+                      >
+                        <option value="">-Select Daily/Weekly-</option>
+                        <option value="0">Daily</option>
+                        <option value="1">Weekly</option>
+                        <option value="2">Both</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>COJ Request</label>
+                      <select
+                        class="form-control"
+                        formControlName="coj_request"
+                      >
+                        <option value="">-Select COJ Request-</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Country</label>
+                      <select
+                        (change)="onCountryChange($any($event.target).value)"
+                        formControlName="country_id"
+                        class="form-control"
+                        name=""
+                        id=""
+                      >
+                        <option
+                          [value]="country.id"
+                          *ngFor="let country of countriesList"
+                        >
+                          {{ country.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>State</label>
+                      <ng-select
+                        [items]="statesList"
+                        [multiple]="true"
+                        bindLabel="name"
+                        [closeOnSelect]="false"
+                        [virtualScroll]="true"
+                        bindValue="id"
+                        formControlName="state_id"
+                        placeholder="Select State"
+                        [loading]="loading"
+                      >
+                        <ng-template
+                          ng-option-tmp
+                          let-item="item"
+                          let-item$="item$"
+                          let-index="index"
+                        >
+                          <input
+                            id="item-{{ index }}"
+                            type="checkbox"
+                            [checked]="item$.selected"
+                          />
+                          {{ item.name }}
+                        </ng-template>
+                      </ng-select>
+                      <!-- <select formControlName="state_id" class="form-control" name="" id="">
+                                                <option value="">--Select State--</option>
+                                                <option [value]="state.id" *ngFor="let state of statesList">{{
+                                                    state.name }}</option>
+                                            </select> -->
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Restricted States</label>
+                                            <select class="form-control" formControlName="state_id">
+                                                <option value="">-Select-</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Does Not Do Business type</label>
+                      <ng-select
+                        [items]="bussinessTypeList"
+                        [multiple]="true"
+                        bindLabel="name"
+                        [closeOnSelect]="false"
+                        [virtualScroll]="true"
+                        bindValue="id"
+                        formControlName="business_type_id"
+                        placeholder="Select"
+                        [loading]="loading"
+                      >
+                        <!-- Does Not Do Business Type -->
+                        <ng-template
+                          ng-option-tmp
+                          let-item="item"
+                          let-item$="item$"
+                          let-index="index"
+                        >
+                          <input
+                            id="item-{{ index }}"
+                            type="checkbox"
+                            [checked]="item$.selected"
+                          />
+                          {{ item.name }}
+                        </ng-template>
+                      </ng-select>
+                      <!-- <div
+                        class="invalid-input"
+                        *ngIf="
+                          f.business_type_id.errors &&
+                          f.business_type_id.touched
+                        "
+                      >
+                        <div *ngIf="f.business_type_id.errors.required">
+                          Does not do bussiness type is required
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Does Not Do Business Type</label>
+                                            <select class="form-control" formControlName="business_type_id">
+                                                <option value="">-Select-</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Status*</label>
+                      <select class="form-control" formControlName="status">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
+
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.status.errors && f.status.touched"
+                      >
+                        <div *ngIf="f.status.errors.required">
+                          Status is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p>Bank Account Info</p>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Account Name</label>
+                      <input
+                        formControlName="account_name"
+                        type="text"
+                        placeholder="Enter account name"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.account_name.errors && f.account_name.touched"
+                      >
+                        <div *ngIf="f.account_name.errors.pattern">
+                          Invalid account name
+                        </div>
+                        <div *ngIf="f.account_name.errors.maxlength">
+                          Maximum 100 characters allowed
+                        </div>
+                        <div *ngIf="f.account_name.errors.minlength">
+                          Account name must be minimum 3 characters long
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Account #</label>
+                      <input
+                        formControlName="account"
+                        type="text"
+                        placeholder="Enter account"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.account.errors && f.account.touched"
+                      >
+                        <div *ngIf="f.account.errors.pattern">
+                          Invalid account
+                        </div>
+                        <div *ngIf="f.account.errors.maxlength">
+                          Maximum 20 characters allowed
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Routing #</label>
+                      <input
+                        formControlName="routing"
+                        type="text"
+                        placeholder="Enter routing"
+                        class="form-control"
+                        maxlength="15"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.routing.errors && f.routing.touched"
+                      >
+                        <div *ngIf="f.routing.errors.pattern">
+                          Invalid routing
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="form-group">
+                      <label>Bank Name</label>
+                      <input
+                        formControlName="bank_name"
+                        type="text"
+                        placeholder="Enter bank name"
+                        class="form-control"
+                      />
+                      <div
+                        class="invalid-input"
+                        *ngIf="f.bank_name.errors && f.bank_name.touched"
+                      >
+                        <div *ngIf="f.bank_name.errors.pattern">
+                          Invalid bank name
+                        </div>
+                        <div *ngIf="f.bank_name.errors.maxlength">
+                          Maximum 100 characters allowed
+                        </div>
+                        <div *ngIf="f.bank_name.errors.minlength">
+                          Account name must be minimum 3 characters long
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-end">
+                    <a
+                      (click)="addUserSubmit()"
+                      class="theme-btn cursor-pointer"
+                      [ngStyle]="background"
+                    >
+                      <span class="">Submit</span>
+                      <span class="btn-icon btn-right-icon">
+                        <svg
+                          width="5"
+                          height="10"
+                          viewBox="0 0 5 10"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

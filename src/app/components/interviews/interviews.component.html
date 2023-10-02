@@ -1,0 +1,261 @@
+<main class="dashboard-wrapper email-template-builder">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+
+                    <li>
+                        <span class="active-page">Interviews</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-lead-content">
+                <div class="full-view">
+                    <!-- send-submission -->
+
+                    <div class="send-submission-data">
+                        <div class="inner-submission-data">
+                            <div class="tab-inner-box">
+                                <div class="tab-wrapper">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" [ngClass]="{ 'active': activeTab == 'Lanloards' }"  (click)="activeTab = 'Lanloards'"  >Landloard
+                                                Verification</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" [ngClass]="{ 'active': activeTab == 'Merchants' }"  (click)="activeTab = 'Merchants'">Merchants
+                                                Verification</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content verification-tabs">
+                                        <div [ngClass]="{ 'active': activeTab == 'Lanloards' }" class="tab-pane">
+                                            <div class="detail_tab-inner">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>Landloard Name & Name Of The Company</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>How Long Have They Been Renting The Property?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>How Long Is The Lease & When Does It Expire?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>Do They Plan On Renewing?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>How Much Is Their Monthly Rent?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>How Is The Rent Paid?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>Are They Up To Date On Their Payments?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>Have They Made Any Late Payments In The Past?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="form-group">
+                                                            <label>How Are They Overall As A Tenant?</label>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="mark-completed">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="flexCheckChecked">
+                                                                <label class="form-check-label"
+                                                                    for="flexCheckChecked">Mark Completed
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="notes-text custom-notes">
+                                                            <div class="form-group">
+                                                                <span class="accordion-head-title">Custom Notes</span>
+                                                                <textarea name="" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div [ngClass]="{ 'active': activeTab == 'Merchants'}" class="tab-pane">
+                                            <div class="detail_tab-inner">
+                                                <div class="merchant-verification-text">
+                                                    <ul class="merchant-verify-list">
+                                                        <li>
+                                                            Hello, this is <input type="text" class="form-control">
+                                                            calling from velocity group USA regading your business
+                                                            financing, how are you today? I am looking to wrap upp your
+                                                            file so we can get you funded today.
+                                                        </li>
+                                                        <li>
+                                                            I would like to go over the term ans conditions of your
+                                                            business financing and some brief security questions, do you
+                                                            have some time right now?
+                                                        </li>
+                                                        <li>
+                                                            I would like to inform you that this pre-funding call is
+                                                            being recorded for quality contril purpose, is that okay
+                                                            with you?
+                                                            <form action="" class="toggle-switch"><label
+                                                                    class="toggleSwitch nolabel" onclick="">
+                                                                    <input type="checkbox" checked="">
+                                                                    <span>
+                                                                        <span>Yes</span>
+                                                                        <span>No</span>
+                                                                    </span>
+                                                                    <a></a>
+                                                                </label>
+                                                            </form>
+                                                        </li>
+                                                        <li>
+                                                            To start, can you please confirm your name, the name of your
+                                                            business and the best contact number to reach you, as well
+                                                            as an email address?
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+
+
+                                                        </li>
+                                                        <li>
+                                                            Please Confirm Your % Of Ownership:
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            Do You Own Any Other Business Beside This One?
+                                                            <form action="" class="toggle-switch"><label
+                                                                    class="toggleSwitch nolabel" onclick="">
+                                                                    <input type="checkbox" checked="">
+                                                                    <span>
+                                                                        <span>Yes</span>
+                                                                        <span>No</span>
+                                                                    </span>
+                                                                    <a></a>
+                                                                </label>
+                                                            </form>
+                                                            If Yes, What Are They & Are They Related To This Business?
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="aling-list">
+                                                        <li>
+                                                            <p> Can You Please Confirm The Physical Address Of Your
+                                                                Business?</p>
+
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            <p> Are There Any Other Location Or Just This One?</p>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            <p> Please Tell Me About Your Business, What Exactly Do You
+                                                                Do?</p>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            <p>How Much Exoerience Do You Have In The Industry?</p>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            <p> How Long Has The Business Been Active?</p>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control">
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lead-submit-btn">
+                        <a href="" class="theme-btn">
+                            <span class="">Submit for review</span>
+                            <span class="btn-icon btn-right-icon">
+                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                        fill="white"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,207 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span routerLink="/{{userBaseRoute}}/drip-campaign-list">
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/drip-campaign-list">Drip Campaign List</span>/
+                    </li>
+
+                    <li class="cursor-pointer">
+                        <span class="active-page">Add Drip
+                            Campaign</span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="create-lead-content">
+                <div class="create-inner-content">
+                    <div class="text-center">
+                        <div  class="cstm-lead-status">
+                            <label>Start</label>
+                            <div class="add-feild feild-btn-grp">
+                                <a  class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                       
+                        <form [formGroup]="leadStatusForm">
+                            <div class="cstm-lead-status">
+                                <label>Drip Campaign Name*</label>
+                                <input type="text" formControlName="name" class="form-control">
+                                <div class="invalid-input" *ngIf="l.name.errors && l.name.touched">
+                                    <div *ngIf="l.name.errors.required">
+                                        Name is required
+                                    </div>
+                                    <div *ngIf="l.name.errors.pattern">
+                                        Invalid name
+                                    </div>
+                                    <div *ngIf="l.name.errors.minlength">
+                                        Name must be minimum 3 characters long
+                                    </div>
+                                    <div *ngIf="l.name.errors.maxlength">
+                                        Maximum 100 characters allowed
+                                    </div>
+                                </div>
+                                <div class="add-feild feild-btn-grp">
+                                    <a  class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                                fill="white" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="cstm-lead-status">
+                                <label>Email Template* </label>
+                                <select  class="form-control" formControlName="template_id">
+                                    <option value="">Select Email Template</option>
+                                    <option [value]="email.id" *ngFor="let email of emailTemplateList">{{email.name}}
+                                    </option>
+                                </select>
+    
+                                <div class="invalid-input" *ngIf="l.template_id.errors && l.template_id.touched">
+                                    <div *ngIf="l.template_id.errors.required">
+                                        Email template is required
+                                    </div>
+                                </div>
+                                <div class="add-feild feild-btn-grp">
+                                    <a (click)="leadStatusShow = true;" class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                                fill="white" />
+                                        </svg>
+                                    </a>
+                                </div>
+    
+                            </div>
+                            
+                            <div *ngIf="leadStatusShow" class="cstm-lead-status">
+            
+                                <label>Lead Status* </label>
+                                <select class="form-control" formControlName="lead_status">
+                                    <option value="" >Select Lead Status</option>
+                                    <option [value]="status.id" *ngFor="let status of leadStatusList">{{status.name}}</option>
+                                </select>
+            
+            
+                                <div class="invalid-input" *ngIf="l.lead_status.errors && l.lead_status.touched">
+                                    <div *ngIf="l.lead_status.errors.required">
+                                        Lead Status is required
+                                    </div>
+                                </div>
+                                <div class="add-feild feild-btn-grp">
+                                    <a (click)="showTime = true;" class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                                fill="white" />
+                                        </svg>
+                                    </a>
+                                </div>
+            
+                            </div>
+            
+                            <div *ngIf="showTime" class="cstm-lead-status">
+                                <div class="form-group">
+                                    <label>Time*</label>
+                                    <div class="input-">
+                                        <!-- <input type="time" formControlName="time" id="appt" name="appt" step="3600000" class="form-control"> -->
+                                        <select class="form-control" formControlName="time">
+                                            <option value="" >Select Time</option>
+                                            <option value="1">1 hr</option>
+                                            <option value="2">2 hr</option>
+                                            <option value="3">3 hr</option>
+                                            <option value="4">4 hr</option>
+                                            <option value="5">5 hr</option>
+                                            <option value="6">6 hr</option>
+                                            <option value="7">7 hr</option>
+                                            <option value="8">8 hr</option>
+                                            <option value="9">9 hr</option>
+                                            <option value="10">10 hr</option>
+                                            <option value="11">11 hr</option>
+                                            <option value="12">12 hr</option>
+                                            <option value="13">13 hr</option>
+                                            <option value="14">14 hr</option>
+                                            <option value="15">15 hr</option>
+                                            <option value="16">16 hr</option>
+                                            <option value="17">17 hr</option>
+                                            <option value="18">18 hr</option>
+                                            <option value="19">19 hr</option>
+                                            <option value="20">20 hr</option>
+                                            <option value="21">21 hr</option>
+                                            <option value="22">22 hr</option>
+                                            <option value="23">23 hr</option>
+                                            <option value="24">24 hr</option>
+                                        </select>
+            
+                                        <div class="invalid-input" *ngIf="l.time.errors && l.time.touched">
+                                            <div *ngIf="l.time.errors.required">
+                                                Time is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="add-feild feild-btn-grp">
+                                        <a (click)="showWait = true;" class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                                viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="showWait" class="cstm-lead-status">
+                                <div class="form-group">
+                                    <label>Wait Time</label>
+                                    <select class="form-control" formControlName="wait_for">
+                                        <option value="" >Select Wait Time</option>
+                                        <option value="1 Day">1 Day</option>
+                                        <option value="1 Week">1 Week</option>
+                                        <option value="2 Week">2 Week</option>
+                                        <option value="1 Month">1 Month</option>
+                                        <option value="1 Months">6 Months</option>
+                                    </select>
+            
+                                    <div class="invalid-input" *ngIf="l.wait_for.errors && l.wait_for.touched">
+                                        <div *ngIf="l.wait_for.errors.required">
+                                            Wait is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </form>
+                    </div>
+                    <div class="text-end create-btn-end">
+                        <button (click)="submitDripCampaign()" type="button" class="theme-btn">
+                            Submit
+                        </button>
+                    </div>
+                </div>             
+            </div>
+            <!-- -->
+           
+        </div>
+  
+
+    </div>
+</main>

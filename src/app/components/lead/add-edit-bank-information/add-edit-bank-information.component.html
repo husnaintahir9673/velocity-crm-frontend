@@ -1,0 +1,212 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <h3 class="page-title cursor-pointer">
+                    <span>
+                    </span> {{ editMode ? 'Edit': '' }} Bank Information
+                </h3>
+                <ul class="lead-view-btn">
+                    <li>
+                        <a (click)="leadDetails.is_freeze == 0 ?  editMode = !editMode : null"  [ngClass]="{'cursor-not-allowed': leadDetails.is_freeze != 0 , 'cursor-pointer': leadDetails.is_freeze == 0}" *ngIf="!editMode && canUpdateBankDetails"
+                            class="cursor-pointer">
+                            <span>
+                                <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                        [ngStyle]="style" fill="#FA5440" />
+                                </svg>
+
+                            </span> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="cancel()" *ngIf="editMode" class="cursor-pointer">
+                            <span>
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                                        fill="#C9624C" />
+                                    <path
+                                        d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                                        fill="#C9624C" />
+                                </svg>
+
+                            </span> Cancel
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Bank Information</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="tab-inner" [formGroup]="bankInfoForm">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Account Name</label>
+                                                <input [readonly]="!editMode" formControlName="bank_account_name"
+                                                    type="text" placeholder="Enter account name" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank_account_name.errors && baif.bank_account_name.touched">
+                                                    <div *ngIf="baif.bank_account_name.errors.required">
+                                                        Account name is required
+                                                    </div>
+                                                    <div *ngIf="baif.bank_account_name.errors.pattern">
+                                                        Invalid account name
+                                                    </div>
+                                                    <div *ngIf="baif.bank_account_name.errors.minlength">
+                                                        Account name must be minimum 3 characters long
+                                                    </div>
+                                                    <div *ngIf="baif.bank_account_name.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Account #</label>
+                                                <input [readonly]="!editMode" formControlName="bank_account" type="text"
+                                                    placeholder="Enter account #" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank_account.errors && baif.bank_account.touched">
+                                                    <div *ngIf="baif.bank_account.errors.pattern">
+                                                        Invalid account
+                                                    </div>
+                                                    <div *ngIf="baif.bank_account.errors.minlength">
+                                                        Account must be 3 characters long
+                                                    </div>
+                                                    <div *ngIf="baif.bank_account.errors.maxlength">
+                                                        Maximum 20 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Routing #</label>
+                                                <input [readonly]="!editMode" formControlName="bank_routing" type="text"
+                                                    placeholder="Enter routing #" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank_routing.errors && baif.bank_routing.touched">
+                                                    <div *ngIf="baif.bank_routing.errors.pattern">
+                                                        Invalid routing
+                                                    </div>
+                                                    <div *ngIf="baif.bank_routing.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Bank</label>
+                                                <input [readonly]="!editMode" formControlName="bank" type="text"
+                                                    placeholder="Enter bank" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank.errors && baif.bank.touched">
+                                                    <div *ngIf="baif.bank.errors.required">
+                                                        Bank name is required
+                                                    </div>
+                                                    <div *ngIf="baif.bank.errors.pattern">
+                                                        Invalid bank
+                                                    </div>
+                                                    <div *ngIf="baif.bank.errors.minlength">
+                                                        Bank name must be minimum 3 characters long
+                                                    </div>
+                                                    <div *ngIf="baif.bank.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input [readonly]="!editMode" formControlName="bank_city" type="text"
+                                                    placeholder="Enter city" class="form-control" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank_city.errors && baif.bank_city.touched">
+                                                    <div *ngIf="baif.bank_city.errors.pattern">
+                                                        Invalid city name
+                                                    </div>
+                                                    <div *ngIf="baif.bank_city.errors.minlength">
+                                                        City name must be 3 characters long
+                                                    </div>
+                                                    <div *ngIf="baif.bank_city.errors.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <select [attr.disabled]="editMode ? null: 'disabled'"
+                                                    (change)="onCountryChange($any($event.target).value)"
+                                                    formControlName="bank_country" class="form-control" name="" id="">
+                                                    <option [value]="country.id" *ngFor="let country of countriesList">
+                                                        {{ country.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <select [attr.disabled]="editMode ? null: 'disabled'"
+                                                    formControlName="bank_state" class="form-control" name="" id="">
+                                                    <option value="">--Select State--</option>
+                                                    <option [value]="state.id" *ngFor="let state of statesList">{{
+                                                        state.name }}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Zip</label>
+                                                <input [readonly]="!editMode" formControlName="bank_zip" type="text"
+                                                    placeholder="Enter zip" class="form-control" maxlength="5" />
+                                                <div class="invalid-input"
+                                                    *ngIf="baif.bank_zip.errors && baif.bank_zip.touched">
+                                                    <div *ngIf="baif.bank_zip.errors.pattern">
+                                                        Invalid zip
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="editMode" class="col-12 text-end">
+                                            <a (click)="onBankInfoSubmit()" class="theme-btn cursor-pointer"
+                                                [ngStyle]="background">
+                                                <span class="">Update</span>
+                                                <span class="btn-icon btn-right-icon">
+                                                    <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                            fill="white"></path>
+                                                    </svg>
+
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

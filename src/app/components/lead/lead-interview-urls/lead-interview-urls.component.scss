@@ -1,0 +1,143 @@
+.wrapper {
+    .outer {
+        .heading {
+            font-family: "IBM-medium";
+            font-size: 15px;
+            line-height: 20px;
+            color: #565d80;
+            margin-top: 20px;
+        }
+        .link-outer {
+            position: relative;
+        }
+        .copy-icon {
+            position: absolute;
+            right: 35px;
+            top: 34px;
+            width: 15px;
+            cursor: pointer;
+        }
+        .open {
+            right: 10px
+        }
+        .lisitng-inner {
+            padding: 33px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 12px rgb(0 0 0 / 8%);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .checkbox-list-items {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0px -13px;
+        }
+        .checkbox-list-items .checkbox-list-outer {
+            flex: 0 0 20%;
+            max-width: 20%;
+            padding: 0px 13px;
+            margin-bottom: 28px;
+        }
+        .checkbox-list-item {
+            background: #ffffff;
+            border: 1px solid #d9d9ea;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .list-btns {
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .center-img {
+            text-align: center;
+            padding: 15px 0px 40px;
+            width: 100%;
+            max-width: 80px;
+            margin: 0px auto;
+        }
+        .list-bottom-content {
+            background: #f5f5fd;
+            padding: 14px 29px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .list-bottom-content p {
+            font-family: "IBM";
+            font-size: 14px;
+            color: #383d56;
+            margin-bottom: 0px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .date-text {
+            font-family: "IBM";
+            font-size: 14px;
+            color: #9a9aba;
+        }
+        .list-btns .dropdown .btn {
+            background-color: transparent;
+            border: 0px;
+            min-height: 30px;
+            padding: 0px;
+            min-width: 31px;
+            text-align: end;
+        }
+        .custom-dropdown .dropdown-menu {
+            background: #ffffff;
+            box-shadow: 0px 4px 18px rgb(0 0 0 / 10%);
+            border-radius: 10px;
+            padding: 13px 14px;
+            border: 0px;
+        }
+        .custom-dropdown .dropdown-item {
+            padding: 7px 10px;
+            background: #f5f5fd;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            transition: 0.3s ease;
+        }
+    }
+}
+
+ .lisitng-inner .no-record-found{
+    width: 102px;
+    margin: 0 auto;
+}
+
+.link-outer {
+    input {
+        padding-right: 75px;
+    }
+}
+.wrapper .outer .checkbox-list-items .checkbox-list-outer {
+
+    flex: 0 0 25%;
+
+    max-width: 25%;
+
+}
+@media screen and (max-width:767px) {
+  .wrapper .outer .checkbox-list-items .checkbox-list-outer {
+     flex: 0 0 50%;
+      max-width: 50%;
+}
+
+}
+
+@media screen and (max-width:575px) {
+.wrapper .outer .checkbox-list-items .checkbox-list-outer {
+     flex: 0 0 100%;
+     max-width: 100%;
+
+    }
+    .wrapper .outer .link-outer {
+    
+        margin-bottom: 10px;
+    
+    }
+
+}

@@ -1,0 +1,263 @@
+<div class="col-md-12">
+    <ngb-accordion #acc="ngbAccordion" activeIds="LeadDetails">
+        <ngb-panel id="LeadDetails">
+            <ng-template ngbPanelHeader let-opened="opened">
+                <a class="accordion-head cursor-pointer" (click)="toggle('LeadDetails')">
+                    <span class="accordion-head-title">Lead Details
+                        <span *ngIf="lead?.is_duplicate == 1"><a placement="right"
+                                ngbTooltip="Duplicate Federal Tax Id({{lead.ref_lead_number}})"><svg width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M3.5 3H5V19.5C5 20.3284 4.32843 21 3.5 21C2.67157 21 2 20.3284 2 19.5V4.5C2 3.67157 2.67157 3 3.5 3Z"
+                                        fill="#fa5440" />
+                                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M6.99976 3L19.7545 3.00004C20.3068 3.00004 20.7545 3.44776 20.7545 4.00004C20.7545 4.24708 20.6631 4.48538 20.4978 4.669L17.4999 8.00005L20.4978 11.3311C20.8673 11.7416 20.834 12.3739 20.4235 12.7433C20.2399 12.9086 20.0016 13 19.7545 13H6.99976V3Z"
+                                        fill="#fa5440" />
+                                </svg>
+
+                            </a>
+                        </span>
+                        <span *ngIf="lead.is_original == 1"><a placement="top"><svg width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M3.5 3H5V19.5C5 20.3284 4.32843 21 3.5 21C2.67157 21 2 20.3284 2 19.5V4.5C2 3.67157 2.67157 3 3.5 3Z"
+                                        fill="#228B22" />
+                                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M6.99976 3L19.7545 3.00004C20.3068 3.00004 20.7545 3.44776 20.7545 4.00004C20.7545 4.24708 20.6631 4.48538 20.4978 4.669L17.4999 8.00005L20.4978 11.3311C20.8673 11.7416 20.834 12.3739 20.4235 12.7433C20.2399 12.9086 20.0016 13 19.7545 13H6.99976V3Z"
+                                        fill="#228B22" />
+                                </svg>
+
+                            </a>
+                        </span>
+                    </span>
+                    <div>
+                        <span class="accordion-head-icon">
+                            <img src="assets/images/drop-down.svg" alt="" />
+                        </span>
+                    </div>
+                </a>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="accordion-body">
+                    <h5><b>
+                            Company Name: {{lead?.company_name}}
+                        </b></h5>
+                    <div class="detail-table-outer">
+                        <div class="lead-detail-inner">
+                            <div class="detail-listing">
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="th-gray">
+                                            <td>First Name</td>
+                                            <td>Last Name</td>
+                                            <td>Email</td>
+                                            <td>Phone</td>
+                                            <!-- <td>Country</td> -->
+                                            <td>City</td>
+                                            <td>State</td>
+                                            <td>Zip</td>
+                                            <td>Add Exclusive Time</td>
+                                            <!-- <td>Cell Phone</td> -->
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span><b>{{lead?.first_name? lead?.first_name:
+                                                        '-' }}</b></span>
+                                            </td>
+                                            <td>
+                                                <span><b>{{lead?.last_name? lead?.last_name:
+                                                        '-'}}</b></span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.email? lead?.email:
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.phone_number | mask: '(000) 000-0000' }}</span>
+                                            </td>
+                                            <!-- <td>
+                                                <span>{{lead?.country_id? lead?.country_id:
+                                                    '-'}}</span>
+                                            </td> -->
+                                            <td>
+                                                <span>{{lead?.lead_city? lead?.lead_city:
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.state_name? lead?.state_name:
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_zip? lead?.lead_zip:
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                            <!-- <td>
+                                                <span>-</span>
+                                            </td> -->
+                                        </tr>
+                                        <tr class="th-gray">
+
+                                            <td>Federal Tax ID</td>
+                                            <td>Date Funded</td>
+                                            <td>Funding Amount</td>
+                                            <td>Factor Rate</td>
+                                            <td>Term</td>
+                                            <td>Annual Revenue</td>
+                                            <td>Business Type</td>
+                                            <td>Fax</td>
+                                            <!-- <td>Cell Phone</td> -->
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <span>{{ lead?.lead_federal_tax_id ?? '-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="lead?.funded_date">{{getDate(lead?.funded_date)}}</span>
+                                                <span *ngIf="lead?.funded_date == ''">-</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_funding_amount |
+                                                    currency}}</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="lead?.factor_rate">{{lead?.factor_rate}}</span>
+                                                <span *ngIf="lead?.factor_rate == ''">-</span>
+                                            </td>
+                                            <!-- <td>
+                                                <span>-</span>
+                                            </td> -->
+                                            <td>
+                                                <span *ngIf="lead?.term">{{lead?.term}}</span>
+                                                <span *ngIf="lead?.term == ''">-</span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    {{ lead?.lead_anual_revenue | currency}}
+                                                </span>
+                                                <!-- <span>{{lead?.lead_zip? lead?.lead_zip: '-'? lead?.lead_zip: '-'}}</span> -->
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_business_type?
+                                                    lead?.lead_business_type:
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_fax? lead?.lead_fax :
+                                                    '-'}}</span>
+                                            </td>
+                                            <!-- <td>
+                                                <span>-</span>
+                                            </td> -->
+                                        </tr>
+                                        <tr class="th-gray">
+                                            <!-- <td>Lead Source</td> -->
+                                            <!-- <td>Company Name</td> -->
+                                            <td>Modified</td>
+                                            <td>Created</td>
+                                            <td>Assigned To</td>
+                                            <td>Exclusive For</td>
+                                            <td>Cell Phone</td>
+                                            <!-- <td>Disposition</td> -->
+                                            <!-- <td>Lead Status</td> -->
+
+                                            <td>Legal Business Name</td>
+                                            <td>DBA</td>
+                                            <td>Business Physical Address</td>
+                                        </tr>
+                                        <tr>
+                                            <!-- <td>
+                                                <span>{{lead?.lead_source? lead?.lead_source:
+                                                    '-'}}</span>
+                                            </td> -->
+                                            <!-- <td>
+                                                <span>{{lead?.company_name? lead?.company_name:
+                                                    '-'}}</span>
+                                            </td> -->
+                                            <td>
+                                                <span>{{getDate(lead?.updated_at)}}</span>
+                                                <!-- <span>{{lead?.updated_at | date: dateFormat
+                                                    }}</span> -->
+                                            </td>
+                                            <td>
+                                                <span>{{getDate(lead?.created_at)}}</span>
+                                                <!-- <span>{{lead?.created_at | date: dateFormat}}</span> -->
+                                            </td>
+
+                                            <td>
+                                                <span>
+                                                    {{ lead.lead_assigned_to ?? '-' }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                            <td>
+                                                <span>-</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.legal_business_name? lead?.legal_business_name :
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_doing_business_as? lead?.lead_doing_business_as :
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_address? lead?.lead_address
+                                                    :
+                                                    '-'}}</span>
+                                            </td>
+
+                                        </tr>
+                                        <tr class="th-gray">
+                                            <td>Business Started Date</td>
+                                            <td>Entity type</td>
+                                            <td>Website</td>
+                                            <td *ngIf="canDeclineLead && lead.can_decline; else emptyTD">
+                                                Action</td>
+                                            <ng-template #emptyTD>
+                                                <td></td>
+                                            </ng-template>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>{{lead?.lead_business_started ?
+                                                    getDate(lead?.lead_business_started) :
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_entity_type ? lead?.lead_entity_type :
+                                                    '-'}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{lead?.lead_website? lead?.lead_website :
+                                                    '-'}}</span>
+                                            </td>
+                                            <td *ngIf="canDeclineLead && lead.can_decline">
+                                                <button class="theme-btn" (click)="declineLeadModal(declineLead)"
+                                                    [ngStyle]="background">Decline</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-template>
+        </ngb-panel>
+
+
+    </ngb-accordion>
+</div>
+<ng-template #declineLead>
+    <app-decline-lead (leadDeclined)="leadDeclined()" (closeModal)="closeModal()" [leadId]="leadId">
+    </app-decline-lead>
+</ng-template>

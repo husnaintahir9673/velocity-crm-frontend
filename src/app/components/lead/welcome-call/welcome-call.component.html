@@ -1,0 +1,150 @@
+<main class="dashboard-wrapper email-template-builder">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../leads">
+                        <span>All Leads</span>/
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span class="active-page"> Lead Details <span class="active-page" *ngIf="lead.lead_id">( {{
+                             lead.lead_id }}, {{lead?.company_name}}, DBA - {{lead?.lead_doing_business_as}}
+                             )</span></span>/
+                     </li>
+                    <li>
+                        <span class="active-page">Welcome Call</span>
+                    </li>
+                </ul>
+            </div>
+            <app-all-detail-lead  [leadId]="leadID"  (leadDetails)="getLeadBasicDetails($event)" ></app-all-detail-lead>
+            <div class="welcome-outer-section">
+                <div class="accordion-item">
+                    <a class="accordion-head" data-bs-toggle="collapse">
+                        <span class="accordion-head-title">Welcome Call</span>
+                    </a>
+                    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+                <div class="welcome-inner-section">
+                    <form [formGroup]="welcomecallForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="welcome-description">
+                                    Hello Annty A, romero <br>
+                                    Welcome to <a class="color-text" [ngStyle]="{'color':color}">Velocity Group USA Inc.</a> I want to congratulate
+                                    you
+                                    on your business funding through <a class="color-text" [ngStyle]="{'color':color}">Velocity Funding Group </a>
+                                    <br>
+                                    This post funding call is being recorded for quality purpose. First and foremost, i
+                                    want
+                                    to congratulate you on becoming a <a class="color-text" [ngStyle]="{'color':color}">Velocity Funding Group
+                                    </a>merchant!<br>
+                                    Thank you for taking the time out to take our calls as well as your patience and the
+                                    information you have provided to ensure a smooth funding on both ends!<br>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="notes-text">
+                                    <div class="form-group">
+                                        <span class="label-text">Please let us know if you have any questions at this
+                                            time.</span>
+                                        <textarea formControlName="any_question" name=""
+                                            class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-text">
+                                        <p class="welcome-description">
+                                            Just in case, can we please have name & cell phone of emergency contact?
+                                        </p>
+                                        <ul class="aling-list">
+                                            <li>
+                                                <p>Name*</p>
+
+                                                <div class="form-group">
+                                                    <input formControlName="name" type="text" placeholder="Enter name"
+                                                        class="form-control">
+                                                    <div class="invalid-input" *ngIf="f.name.errors && f.name.touched">
+                                                        <div *ngIf="f.name.errors.required">
+                                                            Name is required
+                                                        </div>
+                                                        <div *ngIf="f.name.errors.pattern">
+                                                            Invalid pattern
+                                                        </div>
+                                                        <div *ngIf="f.name.errors.maxlength">
+                                                            Maximum 100 characters allowed
+                                                        </div>
+                                                        <div *ngIf="f.name.errors.minlength">
+                                                            Name must be minimum 3 characters long
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                                <p>Cell Phone*</p>
+                                                <div class="form-group">
+                                                    <input formControlName="cell_phone" [mask]="mask.phone" type="tel"
+                                                        placeholder="(814) 582 -6388" class="form-control">
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.cell_phone.errors && f.cell_phone.touched">
+                                                        <div *ngIf="f.cell_phone.errors.required">
+                                                            Cell phone is required
+                                                        </div>
+                                                        <div *ngIf="f.cell_phone.errors.mask">
+                                                            Invalid cell phone
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <p>Please know we are always available if you hace any question or concerns with
+                                            your advance. Dont’t hesitate to reach out to us if any concerns do arise.
+                                        </p>
+                                        <p>Have a great day and thanku you for choosing <span
+                                                class="color-text" [ngStyle]="{'color':color}" >Velocity
+                                                group USA Inc!</span> </p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                    <div class="mark-completed">
+                                        <div class="form-check">
+                                            <input formControlName="mark_complete" class="form-check-input"
+                                                type="checkbox" value="" id="flexCheckChecked" (change)="getCheckBox($any($event.target).value)"
+                                                [ngStyle]="{'background-color':boolCondition?color:'','border-color':boolCondition?color:''}"
+
+                                                >
+                                            <label class="form-check-label" for="flexCheckChecked">Mark Completed
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="lead-submit-btn">
+                    <a (click)="submitWelcomeForm()" class="theme-btn cursor-pointer" [ngStyle]="background">
+                        <span class="">Submit</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

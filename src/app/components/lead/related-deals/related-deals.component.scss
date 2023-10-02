@@ -1,0 +1,271 @@
+/* updates CSS*/
+
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.inner-page-search {
+    background: #F5F5FD;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.top-header-search {
+    position: relative;
+    width: 450px;
+}
+.seach-right .form-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.seach-right .form-group .input-group {
+    max-width: 277px;
+    width: 100%;
+}
+.seach-right .form-group label {
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+.seach-right .form-group .form-control {
+    color: #383D56;
+}
+.seach-right .form-group .form-control::-webkit-input-placeholder {
+    color: #565D80;
+  }
+.seach-right .form-group .form-control::-moz-placeholder {
+    color: #565D80;
+  }
+.seach-right .form-group .form-control:-ms-input-placeholder { 
+    color: #565D80;
+  }
+.seach-right .form-group .form-control:-moz-placeholder {
+    color: #565D80;
+  }
+  .inner-page-search .top-header-search .search-input {
+    background-color: #fff;
+}
+/* table-css */
+.update-table .table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.update-table .table thead tr {
+    background: #FA5440;
+    box-shadow: 1px 17px 44px rgb(3 2 41 / 7%);
+    border-radius: 10px 10px 0px 0px;
+}
+.update-table .table thead tr th {
+    font-family: 'IBM-semi';
+    font-size: 18px;
+    color: #fff;
+    padding: 13px 39px;
+}
+.serial-border {
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    width: 37px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+    padding: 3px;
+}
+.update-table tbody td {
+    color: #565D80;
+    font-size: 14px;
+    padding: 13px 39px;
+    font-family: "IBM";
+}
+tr .serial-border, .update-table .table tr:nth-child(odd) .serial-border {
+    border-color: #EBEBFD;
+}
+.update-table .table tr:nth-child(even) .serial-border {
+    background-color: #fff;
+}
+.update-table .table tr:nth-child(even) {
+    background-color: #F5F5FD;
+}
+.update-table tbody td:first-child, .update-table tbody  td:last-child { 
+    border-radius: 0px;
+}
+// .update-table .table thead tr th:first-child {
+//     width: 100px;
+// }
+.update-table .table th:last-child, .update-table .table td:last-child {
+    text-align: left;
+}
+.footer-pagination {
+    text-align: right;
+}
+.footer-pagination .pagination {
+    width: 100%;
+    max-width: 180px;
+    margin-left: auto;
+}
+.table > :not(:first-child) {
+    border-top: none !important; 
+}
+.top-header-search button svg {
+    margin-bottom: 2px;
+}
+.top-header-search button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    padding: 5px 13px;
+    border: 0;
+    background-color: #FA5440;
+    border-radius: 6px;
+    height: 80%;
+    transform: translateY(-50%);
+}
+.table-responsive {
+    margin-bottom: 20px;
+    background: #F8F8FA;
+    box-shadow: 0px 2px 4px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    padding: 10px 30px 20px;
+}
+.table tbody tr {
+    background: #FFFFFF;
+    border-radius: 10px;
+    transition: .5s ease;
+}
+.table td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+.table td {
+    padding: 15px 25px;
+    vertical-align: middle;
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    color: #383D56;
+    border: 0;
+}
+.pagination {
+    background: #FFFFFF;
+    border: 1px solid #E9EDF4;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+li {
+    list-style-type: none;
+}
+.page-link {
+    font-size: 14px;
+    line-height: 11px;
+    color: #7B8191;
+    padding: 12px 15px;
+    display: inline-block;
+    border: 0;
+    border-radius: 5px;
+}
+ul, li {
+    padding: 0;
+    margin: 0;
+}
+.page-item.active .page-link {
+    background-color: #FA5440;
+    border-color: transparent;
+}
+
+.top-header-search .search-input {
+    background: #F5F5FD;
+    border-radius: 10px;
+    border-color: transparent;
+    width: 100%;
+    min-width: 450px;
+    font-size: 14px;
+    font-family: 'IBM';
+    color: #8989B2;
+    padding-right: 60px;
+}
+.seach-right {
+    position: relative;
+    .hidden {
+        position: absolute;
+        right: 500px
+    }
+}
+
+.tab-section .detail_tab-inner  .container {
+    padding: 0;
+}
+
+/* container Queries */
+
+@media screen and (min-width:200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        max-width: 880px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .container {
+        max-width: 1120px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .container {
+        max-width: 1250px;
+        padding: 0 25px;
+    }
+}
+
+@media screen and (min-width:1441px) {
+    .container {
+        max-width: 1675px;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width:1450px) {
+
+    .top-header-search {
+        width: 300px;
+    }
+    .top-header-search .search-input {
+        min-width: 300px;
+    }
+    .update-table .table thead tr th {
+        padding: 13px 10px;
+    }
+    .update-table tbody td {
+        padding: 13px 17px;
+    }
+    label {
+        font-size: 14px;
+    }
+    .seach-right .form-group .input-group {
+        max-width: 240px;
+    }
+    .detail_tab-inner .container {
+        padding: 0 10px !important;
+    }
+ }
+    @media screen and (max-width:1299px) {
+    .detail_tab-inner {
+        padding: 20px 20px;
+    }
+}
+@media screen and (max-width:991px) {
+.top-header-navigation .nav-link {
+    font-size: 10px;
+}
+.top-header-search .search-input {
+    min-width: 395px;
+}
+.step-listing li {
+    max-width: 105px;
+    flex: 0 0 105px;
+}
+}

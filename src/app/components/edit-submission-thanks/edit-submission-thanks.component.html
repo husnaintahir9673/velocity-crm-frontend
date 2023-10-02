@@ -1,0 +1,61 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <!-- <div class="page-header">
+                <h3 class="page-title cursor-pointer">
+                    <span> Lead Update Content</span>
+                </h3>
+            </div> -->
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Lead Update Content</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="submissionForm">
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Thanks Message*</label>
+                                            <textarea formControlName="thanks_message" name="" [maxlength]="1000" class="form-control"></textarea>
+                                            <div class="invalid-input" *ngIf="f.thanks_message.errors && f.thanks_message.touched">
+                                                <div *ngIf="f.thanks_message.errors.required">
+                                                    Thanks message is required
+                                                </div>
+                                                <div *ngIf="f.thanks_message.errors.pattern">
+                                                    Invalid thanks message
+                                                </div>
+                                                <div *ngIf="f.thanks_message.errors.maxlength">
+                                                    Maximum 1000 characters allowed
+                                                </div>
+                                                <div *ngIf="f.thanks_message.errors.minlength">
+                                                    Thanks message must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 my-3">
+                                        <a (click)="updateThanksMessage()"  class="theme-btn cursor-pointer " [ngStyle]="background">
+                                            <span class="">Submit</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

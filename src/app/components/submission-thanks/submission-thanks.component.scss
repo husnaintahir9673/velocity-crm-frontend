@@ -1,0 +1,49 @@
+/* Coming SOON Page CSS  */
+
+.access-denied-page .search-input {
+    padding-right: 10px !important;
+    min-width: 100%;
+}
+.denied-text {
+    padding: 10px 0px;
+}
+.header-content h1 {
+    font-size: 44px;
+    padding: 25px 0px 0px;
+    margin-bottom: 0px;
+    color: #fa5440;
+    font-family: 'IBM-bold';
+}
+.denied-text {
+    padding: 10px 0px;
+}
+.login-card {
+    padding: 60px 50px;
+}
+.login-page-inner {
+    background-color: #E8E8F1;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+.login-card {
+    background-color: #fff;
+    padding: 40px 50px;
+}
+.access-denied-page {
+    text-align: center;
+}
+.theme-btn {
+    padding: 10px 23px;
+}
+.back-btn {
+    margin-top: 40px;
+}
+.back-btn svg {
+    transform: rotate(180deg);
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}

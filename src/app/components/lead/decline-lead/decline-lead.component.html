@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title">Decline Deal</h4>
+    <button type="button" class="btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body" [formGroup]="declineForm">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label>Select Decline Type*</label>
+                <select formControlName="declineType" name="" id="" class="form-control">
+                    <option value="">Select decline type</option>
+                    <option [value]="type.id" *ngFor="let type of declineTypes">
+                        {{ type.name }}
+                    </option>
+                </select>
+                <div class="invalid-input" *ngIf="f.declineType?.errors && f.declineType?.touched">
+                    <div *ngIf="f.declineType?.errors?.required">
+                        Decline type is required
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label>Select Decline Reason*</label>
+                <select formControlName="declineReason" multiple name="" id="" class="form-control multiselect-reason">
+                    <option [value]="reason.id" *ngFor="let reason of declineReasons">
+                        {{ reason.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="invalid-input" *ngIf="f.declineReason?.errors && f.declineReason?.touched">
+                <div *ngIf="f.declineReason?.errors?.required">
+                    Decline reason is required
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="notes-text">
+                <div class="form-group">
+                    <span class="accordion-head-title">Note*</span>
+                    <textarea formControlName="note" name="" [maxlength]="1000" class="form-control"></textarea>
+                    <div class="invalid-input" *ngIf="f.note?.errors && f.note?.touched">
+                        <div *ngIf="f.note?.errors?.pattern">
+                            Invalid note
+                        </div>
+                        <div *ngIf="f.note?.errors?.required">
+                            Note is required
+                        </div>
+                        <div *ngIf="f.note?.errors?.maxlength">
+                            Maximum characters is 1000
+                        </div>
+                        <div *ngIf="f.note?.errors?.minlength">
+                            Note must be minimum 3 characters long
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="theme-btn btn-sm" data-bs-dismiss="modal" (click)="declineLead()"
+        [ngStyle]="background">Decline</button>
+</div>

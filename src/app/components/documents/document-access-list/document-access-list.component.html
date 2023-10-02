@@ -1,0 +1,118 @@
+<header class="header" id="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="top-header-content">
+                <div class="top-header-left">
+                    <a class="navbar-brand logo">
+                    <img [src]="logoImage" alt="logo" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">Documents</h6>
+                </div>
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type of document</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Updated</th>
+                            <th scope="col">Uploaded by</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- routerLink="/lead-overview"  [queryParams]="{ mode: 'document',id: doc.lead_id, token: token }"  -->
+                        <tr class="cursor-pointer"  (click)="leadDetailsLink(doc.lead_id)" *ngFor="let doc of documentsList">
+                            <td>
+                                {{ doc.document_name }}
+                            </td>
+                            <td class="img">
+                                {{doc.document_type}}
+                                 <a [ngSwitch]="doc.mime">
+                                    <img *ngSwitchCase="'text/plain'" src="assets/images/txt-file.svg" alt="image">
+                                    <img *ngSwitchCase="'application/pdf'" src="assets/images/pdf.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                        src="assets/images/microsoft-excel.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                        src="assets/images/microsoft-excel.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                        src="assets/images/doc-icon.svg" alt="image">
+                                    <img *ngSwitchCase="'image/png'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchCase="'image/jpeg'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchCase="'image/gif'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchDefault src="assets/images/other.svg" alt="image">
+
+                                </a>
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>
+                                    {{getDate(doc.uploaded_on)}}
+                                 
+                                </span>
+                                <!-- {{ doc.uploaded_on | date: dateFormat}} -->
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>
+                                    {{getDate(doc.updated_on)}}
+                                </span>
+                            </td>
+                            <td>
+                                {{ doc.uploaded_by }} ({{doc.lead_id_number}})
+                            </td>
+                            <td>
+                                <div class="dropdown" ngbDropdown>
+                                    <a   (click)="$event.stopPropagation()" class="custom-dropdowm dropdown-toggle" data-bs-toggle="dropdown"
+                                        ngbDropdownToggle>
+                                        <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                fill="#FA5440"></path>
+                                            <path
+                                                d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                fill="#FA5440"></path>
+                                            <path
+                                                d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                fill="#FA5440"></path>
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                        <li>
+                                            <a [href]="doc.url" target="_blank" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view cursor-pointer">Document View</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a (click)="downloadFile(doc); $event.stopPropagation();" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view cursor-pointer"><svg
+                                                    width="13" height="11" viewBox="0 0 13 11" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M9.37968 9.68519C9.37968 9.56648 9.33631 9.46375 9.24956 9.377C9.16281 9.29025 9.06008 9.24687 8.94136 9.24687C8.82265 9.24687 8.71992 9.29025 8.63317 9.377C8.54642 9.46375 8.50304 9.56648 8.50304 9.68519C8.50304 9.8039 8.54642 9.90664 8.63317 9.99339C8.71992 10.0801 8.82265 10.1235 8.94136 10.1235C9.06008 10.1235 9.16281 10.0801 9.24956 9.99339C9.33631 9.90664 9.37968 9.8039 9.37968 9.68519ZM11.133 9.68519C11.133 9.56648 11.0896 9.46375 11.0028 9.377C10.9161 9.29025 10.8134 9.24687 10.6946 9.24687C10.5759 9.24687 10.4732 9.29025 10.3865 9.377C10.2997 9.46375 10.2563 9.56648 10.2563 9.68519C10.2563 9.8039 10.2997 9.90664 10.3865 9.99339C10.4732 10.0801 10.5759 10.1235 10.6946 10.1235C10.8134 10.1235 10.9161 10.0801 11.0028 9.99339C11.0896 9.90664 11.133 9.8039 11.133 9.68519ZM12.0096 8.15107V10.3427C12.0096 10.5253 11.9457 10.6805 11.8178 10.8084C11.69 10.9362 11.5348 11.0002 11.3521 11.0002H1.27076C1.08813 11.0002 0.93289 10.9362 0.805046 10.8084C0.677203 10.6805 0.613281 10.5253 0.613281 10.3427V8.15107C0.613281 7.96844 0.677203 7.8132 0.805046 7.68536C0.93289 7.55751 1.08813 7.49359 1.27076 7.49359H4.45543L5.38001 8.42502C5.64483 8.68071 5.95531 8.80855 6.31144 8.80855C6.66758 8.80855 6.97806 8.68071 7.24287 8.42502L8.1743 7.49359H11.3521C11.5348 7.49359 11.69 7.55751 11.8178 7.68536C11.9457 7.8132 12.0096 7.96844 12.0096 8.15107ZM9.78376 4.25413C9.86138 4.44133 9.82942 4.60114 9.68788 4.73354L6.61964 7.80179C6.53745 7.88854 6.43472 7.93191 6.31144 7.93191C6.18817 7.93191 6.08543 7.88854 6.00325 7.80179L2.93501 4.73354C2.79347 4.60114 2.76151 4.44133 2.83913 4.25413C2.91674 4.07606 3.05144 3.98703 3.2432 3.98703H4.99648V0.918789C4.99648 0.800077 5.03986 0.697346 5.12661 0.610595C5.21336 0.523844 5.31609 0.480469 5.4348 0.480469H7.18808C7.3068 0.480469 7.40953 0.523844 7.49628 0.610595C7.58303 0.697346 7.6264 0.800077 7.6264 0.918789V3.98703H9.37968C9.57145 3.98703 9.70614 4.07606 9.78376 4.25413Z"
+                                                        fill="#565D80" />
+                                                </svg> Download</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

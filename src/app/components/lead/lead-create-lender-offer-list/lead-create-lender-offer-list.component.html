@@ -1,0 +1,147 @@
+<main class="">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="list-search-content">
+                <div class="inner-page-search">
+                    <div class="seach-right">
+                        <button [disabled]="leadDetails.is_freeze != 0" *ngIf="canCreateLenderOffer && leadDetails?.can_lender_offer" [ngStyle]="background"
+                            class="theme-btn" routerLink="/{{userBaseRoute}}/lead-createlenderoffer/{{leadID}}"  [ngClass]="{'cursor-not-allowed':leadDetails.is_freeze != 0 , 'cursor-pointer': leadDetails.is_freeze == 0}">Create
+                            Lender
+                            Offer</button>
+                    </div>
+                </div>
+                <!-- updates-table -->
+                <div class="update-table">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr [ngStyle]="background">
+                                <th>Lender</th>
+                                <th>Funding Amount</th>
+                                <th>Buy Rate</th>
+                                <th>Sell Rate</th>
+                                <th>Terms</th>
+                                <th>RTR</th>
+                                <th>Payment</th>
+                                <th>Position</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lender of lenderList | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total } ; let i = index"
+                                [ngClass]="{ 'green': lender.apply_to_function == true}">
+                                <td>{{lender.lender}}</td>
+                                <td>{{ lender.funding_amount | currency}}</td>
+                                <td>{{ lender.buy_rate }} </td>
+                                <td>{{ lender.sell_rate }}</td>
+                                <td>{{ lender.terms }}</td>
+                                <td>{{ lender.rtr | currency}}</td>
+                                <td>{{ lender.payment | currency }}</td>
+                                <td>{{ lender.position }}</td>
+                                <td>{{ lender.user_name }}</td>
+                                <td>{{ getDate(lender.created_at) }}</td>
+                                <td>
+                                    <!-- dropdown-item table-dropdown-item  -->
+                                    <a *ngIf="canViewLenderOffer && leadDetails.is_freeze == 0" 
+                                        routerLink="/{{userBaseRoute}}/edit-lender-offer/{{leadID}}/{{lender.lender_offer_id}}"
+                                        [queryParams]="{mode: 'edit'}" class="view cursor-pointer"><img
+                                            src="assets/images/view.svg" alt="/icon"></a>
+
+                                            <a *ngIf="canViewLenderOffer && leadDetails.is_freeze != 0" 
+                                            class="view cursor-not-allowed"><img
+                                                src="assets/images/view.svg" alt="/icon"></a>
+                                    <!-- <a *ngIf="canEditLenderOffer"
+                                        routerLink="/{{userBaseRoute}}/edit-lender-offer/{{leadID}}/{{lender.lender_offer_id}}"
+                                        [queryParams]="{mode: 'edit'}"
+                                        class="edit cursor-pointer"><img
+                                            src="assets/images/edit.svg" alt="/icon"></a> -->
+                                    <a *ngIf="canDeleteLenderOffer && leadDetails.is_freeze == 0"
+                                        (confirm)="deleteLenderOffer(lender.lender_offer_id)"
+                                        [swal]="{ title: 'Are you sure to delete?',text: 'You will not be able to revert this!',icon: 'warning',confirmButtonColor: '#f0412e', showCancelButton: true,confirmButtonText: 'Yes, delete it!' }"
+                                        class="delete cursor-pointer"><img src="assets/images/delete.svg"
+                                            alt="/icon"></a>
+                                            <a *ngIf="canDeleteLenderOffer && leadDetails.is_freeze != 0"
+                                            class="delete cursor-not-allowed"><img src="assets/images/delete.svg"
+                                                alt="/icon"></a>
+                                    <!-- <div class="dropdown" ngbDropdown>
+                                        <a (click)="$event.stopPropagation();" class="custom-dropdowm dropdown-toggle"
+                                            data-bs-toggle="dropdown" ngbDropdownToggle>
+                                            <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                    fill="#FA5440" />
+                                                <path
+                                                    d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                    fill="#FA5440" />
+                                                <path
+                                                    d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                    fill="#FA5440" />
+                                            </svg>
+                                        </a>
+                                        <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                            <li>
+                                                <a ngbDropdownItem
+                                                    routerLink="/{{userBaseRoute}}/edit-lender-offer/{{leadID}}/{{lender.lender_offer_id}}"
+                                                    class="dropdown-item table-dropdown-item view"><img
+                                                        src="assets/images/view.svg" alt="/icon">View detail</a>
+                                            </li>
+                                            <li>
+                                                <a ngbDropdownItem
+                                                    routerLink="/{{userBaseRoute}}/edit-lender-offer/{{leadID}}/{{lender.lender_offer_id}}"
+                                                    [queryParams]="{mode: 'edit'}"
+                                                    class="dropdown-item table-dropdown-item edit"><img
+                                                        src="assets/images/edit.svg" alt="/icon">Edit</a>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+                                </td>
+                            </tr>
+                            <tr *ngIf="!lenderList.length">
+                                <td colspan="11" class="text-center">
+                                    No records found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="footer-pagination">
+                        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                    </div>
+                </div>
+
+
+
+
+                <div class="declined-table mt-5">
+                    <h5>Declined Notes:</h5>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr [ngStyle]="background">
+                                <th>Lender Name</th>
+                                <th>Declined Reason</th>
+                                <th>Declined By</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let lender of declinedOfferList | paginate: { itemsPerPage: declinedlimit, currentPage: declinedpage, totalItems: declinedtotal } ; let i = index">
+                                <td>{{lender.lender_name}}</td>
+                                <td>{{ lender.decline_reason}}</td>
+                                <td>{{ lender.declined_by }} </td>
+                                <td>{{ getDate(lender.created_at) }}</td>
+                            </tr>
+                            <tr *ngIf="!declinedOfferList.length">
+                                <td colspan="4" class="text-center">
+                                    No records found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>

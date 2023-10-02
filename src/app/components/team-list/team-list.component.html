@@ -1,0 +1,145 @@
+<app-dashboard-cards></app-dashboard-cards>
+<main class="dashboard-wrapper">
+    <div class="overlay" *ngIf="predictiveSearchResults.length" (click)="predictiveSearchResults = []"></div>
+    <div class="container">
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">All Teams <span>(Displaying {{ teamList.length }} of {{totalUsersCount ? totalUsersCount : 0}} results)</span></h6>
+                </div>
+                <div *ngIf="canCreateTeam" class="create-new-lead">
+                    <a routerLink="./add" class="theme-btn in-blc" [ngStyle]="background"><span>+</span> Create New Team</a>
+                </div>
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('team_name')" [ngClass]="{
+                                'active-tab': search.sortby == 'team_name'}">Team Name <img
+                              
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                
+                                  'upward-img': search.order == 'ASC' && search.sortby == 'team_name'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('leader_name')" [ngClass]="{
+                                'active-tab': search.sortby == 'leader_name'}">Team Leader <img
+                              
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'leader_name',
+                                  'upward-img': search.order == 'ASC' && search.sortby == 'leader_name'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col">Team Member 
+                                <!-- <span class="cursor-pointer" (click)="sortBy('members')" [ngClass]="{
+                                'active-tab': search.sortby == 'members'}">Team Member <img
+                              
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'members',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'members'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('created_at')" [ngClass]="{
+                                'active-tab': search.sortby == 'created_at'}">Created At <img
+                           
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'created_at',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'created_at'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let team of teamList | paginate: { itemsPerPage: usersListLimit, currentPage: userListPage, totalItems: totalUsersCount }; let i = index"
+                            class="cursor-pointer" routerLink="./{{team.id}}">
+                            <td>{{ team.team_name}}</td>
+                            <td>
+                                <span>{{ team.leader_name }}</span>
+                            </td>
+                            <td>
+                                <span>{{ team.members }}</span>
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>{{getDate(team.created_at)}}</span>
+                            </td>
+                            <td>
+                                <div class="dropdown" ngbDropdown>
+                                    <a (click)="$event.stopPropagation();" class="custom-dropdowm dropdown-toggle"
+                                        data-bs-toggle="dropdown" ngbDropdownToggle>
+                                        <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                fill="#FA5440" />
+                                            <path
+                                                d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                fill="#FA5440" />
+                                            <path
+                                                d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                fill="#FA5440" />
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                        <li  *ngIf="canCreateTeam">
+                                            <a routerLink="./{{team.id}}" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view"><img
+                                                    src="assets/images/view.svg" alt="/icon">View detail</a>
+                                        </li>
+                                        <li  *ngIf="canEditTeam">
+                                            <a routerLink="./{{team.id}}" [queryParams]="{mode: 'edit'}" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item edit"><img
+                                                    src="assets/images/edit.svg" alt="/icon">Edit</a>
+                                        </li>
+                                        <li  *ngIf="canDeleteTeam">
+                                            <a (confirm)="deleteUser(team)"
+                                                [swal]="{ title: 'Are you sure to delete this team?',text: 'You will not be able to revert this!',icon: 'warning',confirmButtonColor: '#f0412e', showCancelButton: true,confirmButtonText: 'Yes, delete it!' }"
+                                                ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item delete cursor-pointer"><img
+                                                    src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!teamList.length">
+                            <td colspan="5" class="text-center">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="table-sort-items">
+                <div class="table-select-row">
+                    <span>Show </span>
+                    <select (change)="onUsersLimitChange($any($event.target).value)" [(ngModel)]="usersListLimit"
+                        class="select table-select-count">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span> entries</span>
+                </div>
+                <pagination-controls (pageChange)="onUserPageChange($event)"></pagination-controls>
+            </div>
+
+        </div>
+    </div>
+</main>

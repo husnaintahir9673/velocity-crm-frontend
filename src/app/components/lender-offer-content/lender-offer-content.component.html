@@ -1,0 +1,75 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Lender Offer Form</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <ng-container [formGroup]="lenderFormGroup">
+                                <div class="row">
+                                                   <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " formArrayName="lenderFormArray"
+                                                   *ngFor="let agn of lenderFormArray.controls; let i = index"> 
+                                                   <ng-container formGroupName="{{i}}">
+                                                    <div class="form-group">
+                                                        <label class="label-toggle">Field Name <span class="toggleSwitch nolabel"><input type="checkbox" formControlName="is_required" id="0"><span><span></span><span></span></span><a></a></span></label>
+                                                        <input formControlName="label" type="text"
+                                                            placeholder="Enter field name" class="form-control" />
+                                                    </div>
+                                                    <div class="invalid-input"
+                                                        *ngIf="lenderFormArray.controls[i].get('label')?.errors && lenderFormArray.controls[i].get('label')?.touched">
+                                                        <div
+                                                            *ngIf="lenderFormArray.controls[i].get('label')?.errors?.pattern">
+                                                            Invalid Field name
+                                                        </div>
+                                                        <div *ngIf="lenderFormArray.controls[i].get('label')?.errors?.minlength">
+                                                            Field name must be minimum 3 characters long
+                                                        </div>
+                                                        <div *ngIf="lenderFormArray.controls[i].get('label')?.errors?.maxlength">
+                                                            Maximum 100 characters allowed
+                                                        </div>
+                                                    </div>
+                                                   <!-- <div class="col-3 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                                    <div class="form-group">
+                                                        <label>Is Required</label>
+                                                        <input formControlName="is_required" type="checkbox" />
+                                                    </div>
+                                                </div> -->
+
+                                          
+                                        </ng-container>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <!-- (click)="submit()" -->
+                                        <a (click)="submit()" class="theme-btn cursor-pointer " [ngStyle]="background">
+                                            <span class="">Submit</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+        
+                                            </span>
+                                        </a>
+                                    </div> 
+                                    </div>
+                                </ng-container>
+
+
+                            </div>
+
+                           
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

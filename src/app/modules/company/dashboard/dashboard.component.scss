@@ -1,0 +1,59 @@
+.dashboard-wrapper {
+    min-height: unset;
+    padding: 20px 0px 0px;
+}
+.statics-list {
+    margin-bottom: 0px;
+}
+.canvas-graph .chart-container {
+    width: 460px;
+    margin: 0 auto;
+}
+.canvas-graph {
+    background: #fff;
+    padding: 30px;
+    height: 100%;
+}
+.applied-search-item {
+    display: inline-block;
+}
+.graph-container {
+    height: 400px;
+    // width: 100%;
+}
+
+
+
+
+.statics-score.mustard {
+    color: gray !important;
+    
+}
+.statics-icon.mustard {
+    background: #d6d0cb !important;
+    border-color: #9a9a9a !important;
+}
+.statics-score.black {
+    color: #056e38 !important;
+    
+}
+.statics-icon.black {
+    background: #c8f8c7 !important;
+    border-color: #056e38 !important;
+}
+.statics-score.green {
+    color: #ea6a0c !important;
+    
+}
+.statics-icon.green {
+    background: #e7b1899c !important;
+    border-color: #ea6a0c !important;
+}
+.statics-score.approved{
+     color: #638D2F !important;
+}
+.statics-icon.approved {
+    background: #EDFFD6 !important;
+    border-color: #DDFFB2 !important;
+
+}

@@ -1,0 +1,91 @@
+.decline-popup-content .modal-header {
+    background-color: #f5f5fd;
+}
+.decline-popup-content .modal-title {
+    font-size: 18px;
+    line-height: 23px;
+    color: #383d56;
+    font-family: "IBM-medium";
+}
+.decline-popup-content .btn-close {
+    opacity: 0.8;
+}
+.decline-popup-content .modal-header {
+    border-bottom: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px 35px;
+}
+.notes-text .form-control {
+    background: #f5f5fd;
+    border-color: transparent;
+    border-radius: 10px;
+    min-height: 115px;
+}
+
+.notes-text .accordion-head-title {
+    font-family: "IBM-medium";
+    color: #565d80;
+    font-size: 15px;
+}
+
+.selection-list .selectDropdown::-webkit-scrollbar {
+    width: 10px;
+}
+
+.selection-list .selectDropdown::-webkit-scrollbar-track {
+    background: #fafaff;
+}
+
+.selection-list .selectDropdown::-webkit-scrollbar-thumb {
+    background: #fa5440;
+    border-radius: 100px;
+}
+
+.selection-list .selectDropdown::-webkit-scrollbar-thumb:hover {
+    background: #fa5440;
+}
+.decline-popup-content .modal-body {
+    padding-bottom: 0px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+.decline-popup-content .modal-body {
+    padding-bottom: 0px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+.decline-popup-content .modal-footer {
+    border: 0px;
+    padding-top: 0px;
+}
+.decline-popup-content .modal-footer .btn-sm {
+    border-radius: 5px;
+    min-width: 70px;
+}
+.btn-close:focus {
+    box-shadow: none;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.multiselect-reason {
+    min-height: 200px;
+    option {
+        padding: 10px 0px;
+    }
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #fafaff;
+        margin-right: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #fa5440;
+        border-radius: 100px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #fa5440;
+    }
+}

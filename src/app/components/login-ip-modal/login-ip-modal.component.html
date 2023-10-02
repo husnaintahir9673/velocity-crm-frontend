@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Last Login Ip's</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModel()"></button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="col-md-12">
+            <ngb-accordion #acc="ngbAccordion"  [closeOthers]="true"   [activeIds]="opentab" *ngFor="let item of loginIpList">
+                <ngb-panel [id]="$any(log.key)" *ngFor="let log of item | keyvalue">
+                    
+                    <!-- -->
+                    <!-- (click)="toggle('LeadDetails')" -->
+                    <ng-template ngbPanelHeader let-opened="opened">
+                        <a *ngFor="let log of item | keyvalue" (click)="openAccordianTab(log.key)" class="accordion-head cursor-pointer">
+                            <!-- *ngFor="let log of item | keyvalue" -->
+                            <span class="accordion-head-title">{{getLoginIpDate(log.key)}}</span>
+                            <div>
+                                <span class="accordion-head-icon">
+                                    <img src="assets/images/drop-down.svg" alt="" />
+                                </span>
+                            </div>
+                        </a>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="accordion-body">
+                            <div class="detail-table-outer">
+                                <div class="lead-detail-inner">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label>Date</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>IP</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <ng-container *ngFor="let log of item | keyvalue">
+                                                <ng-container *ngFor="let l of $any(log.value)">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            {{ getDate(l.date) }}
+                                                        </div>
+                                                        <div class="col-6">
+                                                            {{ l.ip }}
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </ng-container>
+                                            </ng-container>
+                                            
+                                        </div>
+                                        <!-- <div class="col-4">
+                                            <label>Created At</label>
+                                            <p *ngFor="let date of  $any(item).value">{{date.createdAt | date:
+                                                dateFormat}}</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngb-panel>
+
+
+            </ngb-accordion>
+        </div>
+        <!-- <div class="row" >
+            <div  class="col-6 form-group">
+                <label for="new">Date</label>
+                    <p>{{ item.key }}</p>
+                </div>
+                <div  class="col-6 form-group last-login-details">
+                   <p><svg (click)="showDates = !showDates" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg></p>
+                    <div class="row"  *ngIf="showDates">
+                          <div  class="col-4" >
+                            <label>Date</label>
+                            <p *ngFor="let date of  $any(item).value">{{date.date | date: dateFormat}}</p>
+                        </div>
+                        <div  class="col-4" >
+                            <label>Ip</label>
+                            <p  *ngFor="let date of  $any(item).value">{{date.ip}}</p>
+                        </div>
+                        <div  class="col-4" >
+                            <label>Created At</label>
+                            <p  *ngFor="let date of  $any(item).value">{{date.createdAt | date: dateFormat}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+           
+        </div> -->
+
+    </form>
+</div>

@@ -1,0 +1,121 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/admin/admin-roles">Roles </span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Update Role</span>/
+                        <span class="active-page">{{roleName}}</span>
+                    </li>
+                </ul>
+                <!-- <button routerLink="../../update-permission-details" class="theme-btn">Update permission details</button> -->
+            </div>
+            <div class="row" [formGroup]="form">
+                <div class="col-md-3 col-lg-3">
+                    <div class="create-lead-content create-lead-left">
+                        <div class="updated-role-feilds">
+                            <div class="row">
+                                <div>
+                                    <div class="form-group">
+                                        <label class="accordion-head-title">Select Permission</label>
+                                        <!-- <input type="text" readonly [value]="roleName" class="form-control" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="full-view permission-list" >
+                            <div class="accordion" id="accordion">
+                                <div class="accordion-item" *ngFor="let role of roleData | keyvalue" [formArrayName]="role.key">
+                                    <ul>
+                                        <li [routerLink]='"."' [fragment]="role.key" [ngClass]="{ 'active': activeId === role.key }">
+                                            <!-- <a  > -->
+                                                {{ role.key }}
+                                            <!-- </a>  -->
+                                            <!--(click)="scroll(role.key)" -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9">
+                    <div class="create-lead-content">
+                        <div class="updated-role-feilds">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="updated-title">
+                                        <span class="accordion-head-title">Permissions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="full-view" >
+                            <div class="accordion" id="accordion">
+                                <div class="accordion-item" *ngFor="let role of roleData | keyvalue; let i = index" [formArrayName]="role.key">
+                                    <a [id]="role.key" class="accordion-head" data-bs-toggle="collapse">
+                                        <span class="totltip-custom">
+                                            <span class="tooltip-icon">
+                                                <img src="assets/images/mark.svg" alt="mark">
+                                                <span class="tooltip-context">
+                                                    <span class="tooltip-title">{{ role.key }}</span>
+                                                    <span class="tooltip-para">{{ role.value.question_mark_text }}</span>
+                                                </span>
+                                            </span>
+                                            
+                                        </span>
+                                        <span class="accordion-head-title">                                            
+                                            {{ role.key }} 
+                                            <input
+                                                class="form-check-input mt-checkbox" type="checkbox" value="" [id]="role.key"
+                                                [checked]="isAllChecked(role.key)"
+                                                (change)="parentCheck(role.key, $any($event?.target).checked)">
+                                        </span>                                               
+                                    </a>
+                                    <div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                                                    *ngFor="let c of role.value.names; let f = index">
+                                                    <div class="permission-outer">
+                                                        <div class="form-check">
+                                                            <input [formControlName]="f" class="form-check-input"
+                                                                type="checkbox"
+                                                                
+                                                                [id]="c.name">
+                                                            <label [for]="c.name" class="form-check-label">{{ c.display_name | titlecase
+                                                                }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-end">
+                                    <button routerLink="../../admin-roles" class="theme-btn white-btn">Cancel</button>
+                                    <button (click)="updatePermissions()" class="theme-btn">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+          </div>
+        </div>
+    </div>
+</main>

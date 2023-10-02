@@ -1,0 +1,96 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <h3 class="page-title cursor-pointer" routerLink="/company/user">
+                    <span>
+                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                fill="#565D80" />
+                        </svg>
+
+                    </span> Add List
+                </h3>
+            </div>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">List details </span>
+                            <!-- <span class="accordion-head-icon">
+                                <img src="assets/images/drop-down.svg" alt="" />
+                            </span> -->
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="listForm">
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label for="new">Name*</label>
+                                            <input formControlName="name" type="text" class="form-control" id="new" placeholder="Enter name" />
+                                            <div class="invalid-input" *ngIf="f.name.errors && f.name.touched">
+                                              <div *ngIf="f.name.errors.required">
+                                                Name is required
+                                              </div>
+                                              <div *ngIf="f.name.errors.pattern">
+                                                Invalid name
+                                              </div>
+                                              <div *ngIf="f.name.errors.minlength">
+                                                Name must be minimum 3 characters long
+                                              </div>
+                                              <div *ngIf="f.name.errors.maxlength">
+                                                Maximum 100 characters allowed
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="new">What kind of list you are creating*</label>
+                                        <div class="radio-btns">
+                                            <div class="form-check">
+                                                <input type="radio"
+                                                    formControlName="select_list"
+                                                    class="form-check-input cursor-pointer" id="text"
+                                                    name="select_list" value="active" (change)="onChange($event)" [ngStyle]="{'background-color':CheckBoxCondition?color:'','border-color':CheckBoxCondition?color:''}"/>
+                                                <label class="form-check-label cursor-pointer"
+                                                    for="text">Active List
+                                                    </label>
+                                                    <!-- <p>Active lists update over time. Record will join or leave the list as their properties change</p> -->
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio"
+                                                    formControlName="select_list"
+                                                    class="form-check-input cursor-pointer" id="email"
+                                                    name="select_list" value="static" (change)="onChange($event)" [ngStyle]="{'background-color':CheckBoxCondition2?color:'','border-color':CheckBoxCondition2?color:''}"/>
+                                                <label class="form-check-label cursor-pointer"
+                                                    for="email">Static List</label>
+                                                    <!-- <p>Statics lists do not automatically update as your record changes. Static list represents a single moment in a time.</p> -->
+                                                     <!-- <p>Statics contains the pasts leads.</p> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <a (click)="addListSubmit()" class="theme-btn cursor-pointer" [ngStyle]="background">
+                                            <span class="">Get Started</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

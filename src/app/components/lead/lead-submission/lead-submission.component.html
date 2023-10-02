@@ -1,0 +1,666 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <!-- <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="../../">All lead</span>/
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="../../lead-detail/{{leadID}}">Lead details</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Lead Submission</span>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="update-table">
+                <h5>Submission Notes:</h5>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr [ngStyle]="background">
+                            <!-- <th><span class="serial-border" [ngStyle]="background">#</span></th> -->
+                            <th>Lender Name</th>
+                            <th>Email</th>
+                            <th>Bussiness State</th>
+                            <th>Document</th>
+                            <th>Notes</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let update of submissionNotesList | paginate: { itemsPerPage: limit, currentPage: submissionpage, totalItems: submissiontotal,  id: 'submissionpage' } ; let i = index">
+                            <!-- <td><span class="serial-border">{{ limit * (submissionpage - 1) + i + 1 }}</span></td> -->
+
+                            <td>
+                                <span *ngFor="let notes of submissionNotesList[i]">{{ notes.lender_name }}<br></span>
+                            </td>
+                            <td> <span *ngFor="let notes of submissionNotesList[i]">{{ notes.email }}<br></span> </td>
+                            <td><span>{{ update[0].business_state }}<br></span> </td>
+                            <td><span *ngFor="let doc of update[0].document">{{ doc.document_name}}<br></span> </td>
+                            <td><span>{{ update[0].note }}<br></span> </td>
+                            <td><span>{{getDate(update[0].created_at)}}<br></span> </td>
+                        </tr>
+                        <tr *ngIf="!submissionNotesList.length">
+                            <td colspan="5" class="text-center">
+                                No records found
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="create-lead-content">
+                <div class="full-view">
+                    <div class="accordion" id="accordion">
+                        <div class="accordion-item">
+                            <!-- href="#collapseTwo" -->
+                            <a class="accordion-head" data-bs-toggle="collapse">
+                                <span class="accordion-head-title">Send Submissions: {{lead.first_name + ' ' +
+                                    lead.last_name }}({{ lead.lead_id }})({{ lead.state_name }})</span>
+                                <!-- <span class="accordion-head-icon">
+                                    <img src="assets/images/drop-down.svg" alt="" />
+                                </span> -->
+                            </a>
+                            <!-- <div [ngStyle]="{'display': isBasicForm ? 'block': 'none'}" id="collapseTwo"
+                                class="collapse show" data-bs-parent="#accordion">
+                                <div class="accordion-body">
+
+                                    <div [formGroup]="basicForm" class="row">
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Credit score</label>
+                                                <input formControlName="credit_score" type="text"
+                                                    placeholder="Enter credit score" class="form-control" maxlength="5"/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.credit_score.errors && f.credit_score.touched">
+                                                    <div *ngIf="f.credit_score.errors.pattern">
+                                                        Credit score must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Negative days </label>
+                                                <input formControlName="negative_days" type="text"
+                                                    placeholder="Enter negative days" class="form-control" maxlength="5"/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.negative_days.errors && f.negative_days.touched">
+                                                    <div *ngIf="f.negative_days.errors.pattern">
+                                                        Negative days must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Advance ($)</label>
+                                                <div class="form-group">
+                                                    <input formControlName="advance" type="text" class="form-control"
+                                                        placeholder="Enter advance ($)" name="date" maxlength="9"  mask="separator.2" 
+                                                        thousandSeparator=",">
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.advance.errors && f.advance.touched">
+                                                        <div *ngIf="f.advance.errors.pattern">
+                                                            Advance must be a number.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>NSFs</label>
+                                                <input formControlName="nsfs" type="email" placeholder="Enter NSFs"
+                                                    class="form-control" maxlength="10"/>
+                                                <div class="invalid-input" *ngIf="f.nsfs.errors && f.nsfs.touched">
+                                                    <div *ngIf="f.nsfs.errors.pattern">
+                                                        NSFs must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Time in business (months)</label>
+                                                <input formControlName="time_in_business" type="text"
+                                                    placeholder="Enter time in business" class="form-control" maxlength="5"/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.time_in_business.errors && f.time_in_business.touched">
+                                                    <div *ngIf="f.time_in_business.errors.pattern">
+                                                        Time in business (months) must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Amount ($)</label>
+                                                <input formControlName="amount" type="text" placeholder="Enter amount"
+                                                    class="form-control" maxlength="15"
+                                                    mask="separator.2" 
+													thousandSeparator=","/>
+                                                <div class="invalid-input" *ngIf="f.amount.errors && f.amount.touched">
+                                                    <div *ngIf="f.amount.errors.pattern">
+                                                        Amount must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Deposits ($)</label>
+                                                <input formControlName="deposits" type="text"
+                                                    placeholder="Enter deposits" class="form-control" maxlength="10"  mask="separator.2" 
+													thousandSeparator=","/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.deposits.errors && f.deposits.touched">
+                                                    <div *ngIf="f.deposits.errors.pattern">
+                                                        Deposits must be a number.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Position</label>
+                                                <input formControlName="position" type="text"
+                                                    placeholder="Enter position" class="form-control" maxlength="5"/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.position.errors && f.position.touched">
+                                                    <div *ngIf="f.position.errors.pattern">
+                                                        Position must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Term (Months)</label>
+                                                <input formControlName="term_months" type="text"
+                                                    placeholder="Enter term" class="form-control" maxlength="5"/>
+                                                <div class="invalid-input"
+                                                    *ngIf="f.term_months.errors && f.term_months.touched">
+                                                    <div *ngIf="f.term_months.errors.pattern">
+                                                        Term (months) must be a number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Consolidation</label>
+                                                <select formControlName="consolidation" class="form-control" name=""
+                                                    id="">
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Sole prop</label>
+                                                <select formControlName="sole_prop" class="form-control" name="" id="">
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Non profit</label>
+
+                                                <select formControlName="non_profit" class="form-control" name="" id="">
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                            <div class="form-group">
+                                                <label>Daily weekly</label>
+                                                <select formControlName="daily_weekly" class="form-control" name=""
+                                                    id="">
+                                                    <option value="">--Select--</option>
+                                                    <option value="daily">Daily</option>
+                                                    <option value="weekly">Weekly</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+                            <ng-container [formGroup]="lenderForm">
+                                <div class="lender-type-data" [ngStyle]="{'display': isBasicForm ? 'none':  'block'}">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="radio-btns">
+                                                <span class="accordion-head-title">Lender Type:</span>
+                                                <div class="radio-btns-inner">
+                                                    <ul class="d-flex">
+                                                        <li>
+                                                            <input  *ngIf="lead.is_freeze != 0" formControlName="lender_type"   onclick="return false;" value="email"
+                                                            type="radio" id="test1" name="lender_type" class="cursor-not-allowed"  checked>
+
+                                                            <input  *ngIf="lead.is_freeze == 0" formControlName="lender_type" value="email"
+                                                                type="radio" id="test1" name="lender_type" checked
+                                                                (change)="checkBoxColor($any($event.target).value)">
+                                                            <label for="test1">
+                                                                <div class="radio-before"></div>
+                                                                Email
+                                                                <div class="radio-after"
+                                                                    [ngStyle]="{'background-color':colorCheckbox?color:'','border-color':colorCheckbox?color:''}">
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <input *ngIf="lead.is_freeze != 0"  onclick="return false;"  formControlName="lender_type" type="radio"
+                                                            value="ondeck" id="test2" name="lender_type" class="cursor-not-allowed">
+
+                                                            <input *ngIf="lead.is_freeze == 0" formControlName="lender_type" type="radio"
+                                                                value="ondeck" id="test2" name="lender_type"
+                                                                (change)="checkBoxColor($any($event.target).value)">
+                                                            <label for="test2">
+                                                                <div class="radio-before"></div>On Deck API<div
+                                                                    class="radio-after"
+                                                                    [ngStyle]="{'background-color':colorCheckbox2?color:'','border-color':colorCheckbox2?color:''}">
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <input *ngIf="lead.is_freeze != 0" class="cursor-not-allowed"  onclick="return false;"  formControlName="lender_type" value="kapitus"
+                                                            type="radio" id="test3" name="lender_type">
+                                                            
+                                                            <input *ngIf="lead.is_freeze == 0"  formControlName="lender_type" value="kapitus"
+                                                                type="radio" id="test3" name="lender_type"
+                                                                (change)="checkBoxColor($any($event.target).value)">
+                                                            <label for="test3">
+                                                                <div class="radio-before"></div>Kapitus<div
+                                                                    class="radio-after"
+                                                                    [ngStyle]="{'background-color':colorCheckbox3?color:'','border-color':colorCheckbox3?color:''}">
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                              <label>Bussiness State</label>
+                                              <!-- <input readonly  formControlName="state_id" type="text"
+                                              placeholder="Enter state" class="form-control" /> -->
+                                              <select [attr.disabled]="'disabled'" formControlName="state_id" class="form-control">
+                                                <option value="">--Bussiness State Has Not Been Selected Yet--</option>
+                                                <option *ngFor="let state of statesList" [value]="state.id">
+                                                  {{ state.name }}
+                                                </option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="lender-sbumission-outer"
+                                    [ngStyle]="{'display': isBasicForm ? 'none':  'block'}">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="lender-listing">
+                                                <div class="list-title">
+                                                    <span class="accordion-head-title">Lenders:</span>
+                                                </div>
+                                                <ng-select *ngIf="lead.is_freeze == 0"  [items]="lendersList" [closeOnSelect]="false"
+                                                [disabled]="false"   [multiple]="true" bindLabel="name" [virtualScroll]="true"
+                                                    bindValue="id" formControlName="lenders"
+                                                    placeholder="Select lenders">
+                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                        let-index="index">
+
+                                                        <input id="item-{{ index }}" type="checkbox"
+                                                            [checked]="item$.selected" [value]="item.id" />
+
+                                                        {{ item.name }}
+
+                                                    </ng-template>
+
+
+                                                </ng-select>
+                                                <ng-select  *ngIf="lead.is_freeze != 0"  [items]="lendersList" [closeOnSelect]="false"
+                                                [disabled]="true" [multiple]="true" bindLabel="name" [virtualScroll]="true"
+                                                bindValue="id" formControlName="lenders"
+                                                placeholder="Select lenders">
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                    let-index="index">
+
+                                                    <input id="item-{{ index }}" type="checkbox"
+                                                        [checked]="item$.selected" [value]="item.id" />
+
+                                                    {{ item.name }}
+
+                                                </ng-template>
+
+
+                                            </ng-select>
+                                                <div class="invalid-input"
+                                                    *ngIf="l.lenders.errors && l.lenders.touched">
+                                                    <div *ngIf="l.lenders.errors.required">
+                                                        Lender is required
+                                                    </div>
+                                                </div>
+                                                <!-- <ul>
+                                                    <li class="lender-list-item"><span>{{ companyName }}</span></li>
+                                                </ul> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="document-listing">
+                                                <div class="list-title">
+                                                    <span *ngIf="!documentcheckbox"
+                                                        class="accordion-head-title">Documents:(last 90 days):</span>
+                                                    <span *ngIf="documentcheckbox"
+                                                        class="accordion-head-title">Documents:</span>
+                                                    <div class="form-group mb-2">
+                                                        <div class="form-check">
+                                                            <input *ngIf="lead.is_freeze != 0"  onclick="return false;" 
+                                                            [ngStyle]="{'background-color':documentcheckbox?color:'', 'border-color':documentcheckbox?color:''}"
+                                                           type="checkbox"
+                                                            class="form-check-input cursor-not-allowed showall"
+                                                            id="check1" name="option1" value="something">
+
+                                                            <input *ngIf="lead.is_freeze == 0"
+                                                                [ngStyle]="{'background-color':documentcheckbox?color:'', 'border-color':documentcheckbox?color:''}"
+                                                                (change)="getshowAllDocuments($event)" type="checkbox"
+                                                                class="form-check-input cursor-pointer showall"
+                                                                id="check1" name="option1" value="something">
+                                                            <label class="form-check-label cursor-pointer"
+                                                                for="check1">Show All</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-select *ngIf="lead.is_freeze == 0" [items]="docsList" [closeOnSelect]="false" [multiple]="true"
+                                                [disabled]="false" bindLabel="document_name" [virtualScroll]="true"
+                                                    bindValue="document_id" formControlName="documents"
+                                                    placeholder="Select documents">
+                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                        let-index="index">
+                                                        <div class="chkbox">
+                                                            <input class="cm-checkbox" id="item-{{ index }}"
+                                                                type="checkbox" [checked]="item$.selected"
+                                                                [value]="item.document_id" />
+
+                                                            <div class="doc-outer docs-outer">
+                                                                <li class="doc-list">
+                                                                    <div class="doc-list-inner">
+                                                                        <!-- <div class="file-image" [ngSwitch]="item.mime">
+                                                                        <img *ngSwitchCase="'text/plain'"
+                                                                            src="assets/images/txt-file.svg"
+                                                                            alt="image">
+                                                                        <img *ngSwitchCase="'application/pdf'"
+                                                                            src="assets/images/pdf.svg" alt="image">
+                                                                        <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                                                            src="assets/images/microsoft-excel.svg"
+                                                                            alt="image">
+                                                                        <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                            src="assets/images/doc-icon.svg"
+                                                                            alt="image">
+                                                                        <img *ngSwitchDefault
+                                                                            src="assets/images/other.svg" alt="image">
+                                                                    </div> -->
+                                                                        <div class="file-content">
+                                                                            <p class="file-text">
+                                                                                {{getChangeDocName(item.document_type)}}({{item.document_name}})
+                                                                            </p>
+                                                                            <!-- <span class="kb-text">{{ item.document_size |
+                                                                            filesize }}</span> -->
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </div>
+                                                        </div>
+
+                                                    </ng-template>
+
+
+                                                </ng-select>
+                                                <ng-select [items]="docsList"  *ngIf="lead.is_freeze != 0" [closeOnSelect]="false" [multiple]="true"
+                                                [disabled]="true"  bindLabel="document_name" [virtualScroll]="true"
+                                                bindValue="document_id" formControlName="documents"
+                                                placeholder="Select documents">
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                    let-index="index">
+                                                    <div class="chkbox">
+                                                        <input class="cm-checkbox" id="item-{{ index }}"
+                                                            type="checkbox" [checked]="item$.selected"
+                                                            [value]="item.document_id" />
+
+                                                        <div class="doc-outer docs-outer">
+                                                            <li class="doc-list">
+                                                                <div class="doc-list-inner">
+                                                                    <!-- <div class="file-image" [ngSwitch]="item.mime">
+                                                                    <img *ngSwitchCase="'text/plain'"
+                                                                        src="assets/images/txt-file.svg"
+                                                                        alt="image">
+                                                                    <img *ngSwitchCase="'application/pdf'"
+                                                                        src="assets/images/pdf.svg" alt="image">
+                                                                    <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                                                        src="assets/images/microsoft-excel.svg"
+                                                                        alt="image">
+                                                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                        src="assets/images/doc-icon.svg"
+                                                                        alt="image">
+                                                                    <img *ngSwitchDefault
+                                                                        src="assets/images/other.svg" alt="image">
+                                                                </div> -->
+                                                                    <div class="file-content">
+                                                                        <p class="file-text">
+                                                                            {{getChangeDocName(item.document_type)}}({{item.document_name}})
+                                                                        </p>
+                                                                        <!-- <span class="kb-text">{{ item.document_size |
+                                                                        filesize }}</span> -->
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </div>
+
+                                                </ng-template>
+
+
+                                            </ng-select>
+                                                <div class="invalid-input"
+                                                    *ngIf="l.documents.errors && l.documents.touched">
+                                                    <div *ngIf="l.documents.errors.required">
+                                                        Document is required
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="doc-outer docs-outer"> 
+                                                    <ul>
+                                                        <li *ngFor="let doc of docsList" class="doc-list">
+                                                            <div class="doc-list-inner">
+                                                                <div class="file-image" [ngSwitch]="doc.mime">
+                                                                    <img *ngSwitchCase="'text/plain'"
+                                                                        src="assets/images/txt-file.svg" alt="image">
+                                                                    <img *ngSwitchCase="'application/pdf'"
+                                                                        src="assets/images/pdf.svg" alt="image">
+                                                                    <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                                                        src="assets/images/microsoft-excel.svg"
+                                                                        alt="image">
+                                                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                        src="assets/images/doc-icon.svg" alt="image">
+                                                                    <img *ngSwitchDefault src="assets/images/other.svg"
+                                                                        alt="image">
+                                                                </div>
+                                                                <div class="file-content">
+                                                                    <p class="file-text">{{ doc.document_name }}</p>
+                                                                    <span class="kb-text">{{ doc.document_size |
+                                                                        filesize }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-3">
+                                            <div class="lender-notes-inner">
+                                                <div class="list-title">
+                                                    <span class="accordion-head-title">Placeholder for lender
+                                                        notes:</span>
+                                                </div>
+                                                <div class="doc-outer">
+                                                    <select formControlName="placeholder_lender_notes"
+                                                        class="custom-select-lead" multiple="multiple">
+                                                        <option class="option" value="__CUSTOMER_COMPANY__">
+                                                            __CUSTOMER_COMPANY__ =&gt;
+                                                            Customer Company Name</option>
+                                                        <option class="option" value="__CUSTOMER_DETAIL_URL__">
+                                                            __CUSTOMER_DETAIL_URL__
+                                                            =&gt; Customer Detail URL</option>
+                                                        <option class="option" value="__CUSTOMER_DETAIL_URL_1__">
+                                                            __CUSTOMER_DETAIL_URL_1__ =&gt; Apply Now</option>
+                                                        <option class="option" value="__CUSTOMER_DETAIL_URL_2__">
+                                                            __CUSTOMER_DETAIL_URL_2__ =&gt; Learn More</option>
+                                                        <option class="option" value="__DATE__">__DATE__ =&gt; Current
+                                                            Date</option>
+                                                        <option class="option" value="__DBA__">__DBA__ =&gt; Doing
+                                                            Business As</option>
+                                                        <option class="option" value="__EMAIL__">__EMAIL__ =&gt;
+                                                            Customer Email Address
+                                                        </option>
+                                                        <option class="option" value="__LEAD_FIRST_NAME__">
+                                                            __LEAD_FIRST_NAME__ =&gt;
+                                                            Customer First Name</option>
+                                                        <option class="option" value="__LEAD_LAST_NAME__">
+                                                            __LEAD_LAST_NAME__ =&gt;
+                                                            Customer Last Name</option>
+                                                        <option class="option" value="__NAME__">__NAME__ =&gt; Customer
+                                                            Name</option>
+                                                        <option class="option" value="__PHONE__">__PHONE__ =&gt;
+                                                            Customer Phone Number
+                                                        </option>
+
+                                                    </select>
+                                                    <div class="invalid-input"
+                                                        *ngIf="lenderForm.controls.placeholder_lender_notes.errors && lenderForm.controls.placeholder_lender_notes.touched">
+                                                        <div *ngIf="lenderForm.controls.placeholder_lender_notes.errors.required">
+                                                            Placeholder for lender notes is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-3">
+                                            <div class="custom-notes">
+                                                <div class="list-title">
+                                                    <span class="accordion-head-title">Custom Notes (Optional):</span>
+                                                </div>
+                                                <div class="doc-outer">
+                                                    <div class="optional-textarea">
+                                                        <textarea [readonly]="lead.is_freeze != 0" formControlName="custom_note" name="" id=""
+                                                            class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="invalid-input"
+                                                        *ngIf="l.custom_note.errors && l.custom_note.touched">
+                                                        <div *ngIf="l.custom_note.errors.pattern">
+                                                            Invalid Custom note
+                                                        </div>
+                                                        <div *ngIf="l.custom_note.errors.maxlength">
+                                                            Maximum 1000 characters allowed
+                                                        </div>
+                                                        <div *ngIf="l.custom_note.errors.minlength">
+                                                            Custom note must be minimum 3 characters long
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="custom-dropdown">
+                                                    <div class="list-title">
+                                                        <span class="accordion-head-title">Custom notes
+                                                            (optional):</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select formControlName="submission_through"
+                                                            class="form-control submission" name="" id="">
+                                                            <option value="SUBMISSION">SUBMISSION EMAIL</option>
+                                                            <option value="BM">BRANCH MANAGER EMAIL</option>
+                                                            <option value="UW">UNDERWRITING EMAIL</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="custom-notes">
+                                                <div class="custom-dropdown">
+                                                    <div class="list-title">
+                                                        <span class="accordion-head-title">Send Submission From</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select formControlName="submission_through"
+                                                            class="form-control submission" name="" id="">
+                                                            <option value="SUBMISSION">SUBMISSION EMAIL</option>
+                                                            <option value="BM">BRANCH MANAGER EMAIL</option>
+                                                            <option value="UW">UNDERWRITING EMAIL</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+                    <div class="lead-submit-btn">
+                        <a *ngIf="isBasicForm" (click)="basicFormSubmit()" [ngStyle]="background"
+                            class="theme-btn cursor-pointer">
+                            <span class="">Next</span>
+                            <span class="btn-icon btn-right-icon">
+                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                        fill="white"></path>
+                                </svg>
+                            </span>
+                        </a>
+                        <a *ngIf="!isBasicForm" class="theme-btn" [ngStyle]="background">
+                            <span  [ngClass]="{'cursor-not-allowed': lead.is_freeze != 0 , 'cursor-pointer': lead.is_freeze == 0}"
+                            (click)="lead.is_freeze == 0 ? finalSubmission() : null">Submit</span>
+                            <span class="btn-icon btn-right-icon">
+                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                        fill="white"></path>
+                                </svg>
+                            </span>
+                        </a>
+                        <!-- <a *ngIf="!isBasicForm" routerLink="../../lead-detail/{{leadID}}"
+                            class="theme-btn white-btn cursor-pointer">
+                            <span class="">Cancel</span>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

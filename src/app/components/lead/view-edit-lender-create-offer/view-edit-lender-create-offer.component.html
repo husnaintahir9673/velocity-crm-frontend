@@ -1,0 +1,363 @@
+<main class="dashboard-wrapper email-template-builder">
+	<div class="container">
+		<div class="craete-lead-wrapper">
+			<div class="page-header">
+				<!-- <h3 class="page-title">
+                    <span>
+                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                fill="#565D80" />
+                        </svg>
+
+                    </span> {{ editMode ? 'Edit': 'View' }} Lender Offer
+                </h3> -->
+				<ul class="breadcrumb">
+					<li class="left-icon cursor-pointer" routerLink="/{{userBaseRoute}}/lead-detail/{{ leadID }}">
+						<span>
+							<svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+									fill="#565D80"></path>
+							</svg>
+						</span>
+					</li>
+					<li class="cursor-pointer" routerLink="/{{userBaseRoute}}/leads">
+						<span>All Leads</span>/
+					</li>
+					<li class="cursor-pointer" routerLink="/{{userBaseRoute}}/lead-detail/{{ leadID }}">
+						<span class="active-page"> Lead Details <span class="active-page" *ngIf="lead.lead_id">( {{
+								lead.lead_id }}, {{lead?.company_name}}, DBA - {{lead?.lead_doing_business_as}}
+								)</span></span>/
+					</li>
+					<li>
+						<span class="active-page">{{ editMode ? 'View & Edit': 'View' }} Lender Offer</span>
+					</li>
+				</ul>
+
+			</div>
+			<app-all-detail-lead [leadId]="leadID" (leadDetails)="getLeadBasicDetails($event)"></app-all-detail-lead>
+			<ul class="lead-view-btn justify-content-end">
+				<li>
+					<a (click)="editMode = !editMode" *ngIf="!editMode && canEditLenderOffer" class="cursor-pointer">
+						<span>
+							<svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+									[ngStyle]="style" fill="#FA5440" />
+							</svg>
+
+						</span> Edit
+					</a>
+				</li>
+				<!-- <li>
+					<a (click)="cancel()" *ngIf="editMode" class="cursor-pointer">
+						<span>
+							<svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+									fill="#C9624C" />
+								<path
+									d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+									fill="#C9624C" />
+							</svg>
+
+						</span> Cancel
+					</a>
+				</li> -->
+			</ul>
+			<div class="create-lead-content">
+				<div class="full-view">
+					<!-- <div class="full-view-heading">
+					<span>{{ editMode ? 'Edit': 'View' }} Lender Offer</span>
+				</div> -->
+					<div class="accordion-item">
+						<a class="accordion-head" data-bs-toggle="collapse">
+							<span class="accordion-head-title">{{ editMode ? 'View & Edit': 'View' }} Lender
+								Offer</span>
+						</a>
+						<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+							<div class="accordion-body">
+								<div class="tab-content verification-tabs">
+
+									<div class="tabs">
+										<div class="detail_tab-inner">
+											<form [formGroup]="createForm">
+												<div class="row">
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Lender Name*</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="lender_id" class="form-control" name=""
+																id="">
+																<option value="">Select lender</option>
+																<option *ngFor="let lender of lenderList"
+																	[value]="lender.id">
+																	{{lender.name}}
+																</option>
+															</select>
+															<div class="invalid-input"
+																*ngIf="f.lender_id.errors && f.lender_id.touched">
+																<div *ngIf="f.lender_id.errors.required">
+																	Lender name is required
+																</div>
+																<div *ngIf="f.lender_id.errors.pattern">
+																	Invalid lender name
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Funding Amount($)*</label>
+															<input thousandSeparator="," mask="separator.2"
+																[readonly]="!editMode"
+																(change)="fundingAmount($any($event.target).value)"
+																formControlName="funding_amount" type="text"
+																class="form-control" placeholder="Enter funding amount">
+															<div class="invalid-input"
+																*ngIf="f.funding_amount.errors && f.funding_amount.touched">
+																<div *ngIf="f.funding_amount.errors.required">
+																	Funding amount is required
+																</div>
+																<div *ngIf="f.funding_amount.errors.pattern">
+																	Invalid funding amount
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Buy Rate*</label>
+															<input [readonly]="!editMode"
+																(change)="buyrate($any($event.target).value)"
+																formControlName="buy_rate" type="text"
+																class="form-control" placeholder="Enter buy rate">
+															<div class="invalid-input"
+																*ngIf="f.buy_rate.errors && f.buy_rate.touched">
+																<div *ngIf="f.buy_rate.errors.required">
+																	Buy rate is required
+																</div>
+																<div *ngIf="f.buy_rate.errors.pattern">
+																	Invalid buy rate
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Sell Rate*</label>
+															<input [readonly]="!editMode"
+																(change)="sellrate($any($event.target).value)"
+																formControlName="sell_rate" type="text"
+																class="form-control" placeholder="Enter sell rate">
+															<div class="invalid-input"
+																*ngIf="f.sell_rate.errors && f.sell_rate.touched">
+																<div *ngIf="f.sell_rate.errors.required">
+																	Sell rate is required
+																</div>
+																<div *ngIf="f.sell_rate.errors.pattern">
+																	Invalid sell rate
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>RTR($)*</label>
+															<!-- [readonly]="!editMode" -->
+															<input readonly formControlName="rtr" mask="separator.2"
+																thousandSeparator="," type="text" class="form-control"
+																placeholder="Enter RTR">
+															<div class="invalid-input"
+																*ngIf="f.rtr.errors && f.rtr.touched">
+																<div *ngIf="f.rtr.errors.required">
+																	Rtr is required
+																</div>
+																<div *ngIf="f.rtr.errors.pattern">
+																	Invalid rtr
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Payment Type</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="payment_type" class="form-control"
+																name="" id="" (change)="getpaymentData()">
+																<option value="">Select payment type</option>
+																<option *ngFor="let type of preFundAdvancetype"
+																	[value]="type.id">
+																	{{ type.name }}
+																</option>
+															</select>
+														</div>
+													</div>
+													<!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Payment Type</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="payment_type" class="form-control"
+																name="" id="" (change)="getpaymentData()">
+																<option value="">Select payment type</option>
+																<option value="daily">Daily</option>
+																<option value="weekly">Weekly
+																</option>
+																<option value="bi-weekly">Bi-Weekly
+																</option>
+																<option value="monthly">Monthly
+																</option>
+															</select>
+														</div>
+													</div> -->
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Term In {{termLables}}*</label>
+															<input [readonly]="!editMode"
+																(change)="getPayment($any($event.target).value)"
+																formControlName="term_in_days" type="text"
+																class="form-control"
+																placeholder="Enter term in {{termLables | lowercase}">
+															<div class="invalid-input"
+																*ngIf="f.term_in_days.errors && f.term_in_days.touched">
+																<div *ngIf="f.term_in_days.errors.required">
+																	Term in {{termLables | lowercase}} is required
+																</div>
+																<div *ngIf="f.term_in_days.errors.pattern">
+																	Invalid term in {{termLables | lowercase}}
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Payment($)*</label>
+															<input [readonly]="!editMode" formControlName="payment"
+																mask="separator.2" thousandSeparator="," type="text"
+																class="form-control" placeholder="Enter payment"
+																(change)="getTermDays()">
+															<div class="invalid-input"
+																*ngIf="f.payment.errors && f.payment.touched">
+																<div *ngIf="f.payment.errors.required">
+																	Payment is required
+																</div>
+																<div *ngIf="f.payment.errors.pattern">
+																	Invalid payment
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Position</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="position" class="form-control" name=""
+																id="">
+																<option value="">Select position</option>
+																<option *ngFor="let type of preFundUnittype"
+																	[value]="type.id">
+																	{{ type.name }}
+																</option>
+															</select>
+														</div>
+													</div>
+													<!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Position</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="position" class="form-control" name=""
+																id="">
+																<option value="">Select position</option>
+																<option value="1">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+																<option value="6">6</option>
+																<option value="7">7</option>
+																<option value="8">8</option>
+																<option value="9">9</option>
+																<option value="10">10</option>
+															</select>
+
+														</div>
+													</div> -->
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="form-group">
+															<label>Funded/Rejected</label>
+															<select [attr.disabled]="editMode ? null: 'disabled'"
+																formControlName="funded_rejected" class="form-control"
+																name="" id="" (change)="getFundValue()">
+																<option value="">Select</option>
+																<option value="funded">Funded</option>
+																<option value="rejected">Rejected
+																</option>
+															</select>
+
+														</div>
+													</div>
+													<div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+														<div class="mark-completed">
+															<div class="form-check">
+																<input *ngIf="!editMode"
+																	[ngStyle]="{'background-color':conditionCheck?color:''}"
+																	onclick="return false;"
+																	formControlName="apply_to_function"
+																	class="form-check-input" type="checkbox" value=""
+																	id="flexCheckChecked">
+																<input *ngIf="editMode"
+																	[ngStyle]="{'background-color':conditionCheck?color:''}"
+																	formControlName="apply_to_function"
+																	class="form-check-input" type="checkbox" value=""
+																	id="flexCheckChecked" (change)="getCheckedFund()">
+																<label class="form-check-label"
+																	for="flexCheckChecked">Apply to funding records
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<div *ngIf="editMode" class="lead-submit-btn">
+												<a (click)="addCreateLenderOffer()" [ngStyle]="background"
+													class="theme-btn cursor-pointer">
+													<span class="">Submit</span>
+													<span class="btn-icon btn-right-icon">
+														<svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+															xmlns="http://www.w3.org/2000/svg">
+															<path
+																d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+																fill="white"></path>
+														</svg>
+													</span>
+												</a>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+								<!-- <div class="send-submission-data">
+						<div class="creating-contract-page">
+							<div class="tab-inner-box">
+								<div class="tab-wrapper">
+								
+							
+								</div>
+							</div>
+						</div>
+					</div> -->
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

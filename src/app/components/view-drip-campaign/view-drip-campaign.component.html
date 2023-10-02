@@ -1,0 +1,1451 @@
+<main class="dashboard-wrapper">
+    <div class="drip-campaign-content">
+        <div class="breadcrumb-drip-campaign">
+            <div class="container">
+                <!-- <div class="page-header">
+                    <h3 class="page-title cursor-pointer" routerLink="/{{userBaseRoute}}/drip-campaign-list">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80" />
+                            </svg>
+    
+                        </span> {{ dripCampaignDeleteStatus || !editMode ? 'View' : 'Edit'}} Drip
+                        Campaign
+                    </h3>
+              
+                </div> -->
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/drip-campaign-list">Drip Campaign
+                            List</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">{{ dripCampaignDeleteStatus || !editMode ? 'View' : 'Edit'}} Drip
+                            Campaign</span>
+                    </li>
+                </ul>
+                <ul class="lead-view-btn"
+                    *ngIf="!dripCampaignDeleteStatus && activeTab == 'Actions' || !dripCampaignDeleteStatus && activeTab == 'Settings'">
+                    <li>
+                        <a (click)="edit()" [ngStyle]="background" *ngIf="!editMode" class="cursor-pointer">
+                            <span>
+                                <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                        fill="#FA5440" />
+                                </svg>
+
+                            </span> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="cancel()" [ngStyle]="background" *ngIf="editMode" class="cursor-pointer">
+                            <span>
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                                        fill="#C9624C" />
+                                    <path
+                                        d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                                        fill="#C9624C" />
+                                </svg>
+
+                            </span> Cancel
+                        </a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+        <div class="top-header-outer">
+
+            <ul [(activeId)]="activeTab" ngbNav #nav="ngbNav">
+                <li [ngbNavItem]="'Actions'" [ngClass]="{ 'active': activeTab == 'Actions' }">
+                    <a ngbNavLink>
+                        <span>
+                            Actions
+                        </span>
+                    </a>
+
+                    <ng-template ngbNavContent>
+                        <!-- <div class="delet-badges" *ngIf="dripCampaignDeleteStatus">
+                            <span><img src="assets/images/delete.svg" alt="/icon">Deleted Drip Campaign</span>
+                        </div> -->
+                        <div class="container">
+                            <div class="campaign-outer" *ngIf="!campaignSteps.length else campaign">
+                                <div class="setup-trigger-outer">
+                                    <!-- <span class="header-title-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License)<path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg></span> -->
+                                    <div class="header">
+                                        Campaign trigger({{dripCampaignName}})
+                                        <!-- <a *ngIf="dripCampaignDeleteStatus" class="edit-icon" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License)<path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg></a> -->
+                                        <a *ngIf="!dripCampaignDeleteStatus && editMode"
+                                            (click)="openModal(dripCampaign)" class="edit-icon"><svg
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                <path
+                                                    d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                            </svg></a>
+                                    </div>
+                                    <div class="body">
+                                        <p>
+                                            Choose the trigger
+                                        </p>
+                                        <button class="theme-btn" [ngStyle]="background"
+                                            (click)="popUps.statusPopup = true;">Set up
+                                            trigger</button>
+                                    </div>
+
+                                </div>
+                                <div class="end-outer">
+                                    <div class="liner">
+
+                                    </div>
+                                    <button *ngIf="dripCampaignDeleteStatus || !editMode" class="add-btn">
+                                        +
+                                    </button>
+                                    <button *ngIf="!dripCampaignDeleteStatus && editMode" (click)="openActionsModel()"
+                                        class="add-btn">
+                                        +
+                                    </button>
+                                    <div class="liner">
+
+                                    </div>
+                                    <button *ngIf="!dripCampaignDeleteStatus && editMode" (click)="onEndClick()"
+                                        class="end-btn" [ngStyle]="{'border-color':color,'color':color}">End</button>
+                                    <button *ngIf="dripCampaignDeleteStatus || !editMode" class="end-btn"
+                                        [ngStyle]="{'border-color':color,'color':color}">End</button>
+                                </div>
+
+
+                                <!-- <div class="end-outer">
+                                    <div class="liner">
+                    
+                                    </div>
+                                    <button class="add-btn rotate">
+                                        <span>
+                                            +
+                                        </span>
+                                        
+                                    </button>
+                                    <div class="liner">
+                    
+                                    </div>
+                                    <div class="new-action">
+                                        <span>New Action</span>
+                                    </div>
+                                    <div class="liner">
+                    
+                                    </div>
+                                    <button class="end-btn">End</button>
+                                </div> -->
+                            </div>
+                            <ng-template #campaign>
+                                <div class="campaign-outer" *ngIf="dripCampaignDeleteStatus  || !editMode">
+                                    <ng-container *ngFor="let camp of campaignSteps; let i = index">
+                                        <div class="setup-trigger-outer">
+                                            <div class="header" *ngIf="i==0">
+                                                {{ camp.header_text }}({{dripCampaignName}})
+                                                <a *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                    (click)="openModal(dripCampaign)" class="edit-icon"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                        <path
+                                                            d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                    </svg></a>
+                                            </div>
+                                            <div class="header" *ngIf="i>0" [ngClass]="{'green-color': i%2 !== 0}">
+                                                {{ camp.header_text }}
+                                                <div *ngIf="i>0 && !dripCampaignDeleteStatus  && editMode"
+                                                    class="header-cross-btn">
+                                                    <button (click)="removeStep(i)" class="btn-close"></button>
+                                                </div>
+                                                <!-- <div *ngIf="i>0 && dripCampaignDeleteStatus" class="header-cross-btn">
+                                                    <button class="btn-close"></button>
+                                                </div> -->
+                                            </div>
+                                            <div class="body">
+                                                <ng-container [ngSwitch]="camp.type">
+                                                    <div *ngSwitchCase="steps.TRIGGER">
+                                                        <p *ngIf="!dripCampaignDeleteStatus  && editMode">
+                                                            Lead status is any of {{ camp.data.status_name }}<a
+                                                                (click)="popUps.statusPopup = true;"
+                                                                class="edit-icon"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 512 512">
+                                                                    <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                                    <path
+                                                                        d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                                </svg></a>
+                                                        </p>
+                                                        <p *ngIf="dripCampaignDeleteStatus || !editMode">
+                                                            Lead status is any of {{ camp.data.status_name }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.TIME_DELAY">
+                                                        <p>
+                                                            {{ camp.data.timeText }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.SEND_EMAIL">
+                                                        <p>
+                                                            {{ camp.data.templateText }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.SET_PROPERTY_VALUE">
+                                                        <p>
+                                                            Set Lead status to {{ camp.data.status_name }}
+                                                        </p>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                        <div class="end-outer" *ngIf="i < (campaignSteps.length - 1)">
+                                            <div class="liner">
+
+                                            </div>
+                                            <button *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                (click)="addOnAIndex = i;openActionsModel()" class="add-btn">
+                                                +
+                                            </button>
+                                            <button *ngIf="dripCampaignDeleteStatus || !editMode" class="add-btn">
+                                                +
+                                            </button>
+                                            <div class="liner">
+
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                    <div class="end-outer">
+                                        <div class="liner">
+
+                                        </div>
+                                        <button *ngIf="!dripCampaignDeleteStatus  && editMode"
+                                            (click)="addOnAIndex = null;openActionsModel()" class="add-btn">
+                                            +
+                                        </button>
+                                        <button *ngIf="dripCampaignDeleteStatus || !editMode" class="add-btn">
+                                            +
+                                        </button>
+                                        <div class="liner">
+
+                                        </div>
+                                        <button *ngIf="!dripCampaignDeleteStatus && editMode" (click)="onEndClick()"
+                                            class="end-btn"
+                                            [ngStyle]="{'border-color':color,'color':color}">End</button>
+                                        <button *ngIf="dripCampaignDeleteStatus || !editMode" class="end-btn"
+                                            [ngStyle]="{'border-color':color,'color':color}">End</button>
+                                    </div>
+                                </div>
+                                <div class="campaign-outer" *ngIf="!dripCampaignDeleteStatus  && editMode">
+                                    <ng-container *ngFor="let camp of campaignSteps; let i = index">
+                                        <div class="setup-trigger-outer" [ngClass]="{ 'grabbable': i>0 }" dndDropzone
+                                            (dndDragover)="onDragover($event, i)"
+                                            (dndDrop)="onDrop($event, campaignSteps)" [dndDraggable]="camp"
+                                            [dndEffectAllowed]="draggable.effectAllowed"
+                                            [dndDisableIf]="draggable.disable" (dndStart)="onDragStart($event, i, camp)"
+                                            (dndCopied)="onDraggableMoved($event,camp, campaignSteps, 'copy', i)"
+                                            (dndEnd)="onDragEnd($event,campaignSteps)">
+                                            <!-- (dndLinked)="onDraggableMoved($event,camp, campaignSteps, 'link', i)"
+                                        (dndCanceled)="onDraggableMoved($event, camp, campaignSteps, 'none', i)"
+                                        (dndMoved)="onDraggableMoved($event, camp, campaignSteps, 'move', i)"   -->
+                                            <!-- <div *ngIf="i==0" class="setup-trigger-outer">
+                                             -->
+
+                                            <div class="header" *ngIf="i==0">
+                                                {{ camp.header_text }}({{dripCampaignName}})
+                                                <a *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                    (click)="openModal(dripCampaign)" class="edit-icon"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                        <path
+                                                            d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                    </svg></a>
+                                            </div>
+                                            <div class="header" *ngIf="i>0" [ngClass]="{'green-color': i%2 !== 0}">
+                                                {{ camp.header_text }}
+                                                <div *ngIf="i>0 && !dripCampaignDeleteStatus  && editMode"
+                                                    class="header-cross-btn">
+                                                    <button (click)="removeStep(i)" class="btn-close"></button>
+                                                </div>
+                                                <!-- <div *ngIf="i>0 && dripCampaignDeleteStatus" class="header-cross-btn">
+                                                    <button class="btn-close"></button>
+                                                </div> -->
+                                            </div>
+                                            <div class="body">
+                                                <ng-container [ngSwitch]="camp.type">
+                                                    <div *ngSwitchCase="steps.TRIGGER">
+                                                        <p *ngIf="!dripCampaignDeleteStatus  && editMode">
+                                                            Lead status is any of {{ camp.data.status_name }}<a
+                                                                (click)="popUps.statusPopup = true;"
+                                                                class="edit-icon"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 512 512">
+                                                                    <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                                    <path
+                                                                        d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                                </svg></a>
+                                                        </p>
+                                                        <p *ngIf="dripCampaignDeleteStatus || !editMode">
+                                                            Lead status is any of {{ camp.data.status_name }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.TIME_DELAY">
+                                                        <p>
+                                                            {{ camp.data.timeText }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.SEND_EMAIL">
+                                                        <p>
+                                                            {{ camp.data.templateText }}
+                                                        </p>
+                                                    </div>
+                                                    <div *ngSwitchCase="steps.SET_PROPERTY_VALUE">
+                                                        <p>
+                                                            Set Lead status to {{ camp.data.status_name }}
+                                                        </p>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                        <div class="end-outer" *ngIf="i < (campaignSteps.length - 1)">
+                                            <div class="liner">
+
+                                            </div>
+                                            <button *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                (click)="addOnAIndex = i;openActionsModel()" class="add-btn">
+                                                +
+                                            </button>
+                                            <button *ngIf="dripCampaignDeleteStatus || !editMode" class="add-btn">
+                                                +
+                                            </button>
+                                            <div class="liner">
+
+                                            </div>
+                                        </div>
+                                    </ng-container>
+
+                                    <div class="end-outer">
+                                        <div class="liner">
+
+                                        </div>
+                                        <button *ngIf="!dripCampaignDeleteStatus  && editMode"
+                                            (click)="addOnAIndex = null;openActionsModel()" class="add-btn">
+                                            +
+                                        </button>
+                                        <button *ngIf="dripCampaignDeleteStatus || !editMode" class="add-btn">
+                                            +
+                                        </button>
+                                        <div class="liner">
+
+                                        </div>
+                                        <button *ngIf="!dripCampaignDeleteStatus && editMode"
+                                            [ngStyle]="{'border-color':color,'color':color}" (click)="onEndClick()"
+                                            class="end-btn">End</button>
+                                        <button *ngIf="dripCampaignDeleteStatus || !editMode" class="end-btn"
+                                            [ngStyle]="{'border-color':color,'color':color}">End</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                        <!-- trigger popup -->
+                        <div class="modal-right" [ngClass]="{'active': popUps.statusPopup}">
+                            <div class="lead-status" [formGroup]="leadStatusForm">
+                                <div class="header">
+                                    Campaign Trigger
+                                </div>
+                                <div class="select-type">
+                                    <div class="select-type">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="radio-btns">
+                                                    <div class="form-check">
+                                                        <input type="radio"
+                                                            (change)="selectType($any($event.target).value)"
+                                                            formControlName="status_type"
+                                                            class="form-check-input cursor-pointer" id="text"
+                                                            name="status_type" value="from_status"
+                                                            [ngStyle]="{'background-color':leadStatusForm.value.status_type == 'from_status'?color:'','border-color':leadStatusForm.value.status_type == 'from_status'?color:''}" />
+                                                        <label class="form-check-label cursor-pointer" for="text">Select
+                                                            from status</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio"
+                                                            (change)="selectType($any($event.target).value)"
+                                                            formControlName="status_type"
+                                                            class="form-check-input cursor-pointer" id="email"
+                                                            name="status_type" value="from_list"
+                                                            [ngStyle]="{'background-color':leadStatusForm.value.status_type == 'from_list'?color:'','border-color':leadStatusForm.value.status_type == 'from_list'?color:''}" />
+                                                        <label class="form-check-label cursor-pointer"
+                                                            for="email">Select from
+                                                            list</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="condition" *ngIf="leadStatusForm.value.status_type == 'from_list'">
+                                        <!--  -->
+                                        <div class="select-template">
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>List</label>
+                                                        <ng-select formControlName="list" name="status"
+                                                            placeholder="Select List" appearance="outline"
+                                                            labelForId="elead" (change)="showActiveStatic($event)">
+                                                            <ng-option [value]="list" *ngFor="let list of listingList">
+                                                                {{ list.name }}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <!-- Active({{list.active_count}}) , Static({{list.static_count}}) -->
+                                                        <!-- <ng-select formControlName="list" bindValue="id"
+                                                        [items]="listingList" bindLabel="name "
+                                                        placeholder="Select list">
+                                                    </ng-select> -->
+                                                        <div class="invalid-input"
+                                                            *ngIf="control.list.errors && control.list.touched">
+                                                            <div *ngIf="control.list.errors.required">
+                                                                List is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="condition" *ngIf="activeStaticList">
+                                        <div class="col-md-12">
+                                            <div class="radio-btns">
+                                                <div class="form-check">
+                                                    <input type="radio"
+                                                        formControlName="select_list"
+                                                        class="form-check-input cursor-pointer" id="text"
+                                                        name="select_list" value="active_list" />
+                                                    <label class="form-check-label cursor-pointer"
+                                                        for="text">Active List
+                                                        </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio"
+                                                        formControlName="select_list"
+                                                        class="form-check-input cursor-pointer" id="email"
+                                                        name="select_list" value="static_list" />
+                                                    <label class="form-check-label cursor-pointer"
+                                                        for="email">Static List</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div> -->
+
+
+                                            </div>
+                                        </div>
+
+                                        <!--  -->
+
+
+                                    </div>
+                                </div>
+                                <div class="condition" *ngIf="leadStatusForm.value.status_type == 'from_status'">
+                                    <div class="body">
+                                        <div class="form-group">
+                                            <label>Lead Status</label>
+                                          <ng-select
+                                            [items]="leadStatusList"
+                                            [multiple]="true"
+                                            bindLabel="name"
+                                            [closeOnSelect]="false"
+                                            [virtualScroll]="true"
+                                            bindValue="id"
+                                            formControlName="lead_status"
+                                            placeholder="Select"
+                                            [loading]="loading"
+                                          >
+                                            <ng-template
+                                              ng-option-tmp
+                                              let-item="item"
+                                              let-item$="item$"
+                                              let-index="index"
+                                            >
+                                              <input
+                                                id="item-{{ index }}"
+                                                type="checkbox"
+                                                [checked]="item$.selected"
+                                              />
+                                              {{ item.name }}
+                                            </ng-template>
+                                          </ng-select>
+                                          <div class="invalid-input"
+                                          *ngIf="control.lead_status.errors && control.lead_status.touched">
+                                          <div *ngIf="control.lead_status.errors.required">
+                                            Lead status is required
+                                          </div>
+                                      </div>
+                                        </div>
+                                        <!-- <div class="lead-status-search">
+                                            <div class="top-header-search">
+                                                <input [(ngModel)]="leadSearchModel" class="form-control search-input"
+                                                    type="text" placeholder="Search lead status" autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="status-list">
+                                            <div class="mark-completed">
+                                                <div class="form-check"
+                                                    *ngFor="let status of leadStatusList | searchFilter: leadSearchModel">
+                                                    <input class="form-check-input" [(ngModel)]="leadStatusId"
+                                                        (change)="onLeadStatusChange(status)" type="radio"
+                                                        name="keys_on_hand" [id]="status.id" [value]="status.id">
+                                                    <label class="form-check-label" [for]="status.id">
+                                                        {{status.name}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <button (click)="addTrigger()"
+                                            [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                        <button (click)="popUps.statusPopup = false"
+                                            [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions popup -->
+                        <div class="modal-right" [ngClass]="{'active': popUps.actionsPopup}">
+                            <div class="actions-outer">
+                                <div class="header">
+                                    Actions
+                                </div>
+                                <div class="body">
+                                    <div class="actions">
+                                        <h6>
+                                            Delay
+                                        </h6>
+                                        <div class="list">
+                                            <ul>
+                                                <li (click)="closeAllModels();popUps.timeDelay = true;">
+                                                    <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 384 512">
+                                                            <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                            <path
+                                                                d="M360 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24 0 90.965 51.016 167.734 120.842 192C75.016 280.266 24 357.035 24 448c-13.255 0-24 10.745-24 24v16c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24 0-90.965-51.016-167.734-120.842-192C308.984 231.734 360 154.965 360 64c13.255 0 24-10.745 24-24V24c0-13.255-10.745-24-24-24zm-64 448H88c0-77.458 46.204-144 104-144 57.786 0 104 66.517 104 144z" />
+                                                        </svg></span>
+                                                    Delay for a set amount of time
+                                                </li>
+                                                <li>
+                                                    <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 448 512">
+                                                            <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                            <path
+                                                                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z" />
+                                                        </svg></span>
+                                                    Delay until a date
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <h6>
+
+                                            Notifications
+                                        </h6>
+                                        <div class="list">
+                                            <ul>
+                                                <li (click)="closeAllModels();popUps.sendMail = true;">
+                                                    <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 448 512">
+                                                            <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                            <path
+                                                                d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z" />
+                                                        </svg></span>
+                                                    Send a email notification
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <h6>
+                                            Property management
+                                        </h6>
+                                        <div class="list">
+                                            <ul>
+                                                <li (click)="closeAllModels();popUps.setPropertyValue = true;">
+                                                    <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 640 512">
+                                                            <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                            <path
+                                                                d="M632.88 400.71L544 352v-64l55.16-17.69c11.79-5.9 11.79-22.72 0-28.62L480 192v-64l27.31-16.3c7.72-7.72 5.61-20.74-4.16-25.62L320 0 136.85 86.07c-9.77 4.88-11.88 17.9-4.16 25.62L160 128v64L40.84 241.69c-11.79 5.9-11.79 22.72 0 28.62L96 288v64L7.12 400.71c-5.42 3.62-7.7 9.63-7 15.29.62 5.01 3.57 9.75 8.72 12.33L64 448v48c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16v-48h160v48c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16v-48h160v48c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16v-48l55.15-19.67c5.16-2.58 8.1-7.32 8.72-12.33.71-5.67-1.57-11.68-6.99-15.29zM224 128h192v64H224v-64zm-64 224v-64h320v64H160z" />
+                                                        </svg></span>
+                                                    Set property value
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <button (click)="popUps.actionsPopup = false"
+                                            [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delay for set amount of time -->
+                        <div class="modal-right" [ngClass]="{'active': popUps.timeDelay}">
+                            <div class="delay-outer" [formGroup]="delaytimer">
+                                <div class="header">
+                                    Delay for a set amount of time
+                                </div>
+                                <div class="body">
+                                    <div class="delay">
+                                        <p>
+                                            Delay enrolled records for a specific amount of days, hours and minutes. Use
+                                            this delay when you
+                                            want to pause all enrolled records for some amount of time.
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Day</label>
+                                                    <input formControlName="day" class="form-control" min="0"
+                                                        type="number" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Hour</label>
+                                                    <input (change)="changeHours($any($event.target).value)"
+                                                        formControlName="hour" class="form-control" min="0" max="23"
+                                                        type="number" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Minute</label>
+                                                    <input (change)="changeMinutes($any($event.target).value)"
+                                                        formControlName="minute" class="form-control" min="0" max="59"
+                                                        type="number" name="" id="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <button (click)="onDelaySelection()"
+                                            [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                        <button (click)="popUps.timeDelay = false; popUps.actionsPopup = true"
+                                            [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                        <!-- <button (click)="closeAllModels()">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Send emails  -->
+                        <div class="modal-right " [ngClass]="{'active': popUps.sendMail}">
+                            <div class="send-email-notifications">
+                                <div class="header">
+                                    Send email notifications
+                                </div>
+                                <div class="body">
+                                    <div class="send-email" [formGroup]="sendMailForm">
+                                        <div class="select-template">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="radio-btns">
+                                                        <div class="form-check">
+                                                            <input type="radio"
+                                                                (change)="templateType($any($event.target).value)"
+                                                                formControlName="template_type"
+                                                                class="form-check-input cursor-pointer" id="text"
+                                                                name="template_type" value="predefined"
+                                                                [ngStyle]="{'background-color':this.sendMailForm.value.template_type == 'predefined'?color:'','border-color':this.sendMailForm.value.template_type == 'predefined'?color:''}" />
+                                                            <label class="form-check-label cursor-pointer"
+                                                                for="text">Select
+                                                                template</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio"
+                                                                (change)="templateType($any($event.target).value)"
+                                                                formControlName="template_type"
+                                                                class="form-check-input cursor-pointer" id="email"
+                                                                name="template_type" value="from_scratch"
+                                                                [ngStyle]="{'background-color':this.sendMailForm.value.template_type == 'from_scratch'?color:'','border-color':this.sendMailForm.value.template_type == 'from_scratch'?color:''}" />
+                                                            <label class="form-check-label cursor-pointer"
+                                                                for="email">Create from
+                                                                scratch</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12"
+                                                    *ngIf="sendMailForm.value.template_type == 'predefined'">
+                                                    <div class="form-group">
+                                                        <label>Template</label>
+                                                        <ng-select formControlName="template" bindValue="id"
+                                                            [items]="emailTemplateList" bindLabel="name"
+                                                            placeholder="Select Template">
+                                                        </ng-select>
+                                                        <div class="invalid-input"
+                                                            *ngIf="f.template.errors && f.template.touched">
+                                                            <div *ngIf="f.template.errors.required">
+                                                                Please select a template
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="create-template"
+                                            *ngIf="sendMailForm.value.template_type == 'from_scratch'">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Subject</label>
+                                                            <input formControlName="subject" type="text"
+                                                                class="form-control" placeholder="Subject">
+                                                            <div class="invalid-input"
+                                                                *ngIf="f.subject.errors && f.subject.touched">
+                                                                <div *ngIf="f.subject.errors.required">
+                                                                    Subject is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>CC</label>
+                                                            <input formControlName="cc" type="text" class="form-control"
+                                                                placeholder="Cc">
+                                                            <div class="invalid-input"
+                                                                *ngIf="f.cc.errors && f.cc.touched">
+                                                                <div *ngIf="f.cc.errors.pattern">
+                                                                    Invalid email
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="">Body</label>
+                                                            <angular-editor formControlName="body" #myckeditor
+                                                                [config]="editorConfig">
+                                                                <ng-template #customButtons
+                                                                    let-executeCommandFn="executeCommandFn">
+                                                                    <ae-toolbar-set>
+                                                                        <ae-button iconClass="fa fa-user"
+                                                                            title="Personalized"
+                                                                            (buttonClick)="openPeronisedForm(myckeditor)">
+                                                                        </ae-button>
+                                                                    </ae-toolbar-set>
+                                                                </ng-template>
+                                                            </angular-editor>
+                                                            <div class="invalid-input"
+                                                                *ngIf="f.body.errors && f.body.touched">
+                                                                <div *ngIf="f.body.errors.required">
+                                                                    Template body is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <button (click)="ontemplateSave()"
+                                            [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                        <button (click)="popUps.sendMail = false; popUps.actionsPopup = true"
+                                            [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                        <!-- <button (click)="closeAllModels()">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-right" [ngClass]="{'active': popUps.setPropertyValue}">
+                            <div class="property-value-outer" [formGroup]="setPropertyForm">
+                                <div class="header">
+                                    Set property value
+                                </div>
+                                <div class="body">
+                                    <div class="property">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Property to set </label>
+                                                    <select (change)="onPopertyToSetChange()" name="" id=""
+                                                        class="form-control" formControlName="proprtyToSet">
+                                                        <option value="">Select property to set</option>
+                                                        <option value="lead-status">Lead status</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12"
+                                                *ngIf="setPropertyForm.value.proprtyToSet === 'lead-status'">
+                                                <div class="form-group">
+                                                    <label>Lead status</label>
+                                                    <ng-select bindValue="id" formControlName="leadStatus"
+                                                        [items]="leadStatusList" bindLabel="name"
+                                                        placeholder="Select select">
+                                                    </ng-select>
+                                                    <div class="invalid-input"
+                                                        *ngIf="setPropertyForm.controls.leadStatus.errors && setPropertyForm.controls.leadStatus.touched">
+                                                        <div
+                                                            *ngIf="setPropertyForm.controls.leadStatus.errors.required">
+                                                            Lead Status is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <button (click)="setPropertySave()"
+                                            [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                        <button (click)="popUps.setPropertyValue = false; popUps.actionsPopup = true"
+                                            [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                        <!-- <button (click)="closeAllModels()">Cancel</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="'Settings'" [ngClass]="{ 'active': activeTab == 'Settings' }">
+                    <a ngbNavLink>
+                        <span>
+                            Settings
+                        </span>
+                    </a>
+
+                    <ng-template ngbNavContent>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="menus">
+                                        <ul>
+                                            <li>
+                                                <a>General Settings</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="content-outer" [formGroup]="gSettingForm">
+                                        <h6>
+                                            General
+                                        </h6>
+                                        <p>What times do you want the action to execute</p>
+                                        <div class="radio-btns">
+                                            <div class="form-check">
+                                                <input
+                                                    [attr.disabled]="!dripCampaignDeleteStatus && editMode ? null: 'disabled'"
+                                                    (change)="onsettingTypeChange()" formControlName="type" type="radio"
+                                                    class="form-check-input cursor-pointer" id="text" value="anytime"
+                                                    (change)="onChange($event)"
+                                                    [ngStyle]="{'background-color':gSettingForm.value.type == 'anytime'?color:'','border-color':gSettingForm.value.type == 'anytime'?color:''}" />
+                                                <label class="form-check-label cursor-pointer" for="text">Any
+                                                    time</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input
+                                                    [attr.disabled]="!dripCampaignDeleteStatus && editMode ? null: 'disabled'"
+                                                    formControlName="type" type="radio"
+                                                    class="form-check-input cursor-pointer" id="email"
+                                                    value="specifictime" (change)="onChange($event)"
+                                                    [ngStyle]="{'background-color':gSettingForm.value.type == 'specifictime'?color:'','border-color':gSettingForm.value.type == 'specifictime'?color:''}" />
+                                                <label class="form-check-label cursor-pointer" for="email">Specific
+                                                    time</label>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="gSettingForm.controls.type.value === 'specifictime'">
+                                            <div class="timers">
+                                                <div class="form-group">
+                                                    <ng-select *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                        (change)="gSettingdayChange()" formControlName="day"
+                                                        placeholder="Select select">
+                                                        <ng-option value="everyday">Every Day</ng-option>
+                                                        <ng-option value="custom">Custom</ng-option>
+                                                    </ng-select>
+                                                    <ng-select *ngIf="dripCampaignDeleteStatus || !editMode"
+                                                        (change)="gSettingdayChange()" formControlName="day"
+                                                        placeholder="Select select">
+                                                        <ng-option value="everyday">Every Day</ng-option>
+                                                        <ng-option value="custom">Custom</ng-option>
+                                                    </ng-select>
+                                                </div>
+
+                                                <div class="form-group mx-1"
+                                                    *ngIf="gSettingForm.controls.day.value === 'custom'">
+                                                    <ng-select *ngIf="!dripCampaignDeleteStatus && editMode"
+                                                        formControlName="customDays" placeholder="Select select"
+                                                        [multiple]="true">
+                                                        <ng-option value="Monday">Monday</ng-option>
+                                                        <ng-option value="Tuesday">Tuesday</ng-option>
+                                                        <ng-option value="Wednesday">Wednesday</ng-option>
+                                                        <ng-option value="Thursday">Thursday</ng-option>
+                                                        <ng-option value="Friday">Friday</ng-option>
+                                                        <ng-option value="Saturday">Saturday</ng-option>
+                                                        <ng-option value="Sunday">Sunday</ng-option>
+                                                    </ng-select>
+                                                    <ng-select *ngIf="dripCampaignDeleteStatus || !editMode"
+                                                        formControlName="customDays" placeholder="Select select"
+                                                        [multiple]="true">
+                                                        <ng-option value="Monday">Monday</ng-option>
+                                                        <ng-option value="Tuesday">Tuesday</ng-option>
+                                                        <ng-option value="Wednesday">Wednesday</ng-option>
+                                                        <ng-option value="Thursday">Thursday</ng-option>
+                                                        <ng-option value="Friday">Friday</ng-option>
+                                                        <ng-option value="Saturday">Saturday</ng-option>
+                                                        <ng-option value="Sunday">Sunday</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                                <div class="label">
+                                                    from
+                                                </div>
+                                                <div class=""
+                                                    [ngClass]="{ 'cstm-time-date': dripCampaignDeleteStatus || !editMode}">
+                                                    <!-- [attr.disabled]="!dripCampaignDeleteStatus ? null: 'disabled'" -->
+                                                    <ngb-timepicker formControlName="from"></ngb-timepicker>
+                                                    <!-- <input type="text" class="form-control"> -->
+                                                </div>
+                                                <div class="label">
+                                                    to
+                                                </div>
+                                                <div class=""
+                                                    [ngClass]="{ 'cstm-time-piker': dripCampaignDeleteStatus || !editMode }">
+                                                    <ngb-timepicker formControlName="to"></ngb-timepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="footer text-end" *ngIf="!dripCampaignDeleteStatus && editMode">
+                                            <div>
+                                                <button class="theme-btn" (click)="onSettingsSave()"
+                                                    [ngStyle]="background">Save</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li *ngIf="canViewDripCampaignLogs" [ngbNavItem]="'Enrollments'"
+                    [ngClass]="{ 'active': activeTab == 'Enrollments' }">
+                    <a ngbNavLink>
+                        <span>
+                            Enrollments
+                        </span>
+                    </a>
+
+
+                    <ng-template ngbNavContent>
+                        <div class="enrollment-page">
+                            <div class="container">
+                                <div class="statics-list">
+                                    <!-- <div class="statics-item cursor-pointer" >
+                                        <span class="statics-icon user">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.99951 7.29004C10.8635 7.29004 12.3745 5.779 12.3745 3.91504C12.3745 2.05108 10.8635 0.540039 8.99951 0.540039C7.13555 0.540039 5.62451 2.05108 5.62451 3.91504C5.62451 5.779 7.13555 7.29004 8.99951 7.29004Z"
+                                                    fill="#547BDB" />
+                                                <path
+                                                    d="M17.3582 15.0978C17.0082 13.5038 16.2054 12.0448 15.0464 10.8959C14.7651 10.6136 14.4602 10.3558 14.1351 10.1253C12.6546 9.01481 10.8501 8.42187 8.9995 8.43781C6.73664 8.42623 4.56098 9.30984 2.947 10.8959C1.78797 12.0448 0.985211 13.5038 0.635122 15.0978C0.574271 15.3797 0.577558 15.6716 0.64474 15.952C0.711922 16.2324 0.84128 16.4941 1.02325 16.7178C1.2117 16.9463 1.44901 17.1296 1.71769 17.2542C1.98638 17.3788 2.2796 17.4416 2.57575 17.4378H15.4232C15.7203 17.438 16.0135 17.3714 16.2813 17.2428C16.5491 17.1143 16.7845 16.9272 16.9701 16.6953C17.1488 16.4742 17.2763 16.2163 17.3434 15.9401C17.4105 15.6639 17.4156 15.3762 17.3582 15.0978Z"
+                                                    fill="#547BDB" />
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content">
+                                            <h4 class="statics-score user"> {{stats?. ?? 0}}</h4>
+                                            <p class="statics-title">All Enrollments</p>
+                                        </div>
+                                    </div> -->
+                                    <div class="statics-item">
+                                        <span class="statics-icon mustard">
+                                            <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_1145_2183)">
+                                                    <path
+                                                        d="M14.999 3.375V16.875C14.999 17.1734 14.8861 17.4595 14.6852 17.6705C14.4843 17.8815 14.2118 18 13.9276 18H1.07045C0.786291 18 0.513769 17.8815 0.312838 17.6705C0.111906 17.4595 -0.000976562 17.1734 -0.000976562 16.875V3.375C-0.000976562 3.07663 0.111906 2.79048 0.312838 2.5795C0.513769 2.36853 0.786291 2.25 1.07045 2.25H2.14188V1.125C2.14188 0.826631 2.25476 0.540483 2.45569 0.329505C2.65663 0.118526 2.92915 0 3.21331 0C3.49747 0 3.76999 0.118526 3.97092 0.329505C4.17186 0.540483 4.28474 0.826631 4.28474 1.125V2.25H6.42759V1.125C6.42759 0.826631 6.54048 0.540483 6.74141 0.329505C6.94234 0.118526 7.21486 0 7.49902 0C7.78318 0 8.05571 0.118526 8.25664 0.329505C8.45757 0.540483 8.57045 0.826631 8.57045 1.125V2.25H10.7133V1.125C10.7133 0.826631 10.8262 0.540483 11.0271 0.329505C11.2281 0.118526 11.5006 0 11.7847 0C12.0689 0 12.3414 0.118526 12.5424 0.329505C12.7433 0.540483 12.8562 0.826631 12.8562 1.125V2.25H13.9276C14.2118 2.25 14.4843 2.36853 14.6852 2.5795C14.8861 2.79048 14.999 3.07663 14.999 3.375ZM12.8562 6.75H2.14188V7.875H12.8562V6.75ZM12.8562 10.125H2.14188V11.25H12.8562V10.125ZM12.8562 13.5H2.14188V14.625H12.8562V13.5Z"
+                                                        fill="#DA7625" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1145_2183">
+                                                        <rect width="15" height="18" fill="white"
+                                                            transform="translate(-0.000976562)" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content ">
+                                            <h4 class="statics-score mustard">{{stats?.countScheduled ?? 0}}</h4>
+                                            <p class="statics-title">Scheduled</p>
+                                        </div>
+                                    </div>
+                                    <div class="statics-item">
+                                        <span class="statics-icon green">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M2.125 0C1.82663 0 1.54048 0.118526 1.3295 0.329505C1.11853 0.540483 1 0.826631 1 1.125V16.875C1 17.1734 1.11853 17.4595 1.3295 17.6705C1.54048 17.8815 1.82663 18 2.125 18H16.75C17.0484 18 17.3345 17.8815 17.5455 17.6705C17.7565 17.4595 17.875 17.1734 17.875 16.875V1.125C17.875 0.826631 17.7565 0.540483 17.5455 0.329505C17.3345 0.118526 17.0484 0 16.75 0L2.125 0ZM15.625 6.1245V15.75H12.25V6.1245H15.625ZM11.125 3.375V15.75H7.75V3.375H11.125ZM6.625 10.2499V15.75H3.25V10.2499H6.625Z"
+                                                    fill="#638D2F" />
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content">
+                                            <h4 class="statics-score green">{{stats?.countInProgress ?? 0}}</h4>
+                                            <p class="statics-title">In Progress</p>
+                                        </div>
+                                    </div>
+                                    <div class="statics-item">
+                                        <span class="statics-icon faded-blue">
+                                            <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.17849 0.71362C8.17849 0.320203 7.85845 0 7.46487 0H4.81079C4.41737 0 4.09717 0.320045 4.09717 0.71362V2.22511H8.1783L8.17849 0.71362Z"
+                                                    fill="#63A0AE" />
+                                                <path
+                                                    d="M7.86475 11.6785V11.7644C7.86475 12.3111 8.293 12.7393 8.83963 12.7393C9.11146 12.7393 9.36292 12.6346 9.54766 12.4446C9.72726 12.2597 9.82204 12.0142 9.81466 11.7532C9.81451 11.7499 9.81451 11.7465 9.81451 11.743V11.6785C9.81451 11.1318 9.38626 10.7036 8.83963 10.7036C8.29296 10.7038 7.86475 11.132 7.86475 11.6785L7.86475 11.6785Z"
+                                                    fill="#63A0AE" />
+                                                <path
+                                                    d="M1.67004 14.9499H10.6061C11.1963 14.9499 11.6765 14.4697 11.6765 13.8795V2.90246C11.6765 2.31224 11.1963 1.83203 10.6061 1.83203H8.89226V2.58168C8.89226 2.77877 8.73254 2.93849 8.53545 2.93849L3.74069 2.93864C3.5436 2.93864 3.38388 2.77892 3.38388 2.58183V1.83218H1.67004C1.07982 1.83218 0.599609 2.31239 0.599609 2.90261V13.8792C0.599609 14.4695 1.07966 14.9497 1.66988 14.9497L1.67004 14.9499ZM10.5278 11.6788V11.7385C10.5394 12.1919 10.373 12.619 10.059 12.9421C9.73885 13.2716 9.30566 13.4532 8.8393 13.4532C8.38212 13.4532 7.95541 13.2763 7.63791 12.9554C7.32389 12.6377 7.15091 12.2149 7.15091 11.7648V11.679C7.15091 11.2218 7.32781 10.7951 7.64875 10.4776C7.96623 10.1635 8.38917 9.99057 8.83926 9.99057C9.29644 9.99057 9.72314 10.1675 10.0406 10.4884C10.355 10.8059 10.5278 11.2287 10.5278 11.6788V11.6788ZM2.81839 4.62244H9.45737C9.65446 4.62244 9.81418 4.78216 9.81418 4.97925C9.81418 5.17634 9.65446 5.33606 9.45737 5.33606H2.81839C2.6213 5.33606 2.46158 5.17634 2.46158 4.97925C2.46158 4.78216 2.62145 4.62244 2.81839 4.62244ZM2.81839 7.19228H9.45737C9.65446 7.19228 9.81418 7.352 9.81418 7.54909C9.81418 7.74618 9.65446 7.9059 9.45737 7.9059L2.81839 7.90575C2.6213 7.90575 2.46158 7.74603 2.46158 7.54894C2.46158 7.352 2.62145 7.19228 2.81839 7.19228V7.19228ZM2.81839 9.76197H5.38823C5.58532 9.76197 5.74504 9.92169 5.74504 10.1188C5.74504 10.3159 5.58532 10.4756 5.38823 10.4756H2.81839C2.6213 10.4756 2.46158 10.3159 2.46158 10.1188C2.46158 9.92169 2.62145 9.76197 2.81839 9.76197Z"
+                                                    fill="#63A0AE" />
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content">
+                                            <h4 class="statics-score faded-blue">{{stats?.countPaused ?? 0}}</h4>
+                                            <p class="statics-title">Paused</p>
+                                        </div>
+                                    </div>
+                                    <div class="statics-item">
+                                        <span class="statics-icon green">
+                                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M11.298 7.56135V0.9248C11.298 0.405525 10.8762 0 10.3732 0H1.12451C0.605232 0 0.199707 0.421833 0.199707 0.9248V10.9848C0.199707 11.5041 0.621541 11.9096 1.12451 11.9096H6.86853C7.09565 13.8893 8.76685 15.4146 10.7953 15.4146C12.9696 15.4146 14.7382 13.646 14.7382 11.4717C14.738 9.47598 13.229 7.82112 11.2983 7.56142L11.298 7.56135ZM3.21764 2.7585H8.2963C8.57213 2.7585 8.81557 2.98562 8.81557 3.27778C8.81557 3.55361 8.58845 3.79705 8.2963 3.79705L3.21764 3.79692C2.9418 3.79692 2.69837 3.5698 2.69837 3.27764C2.6985 2.98561 2.94181 2.75851 3.21764 2.75851V2.7585ZM3.21764 5.45194H8.2963C8.57213 5.45194 8.81557 5.67906 8.81557 5.97122C8.81557 6.26324 8.58845 6.49049 8.2963 6.49049H3.21764C2.9418 6.49049 2.69837 6.26337 2.69837 5.97122C2.6985 5.67919 2.94181 5.45194 3.21764 5.45194ZM5.71651 9.16765H3.21764C2.9418 9.16765 2.69837 8.94054 2.69837 8.64838C2.69837 8.35635 2.92549 8.12911 3.21764 8.12911H5.73268C6.00851 8.12911 6.25195 8.35623 6.25195 8.64838C6.25195 8.94041 6.0085 9.16765 5.71647 9.16765H5.71651ZM10.7952 14.3923C9.18886 14.3923 7.87446 13.078 7.87446 11.4716C7.87446 9.86526 9.18872 8.55087 10.7952 8.55087C12.4015 8.55087 13.7159 9.86513 13.7159 11.4716C13.7159 13.078 12.4015 14.3923 10.7952 14.3923Z"
+                                                    fill="#638D2F" />
+                                                <path
+                                                    d="M11.6712 10.2871L10.3732 11.5852L9.90261 11.1146C9.70788 10.9199 9.38333 10.9199 9.17242 11.1146C8.97768 11.3094 8.97768 11.6339 9.17242 11.8448L9.99991 12.6723C10.0972 12.7696 10.227 12.8183 10.3569 12.8183C10.4867 12.8183 10.6165 12.7696 10.7138 12.6723L12.3688 11.0173C12.5636 10.8226 12.5636 10.498 12.3688 10.2871C12.2066 10.0762 11.8822 10.0762 11.6713 10.2871H11.6712Z"
+                                                    fill="#638D2F" />
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content">
+                                            <h4 class="statics-score green">{{stats?.countFinished ?? 0}}</h4>
+                                            <p class="statics-title">Finished</p>
+                                        </div>
+                                    </div>
+                                    <div class="statics-item cursor-pointer">
+                                        <span class="statics-icon">
+                                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                                                    fill="#C9624C" />
+                                                <path
+                                                    d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                                                    fill="#C9624C" />
+                                            </svg>
+                                        </span>
+                                        <div class="statics-content">
+                                            <h4 class="statics-score">{{stats?.countError ?? 0}}</h4>
+                                            <p class="statics-title">Error</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inner-page-search">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="top-header-search">
+                                                <label>Filter by Enrollments:</label>
+                                                <input (keyup.enter)="enrollmentpage = 1 ; getEnrollmentList();"
+                                                    [(ngModel)]="enrollmentSearch" class="form-control search-input"
+                                                    type="text" placeholder="Search contact , company , lead no.">
+                                                <button class="cstm-search-btn" type="submit"
+                                                    (click)="enrollmentpage = 1 ; getEnrollmentList()">
+                                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M6.41668 12.8334C2.87876 12.8334 0 9.9546 0 6.41668C0 2.87876 2.87876 0 6.41668 0C9.9546 0 12.8334 2.87876 12.8334 6.41668C12.8334 9.9546 9.9546 12.8334 6.41668 12.8334ZM6.41668 1.16667C3.52217 1.16667 1.16667 3.52159 1.16667 6.41668C1.16667 9.31177 3.52217 11.6667 6.41668 11.6667C9.31119 11.6667 11.6667 9.31177 11.6667 6.41668C11.6667 3.52159 9.31119 1.16667 6.41668 1.16667Z"
+                                                            fill="#FA5440"></path>
+                                                        <path
+                                                            d="M13.4163 14C13.2669 14 13.1176 13.9429 13.0038 13.8291L10.2068 11.032C9.97926 10.8039 9.97926 10.4347 10.2068 10.2072C10.4348 9.97911 10.8041 9.97911 11.0322 10.2072L13.8287 13.0043C14.0568 13.2324 14.0568 13.601 13.8287 13.8291C13.7149 13.9429 13.5656 14 13.4163 14Z"
+                                                            fill="#FA5440"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="seach-right">
+                                                <div class="form-group hidden">
+                                                    <div class="input-group">
+                                                        <input name="datepicker" class="form-control" ngbDatepicker
+                                                            #datepicker="ngbDatepicker"
+                                                            [minDate]="{year: 1900, month: 1, day: 1}"
+                                                            [autoClose]="'outside'"
+                                                            (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                                                            [dayTemplate]="t" outsideDays="hidden"
+                                                            [startDate]="fromDate!" [maxDate]="maxDate" tabindex="-1">
+                                                        <ng-template #t let-date let-focused="focused">
+                                                            <span class="custom-day" [class.focused]="focused"
+                                                                [class.range]="isRange(date)"
+                                                                [class.faded]="isHovered(date) || isInside(date)"
+                                                                (mouseenter)="hoveredDate = date"
+                                                                (mouseleave)="hoveredDate = null">
+                                                                {{ date.day }}
+                                                            </span>
+                                                        </ng-template>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Filter by date:</label>
+                                                    <div class="input-group">
+                                                        <input readonly #dpFromDate name="dpFromDate"
+                                                            [value]="selectedDate"
+                                                            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                                                            (click)="datepicker.toggle()" type="text"
+                                                            class="form-control" placeholder="03/30/2022 - 04/10/2022"
+                                                            name="date">
+                                                        <span class="input-group-text" (click)="datepicker.toggle()">
+                                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.5 9C7.64834 9 7.79334 8.95601 7.91668 8.8736C8.04002 8.79119 8.13614 8.67406 8.19291 8.53701C8.24968 8.39997 8.26453 8.24917 8.23559 8.10368C8.20665 7.9582 8.13522 7.82456 8.03033 7.71967C7.92544 7.61478 7.7918 7.54335 7.64632 7.51441C7.50083 7.48547 7.35003 7.50032 7.21299 7.55709C7.07594 7.61386 6.95881 7.70999 6.8764 7.83332C6.79399 7.95666 6.75 8.10166 6.75 8.25C6.75 8.44891 6.82902 8.63968 6.96967 8.78033C7.11032 8.92098 7.30109 9 7.5 9ZM11.25 9C11.3983 9 11.5433 8.95601 11.6667 8.8736C11.79 8.79119 11.8861 8.67406 11.9429 8.53701C11.9997 8.39997 12.0145 8.24917 11.9856 8.10368C11.9566 7.9582 11.8852 7.82456 11.7803 7.71967C11.6754 7.61478 11.5418 7.54335 11.3963 7.51441C11.2508 7.48547 11.1 7.50032 10.963 7.55709C10.8259 7.61386 10.7088 7.70999 10.6264 7.83332C10.544 7.95666 10.5 8.10166 10.5 8.25C10.5 8.44891 10.579 8.63968 10.7197 8.78033C10.8603 8.92098 11.0511 9 11.25 9ZM7.5 12C7.64834 12 7.79334 11.956 7.91668 11.8736C8.04002 11.7912 8.13614 11.6741 8.19291 11.537C8.24968 11.4 8.26453 11.2492 8.23559 11.1037C8.20665 10.9582 8.13522 10.8246 8.03033 10.7197C7.92544 10.6148 7.7918 10.5434 7.64632 10.5144C7.50083 10.4855 7.35003 10.5003 7.21299 10.5571C7.07594 10.6139 6.95881 10.71 6.8764 10.8333C6.79399 10.9567 6.75 11.1017 6.75 11.25C6.75 11.4489 6.82902 11.6397 6.96967 11.7803C7.11032 11.921 7.30109 12 7.5 12ZM11.25 12C11.3983 12 11.5433 11.956 11.6667 11.8736C11.79 11.7912 11.8861 11.6741 11.9429 11.537C11.9997 11.4 12.0145 11.2492 11.9856 11.1037C11.9566 10.9582 11.8852 10.8246 11.7803 10.7197C11.6754 10.6148 11.5418 10.5434 11.3963 10.5144C11.2508 10.4855 11.1 10.5003 10.963 10.5571C10.8259 10.6139 10.7088 10.71 10.6264 10.8333C10.544 10.9567 10.5 11.1017 10.5 11.25C10.5 11.4489 10.579 11.6397 10.7197 11.7803C10.8603 11.921 11.0511 12 11.25 12ZM3.75 9C3.89834 9 4.04334 8.95601 4.16668 8.8736C4.29001 8.79119 4.38614 8.67406 4.44291 8.53701C4.49968 8.39997 4.51453 8.24917 4.48559 8.10368C4.45665 7.9582 4.38522 7.82456 4.28033 7.71967C4.17544 7.61478 4.0418 7.54335 3.89632 7.51441C3.75083 7.48547 3.60003 7.50032 3.46299 7.55709C3.32594 7.61386 3.20881 7.70999 3.1264 7.83332C3.04399 7.95666 3 8.10166 3 8.25C3 8.44891 3.07902 8.63968 3.21967 8.78033C3.36032 8.92098 3.55109 9 3.75 9ZM12.75 1.5H12V0.75C12 0.551088 11.921 0.360322 11.7803 0.21967C11.6397 0.0790176 11.4489 0 11.25 0C11.0511 0 10.8603 0.0790176 10.7197 0.21967C10.579 0.360322 10.5 0.551088 10.5 0.75V1.5H4.5V0.75C4.5 0.551088 4.42098 0.360322 4.28033 0.21967C4.13968 0.0790176 3.94891 0 3.75 0C3.55109 0 3.36032 0.0790176 3.21967 0.21967C3.07902 0.360322 3 0.551088 3 0.75V1.5H2.25C1.65326 1.5 1.08097 1.73705 0.65901 2.15901C0.237053 2.58097 0 3.15326 0 3.75V12.75C0 13.3467 0.237053 13.919 0.65901 14.341C1.08097 14.7629 1.65326 15 2.25 15H12.75C13.3467 15 13.919 14.7629 14.341 14.341C14.7629 13.919 15 13.3467 15 12.75V3.75C15 3.15326 14.7629 2.58097 14.341 2.15901C13.919 1.73705 13.3467 1.5 12.75 1.5ZM13.5 12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5H2.25C2.05109 13.5 1.86032 13.421 1.71967 13.2803C1.57902 13.1397 1.5 12.9489 1.5 12.75V6H13.5V12.75ZM13.5 4.5H1.5V3.75C1.5 3.55109 1.57902 3.36032 1.71967 3.21967C1.86032 3.07902 2.05109 3 2.25 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V4.5ZM3.75 12C3.89834 12 4.04334 11.956 4.16668 11.8736C4.29001 11.7912 4.38614 11.6741 4.44291 11.537C4.49968 11.4 4.51453 11.2492 4.48559 11.1037C4.45665 10.9582 4.38522 10.8246 4.28033 10.7197C4.17544 10.6148 4.0418 10.5434 3.89632 10.5144C3.75083 10.4855 3.60003 10.5003 3.46299 10.5571C3.32594 10.6139 3.20881 10.71 3.1264 10.8333C3.04399 10.9567 3 11.1017 3 11.25C3 11.4489 3.07902 11.6397 3.21967 11.7803C3.36032 11.921 3.55109 12 3.75 12Z"
+                                                                    fill="#565D80"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label class="opacity-0">fgf</label>
+                                                <button class="theme-btn" [ngStyle]="background"
+                                                    (click)="resetCompanyList()">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="order-list-inner">
+                                <div class="table-list-buttons">
+                                </div>
+                                <div class="table-responsive lead-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th><span class="serial-border">S.No.</span></th> -->
+                                                <th><span class="serial-border">#</span></th>
+                                                <th scope="col">Lead No.</th>
+                                                <th scope="col">Contact</th>
+                                                <th scope="col">Company</th>
+                                                <th scope="col">Enrolled Time</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Latest Step</th>
+                                                <th scope="col">Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="
+                                      let enroll of enrollmentList
+                                        | paginate
+                                          : {
+                                              itemsPerPage: enrollmentlimit,
+                                              currentPage: enrollmentpage,
+                                              totalItems: totalEnrollment,
+                                              id:'enrollmentpage'
+                                            };
+                                      let i = index
+                                    ">
+                                                <td><span class="serial-border">{{ enrollmentlimit * (enrollmentpage -
+                                                        1) + i + 1 }}</span></td>
+                                                <!-- routerLink="/{{userBaseRoute}}/lead-detail/{{ enroll.lead_id }}" -->
+                                                <td><a class="cursor-pointer" (click)="leadDetailsLink(enroll.lead_id)">
+                                                        {{ enroll.lead_num }}
+                                                    </a></td>
+                                                <td> <span>{{ enroll.lead_name }}</span>
+                                                    <p><img src="assets/images/message.svg" alt="/icon" /> {{
+                                                        enroll.email }}</p>
+                                                </td>
+                                                <td>{{ enroll.company_name }}
+                                                </td>
+                                                <td> <img src="assets/images/calendar.svg" alt="/icon" />
+                                                    <span>{{ getDate(enroll.created_at) }}</span>
+                                                    <!-- <p>{{ enroll.creater }}</p> -->
+                                                </td>
+                                                <td [ngSwitch]="enroll.status">
+                                                    <span *ngSwitchCase="'In Progress'" class="progress">
+                                                        In Progress
+                                                    </span>
+                                                    <span *ngSwitchCase="'Scheduled'" class="scheduled">
+                                                        Scheduled
+                                                    </span>
+                                                    <span *ngSwitchCase="'Paused'" class="paused">
+                                                        Paused
+                                                    </span>
+                                                    <span *ngSwitchCase="'Finished'" class="progress">
+                                                        Finished
+                                                    </span>
+                                                    <span *ngSwitchCase="'Error'" class="error">
+                                                        Error
+                                                    </span>
+                                                </td>
+                                                <!-- <td>
+                                                    <span class="progress"> {{ enroll.status }}</span>   
+                                                </td> -->
+
+                                                <td>
+                                                    <img src="assets/images/calendar.svg" alt="/icon" />
+                                                    <span>{{ getDate(enroll.latest_step?.date) }}</span>
+                                                    <span class="totltip-custom" *ngIf="enroll.status == 'Finished'">
+                                                        <span class="tooltip-icon">
+                                                            <img src="assets/images/info-circle-solid.svg"
+                                                                alt="information">
+                                                            <span class="tooltip-context">
+                                                                <span class="tooltip-title"
+                                                                    *ngFor="let steps of enrollmentList[i].campaign?.compaignStep let n = index"><span
+                                                                        *ngIf="n<=enroll.latest_step?.step_no"><img
+                                                                            src="assets/images/greentick.png"
+                                                                            alt="greentick"></span>
+
+
+                                                                    <span *ngIf="n>enroll.latest_step?.step_no"><img
+                                                                            src="assets/images/timer.png"
+                                                                            alt="timer"></span>{{ steps.type ==
+                                                                    'trigger'? 'TRIGGER': steps.type == 'time-delay'?
+                                                                    'TIME DELAY': steps.type == 'set-property-value'?
+                                                                    'SET PROPERTY VALUE'
+                                                                    : 'SEND EMAIL' }} </span>
+                                                            </span>
+                                                        </span>
+
+                                                    </span>
+                                                    <p>{{ enroll.latest_step?.step }}</p>
+
+                                                </td>
+                                                <td *ngIf="enroll.status != 'Finished'">
+                                                    <span>{{ enroll?.next_step?.step }}</span>
+                                                    <span class="totltip-custom">
+                                                        <span class="tooltip-icon">
+                                                            <img src="assets/images/info-circle-solid.svg"
+                                                                alt="information">
+                                                            <span class="tooltip-context">
+                                                                <span class="tooltip-title"
+                                                                    *ngFor="let steps of enrollmentList[i].campaign?.compaignStep let n = index"><span
+                                                                        *ngIf="n<=enroll.latest_step?.step_no"><img
+                                                                            src="assets/images/greentick.png"
+                                                                            alt="greentick"></span>
+
+
+                                                                    <span *ngIf="n>enroll.latest_step?.step_no"><img
+                                                                            src="assets/images/timer.png"
+                                                                            alt="timer"></span>{{ steps.type ==
+                                                                    'trigger'? 'TRIGGER': steps.type == 'time-delay'?
+                                                                    'TIME DELAY': steps.type == 'set-property-value'?
+                                                                    'SET PROPERTY VALUE'
+                                                                    : 'SEND EMAIL' }} </span>
+                                                            </span>
+                                                        </span>
+
+                                                    </span>
+                                                    <p>next step on <img src="assets/images/calendar.svg"
+                                                            alt="/icon" />{{ getDate(enroll?.next_step?.date) }}</p>
+
+                                                </td>
+                                                <td *ngIf="enroll.status == 'Finished'">
+                                                    <span class="progress">
+                                                        Finished
+                                                    </span>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr *ngIf="!enrollmentList.length">
+                                                <td colspan="8" class="text-center">No records found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="footer-pagination">
+                                        <!-- id="enrollmentpage" -->
+                                        <pagination-controls id="enrollmentpage" (pageChange)="onPageChange($event)">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+                <li *ngIf="canViewDripCampaignLogs" [ngbNavItem]="'Logs'" [ngClass]="{ 'active': activeTab == 'Logs' }">
+                    <a ngbNavLink>
+                        <span>
+                            Logs
+                        </span>
+                    </a>
+
+
+                    <ng-template ngbNavContent>
+                        <div class="container">
+                            <div class="order-list-inner">
+                                <div class="table-list-buttons">
+                                </div>
+                                <div class="table-responsive lead-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="serial-border">S.No.</span></th>
+                                                <th scope="col">Updates</th>
+                                                <th scope="col">Contact</th>
+                                                <th scope="col">Updated By</th>
+                                                <th scope="col">Created Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="
+                                      let user of dripCampaignList
+                                        | paginate
+                                          : {
+                                              itemsPerPage: logslimit,
+                                              currentPage: logspage,
+                                              totalItems: totalLogs,  id: 'logspage'
+                                            };
+                                      let i = index
+                                    ">
+                                                <td><span class="serial-border">{{ logslimit * (logspage - 1) +
+                                                        i + 1 }}</span></td>
+                                                <td>{{ user.note }}</td>
+                                                <td> {{ user.email }}
+                                                </td>
+                                                <td>
+                                                    {{ user.name }}
+                                                </td>
+                                                <td> <img src="assets/images/calendar.svg" alt="/icon" />
+                                                    <span>{{ getDate(user.created_at) }}</span>
+                                                </td>
+
+                                            </tr>
+                                            <tr *ngIf="!dripCampaignList.length">
+                                                <td colspan="5" class="text-center">No records found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="footer-pagination">
+                                        <!-- id="enrollmentpage" -->
+                                        <pagination-controls id="logspage" (pageChange)="onLogsPageChange($event)">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+
+
+            </ul>
+        </div>
+        <div *ngIf="dripCampaignDeleteStatus" class="alert alert-danger" role="alert">
+            <p class="text-center email"><b>Deleted Drip Campaign ({{dripCampaignName}})</b></p>
+        </div>
+        <div *ngIf="dripCampaignStatus == 'Inactive' && !dripCampaignDeleteStatus" class="alert alert-danger"
+            role="alert">
+            <p class="text-center email"><b>Drip Campaign ({{dripCampaignName}}) Status Is Inactive</b> <a
+                    (click)="changeStatus('1')" class="click cursor-pointer"> click
+                    here to update</a></p>
+        </div>
+    </div>
+
+    <div [ngbNavOutlet]="nav" class="tab-content"></div>
+
+</main>
+<ng-template #dripCampaign>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Drip Campaign</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dripCampaignNameForm">
+            <div class="form-group">
+                <label for="new">Name*</label>
+                <input formControlName="name" type="text" class="form-control" id="new" placeholder="Enter name" />
+                <div class="invalid-input" *ngIf="n.name.errors && n.name.touched">
+                    <div *ngIf="n.name.errors.required">
+                        Name is required
+                    </div>
+                    <div *ngIf="n.name.errors.pattern">
+                        Invalid name
+                    </div>
+                    <div *ngIf="n.name.errors.minlength">
+                        Name must be minimum 3 characters long
+                    </div>
+                    <div *ngIf="n.name.errors.maxlength">
+                        Maximum 100 characters allowed
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="theme-btn" (click)="submitDripCampaignName()" [ngStyle]="background">
+            Submit
+        </button>
+    </div>
+</ng-template>
+<ng-template #personizedVars>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Insert Personalization Token</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Select Personalization Token* </label>
+                    <ng-select (change)="onTokenSelect($event)" name="status" placeholder="Select Token"
+                        appearance="outline" labelForId="elead">
+                        <ng-option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">
+                            {{ token.key }}
+                        </ng-option>
+                    </ng-select>
+                    <!-- <select (change)="onTokenSelect($event)" class="form-control" name="" id="">
+                        <option value="">--Select token--</option>
+                        <option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">{{ token.key
+                            }}</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

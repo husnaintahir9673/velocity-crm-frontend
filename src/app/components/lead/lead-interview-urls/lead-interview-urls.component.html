@@ -1,0 +1,130 @@
+<main class="wrapper">
+    <div class="container">
+        <div class="outer">
+            <div class="row">
+                <div *ngIf="cantakeLandlordInterview" class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group link-outer">
+                        <label>Landlord Interview Call Link</label>
+                        <input #landlord readonly [value]="lanloardsurl" type="text" class="form-control"
+                            value="example.com">
+                        <div (click)="copyTest(landlord.value)" class="copy-icon" title="Copy link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z" />
+                            </svg>
+                        </div>
+                        <div class="copy-icon open" title="Open link">
+                            <a [href]="lanloardsurl" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                    <path
+                                        d="M256 64C256 46.33 270.3 32 288 32H415.1C415.1 32 415.1 32 415.1 32C420.3 32 424.5 32.86 428.2 34.43C431.1 35.98 435.5 38.27 438.6 41.3C438.6 41.35 438.6 41.4 438.7 41.44C444.9 47.66 447.1 55.78 448 63.9C448 63.94 448 63.97 448 64V192C448 209.7 433.7 224 416 224C398.3 224 384 209.7 384 192V141.3L214.6 310.6C202.1 323.1 181.9 323.1 169.4 310.6C156.9 298.1 156.9 277.9 169.4 265.4L338.7 96H288C270.3 96 256 81.67 256 64V64zM0 128C0 92.65 28.65 64 64 64H160C177.7 64 192 78.33 192 96C192 113.7 177.7 128 160 128H64V416H352V320C352 302.3 366.3 288 384 288C401.7 288 416 302.3 416 320V416C416 451.3 387.3 480 352 480H64C28.65 480 0 451.3 0 416V128z" />
+                                </svg>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div *ngIf="cantakeMerchantInterview" class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                    <div class="form-group link-outer">
+                        <label>Merchant Interview Call Link</label>
+                        <input #merchant readonly [value]="merchanturl" type="text" class="form-control"
+                            value="example22.com">
+                        <div class="copy-icon" (click)="copyTest(merchant.value)" title="Copy link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z" />
+                            </svg>
+                        </div>
+                        <div class="copy-icon open" title="Open link">
+                            <a [href]="merchanturl" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                    <path
+                                        d="M256 64C256 46.33 270.3 32 288 32H415.1C415.1 32 415.1 32 415.1 32C420.3 32 424.5 32.86 428.2 34.43C431.1 35.98 435.5 38.27 438.6 41.3C438.6 41.35 438.6 41.4 438.7 41.44C444.9 47.66 447.1 55.78 448 63.9C448 63.94 448 63.97 448 64V192C448 209.7 433.7 224 416 224C398.3 224 384 209.7 384 192V141.3L214.6 310.6C202.1 323.1 181.9 323.1 169.4 310.6C156.9 298.1 156.9 277.9 169.4 265.4L338.7 96H288C270.3 96 256 81.67 256 64V64zM0 128C0 92.65 28.65 64 64 64H160C177.7 64 192 78.33 192 96C192 113.7 177.7 128 160 128H64V416H352V320C352 302.3 366.3 288 384 288C401.7 288 416 302.3 416 320V416C416 451.3 387.3 480 352 480H64C28.65 480 0 451.3 0 416V128z" />
+                                </svg>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="heading">
+                        Interview Documents
+                    </h4>
+                    <div class="lisitng-inner">
+                        <ul class="checkbox-list-items">
+                            <li class="checkbox-list-outer" *ngFor="let doc of interviewDocuments">
+                                <div class="checkbox-list-item">
+                                    <div class="list-btns d-flex">
+                                        <div class="form-check">
+
+                                        </div>
+                                        <div class="custom-dropdown">
+                                            <div class="dropdown" ngbDropdown>
+                                                <button type="button" ngbDropdownToggle
+                                                    class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <img src="assets/images/drop-dots.svg" alt="icon">
+                                                </button>
+                                                <ul class="dropdown-menu" ngbDropdownMenu>
+                                                    <li>
+                                                        <a ngbDropdownItem class="dropdown-item" [href]="doc.url"
+                                                            target="_blank"><svg width="12" height="12"
+                                                                viewBox="0 0 12 12" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M6.00049 2.25C3.50049 2.25 1.36549 3.805 0.500488 6C1.36549 8.195 3.50049 9.75 6.00049 9.75C8.50299 9.75 10.6355 8.195 11.5005 6C10.6355 3.805 8.50299 2.25 6.00049 2.25ZM6.00049 8.5C4.62049 8.5 3.50049 7.38 3.50049 6C3.50049 4.62 4.62049 3.5 6.00049 3.5C7.38049 3.5 8.50049 4.62 8.50049 6C8.50049 7.38 7.38049 8.5 6.00049 8.5ZM6.00049 4.5C5.17299 4.5 4.50049 5.1725 4.50049 6C4.50049 6.8275 5.17299 7.5 6.00049 7.5C6.82799 7.5 7.50049 6.8275 7.50049 6C7.50049 5.1725 6.82799 4.5 6.00049 4.5Z"
+                                                                    fill="#5254A6" />
+                                                            </svg>
+                                                            View
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="center-img">
+                                        <a [ngSwitch]="doc.mime">
+                                            <img *ngSwitchCase="'text/plain'" src="assets/images/txt-file.svg"
+                                                alt="image">
+                                            <img *ngSwitchCase="'application/pdf'" src="assets/images/pdf.svg"
+                                                alt="image">
+                                            <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                                src="assets/images/microsoft-excel.svg" alt="image">
+                                            <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                src="assets/images/microsoft-excel.svg" alt="image">
+                                            <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                src="assets/images/doc-icon.svg" alt="image">
+                                            <img *ngSwitchCase="'image/png'" src="assets/images/image.svg" alt="image">
+                                            <img *ngSwitchCase="'image/jpeg'" src="assets/images/image.svg" alt="image">
+                                            <img *ngSwitchCase="'image/gif'" src="assets/images/image.svg" alt="image">
+                                            <img *ngSwitchDefault src="assets/images/other.svg" alt="image">
+
+                                        </a>
+                                    </div>
+                                    <div class="list-bottom-content">
+                                        <p>{{ doc.document_name }}</p>
+                                        <span class="date-text">
+                                            {{getDate(doc.uploaded_on)}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="no-record-found" *ngIf="!interviewDocuments.length">
+                            <li>
+                                <span>No record found</span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

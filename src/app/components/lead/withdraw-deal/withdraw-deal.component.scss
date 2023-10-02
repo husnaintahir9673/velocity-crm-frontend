@@ -1,0 +1,24 @@
+.multiselect-reason {
+    max-height: 120px;
+    option {
+        padding: 10px 0px;
+    }
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #fafaff;
+        margin-right: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #fa5440;
+        border-radius: 100px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #fa5440;
+    }
+}
+
+.form-group {
+    margin-bottom: 15px;
+}

@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div *ngIf="emailConfigurationMessage" class="alert alert-danger" role="alert">
+    <p  class="text-center email"><b>Please update your email
+            configuration</b><a routerLink="/company/email-configurations" class="click cursor-pointer"> click
+            here to update</a></p>
+</div>
+<router-outlet></router-outlet>

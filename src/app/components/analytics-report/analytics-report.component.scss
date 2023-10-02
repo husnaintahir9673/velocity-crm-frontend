@@ -1,0 +1,16 @@
+.dashboard-wrapper {
+    min-height: 90vh;
+    overflow: hidden;
+}
+.canvas-graph {
+    text-align: center;
+}
+.canvas-graph .chart-container {
+    width: 460px;
+    margin: 0 auto;
+}
+
+// custom color
+.custom-day.range, .custom-day:hover {
+    background-color: var(--custom,'#FA5440') !important;
+}

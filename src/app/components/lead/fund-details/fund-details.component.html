@@ -1,0 +1,388 @@
+<main class="dashboard-wrapper fund-details-page">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../leads">
+                        <span>All Leads</span>/
+                    </li>
+                    <li class="cursor-pointer" routerLink="../../lead-detail/{{ leadID }}">
+                        <span class="active-page"> Lead Details <span class="active-page" *ngIf="lead.lead_id">( {{
+                                lead.lead_id }}, {{lead?.company_name}}, DBA - {{lead?.lead_doing_business_as}}
+                                )</span></span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Fund Details</span>
+                    </li>
+                </ul>
+            </div>
+            <app-all-detail-lead [leadId]="leadID" (leadDetails)="getLeadBasicDetails($event)"></app-all-detail-lead>
+            <div class="fund-detail-section">
+                <div class="accordion-item">
+                    <a class="accordion-head" data-bs-toggle="collapse">
+                        <span class="accordion-head-title">Fund Details</span>
+                    </a>
+                    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                        <div class="accordion-body">
+
+                            <div class="details-inner">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-5">
+                                            <div class="fund-detail-lists">
+                                                <ul class="funding-list">
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Business Name</span>
+                                                            <span class="des-text">{{ fundDetails?.business_name
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Funding Date</span>
+                                                            <span class="des-text">{{ getDate(fundDetails?.funding_date)
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Funding Amount($) </span>
+                                                            <span class="des-text">{{ fundDetails?.funding_amount |
+                                                                currency }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Factor Rate(%)</span>
+                                                            <span class="des-text">{{ fundDetails?.factor_rate }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Payback Amount($) </span>
+                                                            <span class="des-text">{{ fundDetails?.payback_amount |
+                                                                currency }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Lender Name</span>
+                                                            <span class="des-text">{{ fundDetails?.lender_name }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Upfront Broker Commission On </span>
+                                                            <span class="des-text">{{
+                                                                fundDetails?.upfront_broker_commission_on | currency
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Upfront Broker Commission($)</span>
+                                                            <span class="des-text">{{
+                                                                fundDetails?.upfront_broker_commission
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Total Points </span>
+                                                            <span class="des-text">{{ fundDetails?.total_points
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Retail Points </span>
+                                                            <span class="des-text">{{ fundDetails?.retail_points
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Upfront Fee($)</span>
+                                                            <span class="des-text">{{ fundDetails?.upfront_fee |
+                                                                currency }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Total Earings($) </span>
+                                                            <span class="des-text">{{ fundDetails?.total_earnings |
+                                                                currency }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Advance Type </span>
+                                                            <span class="des-text">{{ fundDetails?.advance_type
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Unit Type </span>
+                                                            <span class="des-text">{{ fundDetails?.unit_type }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Terms In Days </span>
+                                                            <span class="des-text">{{ fundDetails?.term_in_weeks
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="">
+                                                        <div class="d-flex list_inner">
+                                                            <span class="name-text">Weekly Ach</span>
+                                                            <span class="des-text">{{ fundDetails?.weekly_remit
+                                                                }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-7">
+                                            <div class="fund-detail-right">
+                                                <div class="participant-selector">
+                                                    <div class="form-group">
+                                                        <label>Participant*</label>
+                                                        <select [(ngModel)]="selectedParticipantID" class="form-control"
+                                                            name="selectedParticipantID" id="">
+                                                            <option value="">--Select Participant--</option>
+                                                            <ng-container *ngFor="let type of syndicateList">
+                                                                <option [value]="type.id" [disabled]="type.selected">
+                                                                    {{type.name}}
+                                                                </option>
+                                                            </ng-container>
+                                                        </select>
+                                                        <!-- <select formControlName="syndicator_id" multiple name="" id="" class="form-control multi-selecte-synd">
+                                                <option [value]="type.id" *ngFor="let type of syndicateList">
+                                                    {{ type.name }}
+                                                </option>
+                                            </select>
+                                             -->
+                                                        <!-- <div class="invalid-input"
+                                                *ngIf="f.participant_name.errors && f.participant_name.touched">
+                                                <div *ngIf="f.participant_name.errors.required">
+                                                    Participant is required
+                                                </div>
+
+                                            </div> -->
+                                                    </div>
+                                                    <div class="add-bank">
+                                                        <a (click)="onAddButtonClick()" [ngStyle]="background"
+                                                            class="add-btn cursor-pointer"><svg width="11" height="11"
+                                                                viewBox="0 0 11 11" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M10.003 5.49988C10.003 5.86951 9.68425 6.16968 9.29041 6.16968H0.712565C0.318718 6.16968 0 5.8697 0 5.49988C0 5.13025 0.318722 4.83008 0.712565 4.83008H9.29041C9.68426 4.83025 10.003 5.13024 10.003 5.49988Z"
+                                                                    fill="white"></path>
+                                                                <path
+                                                                    d="M5.00884 0.498535C5.38112 0.498535 5.67864 0.818668 5.67864 1.2125L5.66114 9.78899C5.65972 10.1841 5.3585 10.5016 4.99011 10.5016C4.62048 10.5001 4.32031 10.1814 4.32031 9.78759L4.33905 1.20974C4.33923 0.816072 4.6378 0.497176 5.00885 0.498579L5.00884 0.498535Z"
+                                                                    fill="white"></path>
+                                                            </svg>
+                                                            Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="remaining-funds-detail">
+                                                    <div class="remaining-input">
+                                                        <div class="form-group">
+                                                            <label>Remaining Funding Amount(50.000.00-0.00)*</label>
+                                                            <input type="text" [value]="remainingFund"
+                                                                placeholder="Enter remaining funding amount"
+                                                                class="form-control" readonly>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="fund-table" [formGroup]="fundDetailForm">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Participant Name</th>
+                                                                    <th scope="col">Management Fee(%)</th>
+                                                                    <th scope="col">Syndication Fee(%)</th>
+                                                                    <th scope="col">Underwriting Fee(%)</th>
+                                                                    <th scope="col">Broker Commission(%)</th>
+                                                                    <th scope="col">Upsell Commission(%)</th>
+                                                                    <th scope="col">Purchase Price($)</th>
+                                                                    <th scope="col">Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let participant of partcipantList; let i = index">
+                                                                    <td>
+                                                                        {{participant.syndicator_name}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.management_fee }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.syndication_fee}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.underwriting_fee}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.broker_commission}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.upsell_commission}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{participant.purchase_price}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a (click)="openparticipantRemovepopup(i, participant.id)"
+                                                                            class="action">
+                                                                            <img src="assets/images/delete.svg"
+                                                                                alt="/icon"></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr formArrayName="participant_form"
+                                                                    *ngFor="let par of participantFaArray.controls; let i = index">
+                                                                    <ng-container formGroupName="{{i}}">
+                                                                        <td>
+                                                                            {{par.get('syndicate_name')?.value}}
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="management_fee"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('management_fee')?.errors && par.get('management_fee')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('management_fee')?.errors?.pattern">
+                                                                                    Invalid management fee
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="syndication_fee"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('syndication_fee')?.errors && par.get('syndication_fee')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('syndication_fee')?.errors?.pattern">
+                                                                                    Invalid syndication fee
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="underwriting_fee"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('underwriting_fee')?.errors && par.get('underwriting_fee')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('underwriting_fee')?.errors?.pattern">
+                                                                                    Invalid underwriting fee
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="broker_commission"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('broker_commission')?.errors && par.get('broker_commission')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('broker_commission')?.errors?.pattern">
+                                                                                    Invalid broker commission
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="upsell_commission"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('upsell_commission')?.errors && par.get('upsell_commission')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('upsell_commission')?.errors?.pattern">
+                                                                                    Invalid upsell commission
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input formControlName="purchase_price"
+                                                                                type="text" class="input-fcs"
+                                                                                mask="separator.2" thousandSeparator=","
+                                                                                maxlength="15">
+                                                                            <div class="invalid-input"
+                                                                                *ngIf="par.get('purchase_price')?.errors && par.get('purchase_price')?.touched">
+                                                                                <div
+                                                                                    *ngIf="par.get('purchase_price')?.errors?.pattern">
+                                                                                    Invalid purchase price
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="action">
+                                                                                <img (click)="removeParticipant(i, par.get('syndicator_id')?.value)"
+                                                                                    src="assets/images/delete.svg"
+                                                                                    alt="/icon">
+                                                                            </a>
+                                                                        </td>
+                                                                    </ng-container>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="right-detail-btns">
+                            <ul class="d-flex">
+                                <li>
+                                    <a (click)="addParticipant()" class="theme-btn cursor-pointer"
+                                        [ngStyle]="background">Send to
+                                        participants</a>
+                                </li>
+                                <!-- <li>
+                                    <a class="theme-btn">Push to IP</a>
+                                </li> -->
+                                <li>
+                                    <a class="theme-btn white-btn cursor-pointer"
+                                        routerLink="../../lead-detail/{{ leadID }}">Cancel</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

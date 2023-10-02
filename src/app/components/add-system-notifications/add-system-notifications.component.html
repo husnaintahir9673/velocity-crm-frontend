@@ -1,0 +1,624 @@
+<main class="dashboard-wrapper">
+    <div class="drip-campaign-content">
+        <div class="breadcrumb-drip-campaign">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/system-notification-list">System Notification
+                            List</span>/
+                    </li>
+                    <li>
+                        <span class="active-page">Add System Notification</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-header-outer">
+            <!-- <ul [(activeId)]="activeTab" ngbNav #nav="ngbNav">
+                <li [ngbNavItem]="'Actions'" [ngClass]="{ 'active': activeTab == 'Actions' }">
+                    <a ngbNavLink>
+                        <span>
+                            Actions
+                        </span>
+                    </a> -->
+                    <div class="container">
+                        <div class="campaign-outer" *ngIf="!campaignSteps.length else campaign">
+                            <div class="setup-trigger-outer">
+                                <!-- <span class="header-title-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License)<path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/></svg></span> -->
+                                <div class="header">
+                                    System trigger({{dripCampaignName}})
+                                    <a (click)="openModal(dripCampaign)" class="edit-icon"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                            <path
+                                                d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                        </svg></a>
+                                </div>
+                                <div class="body">
+                                    <p>
+                                        Choose the trigger
+                                    </p>
+                                    <button [ngStyle]="background" class="theme-btn" (click)="popUps.statusPopup = true;">Set up
+                                        trigger</button>
+                                </div>
+
+                            </div>
+                            <div class="end-outer">
+                                <div class="liner">
+
+                                </div>
+                                <button (click)="openActionsModel()" class="add-btn">
+                                    +
+                                </button>
+                                <div class="liner">
+
+                                </div>
+                                <button (click)="onSettingsSave()"  [ngStyle]="{'border-color':color,'color':color}" class="end-btn">End</button>
+                            </div>
+
+
+                            <!-- <div class="end-outer">
+                                <div class="liner">
+                
+                                </div>
+                                <button class="add-btn rotate">
+                                    <span>
+                                        +
+                                    </span>
+                                    
+                                </button>
+                                <div class="liner">
+                
+                                </div>
+                                <div class="new-action">
+                                    <span>New Action</span>
+                                </div>
+                                <div class="liner">
+                
+                                </div>
+                                <button class="end-btn">End</button>
+                            </div> -->
+                        </div>
+                        <ng-template #campaign>
+                            <div class="campaign-outer">
+                                <ng-container *ngFor="let camp of campaignSteps; let i = index">
+                                    <div class="setup-trigger-outer" [ngClass]="{ 'grabbable': i>0 }"  
+                                        dndDropzone
+                                        (dndDragover)="onDragover($event, i)"
+                                        (dndDrop)="onDrop($event, campaignSteps)" 
+                                        [dndDraggable]="camp"
+                                        [dndEffectAllowed]="draggable.effectAllowed"
+                                        [dndDisableIf]="draggable.disable"
+                                        (dndStart)="onDragStart($event, i, camp)"
+                                        (dndCopied)="onDraggableMoved($event,camp, campaignSteps, 'copy', i)"
+                                        (dndEnd)="onDragEnd($event,campaignSteps)">
+                                        <div class="header" *ngIf="i==0">
+                                            {{ camp.header_text }}({{dripCampaignName}})
+                                            <a (click)="openModal(dripCampaign)" class="edit-icon"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                    <path
+                                                        d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                </svg></a>
+                                        </div>
+                                        <div class="header" *ngIf="i>0" [ngClass]="{'green-color': i%2 !== 0}">
+                                            {{ camp.header_text }}
+                                            <div *ngIf="i>0" class="header-cross-btn">
+                                                <button (click)="removeStep(i)" class="btn-close"></button>
+                                            </div>
+                                        </div>
+                                        <div class="body">
+                                            <ng-container [ngSwitch]="camp.type">
+                                                <div *ngSwitchCase="steps.TRIGGER"
+                                                    (click)="popUps.statusPopup = true;">
+                                                    <p>
+                                                    Lead status ({{ camp.data.status_name }}) , System Status ({{ camp.data.system_name }}) <a
+                                                            (click)="popUps.statusPopup = true;"
+                                                            class="edit-icon"><svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 512 512">
+                                                                <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                                <path
+                                                                    d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z" />
+                                                            </svg></a>
+                                                    </p>
+                                                </div>
+                                                <div class="step-send-email"  *ngSwitchCase="steps.SEND_EMAIL" (click)="getemailPopup(i)">
+                                                    <p>
+                                                        {{ camp.data.templateText }}
+                                                        <a class="edit-icon cursor-pointer"><svg _ngcontent-bbk-c296="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path _ngcontent-bbk-c296="" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg></a>
+                                                    </p>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="end-outer" *ngIf="i < (campaignSteps.length - 1)">
+                                        <div class="liner">
+
+                                        </div>
+                                        <button (click)="addOnAIndex = i;openActionsModel()" class="add-btn">
+                                            +
+                                        </button>
+                                        <div class="liner">
+
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <div class="end-outer">
+                                    <div class="liner">
+
+                                    </div>
+                                    <button (click)="addOnAIndex = null;openActionsModel()" class="add-btn">
+                                        +
+                                    </button>
+                                    <div class="liner">
+
+                                    </div>
+                                    <button (click)="onSettingsSave()" [ngStyle]="{'border-color':color,'color':color}" class="end-btn">End</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <!-- trigger popup -->
+                    <!-- css for scroll cstm-overflow-scroll -->
+                    <div class="modal-right" [ngClass]="{'active': popUps.statusPopup}">
+                        <div class="lead-status">
+                            <div class="header">
+                                System Trigger
+                            </div>
+                            <div class="body" [formGroup]="leadStatusForm">
+                                <div class="col-md-12">
+                                    <div class="radio-btns">
+                                        <div class="form-check">
+                                            <input type="radio"
+                                            formControlName="status_type"
+                                            (change)="leadType($any($event.target).value)"
+                                                class="form-check-input cursor-pointer" id="specific"
+                                                name="status_type" value="specific"
+                                                [ngStyle]="{'background-color':leadStatusForm.value.status_type == 'specific'?color:'','border-color':leadStatusForm.value.status_type == 'specific'?color:''}" />
+                                            <label class="form-check-label cursor-pointer"
+                                                for="specific">Specific Lead Status</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio"
+                                            formControlName="status_type"
+                                            (change)="leadType($any($event.target).value)"
+                                                class="form-check-input cursor-pointer" id="all"
+                                                name="status_type" value="all"
+                                                [ngStyle]="{'background-color':leadStatusForm.value.status_type == 'all'?color:'','border-color':leadStatusForm.value.status_type == 'all'?color:''}"  />
+                                            <label class="form-check-label cursor-pointer"
+                                                for="all">All Status</label>
+                                        </div>
+                                    </div>
+                                    <div class="invalid-input"
+                                    *ngIf="control.status_type.errors && control.status_type.touched">
+                                    <div *ngIf="control.status_type.errors.required">
+                                        Status type is required
+                                    </div>
+                                </div>
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="form-group" *ngIf="leadStatusForm.value.status_type == 'specific'">
+                                        <label>Lead Status</label>
+                                        <ng-select formControlName="lead_status" 
+                                        name="status" placeholder="Select Lead Status" appearance="outline"
+                                     labelForId="elead">
+                                        <ng-option [value]="status" *ngFor="let status of leadStatusList">
+                                            {{ status.name }}
+                                        </ng-option>
+                                        </ng-select>
+                                        <div class="invalid-input"
+                                            *ngIf="control.lead_status.errors && control.lead_status.touched">
+                                            <div *ngIf="control.lead_status.errors.required">
+                                                Lead status is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>System Status*</label>
+                                        <ng-select formControlName="system_status" 
+                                        name="status" placeholder="Select System Status" appearance="outline"
+                                     labelForId="elead">
+                                        <ng-option [value]="system" *ngFor="let system of systemStatusList">
+                                            {{ system.name }}
+                                        </ng-option>
+                                        </ng-select>
+                                        <div class="invalid-input"
+                                            *ngIf="control.system_status.errors && control.system_status.touched">
+                                            <div *ngIf="control.system_status.errors.required">
+                                                System status is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="lead-status-search">
+                                    <div class="top-header-search">
+                                        <input [(ngModel)]="systemSearchModel"  class="form-control search-input"
+                                            type="text" placeholder="Search system status" autofocus>
+
+                                    </div>
+                                </div>
+                                <div class="status-list">
+                                    <div class="mark-completed">
+                                        <div class="form-check"
+                                            *ngFor="let status of leadStatusList | searchFilter: systemSearchModel">
+                                            <input class="form-check-input" 
+                                                type="radio" name="keys_on_hand" 
+                                                >
+                                            <label class="form-check-label" >
+                                                {{status.name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                  
+                        <div class="footer">
+                            <div>
+                                <button (click)="addTrigger()" [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                <button (click)="popUps.statusPopup = false" [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Actions popup -->
+                    <div class="modal-right" [ngClass]="{'active': popUps.actionsPopup}">
+                        <div class="actions-outer">
+                            <div class="header">
+                                Actions
+                            </div>
+                            <div class="body">
+                                <div class="actions">
+                                    <h6>
+
+                                        Notifications
+                                    </h6>
+                                    <div class="list">
+                                        <ul>
+                                            <li (click)="closeAllModels();popUps.sendMail = true;editEmailPopup = false">
+                                                <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 448 512">
+                                                        <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+                                                        <path
+                                                            d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z" />
+                                                    </svg></span>
+                                                Send a email notification
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div>
+                                    <button (click)="popUps.actionsPopup = false" [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Send emails  -->
+                    <div class="modal-right " [ngClass]="{'active': popUps.sendMail}">
+                        <div class="send-email-notifications">
+                            <div class="header">
+                                Send email notifications
+                            </div>
+                            <div class="body">
+                                <div class="send-email" [formGroup]="sendMailForm">
+                                    <div class="select-template">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="radio-btns">
+                                                    <div class="form-check">
+                                                        <input type="radio"
+                                                            (change)="templateType($any($event.target).value)"
+                                                            formControlName="template_type"
+                                                            class="form-check-input cursor-pointer" id="text"
+                                                            name="template_type" value="predefined" [ngStyle]="{'background-color':templateSelectColor?color:'','border-color':templateSelectColor?color:''}"/>
+                                                            <!-- [ngStyle]="{'background-color':templateSelectColor?color:'','border-color':templateSelectColor?color:''}" -->
+                                                        <label class="form-check-label cursor-pointer"
+                                                            for="text">Select
+                                                            template</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio"
+                                                            (change)="templateType($any($event.target).value)"
+                                                            formControlName="template_type"
+                                                            class="form-check-input cursor-pointer" id="email"
+                                                            
+                                                            name="template_type" value="from_scratch" [ngStyle]="{'background-color':templateSelectColor2?color:'','border-color':templateSelectColor2?color:''}" />
+                                                            <!--  -->
+                                                        <label class="form-check-label cursor-pointer"
+                                                            for="email">Create from
+                                                            scratch</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12"
+                                                *ngIf="sendMailForm.value.template_type == 'predefined'">
+                                                <div class="form-group">
+                                                    <label>Template</label>
+                                                    <ng-select formControlName="template" bindValue="id"
+                                                    [items]="emailTemplateList" bindLabel="name"
+                                                    placeholder="Select Template" appearance="outline"
+                                                    [searchable]="false" [clearable]="false" labelForId="elead">
+                                                    <ng-option [value]="template.id" *ngFor="let template of emailTemplateList">
+                                                        {{ template.name }}
+                                                    </ng-option>
+                                                </ng-select>
+                                                    <!-- <ng-select formControlName="template" bindValue="id"
+                                                        [items]="emailTemplateList" bindLabel="name"
+                                                        placeholder="Select Template">
+                                                    </ng-select> -->
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.template.errors && f.template.touched">
+                                                        <div *ngIf="f.template.errors.required">
+                                                            Please select a template
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12" *ngIf="sendMailForm.value.template_type == 'predefined'">
+                                                <div class="form-group">
+                                                  <label>From</label>
+                                                  <select
+                                                    formControlName="from_option"
+                                                    class="form-control"
+                                                    name=""
+                                                    id=""
+                                                  >
+                                                    <option value="">--Select From--</option>
+                                                    <option
+                                                      [value]="from.id"
+                                                      *ngFor="let from of fromOptions"
+                                                    >
+                                                      {{ from.name }}
+                                                    </option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <div class="col-12" *ngIf="sendMailForm.value.template_type == 'predefined'">
+                                                <div class="form-group">
+                                                    <label>To</label>
+                                                  <ng-select
+                                                    [items]="rolesList"
+                                                    [multiple]="true"
+                                                    bindLabel="name"
+                                                    [closeOnSelect]="false"
+                                                    [virtualScroll]="true"
+                                                    bindValue="id"
+                                                    formControlName="to_option"
+                                                    placeholder="Select"
+                                                    [loading]="loading"
+                                                  >
+                                                    <ng-template
+                                                      ng-option-tmp
+                                                      let-item="item"
+                                                      let-item$="item$"
+                                                      let-index="index"
+                                                    >
+                                                      <input
+                                                        id="item-{{ index }}"
+                                                        type="checkbox"
+                                                        [checked]="item$.selected"
+                                                      />
+                                                      {{ item.name }}
+                                                    </ng-template>
+                                                  </ng-select>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-12"  *ngIf="sendMailForm.value.template_type == 'predefined'">
+                                                <div class="form-group">
+                                                    <label>CC</label>
+                                                    <input formControlName="cc_template" type="text" class="form-control"
+                                                        placeholder="Cc">
+                                                    <div class="invalid-input"
+                                                        *ngIf="f.cc_template.errors && f.cc_template.touched">
+                                                        <div *ngIf="f.cc_template.errors.pattern">
+                                                            Invalid email
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="create-template"
+                                        *ngIf="sendMailForm.value.template_type == 'from_scratch'">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Subject</label>
+                                                        <input formControlName="subject" type="text"
+                                                            class="form-control" placeholder="Subject">
+                                                        <div class="invalid-input"
+                                                            *ngIf="f.subject.errors && f.subject.touched">
+                                                            <div *ngIf="f.subject.errors.required">
+                                                                Subject is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12" *ngIf="sendMailForm.value.template_type == 'from_scratch'">
+                                                    <div class="form-group">
+                                                      <label>From</label>
+                                                      <select
+                                                        formControlName="from_option_scratch"
+                                                        class="form-control"
+                                                        name=""
+                                                        id=""
+                                                      >
+                                                        <option value="">--Select From--</option>
+                                                        <option
+                                                          [value]="from.id"
+                                                          *ngFor="let from of fromOptions"
+                                                        >
+                                                          {{ from.name }}
+                                                        </option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-12" *ngIf="sendMailForm.value.template_type == 'from_scratch'">
+                                                    <div class="form-group">
+                                                        <label>To</label>
+                                                      <ng-select
+                                                        [items]="rolesList"
+                                                        [multiple]="true"
+                                                        bindLabel="name"
+                                                        [closeOnSelect]="false"
+                                                        [virtualScroll]="true"
+                                                        bindValue="id"
+                                                        formControlName="to_option_scratch"
+                                                        placeholder="Select"
+                                                        [loading]="loading"
+                                                      >
+                                                        <ng-template
+                                                          ng-option-tmp
+                                                          let-item="item"
+                                                          let-item$="item$"
+                                                          let-index="index"
+                                                        >
+                                                          <input
+                                                            id="item-{{ index }}"
+                                                            type="checkbox"
+                                                            [checked]="item$.selected"
+                                                          />
+                                                          {{ item.name }}
+                                                        </ng-template>
+                                                      </ng-select>
+                                                    </div>
+                                                  </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>CC</label>
+                                                        <input formControlName="cc" type="text" class="form-control"
+                                                            placeholder="Cc">
+                                                        <div class="invalid-input"
+                                                            *ngIf="f.cc.errors && f.cc.touched">
+                                                            <div *ngIf="f.cc.errors.required">
+                                                                Cc is required
+                                                            </div>
+                                                            <div *ngIf="f.cc.errors.pattern">
+                                                                Invalid email
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="">Body</label>
+                                                        <angular-editor formControlName="body" #myckeditor
+                                                            [config]="editorConfig">
+                                                            <ng-template #customButtons
+                                                                let-executeCommandFn="executeCommandFn">
+                                                                <ae-toolbar-set>
+                                                                    <ae-button iconClass="fa fa-user"
+                                                                        title="Personalized"
+                                                                        (buttonClick)="openPeronisedForm(myckeditor)">
+                                                                    </ae-button>
+                                                                </ae-toolbar-set>
+                                                            </ng-template>
+                                                        </angular-editor>
+                                                        <div class="invalid-input"
+                                                            *ngIf="f.body.errors && f.body.touched">
+                                                            <div *ngIf="f.body.errors.required">
+                                                                Template body is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div>
+                                    <button (click)="ontemplateSave()" [ngStyle]="{'border-color':color,'color':color}">Save</button>
+                                    <button
+                                        (click)="popUps.sendMail = false; popUps.actionsPopup = true" [ngStyle]="{'border-color':color,'color':color}">Cancel</button>
+                                    <!-- <button (click)="closeAllModels()">Cancel</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+  
+
+        </div>
+    </div>
+
+</main>
+<ng-template #dripCampaign>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit System Notification</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dripCampaignNameForm">
+            <div class="form-group">
+                <label for="new">Name*</label>
+                <input formControlName="name" type="text" class="form-control" id="new" placeholder="Enter name" />
+                <div class="invalid-input" *ngIf="n.name.errors && n.name.touched">
+                    <div *ngIf="n.name.errors.required">
+                        Name is required
+                    </div>
+                    <div *ngIf="n.name.errors.pattern">
+                        Invalid name
+                    </div>
+                    <div *ngIf="n.name.errors.minlength">
+                        Name must be minimum 3 characters long
+                    </div>
+                    <div *ngIf="n.name.errors.maxlength">
+                        Maximum 100 characters allowed
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="theme-btn" (click)="submitDripCampaignName()" [ngStyle]="background">
+            Submit
+        </button>
+    </div>
+</ng-template>
+<ng-template #personizedVars>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Insert Personalization Token</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Select Personalization Token* </label>
+                    <ng-select (change)="onTokenSelect($event)" name="status" placeholder="Select Token"
+                    appearance="outline" labelForId="elead">
+                    <ng-option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">
+                        {{ token.key }}
+                    </ng-option>
+                </ng-select>
+                    <!-- <select (change)="onTokenSelect($event)" class="form-control" name="" id="">
+                        <option value="">--Select token--</option>
+                        <option [value]="token.value" *ngFor="let token of personilizedVariables| keyvalue">{{ token.key
+                            }}</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

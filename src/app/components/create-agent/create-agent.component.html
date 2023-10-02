@@ -1,0 +1,394 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <!-- <h3 class="page-title cursor-pointer" routerLink="/company/agent"> -->
+                        <!-- </h3> -->
+                        <span class="cursor-pointer" routerLink="/company/agent">Agent List</span>/
+                    </li>
+                    <li>
+                        <span class="active-page"> Add Agent <span class="active-page">
+                            <!-- ( {{
+                            userDetails?.id }}, {{userDetails?.first_name}}
+                                ) -->
+                            </span></span>
+                    </li>
+                </ul>
+
+
+
+
+                <!-- <h3 class="page-title cursor-pointer" routerLink="/company/agent">
+                    <span>
+                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                fill="#565D80" />
+                        </svg>
+
+                    </span> Add Agent
+                </h3> -->
+            </div>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Agent Details </span>
+                            <!-- <span class="accordion-head-icon">
+                                <img src="assets/images/drop-down.svg" alt="" />
+                            </span> -->
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="addAgentForm">
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>First Name*</label>
+                                            <input formControlName="first_name" type="text" placeholder="First name"
+                                                class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.first_name.errors && f.first_name.touched">
+                                                <div *ngIf="f.first_name.errors.required">
+                                                    First name is required
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.minlength">
+                                                    First name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Last Name*</label>
+                                            <input formControlName="last_name" type="text" placeholder="Last name"
+                                                class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.last_name.errors && f.last_name.touched">
+                                                <div *ngIf="f.last_name.errors.required">
+                                                    Last name is required
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.minlength">
+                                                    Last name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Email*</label>
+                                            <input formControlName="email" type="email" id="tst" placeholder="Email"
+                                                class="form-control" autocomplete="off" />
+                                            <div class="invalid-input" *ngIf="f.email.errors && f.email.touched">
+                                                <div *ngIf="f.email.errors.required">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="f.email.errors.pattern">
+                                                    Invalid email
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Password*</label>
+                                            <input formControlName="password" [type]="passwordType ? 'password': 'text'"
+                                                id="gjhyk" placeholder="Password" class="form-control"
+                                                autocomplete="new-password" />
+                                            <span (click)="passwordType = !passwordType" *ngIf="!passwordType"
+                                                class="bi bi-eye-slash cursor-pointer" id="togglePassword">
+                                                <img src="assets/images/eye-visible.svg" alt="Eye Off Icon">
+                                            </span>
+                                            <span (click)="passwordType = !passwordType" *ngIf="passwordType"
+                                                class="bi bi-eye-slash eye-visible cursor-pointer" id="togglePassword">
+                                                <img src="assets/images/eye-off.svg" alt="Eye On Icon">
+                                            </span>
+                                            <div class="invalid-input" *ngIf="f.password.errors && f.password.touched">
+                                                <div *ngIf="f.password.errors.required">
+                                                    Password is required
+                                                </div>
+                                                
+                                                <div *ngIf="f.password.errors.maxlength">
+                                                    Password must be maximum 16 characters long
+                                                </div>
+                                                <div *ngIf="f.password.errors.pattern">
+                                                    Password should contain atleast 8 characters, one capital letter,
+                                                    one number and one special character
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input [mask]="mask.phone" formControlName="phone_number" type="text"
+                                                placeholder="(814) 582-6388" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.phone_number.errors && f.phone_number.touched">
+                                                <div *ngIf="f.phone_number.errors.pattern">
+                                                    Invalid phone number
+                                                </div>
+                                                <div *ngIf="f.phone_number.errors.mask">
+                                                    Invalid phone number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Fax</label>
+                                            <input formControlName="fax" type="text" placeholder="Fax"
+                                                class="form-control" maxlength="15"/>
+                                            <div class="invalid-input" *ngIf="f.fax.errors && f.fax.touched">
+                                                <div *ngIf="f.fax.errors.pattern">
+                                                    Invalid fax number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <textarea  name="sdf" id="" cols="30" rows="3" ></textarea> -->
+<!-- 
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input type="text" formControlName="address" placeholder="Address"
+                                                class="form-control">
+                                            <div class="invalid-input" *ngIf="f.address.errors && f.address.touched">
+                                                <div *ngIf="f.address.errors.pattern">
+                                                    Invalid address
+                                                </div>
+                                                <div *ngIf="f.address.errors.maxlength">
+                                                    Maximum 200 characters allowed
+                                                </div>
+                                                <div *ngIf="f.address.errors.minlength">
+                                                    Address must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+<!-- 
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input formControlName="city" type="text" placeholder="City"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.city.errors && f.city.touched">
+                                                <div *ngIf="f.city.errors.pattern">
+                                                    Invalid city name
+                                                </div>
+                                                <div *ngIf="f.city.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.city.errors.minlength">
+                                                    City name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+<!-- 
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <select formControlName="state_id" class="form-control" name=""
+                                                id="country">
+                                                <option value="">--Select State--</option>
+                                                <option [value]="state.id" *ngFor="let state of statesList">{{
+                                                    state.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Zip Code</label>
+                                            <input formControlName="zip_code" type="text" placeholder="Zip code"
+                                                class="form-control" maxlength="5"/>
+                                            <div class="invalid-input" *ngIf="f.zip_code.errors && f.zip_code.touched">
+                                                <div *ngIf="f.zip_code.errors.pattern">
+                                                    Invalid zip code
+                                                </div>
+                                            </div>
+                                        </div> -->
+<!-- 
+                                    </div> -->
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Country*</label>
+                                            <select (change)="onCountryChange($any($event.target).value)"
+                                                formControlName="country_id" class="form-control" name="" id="country">
+                                                <option [value]="country.id" *ngFor="let country of countriesList">{{
+                                                    country.name }}</option>
+                                            </select>
+                                            <div class="invalid-input"
+                                                *ngIf="f.country_id.errors && f.country_id.touched">
+                                                <div *ngIf="f.country_id.errors.required">
+                                                    Country is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Date Of Birth</label>
+                                            <div class="input-group">
+                                                <input #dob formControlName="dob"
+                                                type="text" placeholder="Date of birth" class="form-control" />
+                                                <span class="input-group-text">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.5 9C7.64834 9 7.79334 8.95601 7.91668 8.8736C8.04002 8.79119 8.13614 8.67406 8.19291 8.53701C8.24968 8.39997 8.26453 8.24917 8.23559 8.10368C8.20665 7.9582 8.13522 7.82456 8.03033 7.71967C7.92544 7.61478 7.7918 7.54335 7.64632 7.51441C7.50083 7.48547 7.35003 7.50032 7.21299 7.55709C7.07594 7.61386 6.95881 7.70999 6.8764 7.83332C6.79399 7.95666 6.75 8.10166 6.75 8.25C6.75 8.44891 6.82902 8.63968 6.96967 8.78033C7.11032 8.92098 7.30109 9 7.5 9ZM11.25 9C11.3983 9 11.5433 8.95601 11.6667 8.8736C11.79 8.79119 11.8861 8.67406 11.9429 8.53701C11.9997 8.39997 12.0145 8.24917 11.9856 8.10368C11.9566 7.9582 11.8852 7.82456 11.7803 7.71967C11.6754 7.61478 11.5418 7.54335 11.3963 7.51441C11.2508 7.48547 11.1 7.50032 10.963 7.55709C10.8259 7.61386 10.7088 7.70999 10.6264 7.83332C10.544 7.95666 10.5 8.10166 10.5 8.25C10.5 8.44891 10.579 8.63968 10.7197 8.78033C10.8603 8.92098 11.0511 9 11.25 9ZM7.5 12C7.64834 12 7.79334 11.956 7.91668 11.8736C8.04002 11.7912 8.13614 11.6741 8.19291 11.537C8.24968 11.4 8.26453 11.2492 8.23559 11.1037C8.20665 10.9582 8.13522 10.8246 8.03033 10.7197C7.92544 10.6148 7.7918 10.5434 7.64632 10.5144C7.50083 10.4855 7.35003 10.5003 7.21299 10.5571C7.07594 10.6139 6.95881 10.71 6.8764 10.8333C6.79399 10.9567 6.75 11.1017 6.75 11.25C6.75 11.4489 6.82902 11.6397 6.96967 11.7803C7.11032 11.921 7.30109 12 7.5 12ZM11.25 12C11.3983 12 11.5433 11.956 11.6667 11.8736C11.79 11.7912 11.8861 11.6741 11.9429 11.537C11.9997 11.4 12.0145 11.2492 11.9856 11.1037C11.9566 10.9582 11.8852 10.8246 11.7803 10.7197C11.6754 10.6148 11.5418 10.5434 11.3963 10.5144C11.2508 10.4855 11.1 10.5003 10.963 10.5571C10.8259 10.6139 10.7088 10.71 10.6264 10.8333C10.544 10.9567 10.5 11.1017 10.5 11.25C10.5 11.4489 10.579 11.6397 10.7197 11.7803C10.8603 11.921 11.0511 12 11.25 12ZM3.75 9C3.89834 9 4.04334 8.95601 4.16668 8.8736C4.29001 8.79119 4.38614 8.67406 4.44291 8.53701C4.49968 8.39997 4.51453 8.24917 4.48559 8.10368C4.45665 7.9582 4.38522 7.82456 4.28033 7.71967C4.17544 7.61478 4.0418 7.54335 3.89632 7.51441C3.75083 7.48547 3.60003 7.50032 3.46299 7.55709C3.32594 7.61386 3.20881 7.70999 3.1264 7.83332C3.04399 7.95666 3 8.10166 3 8.25C3 8.44891 3.07902 8.63968 3.21967 8.78033C3.36032 8.92098 3.55109 9 3.75 9ZM12.75 1.5H12V0.75C12 0.551088 11.921 0.360322 11.7803 0.21967C11.6397 0.0790176 11.4489 0 11.25 0C11.0511 0 10.8603 0.0790176 10.7197 0.21967C10.579 0.360322 10.5 0.551088 10.5 0.75V1.5H4.5V0.75C4.5 0.551088 4.42098 0.360322 4.28033 0.21967C4.13968 0.0790176 3.94891 0 3.75 0C3.55109 0 3.36032 0.0790176 3.21967 0.21967C3.07902 0.360322 3 0.551088 3 0.75V1.5H2.25C1.65326 1.5 1.08097 1.73705 0.65901 2.15901C0.237053 2.58097 0 3.15326 0 3.75V12.75C0 13.3467 0.237053 13.919 0.65901 14.341C1.08097 14.7629 1.65326 15 2.25 15H12.75C13.3467 15 13.919 14.7629 14.341 14.341C14.7629 13.919 15 13.3467 15 12.75V3.75C15 3.15326 14.7629 2.58097 14.341 2.15901C13.919 1.73705 13.3467 1.5 12.75 1.5ZM13.5 12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5H2.25C2.05109 13.5 1.86032 13.421 1.71967 13.2803C1.57902 13.1397 1.5 12.9489 1.5 12.75V6H13.5V12.75ZM13.5 4.5H1.5V3.75C1.5 3.55109 1.57902 3.36032 1.71967 3.21967C1.86032 3.07902 2.05109 3 2.25 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V4.5ZM3.75 12C3.89834 12 4.04334 11.956 4.16668 11.8736C4.29001 11.7912 4.38614 11.6741 4.44291 11.537C4.49968 11.4 4.51453 11.2492 4.48559 11.1037C4.45665 10.9582 4.38522 10.8246 4.28033 10.7197C4.17544 10.6148 4.0418 10.5434 3.89632 10.5144C3.75083 10.4855 3.60003 10.5003 3.46299 10.5571C3.32594 10.6139 3.20881 10.71 3.1264 10.8333C3.04399 10.9567 3 11.1017 3 11.25C3 11.4489 3.07902 11.6397 3.21967 11.7803C3.36032 11.921 3.55109 12 3.75 12Z"
+                                                            fill="#565D80"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Role*</label>
+                                            <select formControlName="role" class="form-control" name="" id="country">
+                                                <option value="">--Select role--</option>
+                                                <option [value]="role.name" *ngFor="let role of rolesList">{{ role.name
+                                                    }}</option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="f.role.errors && f.role.touched">
+                                                <div *ngIf="f.role.errors.required">
+                                                    Role is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Status*</label>
+                                            <select formControlName="status" class="form-control" name="" id="country">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="f.status.errors && f.status.touched">
+                                                <div *ngIf="f.status.errors.required">
+                                                    Status is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="country">Time Zone</label>
+                                        <select 
+                                            formControlName="time_zone_id" name="country" id="time"
+                                            class="form-control">
+                                            <option [value]="time.id" *ngFor="let time of timezonesList">
+                                                {{ time.time_zone }}</option>
+                                        </select>
+                                    </div> -->
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="country">Date Format</label>
+                                        <select 
+                                            formControlName="date_format_id" name="format" id="date"
+                                            class="form-control">
+                                            <option [value]="date.id" *ngFor="let date of dateFormatList">
+                                                {{ date.format }} ({{ getDate(currentDate, date.format)}})</option>
+                                        </select>
+                                    </div> -->
+                                    
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>SIP Extension*</label>
+                                            <input formControlName="sip_extension" type="text" placeholder="Enter sip extension"
+                                                class="form-control"/>
+                                            <div class="invalid-input" *ngIf="f.sip_extension.errors && f.sip_extension.touched">
+                                                <div *ngIf="f.sip_extension.errors.required">
+                                                    Sip extension is required
+                                                </div> 
+                                                <div *ngIf="f.sip_extension.errors.pattern">
+                                                    Invalid sip extension
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+                                    
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>SIP Password</label>
+                                            <input formControlName="sip_password" type="text" placeholder="Enter sip password"
+                                                class="form-control"/>
+                                            <div class="invalid-input" *ngIf="f.sip_password.errors && f.sip_password.touched">
+                                                <div *ngIf="f.sip_password.errors.pattern">
+                                                    Invalid sip password
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <div class="mark-completed">
+
+                                                <div class="form-check">
+                                                    <input id="auto_commission" name="auto_commission" formControlName="auto_commission"
+                                                        class="form-check-input" type="checkbox"
+                                                        value="1" >
+                                                    <label class="form-check-label"
+                                                        for="auto_commission">Automatic Commission
+                                                    </label>
+                                            
+                                                </div>
+                                            </div>
+                                
+                                
+                                        </div>
+
+
+                                    </div> -->
+
+                                    <div class="col-12 text-end">
+                                        <a (click)="addAgentSubmit()" [ngStyle]="background" class="theme-btn cursor-pointer">
+                                            <span class="">Submit</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,27 @@
+.top-header {
+    background-color: #fff;
+    border-bottom: 1px solid #E9EDF4;
+}
+.top-header-content {
+    padding: 9px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}.top-header-left {
+    width: 20%;
+}   
+.lead-table {
+    min-height: 300px;
+}
+td.img {
+    img{
+        width: 15px;
+    }
+}
+
+.logo img {
+    object-fit: contain;
+    height: 100%;
+    width: 35%;
+    max-height: 45px;
+}

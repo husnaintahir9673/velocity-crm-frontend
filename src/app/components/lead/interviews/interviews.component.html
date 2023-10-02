@@ -1,0 +1,893 @@
+<main class="dashboard-wrapper email-template-builder">
+  <div class="container">
+    <div class="craete-lead-wrapper">
+      <div class="page-header">
+        <ul class="breadcrumb">
+          <li
+            class="left-icon cursor-pointer"
+            routerLink="../../lead-detail/{{ leadID }}"
+          >
+            <span>
+              <svg
+                width="5"
+                height="9"
+                viewBox="0 0 5 9"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                  fill="#565D80"
+                ></path>
+              </svg>
+            </span>
+          </li>
+          <li class="cursor-pointer" routerLink="../../leads">
+            <span>All Leads</span>/
+          </li>
+          <li
+            class="cursor-pointer"
+            routerLink="../../lead-detail/{{ leadID }}"
+          >
+            <span class="active-page">
+              Lead Details
+              <span class="active-page" *ngIf="lead.lead_id"
+                >( {{ lead.lead_id }}, {{ lead?.company_name }}, DBA -
+                {{ lead?.lead_doing_business_as }} )</span
+              ></span
+            >/
+          </li>
+          <li>
+            <span class="active-page">Interviews</span>
+          </li>
+        </ul>
+      </div>
+      <app-all-detail-lead
+        [leadId]="leadID"
+        (leadDetails)="getLeadBasicDetails($event)"
+      ></app-all-detail-lead>
+      <div class="create-lead-content">
+        <div class="full-view">
+          <!-- <div class="full-view-heading">
+                        <span>Interviews</span>
+                    </div> -->
+
+          <div class="send-submission-data">
+            <div class="inner-submission-data">
+              <div class="tab-inner-box">
+                <div class="tab-wrapper">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item cursor-pointer">
+                      <a
+                        class="nav-link"
+                        data-bs-toggle="tab"
+                        [ngClass]="{ active: activeTab == 'Lanloards' }"
+                        (click)="lanlordInterviewsTab()"
+                        >Landloard Verification</a
+                      >
+                    </li>
+                    <li class="nav-item cursor-pointer">
+                      <a
+                        class="nav-link"
+                        data-bs-toggle="tab"
+                        [ngClass]="{ active: activeTab == 'Merchants' }"
+                        (click)="merchantInterviewsTab()"
+                        >Merchants Verification</a
+                      >
+                    </li>
+                  </ul>
+                  <div class="tab-content verification-tabs">
+                    <div
+                      [ngClass]="{ active: activeTab == 'Lanloards' }"
+                      class="tab-pane"
+                    >
+                      <div class="detail_tab-inner" [formGroup]="landLordForm">
+                        <div class="row">
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label
+                                >Landloard Name & Name Of The Company*</label
+                              >
+                              <input
+                                formControlName="landlord_name"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.landlord_name.errors &&
+                                  f.landlord_name.touched
+                                "
+                              >
+                                <div *ngIf="f.landlord_name.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div *ngIf="f.landlord_name.errors.required">
+                                  Landlord name is required
+                                </div>
+                                <div *ngIf="f.landlord_name.errors.minlength">
+                                  Landlord name must be minimum 3 characters
+                                  long
+                                </div>
+                                <div *ngIf="f.landlord_name.errors.maxlength">
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label
+                                >How Long Have They Been Renting The
+                                Property?</label
+                              >
+                              <input
+                                formControlName="renting_property"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.renting_property.errors &&
+                                  f.renting_property.touched
+                                "
+                              >
+                                <div *ngIf="f.renting_property.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div
+                                  *ngIf="f.renting_property.errors.maxlength"
+                                >
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label
+                                >How Long Is The Lease & When Does It
+                                Expire?</label
+                              >
+                              <input
+                                formControlName="lease_detail"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.lease_detail.errors &&
+                                  f.lease_detail.touched
+                                "
+                              >
+                                <div *ngIf="f.lease_detail.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div *ngIf="f.lease_detail.errors.maxlength">
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label>Do They Plan On Renewing?</label>
+                              <input
+                                formControlName="plan_on_renewing"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.plan_on_renewing.errors &&
+                                  f.plan_on_renewing.touched
+                                "
+                              >
+                                <div *ngIf="f.plan_on_renewing.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div
+                                  *ngIf="f.plan_on_renewing.errors.maxlength"
+                                >
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label>How Much Is Their Monthly Rent($)?</label>
+                              <input
+                                formControlName="monthly_rent"
+                                type="text"
+                                class="form-control"
+                                mask="separator.2"
+                                thousandSeparator=","
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.monthly_rent.errors &&
+                                  f.monthly_rent.touched
+                                "
+                              >
+                                <div *ngIf="f.monthly_rent.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div *ngIf="f.monthly_rent.errors.maxlength">
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label>How Is The Rent Paid?</label>
+                              <input
+                                formControlName="how_rent_paid"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.how_rent_paid.errors &&
+                                  f.how_rent_paid.touched
+                                "
+                              >
+                                <div *ngIf="f.how_rent_paid.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div *ngIf="f.how_rent_paid.errors.maxlength">
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label
+                                >Are They Up To Date On Their Payments?</label
+                              >
+                              <input
+                                formControlName="upto_date_payments"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.upto_date_payments.errors &&
+                                  f.upto_date_payments.touched
+                                "
+                              >
+                                <div
+                                  *ngIf="f.upto_date_payments.errors.pattern"
+                                >
+                                  Invalid value
+                                </div>
+                                <div
+                                  *ngIf="f.upto_date_payments.errors.maxlength"
+                                >
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label
+                                >Have They Made Any Late Payments In The
+                                Past?</label
+                              >
+                              <input
+                                formControlName="any_late_payment"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.any_late_payment.errors &&
+                                  f.any_late_payment.touched
+                                "
+                              >
+                                <div *ngIf="f.any_late_payment.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div
+                                  *ngIf="f.any_late_payment.errors.maxlength"
+                                >
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="form-group">
+                              <label>How Are They Overall As A Tenant?</label>
+                              <input
+                                formControlName="overall_tenant"
+                                type="text"
+                                class="form-control"
+                              />
+                              <div
+                                class="invalid-input"
+                                *ngIf="
+                                  f.overall_tenant.errors &&
+                                  f.overall_tenant.touched
+                                "
+                              >
+                                <div *ngIf="f.overall_tenant.errors.pattern">
+                                  Invalid value
+                                </div>
+                                <div *ngIf="f.overall_tenant.errors.maxlength">
+                                  Maximum 100 characters allowed
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                          >
+                            <div class="mark-completed">
+                              <div class="form-check">
+                                <input
+                                  formControlName="mark_complete"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  (change)="getCheckBox($any($event.target).value)"
+                                  [ngStyle]="{'background-color':boolCondition?color:'','border-color':boolCondition?color:''}"
+                                  value=""
+                                  id="flexChec"
+                                />
+                                <label class="form-check-label" for="flexChec"
+                                  >Mark Completed
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+                          >
+                            <div class="notes-text custom-notes">
+                              <div class="form-group">
+                                <span class="accordion-head-title"
+                                  >Custom Notes</span
+                                >
+                                <textarea
+                                  name=""
+                                  formControlName="note"
+                                  class="form-control"
+                                ></textarea>
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="f.note.errors && f.note.touched"
+                                >
+                                  <div *ngIf="f.note.errors.pattern">
+                                    Invalid value
+                                  </div>
+                                  <div *ngIf="f.note.errors.minlength">
+                                    Custom note must be minimum 10 characters
+                                    long
+                                  </div>
+                                  <div *ngIf="f.note.errors.maxlength">
+                                    Maximum 1000 characters allowed
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      [ngClass]="{ active: activeTab == 'Merchants' }"
+                      class="tab-pane"
+                    >
+                      <div class="detail_tab-inner" [formGroup]="merchantForm">
+                        <div class="merchant-verification-text">
+                          <ul class="merchant-verify-list">
+                            <li>
+                              Hello, this is*
+                              <div class="called-input">
+                                <input
+                                  formControlName="called_by_name"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.called_by_name.errors &&
+                                    m.called_by_name.touched
+                                  "
+                                >
+                                  <div *ngIf="m.called_by_name.errors.pattern">
+                                    Invalid value
+                                  </div>
+                                  <div *ngIf="m.called_by_name.errors.required">
+                                    This field is required
+                                  </div>
+                                  <div
+                                    *ngIf="m.called_by_name.errors.maxlength"
+                                  >
+                                    Maximum 100 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="m.called_by_name.errors.minlength"
+                                  >
+                                    Name must be minimum 3 characters long
+                                  </div>
+                                </div>
+                              </div>
+
+                              calling from velocity group USA regading your
+                              business financing, how are you today? I am
+                              looking to wrap upp your file so we can get you
+                              funded today.
+                            </li>
+                            <li>
+                              I would like to go over the term and conditions of
+                              your business financing and some brief security
+                              questions, do you have some time right now?
+                            </li>
+                            <li>
+                              I would like to inform you that this pre-funding
+                              call is being recorded for quality control
+                              purpose, is that okay with you?
+                              <span class="toggle-switch"
+                                ><label class="toggleSwitch nolabel" onclick="">
+                                  <input
+                                  (change)="toggleValue($any($event.target).value)"
+                                    formControlName="accept_call_recording"
+                                    type="checkbox"
+                                    checked=""
+                                  />
+                                  <span>
+                                    <span>Yes</span>
+                                    <span>No</span>
+                                  </span>
+                                  <a [ngStyle]="{'background-color':boolCondition1?color:''}"></a>
+                                </label>
+                              </span>
+                            </li>
+                            <li>
+                              To start, can you please confirm your name, the
+                              name of your business and the best contact number
+                              to reach you, as well as an email address? here
+                              <div class="form-group">
+                                <div class="called-input">
+                                  <input
+                                    formControlName="business_name"
+                                    type="text"
+                                    class="form-control"
+                                  />
+                                  <div
+                                    class="invalid-input"
+                                    *ngIf="
+                                      m.business_name.errors &&
+                                      m.business_name.touched
+                                    "
+                                  >
+                                    <div *ngIf="m.business_name.errors.pattern">
+                                      Invalid value
+                                    </div>
+                                    <div
+                                      *ngIf="m.business_name.errors.maxlength"
+                                    >
+                                      Maximum 100 characters allowed
+                                    </div>
+                                    <div
+                                      *ngIf="m.business_name.errors.minlength"
+                                    >
+                                      Business name must be minimum 3 characters
+                                      long
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="called-input">
+                                  <input
+                                    formControlName="business_email"
+                                    type="text"
+                                    class="form-control"
+                                  />
+                                  <div
+                                    class="invalid-input"
+                                    *ngIf="
+                                      m.business_email.errors &&
+                                      m.business_email.touched
+                                    "
+                                  >
+                                    <div
+                                      *ngIf="m.business_email.errors.pattern"
+                                    >
+                                      Invalid email
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              Please Confirm Your % Of Ownership:
+                              <div class="form-group">
+                                <div class="called-input">
+                                  <input
+                                    type="text"
+                                    formControlName="percent_of_ownership"
+                                    class="form-control"
+                                    maxlength="15"
+                                  />
+                                  <div
+                                    class="invalid-input"
+                                    *ngIf="
+                                      m.percent_of_ownership.errors &&
+                                      m.percent_of_ownership.touched
+                                    "
+                                  >
+                                    <div
+                                      *ngIf="
+                                        m.percent_of_ownership.errors.pattern
+                                      "
+                                    >
+                                      Invalid value
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              Do You Own Any Other Business Beside This One?
+                              <span class="toggle-switch"
+                                ><label class="toggleSwitch nolabel" onclick="">
+                                  <input
+                                    formControlName="other_business"
+                                    type="checkbox"
+                                  (change)="toggleValue($any($event.target).value)"
+
+                                    checked=""
+                                  />
+                                  <span>
+                                    <span>Yes</span>
+                                    <span>No</span>
+                                  </span>
+                                  <a [ngStyle]="{'background-color':boolCondition2?color:''}"></a>
+                                </label>
+                              </span>
+                              If Yes, What Are They & Are They Related To This
+                              Business?
+                              <div class="form-group">
+                                <div class="called-input">
+                                  <input
+                                    formControlName="other_business_details"
+                                    type="text"
+                                    class="form-control"
+                                  />
+                                  <div
+                                    class="invalid-input"
+                                    *ngIf="
+                                      m.other_business_details.errors &&
+                                      m.other_business_details.touched
+                                    "
+                                  >
+                                    <div
+                                      *ngIf="
+                                        m.other_business_details.errors.pattern
+                                      "
+                                    >
+                                      Invalid value
+                                    </div>
+                                    <div
+                                      *ngIf="
+                                        m.other_business_details.errors
+                                          .maxlength
+                                      "
+                                    >
+                                      Maximum 100 characters allowed
+                                    </div>
+                                    <div
+                                      *ngIf="
+                                        m.other_business_details.errors
+                                          .minlength
+                                      "
+                                    >
+                                      other business details must be minimum 3
+                                      characters long
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          <ul class="aling-list">
+                            <li>
+                              <p>
+                                Can You Please Confirm The Physical Address Of
+                                Your Business?
+                              </p>
+
+                              <div class="form-group">
+                                <input
+                                  formControlName="business_physical_address"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.business_physical_address.errors &&
+                                    m.business_physical_address.touched
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      m.business_physical_address.errors.pattern
+                                    "
+                                  >
+                                    Invalid value
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.business_physical_address.errors
+                                        .maxlength
+                                    "
+                                  >
+                                    Maximum 200 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.business_physical_address.errors
+                                        .minlength
+                                    "
+                                  >
+                                    business address must be minimum 3
+                                    characters long
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <p>
+                                Are There Any Other Location Or Just This One?
+                              </p>
+                              <div class="form-group">
+                                <input
+                                  formControlName="any_other_location"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.any_other_location.errors &&
+                                    m.any_other_location.touched
+                                  "
+                                >
+                                  <div
+                                    *ngIf="m.any_other_location.errors.pattern"
+                                  >
+                                    Invalid value
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.any_other_location.errors.maxlength
+                                    "
+                                  >
+                                    Maximum 200 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.any_other_location.errors.minlength
+                                    "
+                                  >
+                                    other location must be minimum 3 characters
+                                    long
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <p>
+                                Please Tell Me About Your Business, What Exactly
+                                Do You Do?
+                              </p>
+                              <div class="form-group">
+                                <input
+                                  formControlName="about_your_business"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.about_your_business.errors &&
+                                    m.about_your_business.touched
+                                  "
+                                >
+                                  <div
+                                    *ngIf="m.about_your_business.errors.pattern"
+                                  >
+                                    Invalid value
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.about_your_business.errors.maxlength
+                                    "
+                                  >
+                                    Maximum 200 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.about_your_business.errors.minlength
+                                    "
+                                  >
+                                    About your business must be minimum 3
+                                    characters long
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <p>
+                                How Much Experience Do You Have In The Industry?
+                              </p>
+                              <div class="form-group">
+                                <input
+                                  formControlName="your_experience"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.your_experience.errors &&
+                                    m.your_experience.touched
+                                  "
+                                >
+                                  <div *ngIf="m.your_experience.errors.pattern">
+                                    Invalid value
+                                  </div>
+                                  <div
+                                    *ngIf="m.your_experience.errors.maxlength"
+                                  >
+                                    Maximum 100 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="m.your_experience.errors.minlength"
+                                  >
+                                    Experience must be minimum 3 characters long
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <p>How Long Has The Business Been Active?</p>
+                              <div class="form-group">
+                                <input
+                                  formControlName="business_been_active"
+                                  type="text"
+                                  class="form-control"
+                                />
+                                <div
+                                  class="invalid-input"
+                                  *ngIf="
+                                    m.business_been_active.errors &&
+                                    m.business_been_active.touched
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      m.business_been_active.errors.pattern
+                                    "
+                                  >
+                                    Invalid value
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.business_been_active.errors.maxlength
+                                    "
+                                  >
+                                    Maximum 100 characters allowed
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      m.business_been_active.errors.minlength
+                                    "
+                                  >
+                                    Value must be minimum 3 characters long
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lead-submit-btn">
+            <a
+              class="theme-btn cursor-pointer"
+              (click)="landlordInterviewSubmit()"
+              *ngIf="activeTab == 'Lanloards'; else merchantSubmit"
+              [ngStyle]="background"
+            >
+              <span class="">Submit for review</span>
+              <span class="btn-icon btn-right-icon">
+                <svg
+                  width="5"
+                  height="10"
+                  viewBox="0 0 5 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                    fill="white"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+            <ng-template #merchantSubmit>
+              <a
+                class="theme-btn cursor-pointer"
+                (click)="merchantInterviewSubmit()"
+                [ngStyle]="background"
+              >
+                <span class="">Submit for review</span>
+                <span class="btn-icon btn-right-icon">
+                  <svg
+                    width="5"
+                    height="10"
+                    viewBox="0 0 5 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                </span>
+              </a>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

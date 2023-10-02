@@ -1,0 +1,239 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span routerLink="/{{userBaseRoute}}/drip-campaign-list">
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/drip-campaign-list">Drip Campaign
+                            List</span>/
+                    </li>
+
+                    <li class="cursor-pointer">
+                        <span class="active-page">{{ editMode ? 'Edit': 'View' }} Drip
+                            Campaign</span>
+                    </li>
+
+                </ul>
+                <ul class="lead-view-btn">
+                    <li>
+                        <a (click)="editMode = !editMode" *ngIf="!editMode && canEditDripCampaign" class="cursor-pointer">
+                            <span>
+                                <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                        fill="#FA5440" />
+                                </svg>
+
+                            </span> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="cancel()" *ngIf="editMode" class="cursor-pointer">
+                            <span>
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                                        fill="#C9624C" />
+                                    <path
+                                        d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                                        fill="#C9624C" />
+                                </svg>
+
+                            </span> Cancel
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-lead-content">
+                <div class="create-inner-content">
+                <div class="text-center">
+                    <div class="cstm-lead-status">
+                        <label>Start</label>
+                        <div class="add-feild feild-btn-grp">
+                            <a class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                    viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                        fill="white" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="leadStatusForm">
+                        <div class="cstm-lead-status">
+                            <label>Drip Campaign Name*</label>
+                            <input [readonly]="!editMode"  type="text" formControlName="name" class="form-control">
+                            <div class="invalid-input" *ngIf="l.name.errors && l.name.touched">
+                                <div *ngIf="l.name.errors.required">
+                                    Name is required
+                                </div>
+                                <div *ngIf="l.name.errors.pattern">
+                                    Invalid name
+                                </div>
+                                <div *ngIf="l.name.errors.minlength">
+                                    Name must be minimum 3 characters long
+                                </div>
+                                <div *ngIf="l.name.errors.maxlength">
+                                    Maximum 100 characters allowed
+                                </div>
+                            </div>
+                            <div class="add-feild feild-btn-grp">
+                                <a class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="cstm-lead-status">
+                            <label>Email Template* </label>
+                            <select  [attr.disabled]="editMode ? null: 'disabled'" class="form-control" formControlName="template_id">
+                                <option value="">Select Email Template</option>
+                                <option [value]="email.id" *ngFor="let email of emailTemplateList">{{email.name}}
+                                </option>
+                            </select>
+
+                            <div class="invalid-input" *ngIf="l.template_id.errors && l.template_id.touched">
+                                <div *ngIf="l.template_id.errors.required">
+                                    Email template is required
+                                </div>
+                            </div>
+                            <div class="add-feild feild-btn-grp">
+                                <a class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="cstm-lead-status">
+
+                            <label>Lead Status* </label>
+                            <select  [attr.disabled]="editMode ? null: 'disabled'" class="form-control" formControlName="lead_status">
+                                <option value="">Select Lead Status</option>
+                                <option [value]="status.id" *ngFor="let status of leadStatusList">{{status.name}}
+                                </option>
+                            </select>
+
+
+                            <div class="invalid-input" *ngIf="l.lead_status.errors && l.lead_status.touched">
+                                <div *ngIf="l.lead_status.errors.required">
+                                    Lead Status is required
+                                </div>
+                            </div>
+                            <div class="add-feild feild-btn-grp">
+                                <a class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16" height="16"
+                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="cstm-lead-status">
+                            <div class="form-group">
+                                <label>Time*</label>
+                                <div class="input-">
+                                    <!-- <input type="time" formControlName="time" id="appt" name="appt" step="3600000" class="form-control"> -->
+                                    <select  [attr.disabled]="editMode ? null: 'disabled'" class="form-control" formControlName="time">
+                                        <option value="">Select Time</option>
+                                        <option value="1">1 hr</option>
+                                        <option value="2">2 hr</option>
+                                        <option value="3">3 hr</option>
+                                        <option value="4">4 hr</option>
+                                        <option value="5">5 hr</option>
+                                        <option value="6">6 hr</option>
+                                        <option value="7">7 hr</option>
+                                        <option value="8">8 hr</option>
+                                        <option value="9">9 hr</option>
+                                        <option value="10">10 hr</option>
+                                        <option value="11">11 hr</option>
+                                        <option value="12">12 hr</option>
+                                        <option value="13">13 hr</option>
+                                        <option value="14">14 hr</option>
+                                        <option value="15">15 hr</option>
+                                        <option value="16">16 hr</option>
+                                        <option value="17">17 hr</option>
+                                        <option value="19">19 hr</option>
+                                        <option value="20">20 hr</option>
+                                        <option value="21">21 hr</option>
+                                        <option value="22">22 hr</option>
+                                        <option value="23">23 hr</option>
+                                        <option value="24">24 hr</option>
+                                    </select>
+
+                                    <div class="invalid-input" *ngIf="l.time.errors && l.time.touched">
+                                        <div *ngIf="l.time.errors.required">
+                                            Time is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-feild feild-btn-grp">
+                                    <a class="theme-btn feild-btn cursor-pointer" type="button"><svg width="16"
+                                            height="16" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.032 15.984V9.648H0.144V6.8H6.032V0.463999H9.168V6.8H15.056V9.648H9.168V15.984H6.032Z"
+                                                fill="white" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cstm-lead-status">
+                            <div class="form-group">
+                                <label>Wait Time</label>
+                                <select [attr.disabled]="editMode ? null: 'disabled'" class="form-control" formControlName="wait_for">
+                                    <option value="">Select Wait Time</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="1 Week">1 Week</option>
+                                    <option value="2 Week">2 Week</option>
+                                    <option value="1 Month">1 Month</option>
+                                    <option value="1 Months">6 Months</option>
+                                </select>
+
+                                <div class="invalid-input" *ngIf="l.wait_for.errors && l.wait_for.touched">
+                                    <div *ngIf="l.wait_for.errors.required">
+                                        Wait is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div *ngIf="editMode" class="text-end create-btn-end">
+                    <button (click)="submitDripCampaign()" type="button" class="theme-btn">
+                        Submit
+                    </button>
+                </div>
+                </div>
+            </div>
+            <!-- -->
+
+        </div>
+
+
+    </div>
+</main>

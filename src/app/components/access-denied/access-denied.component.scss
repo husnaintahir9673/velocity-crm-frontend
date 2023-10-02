@@ -1,0 +1,55 @@
+.access-denied-page {
+    text-align: center;
+}
+.header-content h1 {
+    font-size: 60px;
+    color: #fa5440;
+    font-family: "IBM-bold";
+}
+.back-btn svg {
+    transform: rotate(180deg);
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}
+.back-btn .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 220px;
+    margin: 24px auto 0px;
+}
+.denied-text .common-text {
+    font-size: 22px;
+    font-family: "IBM-medium";
+}
+.normal-text {
+    width: 100%;
+    display: inline-block;
+    max-width: 370px;
+    padding-bottom: 10px;
+}
+.login-page-inner {
+    background-color: #E8E8F1;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+.login-card {
+    background-color: #fff;
+    padding: 40px 50px;
+}
+.login-card img {
+    max-width: 150px;
+}
+.theme-btn {
+    padding: 10px 23px;
+}
+.back-btn svg {
+    transform: rotate(180deg);
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+}

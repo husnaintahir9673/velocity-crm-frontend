@@ -1,0 +1,142 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.page-title {
+    font-family: 'IBM-semi';
+    font-size: 20px;
+    color: #383D56;
+    margin: 0;
+}
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.page-title span {
+    margin-right: 10px;
+}
+.imageinput{
+    padding-top: 8px;
+    margin-top: 10px;
+}
+.image {
+    max-width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+}
+.image img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.accordion-item {
+    border-radius: 10px!important;
+    overflow: hidden;
+    border: 0;
+    margin-bottom: 18px;
+    background-color: #fff;
+}
+.accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px 45px;
+    background-color: #F6F6F9;
+}
+.accordion-head-title {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: #383D56;
+    margin: 0;
+}
+.accordion-body {
+    background-color: #fff;
+    padding: 30px 45px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.lead-view-btn {
+    display: flex;
+}
+li {
+    list-style-type: none;
+}
+.lead-view-btn li a.active {
+    background-color: #FA5440;
+    color: #fff;
+}
+.lead-view-btn li a {
+    display: flex;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'IBM-medium';
+    font-size: 13px;
+    color: #565D80;
+    margin-left: 10px;
+}
+.lead-view-btn li a span {
+    margin-right: 10px;
+}
+
+.upload-image-inner {
+    position: relative;
+    width: 100%;
+    max-width: 120px;
+}
+.profile-picture-view {
+    width: 100%;
+    max-width: 100px;
+    border: 1px solid #fa5440;
+    border-radius: 50%;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+.profile-picture-view img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.upload-image-inner .upload-image {
+    width: 100%;
+    max-width: 30px;
+    height: 30px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fa5440;
+    border-color: #fa5440;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+}
+.drag-drop-text {
+    text-align: center;
+}
+.upload-image p {
+    margin-bottom: 0px;
+}
+.upload-image-inner .drag-drop-text a {
+    color: #fff;
+    font-size: 23px;
+    line-height: 23px;
+}
+.upload-file {
+    position: absolute;
+    width: 100% !important;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    bottom: 0;
+}

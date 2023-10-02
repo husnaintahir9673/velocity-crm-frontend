@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6" width="10" height="6">
+	<title>drop-arrow</title>
+	<defs>
+		<image  width="10" height="5" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAFBAMAAACOSmBbAAAAAXNSR0IB2cksfwAAACRQTFRFmpq6mpq6mpq6mpq6mpq6mpq6mpq6mpq6mpq6mpq6mpq6mpq6brf/hgAAAAx0Uk5Tz48An79A768QMCDfhbZa+wAAACZJREFUeJxjYFRSUjJhCKtQaslk0NqwinsRg9Lq3buUGJS0WJqUAG+NCAJ8xShoAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

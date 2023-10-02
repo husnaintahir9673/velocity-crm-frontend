@@ -1,0 +1,599 @@
+<!-- dashboard -->
+<app-dashboard-cards></app-dashboard-cards>
+<!--  -->
+<main class="dashboard-wrapper">
+    <div class="overlay" *ngIf="predictiveSearchResults.length" (click)="predictiveSearchResults = []"></div>
+    <div class="container">
+        <div class="add-doc-files">
+            <div class="docs-inner">
+                <div class="row">
+                    <div class="col-md-8 col-lg-10">
+                        <div class="upload-image-outer">
+                            <div class="upload-image">
+                                <div class="drag-drop-text">
+                                    <p><a>Drag and drop files or add documents</a></p>
+                                </div>
+                                <input #input multiple="true" (change)="onFileChange($any($event.target).files, input)"
+                                    type="file" name="myfile" class="upload-file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2" style="position:relative">
+                        <div class="right-add-btns" ngxUiLoaderBlurred [loaderId]="'r1'">
+                            <ul class="d-flex">
+
+                                <li>
+                                    <a class="theme-btn theme-btn small-btn cursor-pointer" *ngIf="!uploading"
+                                        (click)="uploadDocuments()">
+                                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M10.003 5.50037C10.003 5.87 9.68425 6.17017 9.29041 6.17017H0.712565C0.318718 6.17017 0 5.87018 0 5.50037C0 5.13073 0.318722 4.83057 0.712565 4.83057H9.29041C9.68426 4.83074 10.003 5.13073 10.003 5.50037Z"
+                                                fill="white"></path>
+                                            <path
+                                                d="M5.01079 0.498535C5.38307 0.498535 5.68059 0.818668 5.68059 1.2125L5.66309 9.78899C5.66167 10.1841 5.36046 10.5016 4.99207 10.5016C4.62243 10.5001 4.32227 10.1814 4.32227 9.78759L4.341 1.20974C4.34118 0.816072 4.63975 0.497176 5.0108 0.498579L5.01079 0.498535Z"
+                                                fill="white"></path>
+                                        </svg>
+                                        Start upload
+                                    </a>
+                                  
+                                </li>
+                            </ul>
+                        </div>
+                        <ngx-ui-loader fgsType="ball-spin-clockwise" [fgsSize]="30" [hasProgressBar]="false" overlayColor="rgba(255,255,255,0)" [loaderId]="'r1'"></ngx-ui-loader>
+
+                    </div>
+
+                </div>
+                <div class="row" *ngIf="roles.ADMINISTRATOR === userRole && formFileArray.length">
+                    <div class="col-md-12">
+                        <div class="upload-image image-detail-list">
+                            <ul class="image-list">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="doc-titile-input">
+                                                <label>Company</label>
+                                                <ng-select [(ngModel)]="company" [clearable]="false"
+                                                    (change)="onCompanySelect($event)"
+                                                    (scrollToEnd)="getMoreCompanies()"
+                                                    (search)="onCompanySearch($event)" [virtualScroll]="true"
+                                                    name="status" placeholder="Select Company" appearance="outline"
+                                                    labelForId="elead">
+                                                    <ng-option [value]="company.id"
+                                                        *ngFor="let company of companiesList">
+                                                        {{ company.first_name + ' ' + company.last_name }}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="doc-titile-input">
+                                                <label>Lead</label>
+                                                <ng-select [(ngModel)]="leadOfCompany" [clearable]="false"
+                                                    [virtualScroll]="false" name="status" placeholder="Select Lead"
+                                                    appearance="outline" labelForId="elead">
+                                                    <ng-option [value]="leads.id" *ngFor="let leads of companyLeads">
+                                                        {{ leads.full_name }}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="roles.COMPANY === userRole && formFileArray.length">
+                    <div class="col-md-12">
+                        <div class="upload-image image-detail-list">
+                            <ul class="image-list">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="doc-titile-input">
+                                                <label>Lead</label>
+                                                <ng-select [(ngModel)]="leadId" [clearable]="false"
+                                                    (scrollToEnd)="getMoreLeads()" (search)="onLeadSearch($event)"
+                                                    [virtualScroll]="true" name="status" placeholder="Select Lead"
+                                                    appearance="outline" labelForId="elead">
+                                                    <ng-option [value]="lead.id" *ngFor="let lead of LeadsList">
+                                                        {{ lead.full_name }}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" [formGroup]="filesForm">
+                    <div class="col-md-12" formArrayName="files">
+
+                        <!-- 6-8-22 -->
+                        <div class="upload-image image-detail-list"
+                            *ngFor="let file of formFileArray.controls; let i=index">
+                            <ul class="image-list" [formGroupName]="i">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="image-type">
+                                                <p class="img-type-text">
+                                                    {{ formFileArray.controls[i].get('fileName')?.value}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <select (change)="docsType($any($event.target).value, i)" name="" id="" formControlName="doc_type"
+                                                    class="form-control">
+                                                    <option  value="">Select Docs Type</option>
+                                                    <option *ngFor="let type of docTypes" [value]="type.value">{{
+                                                        type.text }}</option>
+                                                </select>
+                                                <div class="invalid-input"
+                                                *ngIf="formFileArray.controls[i].get('doc_type')?.errors && formFileArray.controls[i].get('doc_type')?.touched">
+                                                <div
+                                                    *ngIf="formFileArray.controls[i].get('doc_type')?.errors?.required">
+                                                    Document type is required 
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="formFileArray.controls[i].get('doc_type')?.value != '3month_bank_statement'" >
+                                            <div class="doc-titile-input">
+                                                <input type="text" formControlName="doc_name"
+                                                    placeholder="Document Title" class="form-control">
+                                                <div class="invalid-input"
+                                                    *ngIf="formFileArray.controls[i].get('doc_name')?.errors && formFileArray.controls[i].get('doc_name')?.touched">
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.required">
+                                                        Document title is required 
+                                                    </div>
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.pattern">
+                                                        Invalid document name
+                                                    </div>
+                                                    <div *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.minlength">
+                                                        Document title must be minimum 3 characters long
+                                                    </div>
+                                                    <div *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="formFileArray.controls[i].get('doc_type')?.value == '3month_bank_statement'" >
+                                            <div class="doc-titile-input">
+                                                <input (focus)="documentDate()"
+                                                (keyup.enter)="uploadDocuments()"
+                                                #ownerDob
+                                                formControlName="document_date"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="mm-dd-yyyy"
+                                                name="date"
+                                              />
+                                                <div class="invalid-input"
+                                                    *ngIf="formFileArray.controls[i].get('document_date')?.errors && formFileArray.controls[i].get('document_date')?.touched">
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('document_date')?.errors?.required">
+                                                        Document date is required 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" *ngIf="formFileArray.controls[i].get('doc_type')?.value == '3month_bank_statement'" >
+                                            <div class="doc-titile-input">
+                                                <textarea  type="text" formControlName="doc_note"
+                                                    placeholder="Document note" class="form-control"></textarea>
+                                                    <div class="invalid-input"
+                                                    *ngIf="formFileArray.controls[i].get('doc_note')?.errors && formFileArray.controls[i].get('doc_note')?.touched">
+                                                    <!-- <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_note')?.errors?.required">
+                                                        Document title is required 
+                                                    </div> -->
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_note')?.errors?.pattern">
+                                                        Invalid note
+                                                    </div>
+                                                    <div *ngIf="formFileArray.controls[i].get('doc_note')?.errors?.minlength">
+                                                        Note must be minimum 3 characters long
+                                                    </div>
+                                                    <div *ngIf="formFileArray.controls[i].get('doc_note')?.errors?.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            <div class="doc-titile-input">
+                                                <select name="" id="" formControlName="doc_type" class="form-control">
+                                                    <option *ngFor="let type of docTypes" [value]="type.value">{{
+                                                        type.text }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="doc-titile-input">
+                                                <input type="text" formControlName="doc_name"
+                                                    placeholder="Document Title" class="form-control">
+                                                <div class="invalid-input"
+                                                    *ngIf="formFileArray.controls[i].get('doc_name')?.errors && formFileArray.controls[i].get('doc_name')?.touched">
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.required">
+                                                        Document title is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.pattern">
+                                                        Invalid document title
+                                                    </div>
+                                                    <div *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.maxlength">
+                                                        Maximum 100 characters allowed
+                                                    </div>
+                                                    <div
+                                                    *ngIf="formFileArray.controls[i].get('doc_name')?.errors?.minlength">
+                                                    Document title must be minimum 3 characters long
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-md-2">
+                                            <div class="dlt-icon" (click)="removeFileFromArray(i)">
+                                                <span class="dlt-icon cursor-pointer">
+                                                <a class="delete-btn">
+                                                    <svg width="11" height="12" viewBox="0 0 11 12" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M10.0869 1.82467C10.3 1.82467 10.4774 2.00164 10.4774 2.22683V2.43503C10.4774 2.65473 10.3 2.83718 10.0869 2.83718H1.00635C0.792677 2.83718 0.615234 2.65473 0.615234 2.43503V2.22683C0.615234 2.00164 0.792677 1.82467 1.00635 1.82467H2.60387C2.92839 1.82467 3.2108 1.59401 3.28381 1.26856L3.36747 0.894897C3.49748 0.385903 3.92537 0.0478516 4.41507 0.0478516H6.6776C7.16197 0.0478516 7.59466 0.385903 7.71988 0.86805L7.8094 1.26801C7.88187 1.59401 8.16429 1.82467 8.48933 1.82467H10.0869ZM9.27577 9.43502C9.44256 7.88064 9.73457 4.18783 9.73457 4.15058C9.74523 4.03771 9.70846 3.93087 9.63546 3.84485C9.55713 3.76431 9.45801 3.71664 9.34878 3.71664H1.7491C1.63933 3.71664 1.53489 3.76431 1.46242 3.84485C1.38889 3.93087 1.35265 4.03771 1.35798 4.15058C1.35896 4.15742 1.36944 4.2875 1.38696 4.50497C1.46477 5.47105 1.68152 8.16178 1.82157 9.43502C1.92068 10.373 2.53614 10.9626 3.42762 10.9839C4.11554 10.9998 4.82425 11.0053 5.54894 11.0053C6.23153 11.0053 6.92479 10.9998 7.63403 10.9839C8.55641 10.968 9.17133 10.3889 9.27577 9.43502Z"
+                                                            fill="#565D80"></path>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 6-8-22 -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <ul class="applied-search-list" *ngIf="selectedFiles.length">
+            <li class="applied-search-item" *ngFor="let file of selectedFiles; let i = index">
+                <span>
+                    {{ file.name }}
+                </span>
+                <span class="filter-cross" (click)="removeLocalFile(i)">
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4.70508 4.50109L7.84749 1.35856C7.89518 1.31249 7.93322 1.25739 7.95939 1.19647C7.98557 1.13554 7.99934 1.07001 7.99992 1.00371C8.00049 0.937403 7.98786 0.871646 7.96275 0.810275C7.93764 0.748905 7.90056 0.693149 7.85367 0.646262C7.80679 0.599375 7.75103 0.562295 7.68966 0.537186C7.62829 0.512077 7.56253 0.499443 7.49623 0.500019C7.42992 0.500595 7.36439 0.514371 7.30347 0.540542C7.24254 0.566714 7.18744 0.604757 7.14138 0.652452L3.99884 3.79486L0.856437 0.652452C0.762445 0.560524 0.635993 0.509372 0.504522 0.510096C0.373051 0.51082 0.247169 0.563362 0.154195 0.656319C0.0612218 0.749276 0.00865787 0.875148 0.00791059 1.00662C0.00716331 1.13809 0.0582932 1.26455 0.150204 1.35856L3.29274 4.50109L0.150204 7.64362C0.102985 7.68981 0.0653968 7.7449 0.0396153 7.80571C0.0138338 7.86651 0.000371308 7.93183 7.57315e-06 7.99788C-0.000356162 8.06393 0.0123861 8.12939 0.0374963 8.19048C0.0626065 8.25157 0.0995857 8.30707 0.146293 8.35377C0.193 8.40047 0.248508 8.43744 0.309601 8.46254C0.370695 8.48764 0.436161 8.50037 0.502208 8.49999C0.568255 8.49962 0.633572 8.48614 0.694376 8.46035C0.75518 8.43456 0.810264 8.39696 0.856437 8.34973L3.99884 5.20733L7.14138 8.34973C7.23888 8.44723 7.36672 8.49605 7.49443 8.49605C7.62214 8.49605 7.75011 8.44723 7.84749 8.34973C7.9411 8.25609 7.99369 8.12909 7.99369 7.99668C7.99369 7.86426 7.9411 7.73727 7.84749 7.64362L4.70508 4.50109Z"
+                            fill="#383D56" />
+                    </svg>
+                </span>
+            </li>
+        </ul>
+        <div class="searchbar-box-container">
+            <div class="searchbar-box">
+                <form>
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-6">
+                                <div class="form-group">
+                                    <label class="big-label">Filter Documents</label>
+                                    <div class="top-header-search">
+                                        <input #predictiveSearch [(ngModel)]="search"
+                                            (keyup.enter)="page = 1; getDocsList();" name="searchKeyword"
+                                            class="form-control search-input" type="text" placeholder="Search">
+                                        <button (click)="page = 1; getDocsList();" type="submit">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.41668 12.8334C2.87876 12.8334 0 9.9546 0 6.41668C0 2.87876 2.87876 0 6.41668 0C9.9546 0 12.8334 2.87876 12.8334 6.41668C12.8334 9.9546 9.9546 12.8334 6.41668 12.8334ZM6.41668 1.16667C3.52217 1.16667 1.16667 3.52159 1.16667 6.41668C1.16667 9.31177 3.52217 11.6667 6.41668 11.6667C9.31119 11.6667 11.6667 9.31177 11.6667 6.41668C11.6667 3.52159 9.31119 1.16667 6.41668 1.16667Z"
+                                                    fill="white" />
+                                                <path
+                                                    d="M13.4163 14C13.2669 14 13.1176 13.9429 13.0038 13.8291L10.2068 11.032C9.97926 10.8039 9.97926 10.4347 10.2068 10.2072C10.4348 9.97911 10.8041 9.97911 11.0322 10.2072L13.8287 13.0043C14.0568 13.2324 14.0568 13.601 13.8287 13.8291C13.7149 13.9429 13.5656 14 13.4163 14Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </button>
+                                        <div class="result-lisitng" *ngIf="predictiveSearchResults.length">
+                                            <table class="table">
+                                                <thead>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>
+                                                        Company
+                                                    </th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="cursor-pointer"
+                                                        *ngFor="let res of predictiveSearchResults"
+                                                        (click)="search = res.search;predictiveSearchId = res.id; predictiveSearchResults = []; getDocsList(); ">
+                                                        <td>
+                                                            {{ res.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ res.email }}
+                                                        </td>
+                                                        <td>
+                                                            {{ res.company_name }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- <ul class="inner-result-list">
+                                                <li *ngFor="let res of predictiveSearchResults">
+                                                    <a class="cursor-pointer" (click)="tempFilter['Search'].value = res; predictiveSearchResults = []; onSearch(); ">{{res}}</a>
+                                                </li>
+                                            </ul> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-8">
+                                        <div class="form-group hidden">
+                                            <div class="input-group">
+                                                <input name="datepicker" class="form-control" ngbDatepicker
+                                                    #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                                                    (dateSelect)="onDateSelection($event)"
+                                                    [minDate]="{year: 1900, month: 1, day: 1}" [displayMonths]="2"
+                                                    [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                                    [maxDate]="maxDate" tabindex="-1">
+                                                <ng-template #t let-date let-focused="focused">
+                                                    <span class="custom-day" [class.focused]="focused"
+                                                        [class.range]="isRange(date)"
+                                                        [class.faded]="isHovered(date) || isInside(date)"
+                                                        (mouseenter)="hoveredDate = date"
+                                                        (mouseleave)="hoveredDate = null">
+                                                        {{ date.day }}
+                                                    </span>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <div class="input-group">
+                                                <input readonly #dpFromDate name="dpFromDate" [value]="selectedDate"
+                                                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                                                    (click)="datepicker.toggle()" type="text"
+                                                    class="form-control cursor-pointer" placeholder="Select Date"
+                                                    name="date">
+                                                <span class="input-group-text cursor-pointer"
+                                                    (click)="datepicker.toggle()">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.5 9C7.64834 9 7.79334 8.95601 7.91668 8.8736C8.04002 8.79119 8.13614 8.67406 8.19291 8.53701C8.24968 8.39997 8.26453 8.24917 8.23559 8.10368C8.20665 7.9582 8.13522 7.82456 8.03033 7.71967C7.92544 7.61478 7.7918 7.54335 7.64632 7.51441C7.50083 7.48547 7.35003 7.50032 7.21299 7.55709C7.07594 7.61386 6.95881 7.70999 6.8764 7.83332C6.79399 7.95666 6.75 8.10166 6.75 8.25C6.75 8.44891 6.82902 8.63968 6.96967 8.78033C7.11032 8.92098 7.30109 9 7.5 9ZM11.25 9C11.3983 9 11.5433 8.95601 11.6667 8.8736C11.79 8.79119 11.8861 8.67406 11.9429 8.53701C11.9997 8.39997 12.0145 8.24917 11.9856 8.10368C11.9566 7.9582 11.8852 7.82456 11.7803 7.71967C11.6754 7.61478 11.5418 7.54335 11.3963 7.51441C11.2508 7.48547 11.1 7.50032 10.963 7.55709C10.8259 7.61386 10.7088 7.70999 10.6264 7.83332C10.544 7.95666 10.5 8.10166 10.5 8.25C10.5 8.44891 10.579 8.63968 10.7197 8.78033C10.8603 8.92098 11.0511 9 11.25 9ZM7.5 12C7.64834 12 7.79334 11.956 7.91668 11.8736C8.04002 11.7912 8.13614 11.6741 8.19291 11.537C8.24968 11.4 8.26453 11.2492 8.23559 11.1037C8.20665 10.9582 8.13522 10.8246 8.03033 10.7197C7.92544 10.6148 7.7918 10.5434 7.64632 10.5144C7.50083 10.4855 7.35003 10.5003 7.21299 10.5571C7.07594 10.6139 6.95881 10.71 6.8764 10.8333C6.79399 10.9567 6.75 11.1017 6.75 11.25C6.75 11.4489 6.82902 11.6397 6.96967 11.7803C7.11032 11.921 7.30109 12 7.5 12ZM11.25 12C11.3983 12 11.5433 11.956 11.6667 11.8736C11.79 11.7912 11.8861 11.6741 11.9429 11.537C11.9997 11.4 12.0145 11.2492 11.9856 11.1037C11.9566 10.9582 11.8852 10.8246 11.7803 10.7197C11.6754 10.6148 11.5418 10.5434 11.3963 10.5144C11.2508 10.4855 11.1 10.5003 10.963 10.5571C10.8259 10.6139 10.7088 10.71 10.6264 10.8333C10.544 10.9567 10.5 11.1017 10.5 11.25C10.5 11.4489 10.579 11.6397 10.7197 11.7803C10.8603 11.921 11.0511 12 11.25 12ZM3.75 9C3.89834 9 4.04334 8.95601 4.16668 8.8736C4.29001 8.79119 4.38614 8.67406 4.44291 8.53701C4.49968 8.39997 4.51453 8.24917 4.48559 8.10368C4.45665 7.9582 4.38522 7.82456 4.28033 7.71967C4.17544 7.61478 4.0418 7.54335 3.89632 7.51441C3.75083 7.48547 3.60003 7.50032 3.46299 7.55709C3.32594 7.61386 3.20881 7.70999 3.1264 7.83332C3.04399 7.95666 3 8.10166 3 8.25C3 8.44891 3.07902 8.63968 3.21967 8.78033C3.36032 8.92098 3.55109 9 3.75 9ZM12.75 1.5H12V0.75C12 0.551088 11.921 0.360322 11.7803 0.21967C11.6397 0.0790176 11.4489 0 11.25 0C11.0511 0 10.8603 0.0790176 10.7197 0.21967C10.579 0.360322 10.5 0.551088 10.5 0.75V1.5H4.5V0.75C4.5 0.551088 4.42098 0.360322 4.28033 0.21967C4.13968 0.0790176 3.94891 0 3.75 0C3.55109 0 3.36032 0.0790176 3.21967 0.21967C3.07902 0.360322 3 0.551088 3 0.75V1.5H2.25C1.65326 1.5 1.08097 1.73705 0.65901 2.15901C0.237053 2.58097 0 3.15326 0 3.75V12.75C0 13.3467 0.237053 13.919 0.65901 14.341C1.08097 14.7629 1.65326 15 2.25 15H12.75C13.3467 15 13.919 14.7629 14.341 14.341C14.7629 13.919 15 13.3467 15 12.75V3.75C15 3.15326 14.7629 2.58097 14.341 2.15901C13.919 1.73705 13.3467 1.5 12.75 1.5ZM13.5 12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5H2.25C2.05109 13.5 1.86032 13.421 1.71967 13.2803C1.57902 13.1397 1.5 12.9489 1.5 12.75V6H13.5V12.75ZM13.5 4.5H1.5V3.75C1.5 3.55109 1.57902 3.36032 1.71967 3.21967C1.86032 3.07902 2.05109 3 2.25 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V4.5ZM3.75 12C3.89834 12 4.04334 11.956 4.16668 11.8736C4.29001 11.7912 4.38614 11.6741 4.44291 11.537C4.49968 11.4 4.51453 11.2492 4.48559 11.1037C4.45665 10.9582 4.38522 10.8246 4.28033 10.7197C4.17544 10.6148 4.0418 10.5434 3.89632 10.5144C3.75083 10.4855 3.60003 10.5003 3.46299 10.5571C3.32594 10.6139 3.20881 10.71 3.1264 10.8333C3.04399 10.9567 3 11.1017 3 11.25C3 11.4489 3.07902 11.6397 3.21967 11.7803C3.36032 11.921 3.55109 12 3.75 12Z"
+                                                            fill="#8989B2" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="opacity-0">fgf</label>
+                                            <button class="theme-btn" (click)="resetFilter()">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">All Docs <span>(Displaying {{ documentsList.length }} of {{totalDocs ? totalDocs : 0}} results)</span></h6>
+                </div>
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"> Name
+                                <!-- <span class="cursor-pointer" (click)="sortBy('document_name')">Name <img
+                                *ngIf="searchOrder.sortby === 'document_name'"
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'downward-img': searchOrder.order == 'DESC',
+                                  'upward-img': searchOrder.order == 'ASC'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <th scope="col">Type Of Document
+                                <!-- <span class="cursor-pointer" (click)="sortBy('document_type')">Type of document<img
+                                *ngIf="searchOrder.sortby === 'document_type'"
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'downward-img': searchOrder.order == 'DESC',
+                                  'upward-img': searchOrder.order == 'ASC'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <th scope="col">Lead Name
+                                <!-- <span class="cursor-pointer" (click)="sortBy('lead_name')">Lead Name<img
+                                *ngIf="searchOrder.sortby === 'lead_name'"
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'downward-img': searchOrder.order == 'DESC',
+                                  'upward-img': searchOrder.order == 'ASC'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <th scope="col">Created
+                                <!-- <span class="cursor-pointer" (click)="sortBy('uploaded_on')">Created <img
+                                *ngIf="searchOrder.sortby === 'uploaded_on'"
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'downward-img': searchOrder.order == 'DESC',
+                                  'upward-img': searchOrder.order == 'ASC'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <!-- <th scope="col">Updated</th> -->
+                            <th scope="col">Uploaded By
+                                <!-- <span class="cursor-pointer" (click)="sortBy('uploaded_by')">Uploaded by <img
+                                *ngIf="searchOrder.sortby === 'uploaded_by'"
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'downward-img': searchOrder.order == 'DESC',
+                                  'upward-img': searchOrder.order == 'ASC'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span> -->
+                            </th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cursor-pointer"  routerLink="/{{userBaseRoute}}/lead-detail/{{doc.lead_id }}"
+                            *ngFor="let doc of documentsList | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalDocs }">
+                            <td class="img">
+                                <a [ngSwitch]="doc.mime">
+                                    <img *ngSwitchCase="'text/plain'" src="assets/images/txt-file.svg" alt="image">
+                                    <img *ngSwitchCase="'application/pdf'" src="assets/images/pdf.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.ms-excel'"
+                                        src="assets/images/microsoft-excel.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                        src="assets/images/microsoft-excel.svg" alt="image">
+                                    <img *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                        src="assets/images/doc-icon.svg" alt="image">
+                                    <img *ngSwitchCase="'image/png'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchCase="'image/jpeg'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchCase="'image/gif'" src="assets/images/image.svg" alt="image">
+                                    <img *ngSwitchDefault src="assets/images/other.svg" alt="image">
+
+                                </a>
+                                {{ doc.document_name }}<br>
+                                <span *ngIf="doc.document_type == '3month_bank_statement' && doc.note != ''"><b>Description:</b> {{ doc.note }}</span>
+                            <td class="img">
+                                {{ getDocType(doc.document_type) }}
+                            </td>
+                            <td>
+                                <a>
+                                    <span>
+                                        {{doc.lead_name}} ({{doc.lead_id_number}})
+                                    </span>
+                                    <!-- <p class="text-align-center">{{doc.lead_id_number}}
+                                    </p> -->
+                                </a>
+                              
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>
+                                    {{getDate(doc.uploaded_on)}}
+                                </span>
+                            </td>
+                            <!-- <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>
+                                    {{getDate(doc.updated_on)}}
+                                </span>
+                            </td> -->
+                            <td>
+                                {{ doc.uploaded_by }}
+                            </td>
+                            <td>
+                                <div class="dropdown" ngbDropdown>
+                                    <a  (click)="$event.stopPropagation()" class="custom-dropdowm dropdown-toggle" data-bs-toggle="dropdown"
+                                        ngbDropdownToggle>
+                                        <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                fill="#FA5440"></path>
+                                            <path
+                                                d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                fill="#FA5440"></path>
+                                            <path
+                                                d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                fill="#FA5440"></path>
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                        <li *ngIf="canViewDoc">
+                                            <a [href]="doc.url" target="_blank" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view cursor-pointer"><img
+                                                    src="assets/images/view.svg" alt="/icon">View</a>
+                                        </li>
+                                        <li *ngIf="canRenameDoc"><a (click)="openModal(renameFile, doc)" ngbDropdownItem
+                                                class="dropdown-item cursor-pointer"><svg width="10" height="12"
+                                                    viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.98303 10.0082H1.46868C1.32633 10.0082 1.18981 10.0648 1.08915 10.1654C0.988493 10.2661 0.931943 10.4026 0.931943 10.545C0.931943 10.6873 0.988493 10.8238 1.08915 10.9245C1.18981 11.0252 1.32633 11.0817 1.46868 11.0817H8.98303C9.12538 11.0817 9.26191 11.0252 9.36257 10.9245C9.46322 10.8238 9.51977 10.6873 9.51977 10.545C9.51977 10.4026 9.46322 10.2661 9.36257 10.1654C9.26191 10.0648 9.12538 10.0082 8.98303 10.0082ZM1.46868 8.93475H1.51699L3.75519 8.73079C4.00037 8.70637 4.22969 8.59834 4.40465 8.42485L9.2353 3.5942C9.42279 3.39612 9.52412 3.1318 9.51708 2.85915C9.51003 2.58651 9.3952 2.32777 9.19773 2.13964L7.72706 0.668972C7.53512 0.488679 7.2836 0.385229 7.02035 0.378302C6.75711 0.371374 6.5005 0.461452 6.29934 0.6314L1.46868 5.46205C1.29519 5.63701 1.18717 5.86632 1.16274 6.11151L0.931943 8.34971C0.924713 8.42832 0.934914 8.50757 0.961819 8.58179C0.988724 8.65601 1.03167 8.72338 1.0876 8.7791C1.13775 8.82884 1.19723 8.8682 1.26263 8.89491C1.32802 8.92162 1.39804 8.93516 1.46868 8.93475ZM6.981 1.42041L8.44629 2.8857L7.37281 3.93235L5.93435 2.49388L6.981 1.42041Z"
+                                                        fill="#565D80" />
+                                                </svg>
+                                                Rename</a></li>
+                                        <li *ngIf="canDeleteDoc">
+                                            <a (confirm)="deleteDoc(doc.document_id)"
+                                                [swal]="{ title: 'Are you sure to delete?',text: 'You will not be able to revert this!',icon: 'warning',confirmButtonColor: '#f0412e', showCancelButton: true,confirmButtonText: 'Yes, delete it!' }"
+                                                ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item delete cursor-pointer"><img
+                                                    src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                        </li>
+                                        <li *ngIf="canDownloadDoc">
+                                            <a (click)="downloadFile(doc)" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view cursor-pointer"><svg
+                                                    width="13" height="11" viewBox="0 0 13 11" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M9.37968 9.68519C9.37968 9.56648 9.33631 9.46375 9.24956 9.377C9.16281 9.29025 9.06008 9.24687 8.94136 9.24687C8.82265 9.24687 8.71992 9.29025 8.63317 9.377C8.54642 9.46375 8.50304 9.56648 8.50304 9.68519C8.50304 9.8039 8.54642 9.90664 8.63317 9.99339C8.71992 10.0801 8.82265 10.1235 8.94136 10.1235C9.06008 10.1235 9.16281 10.0801 9.24956 9.99339C9.33631 9.90664 9.37968 9.8039 9.37968 9.68519ZM11.133 9.68519C11.133 9.56648 11.0896 9.46375 11.0028 9.377C10.9161 9.29025 10.8134 9.24687 10.6946 9.24687C10.5759 9.24687 10.4732 9.29025 10.3865 9.377C10.2997 9.46375 10.2563 9.56648 10.2563 9.68519C10.2563 9.8039 10.2997 9.90664 10.3865 9.99339C10.4732 10.0801 10.5759 10.1235 10.6946 10.1235C10.8134 10.1235 10.9161 10.0801 11.0028 9.99339C11.0896 9.90664 11.133 9.8039 11.133 9.68519ZM12.0096 8.15107V10.3427C12.0096 10.5253 11.9457 10.6805 11.8178 10.8084C11.69 10.9362 11.5348 11.0002 11.3521 11.0002H1.27076C1.08813 11.0002 0.93289 10.9362 0.805046 10.8084C0.677203 10.6805 0.613281 10.5253 0.613281 10.3427V8.15107C0.613281 7.96844 0.677203 7.8132 0.805046 7.68536C0.93289 7.55751 1.08813 7.49359 1.27076 7.49359H4.45543L5.38001 8.42502C5.64483 8.68071 5.95531 8.80855 6.31144 8.80855C6.66758 8.80855 6.97806 8.68071 7.24287 8.42502L8.1743 7.49359H11.3521C11.5348 7.49359 11.69 7.55751 11.8178 7.68536C11.9457 7.8132 12.0096 7.96844 12.0096 8.15107ZM9.78376 4.25413C9.86138 4.44133 9.82942 4.60114 9.68788 4.73354L6.61964 7.80179C6.53745 7.88854 6.43472 7.93191 6.31144 7.93191C6.18817 7.93191 6.08543 7.88854 6.00325 7.80179L2.93501 4.73354C2.79347 4.60114 2.76151 4.44133 2.83913 4.25413C2.91674 4.07606 3.05144 3.98703 3.2432 3.98703H4.99648V0.918789C4.99648 0.800077 5.03986 0.697346 5.12661 0.610595C5.21336 0.523844 5.31609 0.480469 5.4348 0.480469H7.18808C7.3068 0.480469 7.40953 0.523844 7.49628 0.610595C7.58303 0.697346 7.6264 0.800077 7.6264 0.918789V3.98703H9.37968C9.57145 3.98703 9.70614 4.07606 9.78376 4.25413Z"
+                                                        fill="#565D80" />
+                                                </svg> Download</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr *ngIf="!documentsList.length">
+                            <td colspan="8" class="text-center">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-sort-items">
+                <div class="table-select-row">
+                    <span>Show </span>
+                    <select (change)="onLimitChange($any($event.target).value)" [(ngModel)]="limit"
+                        class="select table-select-count">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span> entries</span>
+                </div>
+                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<ng-template #renameFile>
+    <app-rename-doc [leadID]="''" [filename]="documentDetails.name" [docID]="documentDetails.id"
+        (closeModal)="onModelClose($event)"></app-rename-doc>
+</ng-template>

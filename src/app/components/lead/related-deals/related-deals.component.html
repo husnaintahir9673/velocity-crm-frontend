@@ -1,0 +1,43 @@
+<main class="">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="list-search-content">
+                <div class="update-table">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr [ngStyle]="background">
+                                <th>Lead Id</th>
+                                <th>Company Name</th>
+                                <th>Created At</th>
+                                <th>Assigned To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let deal of relatedDealsList | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total,id: 'related-deals' } ; let i = index">
+                                <td><a *ngIf="deal.clickable == 1" (click)="leadDetailsLink(deal.id)"
+                                        class="cursor-pointer">{{deal.lead_id}}</a>
+                                    <span *ngIf="deal.clickable == 0">
+                                        {{deal.lead_id}}</span>
+                                </td>
+                                <td>{{ deal.company_name}}</td>
+                                <td>{{ getDate(deal.created_at) }} </td>
+                                <td>{{ deal.assigned_to }}</td>
+                            </tr>
+                            <tr *ngIf="!relatedDealsList.length">
+                                <td colspan="4" class="text-center">
+                                    No records found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="footer-pagination">
+                        <pagination-controls id="related-deals" (pageChange)="onPageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,396 @@
+
+<!-- dashborad-A -->
+<app-dashboard-cards></app-dashboard-cards>
+<!--  -->
+<main class="dashboard-wrapper">
+      <div class="container">
+          <div class="row">
+            <div class="col-8" *ngIf="canViewCompanyCount || canViewUserCount">
+                <div class="canvas-graph">
+                    <label *ngIf="canViewCompanyCount && canViewUserCount"><b>Users And Companies</b></label>
+                    <label *ngIf="canViewUserCount && !canViewCompanyCount"><b>Users</b></label>
+                    <div style="display: block;">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label for="elead">Date Range</label>
+                                <ng-select (change)="onUserSearch()" [(ngModel)]="tempUserFilter['Date Range'].value"
+                                    placeholder="Select Date Range" name="userdate" appearance="outline"
+                                    [searchable]="false" [clearable]="false" labelForId="elead">
+                                    <ng-option [value]="u" *ngFor="let u of userDateOptions">
+                                        {{u.name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let fil of appliedUserFilter | keyvalue">
+                            <li (click)="removeUserFilter(fil.key)" [ngStyle]="{'border-color':color,'color':color}" class="applied-search-item cursor-pointer"
+                                *ngIf="fil.value['value']">
+                                <span [ngStyle]="{'color':color}">{{ fil.key }}:</span> {{ fil.value['value'].name ? fil.value['value'].name :
+                                fil.value['value'] }}
+                                <span class="filter-cross"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.70508 4.50109L7.84749 1.35856C7.89518 1.31249 7.93322 1.25739 7.95939 1.19647C7.98557 1.13554 7.99934 1.07001 7.99992 1.00371C8.00049 0.937403 7.98786 0.871646 7.96275 0.810275C7.93764 0.748905 7.90056 0.693149 7.85367 0.646262C7.80679 0.599375 7.75103 0.562295 7.68966 0.537186C7.62829 0.512077 7.56253 0.499443 7.49623 0.500019C7.42992 0.500595 7.36439 0.514371 7.30347 0.540542C7.24254 0.566714 7.18744 0.604757 7.14138 0.652452L3.99884 3.79486L0.856437 0.652452C0.762445 0.560524 0.635993 0.509372 0.504522 0.510096C0.373051 0.51082 0.247169 0.563362 0.154195 0.656319C0.0612218 0.749276 0.00865787 0.875148 0.00791059 1.00662C0.00716331 1.13809 0.0582932 1.26455 0.150204 1.35856L3.29274 4.50109L0.150204 7.64362C0.102985 7.68981 0.0653968 7.7449 0.0396153 7.80571C0.0138338 7.86651 0.000371308 7.93183 7.57315e-06 7.99788C-0.000356162 8.06393 0.0123861 8.12939 0.0374963 8.19048C0.0626065 8.25157 0.0995857 8.30707 0.146293 8.35377C0.193 8.40047 0.248508 8.43744 0.309601 8.46254C0.370695 8.48764 0.436161 8.50037 0.502208 8.49999C0.568255 8.49962 0.633572 8.48614 0.694376 8.46035C0.75518 8.43456 0.810264 8.39696 0.856437 8.34973L3.99884 5.20733L7.14138 8.34973C7.23888 8.44723 7.36672 8.49605 7.49443 8.49605C7.62214 8.49605 7.75011 8.44723 7.84749 8.34973C7.9411 8.25609 7.99369 8.12909 7.99369 7.99668C7.99369 7.86426 7.9411 7.73727 7.84749 7.64362L4.70508 4.50109Z"
+                                            fill="#383D56" [ngStyle]="style"/>
+                                    </svg>
+                                </span>
+                            </li>
+                        </ng-container>
+                        <div class="graph-container">
+                            <canvas #userCount baseChart [type]="'line'" [data]="userChartData"
+                                [options]="userChartOptions" [legend]="userChartLegend">
+                            </canvas>
+                        </div>
+    
+                    </div>
+    
+    
+                </div>
+            </div>
+            <div class="col-4" *ngIf="canViewLeadCount">
+                <div class="canvas-graph">
+                    <label><b>Lead Status</b></label>
+                    <div style="display: block;">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <label for="elead">Date Range</label>
+                                <ng-select (change)="onLeadSearch()" [(ngModel)]="tempLeadFilter['Date Range'].value"
+                                    placeholder="Select Date Range" name="userdate" appearance="outline"
+                                    [searchable]="false" [clearable]="false" labelForId="elead">
+                                    <ng-option [value]="u" *ngFor="let u of leadDateOptions">
+                                        {{u.name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let fil of appliedLeadFilter | keyvalue">
+                            <li (click)="removeLeadFilter(fil.key)" [ngStyle]="{'border-color':color,'color':color}" class="applied-search-item cursor-pointer"
+                                *ngIf="fil.value['value']">
+                                <span [ngStyle]="{'color':color}">{{ fil.key }}:</span> {{ fil.value['value'].name ? fil.value['value'].name :
+                                fil.value['value'] }}
+                                <span class="filter-cross"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.70508 4.50109L7.84749 1.35856C7.89518 1.31249 7.93322 1.25739 7.95939 1.19647C7.98557 1.13554 7.99934 1.07001 7.99992 1.00371C8.00049 0.937403 7.98786 0.871646 7.96275 0.810275C7.93764 0.748905 7.90056 0.693149 7.85367 0.646262C7.80679 0.599375 7.75103 0.562295 7.68966 0.537186C7.62829 0.512077 7.56253 0.499443 7.49623 0.500019C7.42992 0.500595 7.36439 0.514371 7.30347 0.540542C7.24254 0.566714 7.18744 0.604757 7.14138 0.652452L3.99884 3.79486L0.856437 0.652452C0.762445 0.560524 0.635993 0.509372 0.504522 0.510096C0.373051 0.51082 0.247169 0.563362 0.154195 0.656319C0.0612218 0.749276 0.00865787 0.875148 0.00791059 1.00662C0.00716331 1.13809 0.0582932 1.26455 0.150204 1.35856L3.29274 4.50109L0.150204 7.64362C0.102985 7.68981 0.0653968 7.7449 0.0396153 7.80571C0.0138338 7.86651 0.000371308 7.93183 7.57315e-06 7.99788C-0.000356162 8.06393 0.0123861 8.12939 0.0374963 8.19048C0.0626065 8.25157 0.0995857 8.30707 0.146293 8.35377C0.193 8.40047 0.248508 8.43744 0.309601 8.46254C0.370695 8.48764 0.436161 8.50037 0.502208 8.49999C0.568255 8.49962 0.633572 8.48614 0.694376 8.46035C0.75518 8.43456 0.810264 8.39696 0.856437 8.34973L3.99884 5.20733L7.14138 8.34973C7.23888 8.44723 7.36672 8.49605 7.49443 8.49605C7.62214 8.49605 7.75011 8.44723 7.84749 8.34973C7.9411 8.25609 7.99369 8.12909 7.99369 7.99668C7.99369 7.86426 7.9411 7.73727 7.84749 7.64362L4.70508 4.50109Z"
+                                            fill="#383D56" [ngStyle]="style"/>
+                                    </svg>
+                                </span>
+                            </li>
+                        </ng-container>
+                        <div class="graph-container">
+                            <canvas #companyCount baseChart  width="400" height="400" [type]="'pie'"
+                                [data]="leadChartData" [options]="leadChartOptions" [legend]="leadChartLegend">
+                            </canvas>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+          </div>
+         <div class="table-responsive lead-table">
+          
+            <div class="lead-table-button">
+                <button *ngIf="canUpdateReportDescription" routerLink="/{{userBaseRoute}}/edit-report-description" [ngStyle]="background" class="theme-btn">Edit Report Description</button>
+            </div>
+            
+            <div class="statics-list">
+                <div class="statics-inner">
+                    <div *ngIf="canViewLoginLogs" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/login-logs-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/login.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Login Logs Report</p>
+                            <p class="statics-description">{{reportDescription?.login_logs}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="statics-inner">
+                    <div *ngIf="canViewLeadSource" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/lead-source-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/check.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title"> Lead Source Report</p>
+                            <p class="statics-description">{{reportDescription?.lead_source}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewUnderwriter" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/underwriter-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/writing.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Underwritter Report</p>
+                            <p class="statics-description">{{reportDescription?.underwritter}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewEmailLogs" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/email-logs-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/email.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Email Logs Report</p>
+                            <p class="statics-description">{{reportDescription?.email_logs}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewLenderSubmission" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/lender-submission-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/business-report.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Lender Submission Report</p>
+                            <p class="statics-description">{{reportDescription?.lender_submission}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewFundingReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/funding-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/sale.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Funding Report</p>
+                            <p class="statics-description">{{reportDescription?.funding}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewOfferReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/offer-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/offer.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Offers Report</p>
+                            <p class="statics-description">{{reportDescription?.offers}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewFundedReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/funded-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/expenses.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Funded Report(%)</p>
+                            <p class="statics-description">{{reportDescription?.funded}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewPreFundingReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/prefunding-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/taxes.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Pre Funding Report</p>
+                            <p class="statics-description">{{reportDescription?.pre_funding}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewLenderReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/lenders-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/report.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Lenders Report</p>
+                            <p class="statics-description">{{reportDescription?.lenders}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewUpdatesLogsReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/updates-logs-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/update.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Updates Logs Report</p>
+                            <p class="statics-description">{{reportDescription?.updates_logs}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewIsoPaymentReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/iso-payment-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/proposal.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Iso Payment Report</p>
+                            <p class="statics-description">{{reportDescription?.iso_payment}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewLeadSubmissionReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/submission-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/submit.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Submission Report</p>
+                            <p class="statics-description">{{reportDescription?.submission}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewPullThroughRatioReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/pull-through-ratio-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/journal.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Pull Through Ratio Report</p>
+                            <p class="statics-description">{{reportDescription?.pull_through_ratio}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf="canViewAnalyticsReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/analytics-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/analysis.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Analytics Report</p>
+                            <p class="statics-description">{{reportDescription?.analytics}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="statics-inner">
+                    <div *ngIf=" canViewLenderOweReport" class="statics-item cursor-pointer"
+                        routerLink="/{{userBaseRoute}}/reports/lender-owe-reports">
+                        <div class="statics-icon">
+                            <span>
+                                <img src="assets/images/loan.svg" alt="">
+                            </span>
+                        </div>
+                        <div class="statics-content">
+                            <h4 class="statics-score"></h4>
+                            <p class="statics-title">Lender Owe Report</p>
+                            <p class="statics-description">{{reportDescription?.lender_owe}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div *ngIf="canViewDailyLeadProgressReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/daily-lead-progress-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Daily Lead Progress Report</p>
+                    </div>
+                </div>
+
+                <div *ngIf="canViewPaymentHistoryReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/lead-payment-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Lead Payment Report</p>
+                    </div>
+                </div>
+                <div *ngIf="canViewCallLogsReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/call-logs-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Call Logs Report</p>
+                    </div>
+                </div>
+                <div *ngIf="canViewSmsMarketingReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/sms-marketing-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Sms Marketing Report</p>
+                    </div>
+                </div>
+                <div *ngIf="canViewSourcePayrollReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/source-pyroll-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Source Payroll Report</p>
+                    </div>
+                </div>
+                <div *ngIf="canViewSmsScheduleReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/sms-schedule-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Sms Schedule Report</p>
+                    </div>
+                </div>
+                <div *ngIf="canViewProfitLossReport" class="statics-item cursor-pointer"
+                    routerLink="/{{userBaseRoute}}/reports/profit-loss-reports">
+                    <div class="statics-content">
+                        <h4 class="statics-score"></h4>
+                        <p class="statics-title">Profit Loss Report</p>
+                    </div>
+                </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</main>

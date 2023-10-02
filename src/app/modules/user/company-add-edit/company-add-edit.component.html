@@ -1,0 +1,499 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+                <h3 class="page-title cursor-pointer" routerLink="/admin/company">
+                    <span>
+                        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                fill="#565D80" />
+                        </svg>
+
+                    </span> {{ editMode ? 'Edit': 'View' }} Company
+                </h3>
+                <ul class="lead-view-btn">
+                    <li>
+                        <a (click)="editMode = !editMode" *ngIf="!editMode" class=" cursor-pointer">
+                            <span>
+                                <span>
+                                    <svg width="12" height="15" viewBox="0 0 12 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10.6387 12.7219H0.712028C0.523977 12.7219 0.343628 12.7966 0.210656 12.9296C0.0776833 13.0626 0.00298009 13.2429 0.00298009 13.431C0.00298009 13.619 0.0776833 13.7994 0.210656 13.9323C0.343628 14.0653 0.523977 14.14 0.712028 14.14H10.6387C10.8267 14.14 11.0071 14.0653 11.1401 13.9323C11.273 13.7994 11.3477 13.619 11.3477 13.431C11.3477 13.2429 11.273 13.0626 11.1401 12.9296C11.0071 12.7966 10.8267 12.7219 10.6387 12.7219ZM0.712028 11.3038H0.775842L3.73257 11.0344C4.05646 11.0021 4.35939 10.8594 4.59052 10.6302L10.9719 4.24878C11.2196 3.98712 11.3535 3.63795 11.3442 3.27777C11.3349 2.91759 11.1832 2.57579 10.9223 2.32727L8.97952 0.384475C8.72596 0.146303 8.3937 0.00964272 8.04594 0.000491198C7.69818 -0.00866033 7.35919 0.110335 7.09346 0.334841L0.712028 6.71627C0.482839 6.94739 0.340135 7.25033 0.307871 7.57422L0.00298009 10.5309C-0.00657152 10.6348 0.0069042 10.7395 0.0424465 10.8375C0.0779889 10.9356 0.134723 11.0246 0.208604 11.0982C0.274857 11.1639 0.353431 11.2159 0.43982 11.2512C0.526208 11.2865 0.618712 11.3043 0.712028 11.3038ZM7.99395 1.37714L9.92965 3.31284L8.51155 4.69548L6.6113 2.79524L7.99395 1.37714Z"
+                                          [ngStyle]="style"  fill="#FA5440" />
+                                    </svg>
+
+                                </span>
+                            </span> Edit
+                        </a>
+                    </li>
+                    <li>
+
+                        <a (click)="cancel()" *ngIf="editMode" class="cursor-pointer">
+                            <span>
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.41453 15.2308C12.6135 15.2308 16.0301 11.8142 16.0301 7.61521C16.0301 3.41623 12.6135 0 8.41453 0C4.21555 0 0.799316 3.41655 0.799316 7.61521C0.799316 11.8142 4.21586 15.2308 8.41453 15.2308ZM8.41453 1.38446C11.8505 1.38446 14.6453 4.18003 14.6453 7.61521C14.6453 11.0505 11.8504 13.846 8.41453 13.846C4.97865 13.846 2.18377 11.0504 2.18377 7.61521C2.18391 4.17989 4.97879 1.38446 8.41453 1.38446Z"
+                                        fill="#C9624C" />
+                                    <path
+                                        d="M5.84803 10.1815C5.98302 10.3165 6.16036 10.3843 6.33757 10.3843C6.51477 10.3843 6.692 10.3165 6.82697 10.1815L8.41443 8.59405L10.0019 10.1815C10.137 10.3165 10.3142 10.3843 10.4914 10.3843C10.6686 10.3843 10.8459 10.3165 10.9808 10.1815C11.2515 9.91084 11.2515 9.47321 10.9808 9.20257L9.39337 7.61511L10.9808 6.02765C11.2515 5.75698 11.2515 5.31935 10.9808 5.04871C10.7102 4.77803 10.2725 4.77803 10.0019 5.04871L8.41443 6.63617L6.82697 5.04871C6.55629 4.77803 6.11867 4.77803 5.84803 5.04871C5.57735 5.31938 5.57735 5.75701 5.84803 6.02765L7.43548 7.61511L5.84803 9.20257C5.57735 9.47338 5.57735 9.91086 5.84803 10.1815Z"
+                                        fill="#C9624C" />
+                                </svg>
+                            </span> Cancel
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Company Details</span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="editCompanyForm">
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Company Name*</label>
+                                            <input [readonly]="!editMode" formControlName="company_name" type="text"
+                                                placeholder="Company name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.company_name.errors && f.company_name.touched">
+                                                <div *ngIf="f.company_name.errors.required">
+                                                    Company name is required
+                                                </div>
+                                                <div *ngIf="f.company_name.errors.pattern">
+                                                  Invalid company name
+                                                </div>
+                                                <div *ngIf="f.company_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.company_name.errors.minlength">
+                                                    Company name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>First Name*</label>
+                                            <input [readonly]="!editMode" formControlName="first_name" type="text"
+                                                placeholder="First name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.first_name.errors && f.first_name.touched && editMode">
+                                                <div *ngIf="f.first_name.errors.required">
+                                                    First name is required
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.minlength">
+                                                    First name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Last Name*</label>
+                                            <input [readonly]="!editMode" formControlName="last_name" type="text"
+                                                placeholder="Last name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.last_name.errors && f.last_name.touched && editMode">
+                                                <div *ngIf="f.last_name.errors.required">
+                                                    Last name is required
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.minlength">
+                                                    Last name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Email*</label>
+                                            <input readonly [value]="companyDetails.email? companyDetails?.email: ''"
+                                                type="email" placeholder="Email" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Phone Number*</label>
+                                            <input [mask]="mask.phone" [readonly]="!editMode"
+                                                formControlName="phone_number" type="text" placeholder="Enter phone number"
+                                                class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.phone_number.errors && f.phone_number.touched && editMode">
+                                                <div *ngIf="f.phone_number.errors.required">
+                                                    Phone number is required
+                                                </div>
+                                                <div *ngIf="f.phone_number.errors.pattern">
+                                                    Invalid phone number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Fax</label>
+                                            <input [readonly]="!editMode" formControlName="fax" type="text"
+                                                placeholder="Fax" class="form-control" maxlength="15"/>
+                                            <div class="invalid-input"
+                                                *ngIf="f.fax.errors && f.fax.touched && editMode">
+                                                <div *ngIf="f.fax.errors.pattern">
+                                                    Invalid fax number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngIf="isApiLoaded">
+                                        <div class="form-group">
+                                            <label>Address*</label>
+                                                <input class="form-control"  [readonly]="!editMode"  id="searchAddress" name="searchAddress" placeholder="Address"
+                                                formControlName="address"  ngx-google-places-autocomplete #placesRef="ngx-places"
+                                                (onAddressChange)="handleAddressChange($event)" />
+                                              
+                                            <!-- <textarea  formControlName="address"
+                                                placeholder="Address" name="sdf" id="" cols="30" rows="3"
+                                                class="form-control"></textarea> -->
+                                            <div class="invalid-input"
+                                                *ngIf="f.address.errors && f.address.touched && editMode">
+                                                <div *ngIf="f.address.errors.required">
+                                                    Address is required
+                                                </div>
+                                                <div *ngIf="f.address.errors.pattern">
+                                                    Invalid address
+                                                </div>
+                                                <div *ngIf="f.address.errors.maxlength">
+                                                    Maximum 200 characters allowed
+                                                </div>
+                                                <div *ngIf="f.address.errors.minlength">
+                                                    Address must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>City*</label>
+                                            <input [readonly]="!editMode" formControlName="city" type="text"
+                                                placeholder="City" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.city.errors && f.city.touched && editMode">
+                                                <div *ngIf="f.city.errors.required">
+                                                    City name is required
+                                                </div>
+                                                <div *ngIf="f.city.errors.pattern">
+                                                    Invalid city name
+                                                </div>
+                                                <div *ngIf="f.city.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.city.errors.minlength">
+                                                    City name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>State*</label>
+                                            <select [attr.disabled]="editMode ? null: 'disabled'"
+                                                formControlName="state_id" class="form-control" name="" id="country">
+                                                <option value="">--Select State--</option>
+                                                <option [value]="state.id" *ngFor="let state of statesList">{{
+                                                    state.name }}</option>
+                                            </select>
+                                            <div class="invalid-input"
+                                                *ngIf="f.state_id.errors && f.state_id.touched && editMode">
+                                                <div *ngIf="f.state_id.errors.required">
+                                                    State is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Zip Code*</label>
+                                            <input [readonly]="!editMode" formControlName="zip_code" type="text"
+                                                placeholder="Zip code" class="form-control" />
+                                        </div>
+                                        <div class="invalid-input"
+                                            *ngIf="f.zip_code.errors && f.zip_code.touched && editMode">
+                                            <div *ngIf="f.zip_code.errors.required">
+                                                Zip code is required
+                                            </div>
+                                            <div *ngIf="f.zip_code.errors.pattern">
+                                                Invalid zip code
+                                            </div>
+                                            <!-- <div *ngIf="f.zip_code.errors.maxlength">
+                                                Maximum 8 characters allowed
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Country*</label>
+                                            <select [attr.disabled]="editMode ? null: 'disabled'"
+                                                (change)="onCountryChange($any($event.target).value)"
+                                                formControlName="country_id" class="form-control" name="" id="country">
+                                                <option [value]="country.id" *ngFor="let country of countriesList">{{
+                                                    country.name }}</option>
+                                            </select>
+                                            <div class="invalid-input"
+                                                *ngIf="f.country_id.errors && f.country_id.touched && editMode">
+                                                <div *ngIf="f.country_id.errors.required">
+                                                    Country is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Status*</label>
+                                            <select [attr.disabled]="editMode ? null: 'disabled'"
+                                                formControlName="status" class="form-control" name="" id="country">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                            <div class="invalid-input"
+                                                *ngIf="f.status.errors && f.status.touched && editMode">
+                                                <div *ngIf="f.status.errors.required">
+                                                    Status is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Company Type*</label>
+                                            <select  [attr.disabled]="editMode ? null: 'disabled'" formControlName="company_type" class="form-control" name="" id="country">
+                                                <option value="">Select Company Type</option>
+                                                <!-- <option value="Company">Company</option> -->
+                                                <option value="funded">Funding Company</option>
+                                                <option value="broker">Broker Company</option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="f.company_type.errors && f.company_type.touched">
+                                                <div *ngIf="f.company_type.errors.required">
+                                                    Company type is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Slug*</label>
+                                            <input [readonly]="!editMode" formControlName="slug" type="text" placeholder="Enter slug"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.slug.errors && f.slug.touched">
+                                                <div *ngIf="f.slug.errors.required">
+                                                    Slug is required
+                                                </div>
+                                                <div *ngIf="f.slug.errors.pattern">
+                                                    Invalid slug
+                                                </div>
+                                                <div *ngIf="f.slug.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="country">Time Zone</label>
+                                        <select [attr.disabled]="editMode ? null: 'disabled'"
+                                            formControlName="time_zone_id" name="country" id="time"
+                                            class="form-control">
+                                            <option [value]="time.id" *ngFor="let time of timezonesList">
+                                                {{ time.time_zone }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="country">Date Format</label>
+                                        <select [attr.disabled]="editMode ? null: 'disabled'"
+                                            formControlName="date_format_id" name="format" id="date"
+                                            class="form-control">
+                                            <option [value]="date.id" *ngFor="let date of dateFormatList">
+                                                {{ date.format }} ({{ getDate(currentDate, date.value)}})</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Funding Email</label>
+                                            <input [readonly]="!editMode" formControlName="funding_email" type="email" placeholder="Enter funding email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.funding_email.errors && f.funding_email.touched">
+                                                <div *ngIf="f.funding_email.errors.pattern">
+                                                    Invalid funding email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Notification Email</label>
+                                            <input [readonly]="!editMode" formControlName="notification_email" type="email" placeholder="Enter notification email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.notification_email.errors && f.notification_email.touched">
+                                                <div *ngIf="f.notification_email.errors.pattern">
+                                                    Invalid notification email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Bcc Email</label>
+                                            <input [readonly]="!editMode" formControlName="bcc_email" type="email" placeholder="Enter bcc email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.bcc_email.errors && f.bcc_email.touched">
+                                                <div *ngIf="f.bcc_email.errors.pattern">
+                                                    Invalid bcc email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Company Url</label>
+                                            <input [readonly]="!editMode" formControlName="company_url" type="text" placeholder="Enter company url"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.company_url.errors && f.company_url.touched">
+                                                <div *ngIf="f.company_url.errors.pattern">
+                                                    Invalid company url
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Marketing Email</label>
+                                            <input [readonly]="!editMode" formControlName="marketing_email" type="email" placeholder="Enter marketing email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.marketing_email.errors && f.marketing_email.touched">
+                                                <div *ngIf="f.marketing_email.errors.pattern">
+                                                    Invalid marketing email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Agent Logout Session</label>
+                                            <select [attr.disabled]="editMode ? null: 'disabled'" formControlName="agent_logout_session" class="form-control" name="">
+                                            <option value="">--Select Agent Logout Session--</option>
+                                            <option value="0">0 minutes(Never)</option>
+                                            <option value="1">1 minute</option>
+                                            <option value="5">5 minutes</option>
+                                            <option value="10">10 minutes</option>
+                                            <option value="15">15 minutes</option>
+                                            <option value="20">20 minutes</option>
+                                            <option value="25">25 minutes</option>
+                                            <option value="30">30 minutes</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Marketplace Email</label>
+                                            <input [readonly]="!editMode" formControlName="marketplace_email" type="email" placeholder="Enter marketplace email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.marketplace_email.errors && f.marketplace_email.touched">
+                                                <div *ngIf="f.marketplace_email.errors.pattern">
+                                                    Invalid marketplace email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Offers Email</label>
+                                            <input [readonly]="!editMode" formControlName="offers_email" type="email" placeholder="Enter offers email"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.offers_email.errors && f.offers_email.touched">
+                                                <div *ngIf="f.offers_email.errors.pattern">
+                                                    Invalid offers email
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <div class="image" *ngIf="logoImage">
+                                                <img [src]="logoImage">
+                                                companyDetails?.logo ? companyDetails?.logo : filePath
+                                            </div>
+                                            <div *ngIf="companyDetails?.logo == null" class="image">
+                                            <img src="assets/images/user.png">
+                                        </div>
+                                            <input *ngIf="editMode" class="form-control imageinput" #input type="file"
+                                                accept="image/*" (change)="imagePreview($event,input)" />
+                                        </div>
+                                    </div> -->
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                    <div class="profile-picture-upload">
+                                        <div class="upload-image-inner">
+                                              <div  *ngIf="!logoImage" class="profile-picture-view">
+                                            <img src="assets/images/user.png">
+                                        </div>
+                                            <div class="profile-picture-view"  *ngIf="logoImage">
+                                                <img [src]="logoImage">
+                                            </div>
+                                            <div class="upload-image" [ngStyle]="background" *ngIf="editMode">
+                                                <div class="drag-drop-text">
+                                                 <p><a href="#">+</a></p>
+                                                </div>
+                                                <input  #input type="file"  (change)="imagePreview($event, input)" accept="image/*" class="upload-file">
+                                            </div>
+                                            <!-- <div class="invalid-input" *ngIf="!fileSelected && imageSelected">
+                                                <div>
+                                                    Company logo is required
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-12 text-end" *ngIf="editMode">
+                                        <a (click)="editCompanySubmit()" [ngStyle]="background" class="theme-btn cursor-pointer">
+                                            <span class="">Update</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

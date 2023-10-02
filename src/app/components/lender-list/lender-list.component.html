@@ -1,0 +1,200 @@
+<!-- dashboard -->
+<app-dashboard-cards></app-dashboard-cards>
+<!--  -->
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">All Lenders <span>(Displaying {{ lenderList.length }} of {{totalUsersCount ? totalUsersCount : 0}} results)</span></h6>
+                </div>
+                <div *ngIf="canCreateLender" class="create-new-lead">
+                    <a  routerLink="/{{userBaseRoute}}/lenders-list/add" class="theme-btn in-blc" [ngStyle]="background"><span>+</span> Create New
+                        Lender</a>
+                </div>
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('name')" [ngClass]="{
+                                'active-tab': search.sortby == 'name'}">Lender Name <img
+                               
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'name',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'name'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('type')" [ngClass]="{
+                                'active-tab': search.sortby == 'type'}">Lender Type <img
+                               
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'type',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'type'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('email')" [ngClass]="{
+                                'active-tab': search.sortby == 'email'}">Lender Email <img
+                             
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'email',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'email'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <!-- <th scope="col" class="min-width">Date</th> -->
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('contact_person')" [ngClass]="{
+                                'active-tab': search.sortby == 'contact_person'}">Lender Contact Person <img
+                             
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'contact_person',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'contact_person'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('status')" [ngClass]="{
+                                'active-tab': search.sortby == 'status'}">Status <img
+                       
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'status',
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'status'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('created_at')" [ngClass]="{
+                                'active-tab': search.sortby == 'created_at'}">Created <img
+                               
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                    'active-tab': search.sortby == 'created_at',
+                                  'upward-img': search.order == 'ASC' && search.sortby == 'created_at'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- (click)="redirectLeadDetail(lead)" [ngClass]="{ 'cursor-pointer' : canViewLead}" -->
+                        <tr routerLink="./{{lender.id}}" [ngClass]="{ 'cursor-pointer' : canViewLender}"
+                            *ngFor="let lender of lenderList | paginate: { itemsPerPage: usersListLimit, currentPage: userListPage, totalItems: totalUsersCount }; let i = index">
+                            <td>{{ usersListLimit * (userListPage - 1) + i + 1 }}</td>
+                            <td>{{ lender.name | titlecase}}</td>
+                            <td>
+                                <span>{{ lender.type == 0 ? 'Email': 'Velocity' }}</span>
+                            </td>
+                            <td>
+                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6192 0C12.6622 0 13.6656 0.412222 14.4037 1.15189C15.1426 1.89 15.5556 2.88556 15.5556 3.92778V10.0722C15.5556 12.2422 13.79 14 11.6192 14H3.93556C1.76478 14 0 12.2422 0 10.0722V3.92778C0 1.75778 1.757 0 3.93556 0H11.6192ZM12.8565 5.08654L12.9187 5.02432C13.1046 4.79877 13.1046 4.4721 12.9101 4.24654C12.802 4.13065 12.6535 4.05988 12.4987 4.04432C12.3353 4.03577 12.1798 4.09099 12.0623 4.19988L8.55534 6.99988C8.10423 7.37399 7.45789 7.37399 6.99978 6.99988L3.49978 4.19988C3.25789 4.02099 2.92345 4.04432 2.722 4.25432C2.512 4.46432 2.48867 4.79877 2.66678 5.0321L2.76867 5.13321L6.30756 7.89432C6.74312 8.23654 7.27123 8.42321 7.82423 8.42321C8.37567 8.42321 8.91312 8.23654 9.34789 7.89432L12.8565 5.08654Z" 
+                                    [ngStyle]="style"  fill="#FA5440"/>
+                                    </svg>
+                                <!-- <img src="assets/images/message.svg" alt="/icon"> -->
+                                <span>{{ lender.email }}</span>
+                            </td>
+                            <td>
+                                <!-- <img src="assets/images/phone.svg" alt="/icon"> -->
+                                <span>
+                                    {{ lender.contact_person }}
+                                </span>
+                            </td>
+                            <td>
+
+                                <div class="toggle-switch" (click)="$event.stopPropagation()">
+                                    <label class="toggleSwitch nolabel" onclick="">
+                                        <input [id]="i" #input type="checkbox" [checked]="lender.status === 'Active'"
+                                            (change)="onStatusToggleChange($event, input, lender.id,i)">
+                                        <span>
+                                            <span></span>
+                                            <span></span>
+                                        </span>
+                    <a [ngStyle]="lender.toggle ? {'background-color': color} : {'background-color': '#ffff'}"></a>
+                                        
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>{{getDate(lender.created_at)}}</span>
+                                <!-- {{ lender.created_at | date:dateFormat}} -->
+                            </td>
+                            <td>
+                                <div class="dropdown" ngbDropdown>
+                                    <a class="custom-dropdowm dropdown-toggle" data-bs-toggle="dropdown"
+                                        ngbDropdownToggle (click)="$event.stopPropagation();">
+                                        <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                               [ngStyle]="style" fill="#FA5440"></path>
+                                            <path
+                                                d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                               [ngStyle]="style" fill="#FA5440"></path>
+                                            <path
+                                                d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                               [ngStyle]="style" fill="#FA5440"></path>
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                        <li *ngIf="canViewLender">
+                                            <a routerLink="/{{userBaseRoute}}/lenders-list/{{lender.id}}" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view"><img
+                                                    src="assets/images/view.svg" alt="/icon">View detail</a>
+                                        </li>
+
+                                        <li *ngIf="canEditLender">
+                                            <a routerLink="/{{userBaseRoute}}/lenders-list/{{lender.id}}" [queryParams]="{mode: 'edit'}"
+                                                ngbDropdownItem class="dropdown-item table-dropdown-item edit"><img
+                                                    src="assets/images/edit.svg" alt="/icon">Edit</a>
+                                        </li>
+                                        <li *ngIf="canDeleteLender">
+                                            <a (confirm)="deleteLender(lender.id)"
+                                                [swal]="{ title: 'Are you sure to delete?',text: 'You will not be able to revert this!',icon: 'warning', showCancelButton: true, confirmButtonColor: '#f0412e',confirmButtonText: 'Yes, delete it!' }"
+                                                ngbDropdownItem class="dropdown-item table-dropdown-item delete"
+                                                href="#"><img src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr *ngIf="!lenderList.length">
+                            <td colspan="8" class="text-center">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-sort-items">
+                <div class="table-select-row">
+                    <span>Show </span>
+                    <select (change)="onUsersLimitChange($any($event.target).value)" [(ngModel)]="usersListLimit"
+                        class="select table-select-count">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span> entries</span>
+                </div>
+                <pagination-controls (pageChange)="onUserPageChange($event)"></pagination-controls>
+            </div>
+
+
+        </div>
+    </div>
+</main>

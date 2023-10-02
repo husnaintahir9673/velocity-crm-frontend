@@ -1,0 +1,351 @@
+/* Fund Details  (Merchant Verification) CSS */
+.fund-detail-lists {
+    background: #FFFFFF;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.funding-list li:nth-child(odd) {
+    background-color: #F5F5FD;
+}
+.funding-list li {
+    padding: 8px 20px;
+}
+.list_inner {
+    justify-content: space-between;
+    grid-gap: 40px;
+}
+
+.full-view-heading span {
+    font-family: "IBM-medium";
+    font-size: 18px;
+    color: #383d56;
+    margin: 0;
+}
+input.input-fcs {
+    max-width: 80px;
+    border: 1px solid #8989b2;
+    border-radius: 5px;
+}
+.name-text {
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    color: #6F7491;
+}
+.des-text {
+    font-family: 'IBM-medium';
+    font-size: 15px;
+    color: #565D80;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 6%);
+}
+.fund-detail-right {
+    background: #FFFFFF;
+    border-radius: 10px;
+    height: 100%;
+}
+.participant-selector {
+    display: flex;
+    align-items: end;
+    padding: 25px 28px;
+    border-bottom: 1px solid rgb(137 137 178 / 20%);
+}
+.participant-selector .form-group {
+    margin-bottom: 0px;
+    flex: 0 0 375px;
+    max-width: 375px;
+    margin-right: 18px;
+}
+.participant-selector .form-group {
+    margin-bottom: 0px;
+}
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.right-detail-btns a.white-btn:hover {
+    color: #fff;
+}
+.white-btn {
+    background: #FFFFFF;
+    color: #565D80;
+}
+.table td {
+    padding: 15px 25px;
+    vertical-align: middle;
+    font-family: 'IBM-medium';
+    font-size: 14px;
+    color: #383D56;
+    border: 0;
+}
+.btn:hover {
+    // background-color: #f0412e;
+    color: #fff;
+}
+.custom-select .selectBtn::after {
+    // background-image: url(../img/wide-down-arrow.svg);
+    width: 13px;
+    height: 7px;
+    transform: inherit;
+    border: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.remaining-funds-detail {
+    padding: 25px 28px;
+}
+.remaining-input .form-group {
+    flex: 0 0 375px;
+    max-width: 375px;
+}
+/*======= fund-table-CSS ========*/
+.fund-table {
+    background: #FFFFFF;
+    border: 1px solid #DEDEF3;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 6%);
+    border-radius: 10px;
+    width: 100%;
+    overflow: auto;
+}
+.fund-table .table {
+    margin-bottom: 0px;
+}
+.fund-table .table td {
+    border: 1px solid #DEDEF3;
+    border-bottom: 0px;
+    text-align: center !important;
+    border-radius: 0px;
+}
+.fund-table .table td:first-child, .fund-table .table th:first-child {
+    border-left: 0px;
+}
+.fund-table .table td:last-child, .fund-table .table th:last-child {
+    border-right: 0px;
+}
+.fund-table .table th {
+    padding: 10px 14px;
+    border: 1px solid #DEDEF3;
+    border-top: 0px;
+    box-shadow: none;
+    border-bottom: 0px;
+    text-align: center;
+    color: #777C96;
+    font-size: 14px;
+    font-family: 'IBM';
+}
+.fund-table .table tbody tr {
+    background: #F5F5FD;
+}
+.right-detail-btns {
+    margin-top: 15px;
+}
+.right-detail-btns ul {
+    justify-content: flex-end;
+}
+.right-detail-btns ul li {
+    margin-left: 10px;
+}
+.multi-selecte-synd {
+    min-height: 200px;
+    option {
+        padding: 10px 0px;
+    }
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #fafaff;
+        margin-right: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #fa5440;
+        border-radius: 100px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #fa5440;
+    }
+}
+
+.right-detail-btns a {
+    font-family: 'IBM-medium';
+    color: #FFFFFF;
+    line-height: 18px;
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+.right-detail-btns a.white-btn {
+    color: #565D80;
+}
+.right-detail-btns a.white-btn:hover {
+    color: #1a1616;
+}
+.remaining-input {
+    margin-bottom: 35px;
+} 
+
+.action {
+    img {
+        width: 15px;
+    }
+}
+.add-bank {
+    margin-bottom: 12px;
+}
+.add-btn {
+    min-height: 40px;
+    text-align: center;
+    min-width: 100px;
+    padding: 15px 23px;
+    font-size: 16px;
+    font-family: "IBM-medium";
+    background-color: #fa5440;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    transition: .3s ease-in all;
+}
+.table > :not(:first-child) {
+    border-top: none !important; 
+}
+.add-btn {
+    min-height: 40px;
+    text-align: center;
+    min-width: 100px;
+    padding: 13px 23px;
+    font-size: 16px;
+    font-family: "IBM-medium";
+    background-color: #fa5440;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    transition: .3s ease-in all;
+}
+.form-control, .form-control:focus {
+    background-color: #FFF !important;
+    border: 1px solid #8989B2 !important;
+    border-radius: 10px !important;
+    min-height: 50px !important;
+    padding: 10px 20px !important;
+    font-family: 'IBM-medium';
+    font-size: 15px !important;
+    color: #9A9ABA;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.theme-btn:hover {
+    // background-color: #f0412e !important;
+    color: #fff;
+}
+.accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px 45px;
+    background-color: #F6F6F9;
+}
+.accordion-head-title {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: #383D56;
+    margin: 0;
+}
+.accordion-body {
+    background-color: #fff;
+    padding: 30px 45px;
+}
+
+/* Responsive */
+/* container Queries */
+
+@media screen and (min-width:200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        max-width: 880px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .container {
+        max-width: 1120px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .container {
+        max-width: 1250px;
+        padding: 0 25px;
+    }
+    .fund-table .table th, .fund-table .table td{
+        padding: 8px 11px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (min-width:1441px) {
+    .container {
+        max-width: 1675px;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width:1199px) {
+.fund-table{
+    overflow-x: auto;
+    width: 100%;
+}
+.participant-selector .form-group {
+    flex: 0 0 300px;
+    max-width: 300px;
+}
+}
+@media screen and (max-width:991px) {
+.top-header-navigation .nav-link {
+    font-size: 10px;
+}
+.top-header-search .search-input {
+    min-width: 395px;
+}
+.step-listing li {
+    max-width: 105px;
+    flex: 0 0 105px;
+}
+}
+@media screen and (max-width:767px) {
+.accordion-body {
+    padding: 20px 12px;
+}
+}
+@media screen and (max-width:575px) {
+    .list_inner {
+        grid-gap: 0;
+        flex-wrap: wrap;
+    }
+    .participant-selector {
+        flex-wrap: wrap;
+    }
+    .participant-selector .form-group {
+        margin-bottom: 20px;
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-right: 0px;
+    }
+    .participant-selector {
+        padding: 16px 8px;
+    }
+    .remaining-funds-detail {
+        padding: 25px 8px;
+    }
+    }

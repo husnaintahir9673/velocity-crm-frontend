@@ -1,0 +1,21 @@
+
+//custom datePicker
+.custom-day.range, .custom-day:hover {
+    background-color: var(--custom,'#FA5440') !important;
+}
+// sorting icon
+.downward-img {
+  transform: rotate(-90deg);
+  margin-left: 10px;
+  width: 100%;
+  max-width: 10px;
+}
+.upward-img {
+  transform: rotate(90deg);
+  margin-left: 10px;
+  width: 100%;
+  max-width: 10px;
+}
+.active-tab{
+  color: #0089ff;
+}

@@ -1,0 +1,326 @@
+<!-- dashboard -->
+<app-dashboard-cards></app-dashboard-cards>
+<!--  -->
+<main class="dashboard-wrapper">
+    <div class="overlay" *ngIf="predictiveSearchResults.length" (click)="predictiveSearchResults = []"></div>
+    <div class="container">
+        <div class="searchbar-box-container">
+            <div class="searchbar-box">
+                <form>
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                                <div class="form-group">
+                                    <label class="big-label">Filter Syndicates</label>
+                                    <div class="top-header-search">
+                                        <!-- [(ngModel)]="searchKeyword"   -->
+                                        <input autocomplete="off" (keyup.enter)="onSearch()" #predictiveSearch
+                                            name="searchKeyword" [(ngModel)]="tempFilter['Search'].value"
+                                            class="form-control search-input" type="text"
+                                            placeholder="Search by name, email, phone number">
+                                        <button [ngStyle]="background" type="submit" (click)="onSearch()">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.41668 12.8334C2.87876 12.8334 0 9.9546 0 6.41668C0 2.87876 2.87876 0 6.41668 0C9.9546 0 12.8334 2.87876 12.8334 6.41668C12.8334 9.9546 9.9546 12.8334 6.41668 12.8334ZM6.41668 1.16667C3.52217 1.16667 1.16667 3.52159 1.16667 6.41668C1.16667 9.31177 3.52217 11.6667 6.41668 11.6667C9.31119 11.6667 11.6667 9.31177 11.6667 6.41668C11.6667 3.52159 9.31119 1.16667 6.41668 1.16667Z"
+                                                    fill="white" />
+                                                <path
+                                                    d="M13.4163 14C13.2669 14 13.1176 13.9429 13.0038 13.8291L10.2068 11.032C9.97926 10.8039 9.97926 10.4347 10.2068 10.2072C10.4348 9.97911 10.8041 9.97911 11.0322 10.2072L13.8287 13.0043C14.0568 13.2324 14.0568 13.601 13.8287 13.8291C13.7149 13.9429 13.5656 14 13.4163 14Z"
+                                                    fill="white" />
+                                            </svg>
+                                        </button>
+                                        <div class="result-lisitng" *ngIf="predictiveSearchResults.length">
+                                            <table class="table">
+                                                <thead>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+
+                                                    <th>
+                                                        Phone
+                                                    </th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="cursor-pointer"
+                                                        *ngFor="let res of predictiveSearchResults"
+                                                        (click)="tempFilter['Search'].value = res.search;predictiveSearchId = res.id;predictiveSearchResults = []; onSearch(); ">
+                                                        <td>
+                                                            {{ res.name }}
+                                                        </td>
+                                                        <td>
+                                                            {{ res.email }}
+                                                        </td>
+
+                                                        <td>
+                                                            {{ res.phone_number }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- <ul class="inner-result-list">
+                                                <li *ngFor="let res of predictiveSearchResults">
+                                                    <a class="cursor-pointer" (click)="tempFilter['Search'].value = res; predictiveSearchResults = []; onSearch(); ">{{res}}</a>
+                                                </li>
+                                            </ul> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group hidden">
+                                            <div class="input-group">
+                                                <input name="datepicker" class="form-control" ngbDatepicker
+                                                    #datepicker="ngbDatepicker"
+                                                    [minDate]="{year: 1900, month: 1, day: 1}" [autoClose]="'outside'"
+                                                    (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                                                    [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!"
+                                                    [maxDate]="maxDate" tabindex="-1">
+                                                <ng-template #t let-date let-focused="focused">
+                                                    <span class="custom-day" [class.focused]="focused"
+                                                        [class.range]="isRange(date)"
+                                                        [class.faded]="isHovered(date) || isInside(date)"
+                                                        (mouseenter)="hoveredDate = date"
+                                                        (mouseleave)="hoveredDate = null">
+                                                        {{ date.day }}
+                                                    </span>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <div class="input-group">
+                                                <input readonly #dpFromDate name="dpFromDate" [value]="selectedDate"
+                                                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                                                    (click)="datepicker.toggle()" type="text"
+                                                    class="form-control cursor-pointer" placeholder="Select Date"
+                                                    name="date">
+                                                <span class="input-group-text cursor-pointer"
+                                                    (click)="datepicker.toggle()">
+                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.5 9C7.64834 9 7.79334 8.95601 7.91668 8.8736C8.04002 8.79119 8.13614 8.67406 8.19291 8.53701C8.24968 8.39997 8.26453 8.24917 8.23559 8.10368C8.20665 7.9582 8.13522 7.82456 8.03033 7.71967C7.92544 7.61478 7.7918 7.54335 7.64632 7.51441C7.50083 7.48547 7.35003 7.50032 7.21299 7.55709C7.07594 7.61386 6.95881 7.70999 6.8764 7.83332C6.79399 7.95666 6.75 8.10166 6.75 8.25C6.75 8.44891 6.82902 8.63968 6.96967 8.78033C7.11032 8.92098 7.30109 9 7.5 9ZM11.25 9C11.3983 9 11.5433 8.95601 11.6667 8.8736C11.79 8.79119 11.8861 8.67406 11.9429 8.53701C11.9997 8.39997 12.0145 8.24917 11.9856 8.10368C11.9566 7.9582 11.8852 7.82456 11.7803 7.71967C11.6754 7.61478 11.5418 7.54335 11.3963 7.51441C11.2508 7.48547 11.1 7.50032 10.963 7.55709C10.8259 7.61386 10.7088 7.70999 10.6264 7.83332C10.544 7.95666 10.5 8.10166 10.5 8.25C10.5 8.44891 10.579 8.63968 10.7197 8.78033C10.8603 8.92098 11.0511 9 11.25 9ZM7.5 12C7.64834 12 7.79334 11.956 7.91668 11.8736C8.04002 11.7912 8.13614 11.6741 8.19291 11.537C8.24968 11.4 8.26453 11.2492 8.23559 11.1037C8.20665 10.9582 8.13522 10.8246 8.03033 10.7197C7.92544 10.6148 7.7918 10.5434 7.64632 10.5144C7.50083 10.4855 7.35003 10.5003 7.21299 10.5571C7.07594 10.6139 6.95881 10.71 6.8764 10.8333C6.79399 10.9567 6.75 11.1017 6.75 11.25C6.75 11.4489 6.82902 11.6397 6.96967 11.7803C7.11032 11.921 7.30109 12 7.5 12ZM11.25 12C11.3983 12 11.5433 11.956 11.6667 11.8736C11.79 11.7912 11.8861 11.6741 11.9429 11.537C11.9997 11.4 12.0145 11.2492 11.9856 11.1037C11.9566 10.9582 11.8852 10.8246 11.7803 10.7197C11.6754 10.6148 11.5418 10.5434 11.3963 10.5144C11.2508 10.4855 11.1 10.5003 10.963 10.5571C10.8259 10.6139 10.7088 10.71 10.6264 10.8333C10.544 10.9567 10.5 11.1017 10.5 11.25C10.5 11.4489 10.579 11.6397 10.7197 11.7803C10.8603 11.921 11.0511 12 11.25 12ZM3.75 9C3.89834 9 4.04334 8.95601 4.16668 8.8736C4.29001 8.79119 4.38614 8.67406 4.44291 8.53701C4.49968 8.39997 4.51453 8.24917 4.48559 8.10368C4.45665 7.9582 4.38522 7.82456 4.28033 7.71967C4.17544 7.61478 4.0418 7.54335 3.89632 7.51441C3.75083 7.48547 3.60003 7.50032 3.46299 7.55709C3.32594 7.61386 3.20881 7.70999 3.1264 7.83332C3.04399 7.95666 3 8.10166 3 8.25C3 8.44891 3.07902 8.63968 3.21967 8.78033C3.36032 8.92098 3.55109 9 3.75 9ZM12.75 1.5H12V0.75C12 0.551088 11.921 0.360322 11.7803 0.21967C11.6397 0.0790176 11.4489 0 11.25 0C11.0511 0 10.8603 0.0790176 10.7197 0.21967C10.579 0.360322 10.5 0.551088 10.5 0.75V1.5H4.5V0.75C4.5 0.551088 4.42098 0.360322 4.28033 0.21967C4.13968 0.0790176 3.94891 0 3.75 0C3.55109 0 3.36032 0.0790176 3.21967 0.21967C3.07902 0.360322 3 0.551088 3 0.75V1.5H2.25C1.65326 1.5 1.08097 1.73705 0.65901 2.15901C0.237053 2.58097 0 3.15326 0 3.75V12.75C0 13.3467 0.237053 13.919 0.65901 14.341C1.08097 14.7629 1.65326 15 2.25 15H12.75C13.3467 15 13.919 14.7629 14.341 14.341C14.7629 13.919 15 13.3467 15 12.75V3.75C15 3.15326 14.7629 2.58097 14.341 2.15901C13.919 1.73705 13.3467 1.5 12.75 1.5ZM13.5 12.75C13.5 12.9489 13.421 13.1397 13.2803 13.2803C13.1397 13.421 12.9489 13.5 12.75 13.5H2.25C2.05109 13.5 1.86032 13.421 1.71967 13.2803C1.57902 13.1397 1.5 12.9489 1.5 12.75V6H13.5V12.75ZM13.5 4.5H1.5V3.75C1.5 3.55109 1.57902 3.36032 1.71967 3.21967C1.86032 3.07902 2.05109 3 2.25 3H12.75C12.9489 3 13.1397 3.07902 13.2803 3.21967C13.421 3.36032 13.5 3.55109 13.5 3.75V4.5ZM3.75 12C3.89834 12 4.04334 11.956 4.16668 11.8736C4.29001 11.7912 4.38614 11.6741 4.44291 11.537C4.49968 11.4 4.51453 11.2492 4.48559 11.1037C4.45665 10.9582 4.38522 10.8246 4.28033 10.7197C4.17544 10.6148 4.0418 10.5434 3.89632 10.5144C3.75083 10.4855 3.60003 10.5003 3.46299 10.5571C3.32594 10.6139 3.20881 10.71 3.1264 10.8333C3.04399 10.9567 3 11.1017 3 11.25C3 11.4489 3.07902 11.6397 3.21967 11.7803C3.36032 11.921 3.55109 12 3.75 12Z"
+                                                            fill="#8989B2" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <div class="custom-select" ngbDropdown>
+                                                <div class="selectBtn form-control cursor-pointer"
+                                                    data-type="firstOption" ngbDropdownToggle>{{ companyStatus ?
+                                                    companyStatus : 'Select Status' }}</div>
+                                                <div class="selectDropdown" ngbDropdownMenu>
+                                                    <div (click)="onStatusChange('')" class="option cursor-pointer"
+                                                        data-type="firstOption" ngbDropdownItem>All
+                                                    </div>
+                                                    <div (click)="onStatusChange('Active')"
+                                                        class="option cursor-pointer" data-type="firstOption"
+                                                        ngbDropdownItem>Active
+                                                    </div>
+                                                    <div (click)="onStatusChange('Inactive')"
+                                                        class="option cursor-pointer" data-type="secondOption"
+                                                        ngbDropdownItem>
+                                                        Inactive</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="opacity-0">fgf</label>
+                                            <button [ngStyle]="background" class="theme-btn"
+                                                (click)="resetCompanyList()">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="order-list-inner">
+            <div class="table-list-buttons">
+                <div class="lead-dropdown">
+                    <h6 class="all-leads-text">All Syndicates <span>(Displaying {{ usersList.length }} of
+                            {{totalUsersCount ? totalUsersCount : 0}} results)</span></h6>
+                </div>
+                <div class="create-new-lead">
+                    <a *ngIf="canCreateSyndicate" routerLink="./add" class="theme-btn in-blc"
+                        [ngStyle]="background"><span>+</span> Create New
+                        Syndicate</a>
+                </div>
+            </div>
+            <div class="table-responsive lead-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('name')" [ngClass]="{
+                                'active-tab': search.sortby == 'name'}">Name <img src="assets/images/left-icn.svg"
+                                        [ngClass]="{
+                                   
+                                  'upward-img': search.order == 'ASC' && search.sortby == 'name'
+                                }" class="downward-img" alt="img-fluid" /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('email')" [ngClass]="{
+                                'active-tab': search.sortby == 'email'}">Email <img
+                                
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'active-tab':search.sortby === 'first_name',
+                                  'upward-img': search.order == 'ASC' && search.sortby === 'email'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col" class="min-width"><span class="cursor-pointer" (click)="sortBy('phone_number')" [ngClass]="{
+                                'active-tab': search.sortby == 'phone_number'}">Primary Phone <img
+                                
+                                src="assets/images/left-icn.svg"
+                                [ngClass]="{
+                                  'active-tab':search.sortby === 'first_name',
+                                  'upward-img': search.order == 'ASC' && search.sortby === 'phone_number'
+                                }"
+                                class="downward-img"
+                                alt="img-fluid"
+                              /></span></th>
+                            <th scope="col" class="min-width"><span class="cursor-pointer"
+                                    (click)="sortBy('created_at')" [ngClass]="{
+                                'active-tab': search.sortby == 'created_at'}">Date <img
+                                        src="assets/images/left-icn.svg" [ngClass]="{
+                                   
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'created_at'
+                                }" class="downward-img" alt="img-fluid" /></span></th>
+                            <th scope="col"><span class="cursor-pointer" (click)="sortBy('status')" [ngClass]="{
+                                'active-tab': search.sortby == 'status'}">Status <img src="assets/images/left-icn.svg"
+                                        [ngClass]="{
+                                  
+                                  'upward-img': search.order == 'ASC' &&  search.sortby == 'status'
+                                }" class="downward-img" alt="img-fluid" /></span></th>
+                            <th scope="col">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- (click)="redirectLeadDetail(lead)" [ngClass]="{ 'cursor-pointer' : canViewLead}" -->
+                        <!-- <td>
+                            <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M11.6192 0C12.6622 0 13.6656 0.412222 14.4037 1.15189C15.1426 1.89 15.5556 2.88556 15.5556 3.92778V10.0722C15.5556 12.2422 13.79 14 11.6192 14H3.93556C1.76478 14 0 12.2422 0 10.0722V3.92778C0 1.75778 1.757 0 3.93556 0H11.6192ZM12.8565 5.08654L12.9187 5.02432C13.1046 4.79877 13.1046 4.4721 12.9101 4.24654C12.802 4.13065 12.6535 4.05988 12.4987 4.04432C12.3353 4.03577 12.1798 4.09099 12.0623 4.19988L8.55534 6.99988C8.10423 7.37399 7.45789 7.37399 6.99978 6.99988L3.49978 4.19988C3.25789 4.02099 2.92345 4.04432 2.722 4.25432C2.512 4.46432 2.48867 4.79877 2.66678 5.0321L2.76867 5.13321L6.30756 7.89432C6.74312 8.23654 7.27123 8.42321 7.82423 8.42321C8.37567 8.42321 8.91312 8.23654 9.34789 7.89432L12.8565 5.08654Z"
+                                    [ngStyle]="style" fill="#FA5440" />
+                            </svg>
+
+                           
+                            <span>{{ user.email }}</span>
+                        </td> -->
+                        <tr routerLink="./{{user.id}}" [ngClass]="{ 'cursor-pointer' : canViewSyndicate}"
+                            *ngFor="let user of usersList | paginate: { itemsPerPage: usersListLimit, currentPage: userListPage, totalItems: totalUsersCount }; let i = index">
+                            <td>{{ user.name | titlecase}}</td>
+                            <td>
+                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M11.6192 0C12.6622 0 13.6656 0.412222 14.4037 1.15189C15.1426 1.89 15.5556 2.88556 15.5556 3.92778V10.0722C15.5556 12.2422 13.79 14 11.6192 14H3.93556C1.76478 14 0 12.2422 0 10.0722V3.92778C0 1.75778 1.757 0 3.93556 0H11.6192ZM12.8565 5.08654L12.9187 5.02432C13.1046 4.79877 13.1046 4.4721 12.9101 4.24654C12.802 4.13065 12.6535 4.05988 12.4987 4.04432C12.3353 4.03577 12.1798 4.09099 12.0623 4.19988L8.55534 6.99988C8.10423 7.37399 7.45789 7.37399 6.99978 6.99988L3.49978 4.19988C3.25789 4.02099 2.92345 4.04432 2.722 4.25432C2.512 4.46432 2.48867 4.79877 2.66678 5.0321L2.76867 5.13321L6.30756 7.89432C6.74312 8.23654 7.27123 8.42321 7.82423 8.42321C8.37567 8.42321 8.91312 8.23654 9.34789 7.89432L12.8565 5.08654Z"
+                                        [ngStyle]="style" fill="#FA5440" />
+                                </svg>
+
+                                <!-- <img src="assets/images/message.svg" alt="/icon"> -->
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height:16px" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
+                                    [ngStyle]="style"/></svg> -->
+                                <span>{{ user.email }}</span>
+                            </td>
+                            <td>
+                                <img src="assets/images/phone.svg" alt="/icon">
+                                <span>
+                                    {{ user.phone_number }}
+                                </span>
+                            </td>
+                            <td>
+                                <img src="assets/images/calendar.svg" alt="/icon">
+                                <span>{{getDate(user.created_at)}}</span>
+                            </td>
+                            <!-- user.created_at | date:dateFormat -->
+                            <td>
+
+                                <div class="toggle-switch" (click)="$event.stopPropagation()">
+                                    <label class="toggleSwitch nolabel" onclick="">
+                                        <input [id]="i" #input type="checkbox" [checked]="user.status === 'Active'"
+                                            (change)="onStatusToggleChange($event, input, user.id, i)">
+                                        <span>
+                                            <span></span>
+                                            <span></span>
+                                        </span>
+                                        <a
+                                            [ngStyle]="user.toggle ? {'background-color': color} : {'background-color': '#ffff'}"></a>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown" ngbDropdown>
+                                    <a class="custom-dropdowm dropdown-toggle" data-bs-toggle="dropdown"
+                                        ngbDropdownToggle (click)="$event.stopPropagation();">
+                                        <svg width="14" height="4" viewBox="0 0 14 4" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.4874 0.512567C12.804 -0.170848 11.696 -0.170848 11.0126 0.512567C10.3291 1.19598 10.3291 2.30402 11.0126 2.98744C11.696 3.67085 12.804 3.67085 13.4874 2.98744C14.1709 2.30405 14.1709 1.19601 13.4874 0.512567Z"
+                                                [ngStyle]="style" fill="#FA5440"></path>
+                                            <path
+                                                d="M8.23744 0.512567C7.55402 -0.170848 6.44598 -0.170848 5.76257 0.512567C5.07915 1.19598 5.07915 2.30402 5.76257 2.98744C6.44598 3.67085 7.55402 3.67085 8.23744 2.98744C8.92085 2.30405 8.92085 1.19601 8.23744 0.512567Z"
+                                                [ngStyle]="style" fill="#FA5440"></path>
+                                            <path
+                                                d="M2.98744 0.512567C2.30402 -0.170848 1.19598 -0.170848 0.512564 0.512567C-0.170852 1.19598 -0.170852 2.30402 0.512564 2.98744C1.19598 3.67085 2.30402 3.67085 2.98744 2.98744C3.67085 2.30405 3.67085 1.19601 2.98744 0.512567Z"
+                                                [ngStyle]="style" fill="#FA5440"></path>
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu custom-dropdown-menu" ngbDropdownMenu>
+                                        <li *ngIf="canViewSyndicate">
+                                            <a routerLink="./{{user.id}}" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item view"><img
+                                                    src="assets/images/view.svg" alt="/icon">View detail</a>
+                                        </li>
+                                        <li *ngIf="canEditSyndicate">
+                                            <a routerLink="./{{user.id}}" [queryParams]="{mode: 'edit'}" ngbDropdownItem
+                                                class="dropdown-item table-dropdown-item edit"><img
+                                                    src="assets/images/edit.svg" alt="/icon">Edit</a>
+                                        </li>
+                                        <li *ngIf="canDeleteSyndicate">
+                                            <a (confirm)="deleteSyndicate(user.id)"
+                                                [swal]="{ title: 'Are you sure to delete?',text: 'You will not be able to revert this!',icon: 'warning', showCancelButton: true, confirmButtonColor: '#f0412e',confirmButtonText: 'Yes, delete it!' }"
+                                                ngbDropdownItem class="dropdown-item table-dropdown-item delete"
+                                                href="#"><img src="assets/images/delete.svg" alt="/icon">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr *ngIf="!usersList.length">
+                            <td colspan="7" class="text-center">No records found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-sort-items">
+                <div class="table-select-row">
+                    <span>Show </span>
+                    <select (change)="onUsersLimitChange($any($event.target).value)" [(ngModel)]="usersListLimit"
+                        class="select table-select-count">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span> entries</span>
+                </div>
+                <pagination-controls (pageChange)="onUserPageChange($event)"></pagination-controls>
+            </div>
+
+        </div>
+    </div>
+</main>

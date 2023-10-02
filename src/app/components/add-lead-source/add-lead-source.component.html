@@ -1,0 +1,470 @@
+<main class="dashboard-wrapper">
+    <div class="container">
+        <div class="craete-lead-wrapper">
+            <div class="page-header">
+
+                <ul class="breadcrumb">
+                    <li class="left-icon">
+                        <span>
+                            <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M-9.79475e-05 4.47979C-9.79402e-05 4.31342 0.0624016 4.15345 0.181152 4.02547L3.93115 0.186189C4.1749 -0.063365 4.5749 -0.063365 4.81865 0.186189C5.0624 0.435742 5.0624 0.845266 4.81865 1.09482L1.50615 4.47979L4.81865 7.86476C5.0624 8.11431 5.0624 8.51744 4.81865 8.76699C4.5749 9.01654 4.18115 9.01654 3.9374 8.76699L0.181152 4.9341C0.0561517 4.80613 -9.79548e-05 4.64616 -9.79475e-05 4.47979Z"
+                                    fill="#565D80"></path>
+                            </svg>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="cursor-pointer" routerLink="/{{userBaseRoute}}/lead-source">Lead Source
+                            List</span>/
+                    </li>
+                    <li>
+                        <span class="active-page"> Add Lead Source <span class="active-page">
+                            </span></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="create-laed-content">
+                <div class="full-view">
+                    <div class="accordion-item">
+                        <a class="accordion-head" data-bs-toggle="collapse">
+                            <span class="accordion-head-title">Lead Source Details </span>
+                        </a>
+                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                            <div class="accordion-body">
+                                <div class="row" [formGroup]="leadSouceForm">
+                                    <h6>Basic Information</h6>
+                                    <br>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Lead Source Name*</label>
+                                            <input formControlName="name" type="text"
+                                                placeholder="Enter lead source name" class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.name.errors && f.name.touched">
+                                                <div *ngIf="f.name.errors.required">
+                                                    Lead source name is required
+                                                </div>
+                                                <div *ngIf="f.name.errors.pattern">
+                                                    Invalid lead source name
+                                                </div>
+                                                <div *ngIf="f.name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.name.errors.minlength">
+                                                    Lead source name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input formControlName="first_name" type="text"
+                                                placeholder="Enter first name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.first_name.errors && f.first_name.touched">
+                                                <div *ngIf="f.first_name.errors.required">
+                                                    First name is required
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.first_name.errors.minlength">
+                                                    First name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input formControlName="last_name" type="text" placeholder="Enter last name"
+                                                class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.last_name.errors && f.last_name.touched">
+                                                <div *ngIf="f.last_name.errors.required">
+                                                    Last name is required
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.pattern">
+                                                    Invalid name
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.last_name.errors.minlength">
+                                                    Last name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <label for="country">Time Zone</label>
+                                        <select formControlName="time_zone_id" name="country" id="time"
+                                            class="form-control">
+                                            <option [value]="time.id" *ngFor="let time of timezonesList">
+                                                {{ time.time_zone }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input formControlName="email" type="email" id="tst"
+                                                placeholder="Enter email" class="form-control" autocomplete="off" />
+                                            <div class="invalid-input" *ngIf="f.email.errors && f.email.touched">
+                                                <div *ngIf="f.email.errors.required">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="f.email.errors.pattern">
+                                                    Invalid email
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input formControlName="username" type="text" placeholder="Enter user name"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.username.errors && f.username.touched">
+                                                <div *ngIf="f.username.errors.pattern">
+                                                    Invalid username
+                                                </div>
+                                                <div *ngIf="f.username.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.username.errors.minlength">
+                                                    Username must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Password*</label>
+                                            <input formControlName="password" [type]="passwordType ? 'password': 'text'"
+                                                id="gjhyk" placeholder="Password" class="form-control"
+                                                autocomplete="new-password" />
+                                            <span (click)="passwordType = !passwordType" *ngIf="!passwordType"
+                                                class="bi bi-eye-slash cursor-pointer" id="togglePassword">
+                                                <img src="assets/images/eye-visible.svg" alt="Eye Off Icon">
+                                            </span>
+                                            <span (click)="passwordType = !passwordType" *ngIf="passwordType"
+                                                class="bi bi-eye-slash eye-visible cursor-pointer" id="togglePassword">
+                                                <img src="assets/images/eye-off.svg" alt="Eye On Icon">
+                                            </span>
+                                            <div class="invalid-input" *ngIf="f.password.errors && f.password.touched">
+                                                <div *ngIf="f.password.errors.required">
+                                                    Password is required
+                                                </div>
+
+                                                <div *ngIf="f.password.errors.maxlength">
+                                                    Password must be maximum 16 characters long
+                                                </div>
+                                                <div *ngIf="f.password.errors.pattern">
+                                                    Password should contain atleast 8 characters, one capital letter,
+                                                    one number and one special character
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input [mask]="mask.phone" formControlName="phone_number" type="text"
+                                                placeholder="(814) 582-6388" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.phone_number.errors && f.phone_number.touched">
+                                                <div *ngIf="f.phone_number.errors.pattern">
+                                                    Invalid phone number
+                                                </div>
+                                                <div *ngIf="f.phone_number.errors.mask">
+                                                    Invalid phone number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Role</label>
+                                            <select formControlName="role" class="form-control" name="" id="country">
+                                                <option value="">--Select role--</option>
+                                                <option [value]="role.name" *ngFor="let role of rolesList">{{ role.name
+                                                    }}</option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="f.role.errors && f.role.touched">
+                                                <div *ngIf="f.role.errors.required">
+                                                    Role is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Secondary Email</label>
+                                            <input formControlName="secondary_email" type="email" id="tst"
+                                                placeholder="Enter secondary email" class="form-control"
+                                                autocomplete="off" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.secondary_email.errors && f.secondary_email.touched">
+                                                <div *ngIf="f.secondary_email.errors.required">
+                                                    Secondary email is required
+                                                </div>
+                                                <div *ngIf="f.secondary_email.errors.pattern">
+                                                    Invalid secondary email
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <input formControlName="company_name" type="text"
+                                                placeholder="Enter company name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.company_name.errors && f.company_name.touched">
+                                                <div *ngIf="f.company_name.errors.pattern">
+                                                    Invalid company name
+                                                </div>
+                                                <div *ngIf="f.company_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.company_name.errors.minlength">
+                                                    Company name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select formControlName="status" class="form-control" name="" id="country">
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="f.status.errors && f.status.touched">
+                                                <div *ngIf="f.status.errors.required">
+                                                    Status is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h6>Bank Account Infomation</h6>
+                                    <br>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Account Name</label>
+                                            <input formControlName="account_name" type="text"
+                                                placeholder="Enter account name" class="form-control" />
+                                            <div class="invalid-input"
+                                                *ngIf="f.account_name.errors && f.account_name.touched">
+                                                <div *ngIf="f.account_name.errors.required">
+                                                    Account name is required
+                                                </div>
+                                                <div *ngIf="f.account_name.errors.pattern">
+                                                    Invalid account name
+                                                </div>
+                                                <div *ngIf="f.account_name.errors.minlength">
+                                                    Account name must be minimum 3 characters long
+                                                </div>
+                                                <div *ngIf="f.account_name.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Account #</label>
+                                            <input formControlName="account" type="text" placeholder="Enter account #"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.account.errors && f.account.touched">
+                                                <div *ngIf="f.account.errors.pattern">
+                                                    Invalid account
+                                                </div>
+                                                <div *ngIf="f.account.errors.minlength">
+                                                    Account must be 3 characters long
+                                                </div>
+                                                <div *ngIf="f.account.errors.maxlength">
+                                                    Maximum 20 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Routing #</label>
+                                            <input formControlName="routing" type="text" placeholder="Enter routing #"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.routing.errors && f.routing.touched">
+                                                <div *ngIf="f.routing.errors.pattern">
+                                                    Invalid routing
+                                                </div>
+                                                <div *ngIf="f.routing.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Bank</label>
+                                            <input formControlName="bank" type="text" placeholder="Enter bank"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.bank.errors && f.bank.touched">
+                                                <div *ngIf="f.bank.errors.required">
+                                                    Bank name is required
+                                                </div>
+                                                <div *ngIf="f.bank.errors.pattern">
+                                                    Invalid bank
+                                                </div>
+                                                <div *ngIf="f.bank.errors.minlength">
+                                                    Bank name must be minimum 3 characters long
+                                                </div>
+                                                <div *ngIf="f.bank.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h6>Address Information</h6>
+                                    <br>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngIf="isApiLoaded">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input class="form-control" id="searchAddress" name="searchAddress"
+                                                formControlName="address" type="text" placeholder="Enter address"
+                                                ngx-google-places-autocomplete #placesRef="ngx-places"
+                                                (onAddressChange)="handleAddressChange($event)" />
+                                            <div class="invalid-input" *ngIf="
+                                              f.address.errors && f.address.touched
+                                            ">
+                                                <div *ngIf="f.address.errors.maxlength">
+                                                    Maximum 200 characters allowed
+                                                </div>
+                                                <div *ngIf="f.address.errors.pattern">
+                                                    Invalid address
+                                                </div>
+                                                <div *ngIf="f.address.errors.minlength">
+                                                    Adress must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Street</label>
+                                            <input formControlName="street" type="text" placeholder="Enter street"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="
+                                              f.street.errors &&
+                                              f.street.touched
+                                            ">
+                                                <div *ngIf="f.street.errors.maxlength">
+                                                    Maximum 200 characters allowed
+                                                </div>
+                                                <div *ngIf="f.street.errors.pattern">
+                                                    Invalid street
+                                                </div>
+                                                <div *ngIf="f.street.errors.minlength">
+                                                    Street must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Zip</label>
+                                            <input formControlName="zip_code" type="text" placeholder="Enter zip"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.zip_code.errors && f.zip_code.touched">
+                                                <div *ngIf="f.zip_code.errors.pattern">
+                                                    Invalid zip
+                                                </div>
+                                                <div *ngIf="f.zip_code.errors.maxlength">
+                                                    Maximum 5 characters allowed
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input formControlName="city" type="text" placeholder="Enter city"
+                                                class="form-control" />
+                                            <div class="invalid-input" *ngIf="f.city.errors && f.city.touched">
+                                                <div *ngIf="f.city.errors.pattern">
+                                                    Invalid city
+                                                </div>
+                                                <div *ngIf="f.city.errors.maxlength">
+                                                    Maximum 100 characters allowed
+                                                </div>
+                                                <div *ngIf="f.city.errors.minlength">
+                                                    City name must be minimum 3 characters long
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <select (change)="
+                                              onCountryChange($any($event.target).value)
+                                            " formControlName="country_id" class="form-control" name="" id="">
+                                                <option [value]="country.id" *ngFor="let country of countriesList">
+                                                    {{ country.name }}
+                                                </option>
+                                            </select>
+                                            <div class="invalid-input" *ngIf="
+                                              f.country_id.errors && f.country_id.touched
+                                            ">
+                                                <div *ngIf="f.country_id.errors.required">
+                                                    Country is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <select formControlName="state_id" class="form-control" name="" id="">
+                                                <option value="">--Select State--</option>
+                                                <option [value]="state.id" *ngFor="let state of statesList">
+                                                    {{ state.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 text-end">
+                                        <a (click)="addLeadSourceSubmit()" [ngStyle]="background"
+                                            class="theme-btn cursor-pointer">
+                                            <span class="">Submit</span>
+                                            <span class="btn-icon btn-right-icon">
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5 5.26331C5 5.42963 4.93752 5.58955 4.81881 5.71748L1.06998 9.55557C0.826304 9.80504 0.426429 9.80504 0.182755 9.55557C-0.0609185 9.30609 -0.0609185 8.8967 0.182755 8.64722L3.49422 5.26331L0.182755 1.8794C-0.0609188 1.62992 -0.0609188 1.22692 0.182755 0.977449C0.426429 0.727974 0.820056 0.727974 1.06373 0.977449L4.81881 4.80914C4.94377 4.93707 5 5.09699 5 5.26331Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,126 @@
+<main class="">
+	<!-- <div class="container"> -->
+		<div class="craete-lead-wrapper">
+			<div class="list-search-content">
+				<div class="inner-page-search" *ngIf="canAddNote">
+					<div class="row" [formGroup]="addNoteForm">
+						<div class="col-12">
+							<div class="top-header-search">
+								<div class="form-group">
+									<textarea [readonly]="lead.is_freeze != 0" formControlName="note" rows="4" class="form-control search-input"></textarea>
+									<!-- <input  class="form-control search-input" type="text" placeholder="Add Note"> -->
+									<button [ngStyle]="background" [ngClass]="{'cursor-not-allowed': lead.is_freeze != 0 , 'cursor-pointer': lead.is_freeze == 0}"  (click)="lead.is_freeze == 0 ?  addNote() : null" type="submit " class="text-white">
+										Add Note
+									</button>
+								</div>
+
+							</div>
+							<div class="validation-case" *ngIf="lead.is_freeze == 0">
+							<div class="invalid-input" *ngIf="f.note.errors && f.note.touched">
+								<div *ngIf="f.note.errors.required">
+									Note is required
+								</div>
+								<div *ngIf="f.note.errors.pattern">
+									Invalid note
+								</div>
+								<div *ngIf="f.note.errors.maxlength">
+									Maximum 1000 characters allowed
+								</div>
+								<div *ngIf="f.note.errors.minlength">
+									Note must be minimum 3 characters long 
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="list-search-content">
+				<div class="update-table">
+					<table class="table table-responsive">
+                        <thead>
+                            <tr [ngStyle]="background">
+                                <th>Updates</th>
+                                <th>Updated by</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let update of leadNotesList | paginate: { itemsPerPage: limit, currentPage: notepage, totalItems: total,  id: 'notepage' } ; let i = index">
+                                <td>
+                                    <span [innerHTML]="update.note"></span>
+                                </td>
+                                <td>{{ update.name }}</td>
+                                <td>{{getDate(update.created_at)}}</td>
+                                <!-- <td>{{ update.created_at | date: dateFormat}} </td> -->
+                            </tr>
+                            <tr *ngIf="!leadNotesList.length">
+                                <td colspan="3" class="text-center">
+                                    No records found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+					<!-- <table class="table table-responsive">
+						<thead>
+							<tr [ngStyle]="background">
+								<th>Note</th>
+								<th>Created by</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr (click)="selectedLead = lead;openModal(noteModal)" *ngFor="let lead of leadNotesList | paginate: { itemsPerPage: limit, currentPage: updatepage,  id: 'updatepage' }  ; let i = index" class="cursor-pointer">
+								<td>{{lead.added_by}}</td>
+								<td>{{getDate(lead.created_at)}}</td>
+							</tr>
+							<tr *ngIf="!leadNotesList.length">
+								<td colspan="3" class="no-result">
+									<p>No results found</p>
+								</td>
+							</tr>
+						</tbody>
+
+					</table> -->
+					<div class="footer-pagination">
+                        <pagination-controls id="notepage" (pageChange)="onPageChange($event)"></pagination-controls>
+                    </div>
+
+				</div>
+
+			</div>
+		</div>
+	<!-- </div> -->
+</main>
+
+<ng-template #noteModal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Note</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<label for="old">Note</label>
+				<textarea [value]="selectedLead.note" readonly name="" id="" cols="30" rows="6" class="form-control"></textarea>
+				
+			</div>
+			<div class="form-group">
+				<label for="new">Created By</label>
+				<input [value]="selectedLead.added_by" readonly type="text" class="form-control" id="new"
+					placeholder="Created by" />
+				
+			</div>
+			<div class="form-group">
+				<label for="confirm">Date</label>
+				<!-- selectedLead.created_at | date: dateFormat -->
+				<input [value]="getDate(selectedLead.created_at)" readonly type="text" class="form-control" id="confirm"
+					placeholder="Date" />
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="theme-btn" [ngStyle]="background" (click)="closeModal()">Close</button>
+	</div>
+</ng-template>

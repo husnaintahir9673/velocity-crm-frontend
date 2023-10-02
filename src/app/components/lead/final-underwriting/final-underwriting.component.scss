@@ -1,0 +1,377 @@
+/* Email - Template Builder CSS */
+.submit-title {
+    padding: 16px 47px;
+}
+.lender-type-data {
+    padding: 33px 47px;
+}
+.status-item {
+    overflow: auto;
+    height: 287px;
+}
+.status-item li {
+    padding: 10px 23px;
+}
+.status-item li.d-flex span {
+    margin-right: 30px;
+}
+.status-item .form-check .form-check-label {
+    padding-left: 60px;
+    color: #383D56;
+}
+.full-view-heading span {
+    font-family: "IBM-medium";
+    font-size: 18px;
+    color: #383d56;
+    margin: 0;
+}
+.status-item li:nth-child(even) {
+    background-color: #F5F5FD;
+}
+.status-item .form-check {
+    margin-bottom: 0px;
+}
+.status-item::-webkit-scrollbar {
+    width: 10px;
+  }
+.status-item::-webkit-scrollbar-track {
+    background: #FAFAFF;
+  }
+.status-item::-webkit-scrollbar-thumb {
+    background: #FA5440;;
+    border-radius: 100px;
+  }
+.status-item::-webkit-scrollbar-thumb:hover {
+    background: #FA5440;;
+  }
+.status-list-inner {
+    background: #FFFFFF;
+    border: 1px solid #D9D9EA;
+    border-radius: 10px;
+}
+.status-item-headin {
+    padding: 11px 22px;
+    background-color: #F5F5FD;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+.status-item-headin span:first-child {
+    margin-right: 35px;
+}
+.notes-text textarea.form-control {
+    background: #F5F5FD;
+    border-radius: 10px;
+    box-shadow: none;
+    min-height: 315px;
+    border-color: transparent;
+}
+.notes-text {
+    padding: 0px;
+}
+.notes-text .accordion-head-title {
+    font-size: 15px;
+    line-height: 20px;
+    color: #565D80;
+}
+
+.right-checkboxes ul {
+    justify-content: flex-end;
+}
+.right-checkboxes ul li:not(:last-child) {
+    margin-right: 30px;
+}
+.right-checkboxes ul .form-check-label {
+    color: #383D56;
+    padding-left: 10px;
+}
+.lead-submit-btn {
+    margin-top: 15px;
+}
+
+.dashboard-wrapper {
+    background-color: #E8E8F1;
+    padding: 20px 0;
+    min-height: calc(100vh - 125px);
+}
+.accordion-head-title {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: #383D56;
+    margin: 0;
+}
+.submit-title {
+    padding: 16px 47px !important;
+}
+.lead-submit-btn {
+    margin-top: 25px;
+    text-align: right;
+}
+.accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px 45px;
+    background-color: #F6F6F9;
+}
+.accordion-head-title {
+    font-family: 'IBM-medium';
+    font-size: 18px;
+    color: #383D56;
+    margin: 0;
+}
+.accordion-body {
+    background-color: #fff;
+    padding: 30px 45px;
+}
+
+/* Responsive-CSS */
+@media screen and (max-width:1280px) {
+.status-item-headin span:first-child {
+    margin-right: 25px;
+}
+.status-item .form-check .form-check-label {
+    padding-left: 50px;
+}
+}
+/*=========== FCS CSS =============*/
+.custom-select .selectBtn::after {
+    // background-image: url(../img/wide-down-arrow.svg);
+    width: 13px;
+    height: 7px;
+    transform: inherit;
+    border: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.send-submission-data {
+    background: #F5F5FD;
+    border-radius: 10px;
+}
+.submit-title {
+    padding: 9px 47px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.lender-type-data {
+    background-color: #fff;
+    padding: 18px 47px;
+}
+.lender-type-data label {
+    font-family: 'IBM-semi';
+    font-size: 15px;
+    color: #565D80;
+}
+.header-right-btn .btn {
+    font-size: 14px;
+    padding: 9.5px 20px;
+    border-radius: 5px;
+}
+.add-bank {
+    text-align: left;
+    margin-right: 25px;
+}
+.table-header, .table-header .form-group {
+    display: flex;
+    align-items: center;
+}
+.table-header .form-group {
+    margin-bottom: 0px;
+    text-align: left;
+}
+.table-header .form-group label {
+    font-family: 'IBM';
+    font-size: 15px;
+    line-height: 20px;
+    color: #565D80;
+    margin-bottom: 0px;
+    width: 120px;
+}
+.add-bank .btn {
+    font-size: 13px;
+    padding: 5px 10px;
+    min-height: 30px;
+    border-radius: 5px;
+}
+.table-header .form-group .form-control::-webkit-input-placeholder {
+    color: #383D56
+  }
+  .table-header .form-group .form-control::-moz-placeholder {
+    color: #383D56
+  }
+  .table-header .form-group .form-control:-ms-input-placeholder {
+    color: #383D56
+  }
+  .table-header .form-group .form-control:-moz-placeholder { 
+    color: #383D56
+  } 
+  .fcs-calender-table th {
+    text-align: left;
+    background-color: #f5f5fd;
+    padding: 18px 25px;
+}
+
+.table td:first-child, .table td:last-child {
+    border-radius: 0px;
+    text-align: center;
+}
+.fcs-calender-table .table td:first-child, .fcs-calender-table .table tr:first-child td {
+   background-color: #F5F5FD;    
+}
+.fcs-calender-table.table-responsive {
+    padding: 0px;
+    background-color: #f5f5fd;
+}
+.fcs-calender-table .table td {
+    border: 1px solid #D6D6E8;
+    padding: 16px 27px;
+    text-align: center;
+}
+.fcs-text, .total-text {
+    color: #383D56;
+    font-size: 15px;
+    font-family: 'IBM-semi';
+}
+.fcs-calender-table .table tr:first-child td:last-child {
+    background-color: #FA5440;
+}
+.fcs-calender-table .table tr:first-child td:last-child .total-text {
+    color: #FFFFFF;
+}
+.fcs-calender-table td:last-child .total-text  {
+    color: #FA5440;
+}
+.fcs-calender-table .table td:first-child {
+    padding-left: 47px;
+    padding-right: 22px;
+    text-align: left;
+}
+
+.feild-btn {
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    padding: 10px;
+    max-width: 50px;
+}
+.feild-btn-grp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: 7px;
+}
+.fcs-form-data .submit-title {
+    background-color: #fff;
+}
+.minus-feild .feild-btn {
+    background: #FFFFFF;
+    border: 1px solid #DEDEF3;
+    border-radius: 10px;
+}
+.fcs-input-feild {
+    background-color: #fff;
+}
+.fcs-input-feild .row {
+    padding: 25px 48px;
+}
+.fcs-input-feild .col-xl-2 {
+    width: 18.666667%;
+}
+.fcs-input-feild .fcs-main-data .col-xl-2:last-child {
+    width: 5%;
+}
+.notes-text {
+    padding: 20px 47px;
+}
+.divider {
+    border-color: #D6D6E8;
+}
+// .notes-text textarea.form-control {
+//     background: #FFFFFF;
+//     box-shadow: 0px 1px 4px rgb(0 0 0 / 6%);
+//     border-radius: 10px;
+//     border-color: transparent;
+//     min-height: 157px;
+// }
+.lead-submit-btn .btn {
+    padding: 9px 15px;
+    font-size: 14px;
+}
+.lead-submit-btn .white-btn {
+    background: #FFFFFF;
+    color: #565D80;
+    margin-left: 10px;
+}
+.lead-submit-btn .btn {
+    padding: 9px 15px;
+    font-size: 14px;
+}
+/* width */
+.fcs-calender-table.table-responsive::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  /* Track */
+  .fcs-calender-table.table-responsive::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color:  #E8E8F1;
+  }
+  
+  /* Handle */
+  .fcs-calender-table.table-responsive::-webkit-scrollbar-thumb {
+    background: #FFFFFF;
+    border-radius: 10px;
+  }
+
+  /* container Queries */
+
+@media screen and (min-width:200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        max-width: 880px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .container {
+        max-width: 1120px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .container {
+        max-width: 1250px;
+        padding: 0 25px;
+    }
+}
+
+@media screen and (min-width:1441px) {
+    .container {
+        max-width: 1675px;
+        padding: 0 15px;
+    }
+}
+@media screen and (max-width:991px) {
+.top-header-navigation .nav-link {
+    font-size: 10px;
+}
+.top-header-search .search-input {
+    min-width: 395px;
+}
+.step-listing li {
+    max-width: 105px;
+    flex: 0 0 105px;
+}
+}

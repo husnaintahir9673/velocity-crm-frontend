@@ -1,0 +1,396 @@
+/* ========= Top Header css start ========== */
+
+.top-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e9edf4;
+}
+
+.top-header-content {
+    padding: 9px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header-left {
+    width: 20%;
+}
+
+.top-header-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.top-header-navigation .nav-item {
+    margin: 0 5px;
+}
+.result-lisitng {
+    width: inherit !important;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.top-header-navigation .nav-item:first-child {
+    margin: 0 10px;
+}
+
+.top-header-navigation .nav-link {
+    padding: 0px  5px;
+    font-family: "IBM-medium";
+    font-size: 15px;
+    color: #565d80;
+    text-align: center;
+}
+
+.top-header-search {
+    position: relative;
+    background: #f5f5fd;
+    display: flex;
+    border-radius: 10px;
+}
+.top-header-search select {
+    border: 0;
+    padding: 10px;
+    background: transparent;
+    color: #8989b2;
+}
+// .custom-navbar .nav-link {
+//     font-size: 15px;
+//     line-height: 20px !important;
+//     padding: 14px 0.5rem !important;
+//     color: #565d80;
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     margin-right: 45px !important;
+//     cursor: pointer;
+// }
+.top-header-search .search-input {
+    background: #f5f5fd;
+    border-color: transparent;
+    width: 100%;
+    min-width: 350px;
+    font-size: 14px;
+    font-family: "IBM";
+    color: #8989b2;
+    padding-right: 60px;
+}
+
+.top-header-search button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    padding: 5px 13px;
+    border: 0;
+    background-color: #fa5440;
+    border-radius: 6px;
+    height: 80%;
+    transform: translateY(-50%);
+}
+
+.top-header-search button svg {
+    margin-bottom: 2px;
+}
+
+.custom-navbar {
+    padding: 0;
+}
+.logo img {
+    object-fit: contain;
+    height: 100%;
+    width: 35%;
+    max-height: 45px;
+}
+
+.custom-navbar .nav-link {
+    font-size: 15px;
+    line-height: 20px;
+    padding: 14px 0.5rem;
+    color: #565d80;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 56px;
+    cursor: pointer;
+}
+ul.navbar-nav .nav-item:last-child a.nav-link {
+    margin-right: 0;
+}
+// .custom-navbar .nav-link::after {
+//     position: absolute;
+//     content: "";
+//     width: 0;
+//     left: 0;
+//     height: 2px;
+//     bottom: 0;
+//     background-color: #fa5440;
+//     transition: 0.7s ease all;
+// }
+.custom-navbar .nav-link .after-link {
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    height: 2px;
+    bottom: 0;
+    background-color: #fa5440;
+    transition: 0.7s ease all;
+}
+.nav-link-icon {
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.custom-navbar .nav-link.active {
+    color: #fa5440;
+}
+
+// .custom-navbar .nav-link:hover::after,
+// .custom-navbar .nav-link.active::after {
+//     width: 100%;
+// }
+.custom-navbar .nav-link:hover .after-link,
+.custom-navbar .nav-link.active .after-link {
+    width: 100%;
+}
+.dropdown-toggle::after {
+    content: unset;
+}
+
+/*================= header css end =================*/
+
+/*================= searchbar box css start =================*/
+
+.searchbar-box-container {
+    margin-bottom: 20px;
+}
+
+.searchbar-box {
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 30px 50px 15px;
+}
+
+.advance-search {
+    display: none;
+}
+
+.advance-search.show {
+    display: block;
+}
+
+li.nav-item.cursor-pointer.dropdown .dropdown-menu {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    min-width: 190px;
+    border: 1px solid #d9d9ea;
+    overflow: hidden;
+}
+li.nav-item.cursor-pointer.dropdown .dropdown-menu button {
+    border-bottom: 1px solid #e8e8f1;
+    padding: 10px 15px;
+}
+li.nav-item.cursor-pointer.dropdown .dropdown-menu button:last-child {
+    border: 0;
+}
+/*================= searchbar box css end =====================*/
+
+.user-profile a {
+    background-color: transparent;
+    padding: 0px;
+    min-width: auto;
+    min-height: auto;
+}
+.user-profile .dropdown-menu li a {
+    padding: 7px 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+}
+.user-profile .dropdown-toggle:hover,
+.user-profile .dropdown-toggle:active,
+.user-profile .dropdown-toggle:focus {
+    background-color: transparent;
+    border-color: transparent;
+}
+.user-profile .dropdown-menu li:not(:last-child) a {
+    border-bottom: 1px solid #e8e8f1;
+}
+.user-profile .dropdown-menu {
+    background: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.user-profile .dropdown-menu li a:active {
+    background-color: transparent !important;
+    color: #565d80;
+}
+
+.links-outer::-webkit-scrollbar {
+    width: 1px;
+    height: 5px;
+}
+.links-outer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.links-outer::-webkit-scrollbar-thumb {
+    background: #e4e0e0;
+    border-radius: 10px;
+}
+
+table td:last-child {
+    border-radius: 0 10px 10px 0;
+    text-align: right;
+}
+.result-lisitng .table {
+    width: 100%;
+}
+.result-lisitng .table td {
+    // padding: 12px 5px;
+    line-height: normal;
+    vertical-align: middle !important;
+    font-family: "IBM-medium" !important;
+    // font-size: 14px !important;
+    // color: #383D56 !important;
+    // border: 0 !important;
+}
+.settings {
+    li {
+        a {
+            svg {
+                width: 15px;
+                // fill: #fa5440;
+                
+            }
+        }
+        // .team {
+        //     svg {
+        //         max-width: 17px;
+        //     }
+        // }
+    }
+}
+// .top-header-navigation li.cstm-setting  svg {
+//     height: 24px !important;
+//     width: 24px !important;
+// }
+
+@media (max-width: 1600px) {
+    .custom-navbar .nav-link {
+        margin-right: 55px;
+    }
+}
+@media (max-width: 1555px) {
+    .custom-navbar .nav-link {
+        margin-right: 42px;
+    }
+}
+@media (max-width: 1440px) {
+    // .links-outer {
+    //     overflow-x: auto;
+    // }
+    .custom-navbar .nav-link {
+        margin-right: 22px;
+    }
+}
+
+@media only screen and (max-width: 1279px) {
+    .custom-navbar .nav-link {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+}
+
+.navbar-nav {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+path {
+    fill: 'blue'
+}
+@media screen and (max-width: 991px) {
+    .container {
+        max-width: 92%;
+        padding: 0 !important;
+        margin: 0 auto;
+    }
+    .collapse:not(.show) {
+        display: none;
+    }
+
+}
+@media screen and (max-width: 767px) {
+ul.top-header-navigation li.nav-item:nth-child(2) {
+    display: none;
+}
+// .navbar-toggler-icon svg {
+//     // color: #f0523a;
+//     // fill: #f0523a;
+// }
+
+.navbar-toggler-icon {
+	margin: 10px 0;
+}
+.searchbar-box {
+    padding: 30px 24px 15px;
+}
+.table-select-row {
+    max-width: 100%;
+    flex: 0 0 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pagination-controls {
+    flex: 0 0 100%;
+    text-align: center;
+    max-width: 100%;
+
+}
+.navbar-nav {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+}
+@media screen and (max-width: 575px) {
+.statics-item {
+    min-width: 100%;
+}
+.create-new-lead {
+    width: 100%;
+}
+.table-list-buttons {
+    flex-wrap: wrap;
+}
+.lead-dropdown {
+    margin-bottom: 20px;
+}
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #fff !important;
+ }
+ svg.email-statics {
+    width: 17px;
+    // color: #fa5440;
+    // fill: #fa5440;
+}
+.top-header-navigation li svg {
+    width: 18px;
+    height: 15px;
+    // color: #fa5440;
+    // fill: #fa5440;
+}
+@media  (max-width:1780px) {
+    .nav-item.cursor-pointer.dropdown .dropdown-menu {
+            left: -103px;
+    }
+}
